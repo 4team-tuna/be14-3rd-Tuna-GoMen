@@ -10,7 +10,7 @@
         <a href="#">멘토 리스트</a>
       </nav>
     </div>
-
+    
     <!-- 오른쪽 -->
     <div class="actions">
       <img src="@/assets/icon-message.png" class="icon-message" />
