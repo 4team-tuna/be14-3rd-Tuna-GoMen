@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.tuna.gomen.mapper.BoardMapper">
+    <!-- resultMap 정의 -->
+    <resultMap id="BoardResultMap" type="com.tuna.gomen.board.query.entity.BoardEntity">
+        <id property="postId" column="post_id"/>
+        <result property="category" column="category"/>
+        <result property="title" column="title"/>
+        <result property="content" column="content"/>
+        <result property="createdAt" column="created_at"/>
+        <result property="modifiedAt" column="modified_at"/>
+        <result property="isBlinded" column="is_blinded"/>
+        <result property="isDeleted" column="is_deleted"/>
+        <result property="userId" column="user_id"/>
+    </resultMap>
+
+    <!-- findAll 쿼리 추가 -->
+    <select id="findAll" resultMap="BoardResultMap">
+        SELECT
+            post_id,
+            category,
+            title,
+            content,
+            created_at,
+            modified_at,
+            is_blinded,
+            is_deleted,
+            user_id
+        FROM tbl_board
+        ORDER BY created_at DESC
+    </select>
+
+
+    <!-- 특정 사용자의 게시글 조회 -->
+    <!-- http://localhost:8080/gomen/boards/user?userId=5 -->
+    <select id="findByUserId" resultMap="BoardResultMap">
+        SELECT * FROM tbl_board
+        WHERE user_id = #{userId}
+        ORDER BY created_at DESC
+    </select>
+
+    <!-- 특정 카테고리의 게시글 조회 -->
+    <!-- http://localhost:8080/gomen/boards/category?category=3 -->
+    <select id="findByCategory" resultMap="BoardResultMap">
+        SELECT * FROM tbl_board
+        WHERE category = #{category}
+        ORDER BY created_at DESC
+    </select>
+
+    <!-- 특정 키워드가 포함된 제목의 게시글 조회 -->
+    <!-- http://localhost:8080/gomen/boards/search?keyword=자바 -->
+    <select id="findByTitleKeyword" resultMap="BoardResultMap">
+        SELECT * FROM tbl_board
+        WHERE title LIKE CONCAT('%', #{keyword}, '%')
+        ORDER BY created_at DESC
+    </select>
+
+    <!-- 특정 게시글의 작성자 회원정보 조회 -->
+    <select id="findAuthorByPostId" resultType="com.tuna.gomen.board.query.entity.UserEntity">
+        SELECT u.user_id, u.login_id, u.name, u.phone_number, u.nickname,
+                u.career_info, u.created_at
+        FROM tbl_user u
+                 JOIN tbl_board b ON u.user_id = b.user_id
+        WHERE b.post_id = #{postId}
+    </select>
+
+    <!-- 특정 게시글의 댓글 조회 -->
+    <!-- http://localhost:8080/gomen/boards/5/comments -->
+    <select id="findCommentsByPostId" resultMap="CommentResultMap">
+        SELECT c.comment_id, c.comment_content, c.created_at, c.user_id, u.nickname AS userNickname
+        FROM tbl_comment c
+                 JOIN tbl_user u ON c.user_id = u.user_id
+        WHERE c.post_id = #{postId}
+        ORDER BY c.created_at ASC
+    </select>
+
+    <!-- 댓글 resultMap 추가 -->
+    <resultMap id="CommentResultMap" type="com.tuna.gomen.board.query.entity.CommentEntity">
+        <id property="commentId" column="comment_id"/>
+        <result property="commentContent" column="comment_content"/>
+        <result property="createdAt" column="created_at"/>
+        <result property="userId" column="user_id"/>
+    </resultMap>
+
+    <!-- 특정 게시글 조회 (파일 목록 포함) -->
+    <!-- http://localhost:8080/gomen/boards/5 -->
+    <select id="getBoardDetails" resultMap="OneBoardResultMap">
+        SELECT b.post_id AS postId, b.category, b.title, b.content, b.created_at AS createdAt,
+               b.modified_at AS modifiedAt, b.is_blinded AS isBlinded, b.is_deleted AS isDeleted,
+               b.user_id AS userId, f.address AS fileAddress
+        FROM tbl_board b
+                 LEFT JOIN tbl_board_file f ON b.post_id = f.board_id
+        WHERE b.post_id = #{postId}
+    </select>
+
+    <resultMap id="OneBoardResultMap"  type="com.tuna.gomen.board.query.entity.BoardEntity">
+        <id property="postId" column="postId"/>
+        <result property="category" column="category"/>
+        <result property="title" column="title"/>
+        <result property="content" column="content"/>
+        <result property="createdAt" column="createdAt"/>
+        <result property="modifiedAt" column="modifiedAt"/>
+        <result property="isBlinded" column="isBlinded"/>
+        <result property="isDeleted" column="isDeleted"/>
+        <result property="userId" column="userId"/>
+        <collection property="fileAddresses" ofType="String">
+            <result column="fileAddress"/>
+        </collection>
+    </resultMap>
+
+
+
+
+
+
+</mapper>

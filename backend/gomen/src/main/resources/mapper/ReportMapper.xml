@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.tuna.gomen.mapper.ReportMapper">
+
+    <resultMap id="ReportWithUserResultMap" type="com.tuna.gomen.report.mybatis.model.Report">
+        <id column="report_id" property="reportId"/>
+        <result column="report_content" property="reportContent"/>
+        <result column="created_at" property="createdAt"/>
+        <result column="is_processed" property="isProcessed"/>
+        <result column="is_processed_time" property="isProcessedTime"/>
+        <result column="poster_id" property="posterId"/>
+        <result column="report_target_post_id" property="reportTargetPostId"/>
+        <result column="report_target_user_id" property="reportTargetUserId"/>
+        <result column="comment_id" property="commentId"/>
+        <result column="violation_id" property="violationId"/>
+        <result column="reporter_nickname" property="reporterNickname"/>
+        <result column="reported_nickname" property="reportedNickname"/>
+        <result column="category_name" property="violationCategory"/>
+    </resultMap>
+
+    <select id="getProcessedReportsWithUser" resultMap="ReportWithUserResultMap">
+        SELECT
+            r.report_id,
+            r.report_content,
+            r.created_at,
+            r.is_processed,
+            r.is_processed_time,
+            r.poster_id,
+            r.report_target_post_id,
+            r.report_target_user_id,
+            r.comment_id,
+            r.violation_id,
+            reporter.nickname AS reporter_nickname,
+            target.nickname AS reported_nickname,
+            c.category_name
+        FROM tbl_report r
+                 INNER JOIN tbl_user reporter ON r.poster_id = reporter.user_id
+                 LEFT JOIN tbl_user target ON r.report_target_user_id = target.user_id
+                 LEFT JOIN tbl_report_category c ON r.violation_id = c.violation_id
+        WHERE r.is_processed = 'Y'
+    </select>
+
+    <select id="selectAllReports" resultMap="ReportWithUserResultMap">
+        SELECT
+            r.report_id,
+            r.report_content,
+            r.created_at,
+            r.is_processed,
+            r.is_processed_time,
+            r.poster_id,
+            r.report_target_post_id,
+            r.report_target_user_id,
+            r.comment_id,
+            r.violation_id,
+            reporter.nickname AS reporter_nickname,
+            target.nickname AS reported_nickname,
+            c.category_name
+        FROM tbl_report r
+                 LEFT JOIN tbl_user reporter ON r.poster_id = reporter.user_id
+                 LEFT JOIN tbl_user target ON r.report_target_user_id = target.user_id
+                 LEFT JOIN tbl_report_category c ON r.violation_id = c.violation_id
+    </select>
+
+    <select id="selectReportsByUserId" parameterType="int" resultMap="ReportWithUserResultMap">
+        SELECT
+            r.report_id,
+            r.report_content,
+            r.created_at,
+            r.is_processed,
+            r.is_processed_time,
+            r.poster_id,
+            r.report_target_post_id,
+            r.report_target_user_id,
+            r.comment_id,
+            r.violation_id,
+            reporter.nickname AS reporter_nickname,
+            target.nickname AS reported_nickname,
+            c.category_name
+        FROM tbl_report r
+                 LEFT JOIN tbl_user reporter ON r.poster_id = reporter.user_id
+                 LEFT JOIN tbl_user target ON r.report_target_user_id = target.user_id
+                 LEFT JOIN tbl_report_category c ON r.violation_id = c.violation_id
+        WHERE r.report_target_user_id = #{userId}
+    </select>
+
+    <select id="selectReportsByPostId" parameterType="int" resultMap="ReportWithUserResultMap">
+        SELECT
+            r.report_id,
+            r.report_content,
+            r.created_at,
+            r.is_processed,
+            r.is_processed_time,
+            r.poster_id,
+            r.report_target_post_id,
+            r.report_target_user_id,
+            r.comment_id,
+            r.violation_id,
+            reporter.nickname AS reporter_nickname,
+            target.nickname AS reported_nickname,
+            c.category_name
+        FROM tbl_report r
+                 LEFT JOIN tbl_user reporter ON r.poster_id = reporter.user_id
+                 LEFT JOIN tbl_user target ON r.report_target_user_id = target.user_id
+                 LEFT JOIN tbl_report_category c ON r.violation_id = c.violation_id
+        WHERE r.report_target_post_id = #{postId}
+    </select>
+
+    <select id="selectReportsByReportingMemberId" parameterType="int" resultMap="ReportWithUserResultMap">
+        SELECT
+            r.report_id,
+            r.report_content,
+            r.created_at,
+            r.is_processed,
+            r.is_processed_time,
+            r.poster_id,
+            r.report_target_post_id,
+            r.report_target_user_id,
+            r.comment_id,
+            r.violation_id,
+            reporter.nickname AS reporter_nickname,
+            target.nickname AS reported_nickname,
+            c.category_name
+        FROM tbl_report r
+                 LEFT JOIN tbl_user reporter ON r.poster_id = reporter.user_id
+                 LEFT JOIN tbl_user target ON r.report_target_user_id = target.user_id
+                 LEFT JOIN tbl_report_category c ON r.violation_id = c.violation_id
+        WHERE r.poster_id = #{reportingMemberId}
+    </select>
+
+    <select id="selectReportsByViolationId" parameterType="int" resultMap="ReportWithUserResultMap">
+        SELECT
+            r.report_id,
+            r.report_content,
+            r.created_at,
+            r.is_processed,
+            r.is_processed_time,
+            r.poster_id,
+            r.report_target_post_id,
+            r.report_target_user_id,
+            r.comment_id,
+            r.violation_id,
+            reporter.nickname AS reporter_nickname,
+            target.nickname AS reported_nickname,
+            c.category_name
+        FROM tbl_report r
+                 LEFT JOIN tbl_user reporter ON r.poster_id = reporter.user_id
+                 LEFT JOIN tbl_user target ON r.report_target_user_id = target.user_id
+                 LEFT JOIN tbl_report_category c ON r.violation_id = c.violation_id
+        WHERE r.violation_id = #{violationId}
+    </select>
+
+    <select id="selectReportsByStatus" parameterType="String" resultMap="ReportWithUserResultMap">
+        SELECT
+            r.report_id,
+            r.report_content,
+            r.created_at,
+            r.is_processed,
+            r.is_processed_time,
+            r.poster_id,
+            r.report_target_post_id,
+            r.report_target_user_id,
+            r.comment_id,
+            r.violation_id,
+            reporter.nickname AS reporter_nickname,
+            target.nickname AS reported_nickname,
+            c.category_name
+        FROM tbl_report r
+                 LEFT JOIN tbl_user reporter ON r.poster_id = reporter.user_id
+                 LEFT JOIN tbl_user target ON r.report_target_user_id = target.user_id
+                 LEFT JOIN tbl_report_category c ON r.violation_id = c.violation_id
+        WHERE r.is_processed = #{status}
+    </select>
+
+</mapper>
