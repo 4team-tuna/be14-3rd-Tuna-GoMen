@@ -1,17 +1,15 @@
 <template>
     <div class="free-board-page">
-      <Header />
   
       <main class="board-container">
         <h2 class="board-title">자유 게시판</h2>
   
         <PostCard v-if="post" :post="post" />
   
-        <CommentList :comments="comments" />
+        <CommentList v-if="comments.length" :comments="comments" />
         <CommentForm />
       </main>
   
-      <Footer />
     </div>
   </template>
   
@@ -30,12 +28,19 @@
   const comments = ref([])
   
   onMounted(async () => {
-    const postRes = await axios.get('http://localhost:3001/posts/1')
+  try {
+    const postRes = await axios.get('/api/posts/1')
     post.value = postRes.data
-  
-    const commentRes = await axios.get('http://localhost:3001/comments?postId=1')
+
+    const commentRes = await axios.get('/api/comments?postId=1')
     comments.value = commentRes.data
-  })
+
+    console.log('🔥 댓글 목록:', comments.value)
+  } catch (error) {
+    console.error('데이터 로딩 실패:', error)
+  }
+})
+
   </script>
   
   <style scoped>
