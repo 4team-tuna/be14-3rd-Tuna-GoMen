@@ -1,17 +1,29 @@
 <template>
-    <div class="text-center mb-6">
-      <img src="@/assets/icon-fire.png" alt="hot" class="mx-auto w-16 mb-4" />
-      <h1 class="text-4xl font-extrabold mb-2">멘토 리스트</h1>
-      <h2 class="text-red-600 text-2xl font-black">지금 가장 HoT한 멘토와!</h2>
+    <div class="mentor-title">
+      <img src="@/assets/icon-fire.png" alt="불 아이콘" class="icon" />
+      <h1>멘토 리스트</h1>
     </div>
   </template>
   
-  <script>
-  export default {
-    name: 'MentorTitle'
-  }
-  </script>
-  
   <style scoped>
-  /* 추가 스타일 필요 시 여기에 작성 */
+  .mentor-title {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 32px;
+  }
+  
+  .icon {
+    width: 28px;
+    height: 28px;
+    object-fit: contain;
+  }
+  
+  h1 {
+    font-size: 24px;
+    font-weight: 800;
+    margin: 0;
+    color: #222;
+  }
   </style>
+  

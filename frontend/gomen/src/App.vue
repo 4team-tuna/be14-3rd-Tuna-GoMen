@@ -8,7 +8,6 @@
   <script setup>
   import Header from './components/common/Header.vue';
   import Footer from './components/common/Footer.vue';
-  import MentorList from './components/mentorList/MentorList.vue';
  </script>
   
   <style scoped>

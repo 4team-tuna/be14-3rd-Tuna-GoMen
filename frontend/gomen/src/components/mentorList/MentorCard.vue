@@ -1,46 +1,117 @@
 <template>
-  <div class="mentor-card border rounded-2xl shadow-md p-5 w-full max-w-sm bg-white">
-    <div class="flex items-center gap-4 mb-4">
-      <img
-        :src="mentor.image"
-        alt="profile"
-        class="w-16 h-16 rounded-full object-cover shrink-0 border"
-      />
-      <div class="flex flex-col">
-        <h3 class="font-bold text-base leading-tight">{{ mentor.name }}</h3>
-        <div class="text-yellow-400 text-sm">⭐ {{ mentor.rating }}</div>
-      </div>
+  <div class="mentor-card">
+    <span class="mentor-rating">⭐ {{ mentor.rating }}</span>
+    <img :src="getImageUrl(mentor.image)" alt="멘토 이미지" class="mentor-image" />
+    <div class="mentor-info">
+      <h3 class="mentor-name">{{ mentor.name }}</h3>
+      <p class="mentor-title">{{ mentor.title }}</p> <!-- ✅ 수정됨 -->
+      <p class="mentor-skills">{{ mentor.skills }}</p>
+      <p class="mentor-description">{{ mentor.description }}</p>
     </div>
-    <div class="text-sm font-semibold text-gray-800 mb-1">{{ mentor.title }}</div>
-    <div class="text-xs text-gray-500 mb-1">{{ mentor.skills }}</div>
-    <div class="text-xs text-gray-600 mb-3 leading-snug">{{ mentor.description }}</div>
-    <button class="mt-auto px-3 py-1 bg-blue-500 text-white text-xs rounded hover:bg-blue-600">
-      멘토 신청
-    </button>
+    <button class="apply-button" @click="$emit('openApply', mentor)">신청하기</button>
   </div>
 </template>
 
-<script>
-export default {
-  name: 'MentorCard',
-  props: {
-    mentor: {
-      type: Object,
-      required: true
-    }
+<script setup>
+defineProps({
+  mentor: {
+    type: Object,
+    required: true
+  }
+})
+
+function getImageUrl(path) {
+  try {
+    return new URL(`@/assets/${path.split('/').pop()}`, import.meta.url).href
+  } catch {
+    return new URL('@/assets/icon-basic-user.png', import.meta.url).href
   }
 }
 </script>
 
 <style scoped>
 .mentor-card {
-  transition: transform 0.2s ease-in-out;
+  position: relative;
+  width: 100%;
+  height: auto;
+  padding: 20px;
+  background-color: #fff;
+  border: 1px solid #e6e7ff;
+  border-radius: 20px;
+  box-shadow: 0px 4px 10px rgba(93, 95, 239, 0.05);
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  height: 100%;
+  align-items: center;
+  box-sizing: border-box;
 }
-.mentor-card:hover {
-  transform: translateY(-4px);
+
+.mentor-rating {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  font-size: 14px;
+  color: #5d5fef;
+  font-weight: bold;
+}
+
+.mentor-image {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-top: 8px;
+}
+
+.mentor-info {
+  text-align: center;
+  padding: 12px 0;
+}
+
+.mentor-name {
+  font-size: 16px;
+  font-weight: 700;
+  margin: 6px 0;
+  color: #333;
+}
+
+.mentor-title {
+  font-size: 15px;         
+  font-weight: 600;        
+  color: #5d5fef;          
+  margin-bottom: 6px;
+}
+
+.mentor-skills {
+  font-size: 14px;         
+  font-weight: 500;        
+  color: #444;             
+  margin: 8px 0;
+  text-align: center;
+  white-space: normal;
+}
+
+.mentor-description {
+  font-size: 12px;
+  color: #888;
+  padding: 0 6px;
+  line-height: 1.4;
+  margin-bottom: 12px;
+}
+
+.apply-button {
+  width: 90%;
+  padding: 10px 0;
+  font-size: 13px;
+  font-weight: bold;
+  background-color: #5d5fef;
+  color: white;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.apply-button:hover {
+  background-color: #7c83ff;
 }
 </style>
