@@ -32,7 +32,9 @@ const reportComment = (id) => {
   display: flex;
   flex-direction: column;
   gap: 16px;
+  padding: 0 50px; /* 좌우 여백 추가 */
 }
+
 
 .comment {
   border-top: 1px solid #eee;

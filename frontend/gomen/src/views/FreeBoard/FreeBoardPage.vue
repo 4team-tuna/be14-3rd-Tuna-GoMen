@@ -52,7 +52,7 @@
   
   .board-container {
   width: 100%;
-  max-width: 1200px; /* 필요시 늘릴 수 있음 */
+  max-width: 1000px; /* 필요시 늘릴 수 있음 */
   margin: 40px auto;
   padding: 24px;
   background: white;
