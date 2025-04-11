@@ -2,7 +2,7 @@
     <div class="free-board-page">
   
       <main class="board-container">
-        <h2 class="board-title">자유 게시판</h2>
+        <h2 class="board-title">📢 자유 게시판</h2>
   
         <PostCard v-if="post" :post="post" />
   
@@ -66,10 +66,9 @@
 
   
   .board-title {
-    font-size: 24px;
+    font-size: 30px;
     font-weight: bold;
-    padding: 20px 0;
-    border-bottom: 1px solid #ddd;
+    margin-left:30px;
   }
   </style>
   
