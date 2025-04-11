@@ -28,16 +28,28 @@ spring:
           predicates:
             - Path=/user/**
           filters:
-#            - AuthorizationHeaderFilter
-#            - RewritePath=/user/(?<segment>.*), /$\{segment}
+        #            - AuthorizationHeaderFilter
+        #            - RewritePath=/user/(?<segment>.*), /$\{segment}
 
         - id: gomen-service
           uri: lb://TUNA-GOMEN-SERVICE
           predicates:
             - Path=/gomen/**
           filters:
-#            - RewritePath=/gomen-service/(?<segment>.*), /$\{segment}
+            #            - RewritePath=/gomen-service/(?<segment>.*), /$\{segment}
             - AuthorizationHeaderFilter
+      globalcors:
+        corsConfigurations:
+          '[/**]':
+            allowedOrigins: "http://localhost:5173"
+            allowedMethods:
+              - GET
+              - POST
+              - PUT
+              - DELETE
+              - OPTIONS
+            allowedHeaders: "*"
+            allowCredentials: true
 
 token:
   expiration_time: 43200000
