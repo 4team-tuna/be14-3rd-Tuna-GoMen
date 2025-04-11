@@ -160,6 +160,13 @@
       "receiverId": "1",
       "content": "오 안녕하세요!",
       "createdAt": "2025-04-11T16:57:24.299Z"
+    },
+    {
+      "id": "0010",
+      "senderId": "1",
+      "receiverId": "1744389791219",
+      "content": "누구시죠",
+      "createdAt": "2025-04-11T17:12:03.650Z"
     }
   ],
   "users": [

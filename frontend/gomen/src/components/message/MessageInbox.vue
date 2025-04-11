@@ -28,14 +28,14 @@
   <div
     v-for="msg in conversation"
     :key="msg.id"
-    :class="['conversation-message-wrapper', msg.senderId === myId ? 'sent' : 'received']"
+    :class="['conversation-message-wrapper', String(msg.senderId) === String(myId) ? 'sent' : 'received']"
   >
-    <div :class="['conversation-message', msg.senderId === myId ? 'sent' : 'received']">
-      <div class="label">
-        {{ msg.senderId === myId ? '발신' : '수신' }}
-      </div>
-      <div class="login-id">
-        {{ getUserLabel(msg.senderId) }}
+  <div :class="['conversation-message', String(msg.senderId) === String(myId) ? 'sent' : 'received']">
+  <div class="label">
+    {{ String(msg.senderId) === String(myId) ? '발신' : '수신' }}
+  </div>
+    <div class="login-id">
+      {{ getUserLabel(msg.senderId) }}
       </div>
       <div class="content">{{ msg.content }}</div>
       <div class="timestamp">{{ formatDateTime(msg.createdAt) }}</div>
@@ -161,8 +161,10 @@ async function refresh() {
     const res = await axios.get('http://localhost:3001/messages')
     const messages = res.data
 
-    sentMessages.value = messages.filter(msg => msg.senderId === myId)
-    receivedMessages.value = messages.filter(msg => msg.receiverId === myId)
+    sentMessages.value = messages.filter(msg => msg.senderId && String(msg.senderId) === String(myId))
+    receivedMessages.value = messages.filter(msg => msg.receiverId && String(msg.receiverId) === String(myId))
+
+
 
     await preloadLoginIds(messages)
   } catch (err) {
