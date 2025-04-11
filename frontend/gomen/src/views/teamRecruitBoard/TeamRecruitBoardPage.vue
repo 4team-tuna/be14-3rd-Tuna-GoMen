@@ -21,6 +21,8 @@
           :total-pages="totalPages"
           @change-page="handlePageChange"
         />
+
+        <WriteButton />
       </div>
     </div>
   </div>
@@ -30,6 +32,7 @@
 import FilterBar from '@/components/TeamRecruitBoard/FilterBar.vue'
 import PostRow from '@/components/TeamRecruitBoard/PostRow.vue'
 import Pagination from '@/components/TeamRecruitBoard/Pagination.vue'
+import WriteButton from '@/components/TeamRecruitBoard/WriteButton.vue'
 
 import { ref, computed, onMounted } from 'vue'
 
