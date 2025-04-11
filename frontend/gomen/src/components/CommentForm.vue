@@ -17,29 +17,32 @@
   </script>
   
   <style scoped>
-  .comment-form {
-    margin-top: 20px;
-    display: flex;
-    flex-direction: column;
-  }
-  .comment-form textarea {
-    padding: 10px;
-    font-size: 14px;
-    resize: none;
-    border-radius: 6px;
-    border: 1px solid #ccc;
-  }
-  .comment-form button {
-    align-self: flex-end;
-    margin-top: 8px;
-    padding: 8px 16px;
-    background-color: #4f46e5;
-    color: white;
-    border: none;
-    border-radius: 6px;
-    cursor: pointer;
-    transition: 0.3s;
-  }
+.comment-form {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.comment-form textarea {
+  padding: 12px;
+  font-size: 14px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  resize: none;
+}
+
+.comment-form button {
+  margin-top: 10px;
+  padding: 10px 16px;
+  align-self: flex-end;
+  background-color: #4f46e5;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
   .comment-form button:hover {
     background-color: #3730a3;
   }

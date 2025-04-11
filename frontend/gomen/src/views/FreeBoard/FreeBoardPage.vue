@@ -18,8 +18,6 @@
   import axios from 'axios'
   
   // 공통 컴포넌트
-  import Header from '@/components/common/Header.vue'
-  import Footer from '@/components/common/Footer.vue'
   import PostCard from '@/components/PostCard.vue'
   import CommentList from '@/components/CommentList.vue'
   import CommentForm from '@/components/CommentForm.vue'
@@ -53,13 +51,19 @@
   }
   
   .board-container {
-    max-width: 800px;
-    margin: 40px auto;
-    padding: 0 16px;
-    background: white;
-    border-radius: 10px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-  }
+  width: 100%;
+  max-width: 1200px; /* 필요시 늘릴 수 있음 */
+  margin: 40px auto;
+  padding: 24px;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
   
   .board-title {
     font-size: 24px;

@@ -32,16 +32,52 @@
   <style scoped>
   /* 기존 스타일 유지 */
   .post-meta {
-    font-size: 12px;
-    color: #777;
-  }
-  .post-meta span + span {
-    margin-left: 10px;
-  }
+  font-size: 13px;
+  color: #888;
+  display: flex;
+  justify-content: flex-start; /* 왼쪽 정렬 */
+  gap: 10px; /* span 사이 간격 주기 */
+}
+
+/* 제거 필요 */
+.post-meta span + span {
+  margin-left: 10px;
+}
+
   .report {
     cursor: pointer;
     color: red;
     font-weight: bold;
   }
+
+  .post-card {
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  padding: 24px;
+  background-color: #fff;
+}
+
+.post-header {
+  margin-bottom: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.post-meta {
+  font-size: 13px;
+  color: #888;
+  display: flex;
+  justify-content: space-between;
+}
+
+.post-actions {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 16px;
+  color: #e74c3c;
+  font-size: 14px;
+}
+
   </style>
   

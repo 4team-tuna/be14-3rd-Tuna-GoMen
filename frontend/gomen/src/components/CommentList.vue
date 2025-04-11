@@ -28,11 +28,31 @@ const reportComment = (id) => {
 
   
   <style scoped>
-  .comment-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
+.comments {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.comment {
+  border-top: 1px solid #eee;
+  padding-top: 12px;
+  font-size: 14px;
+}
+
+.comment-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-weight: 500;
+}
+
+.comment-date {
+  font-size: 12px;
+  color: #aaa;
+  margin-top: 4px;
+}
+
   .report {
     font-size: 12px;
     cursor: pointer;
