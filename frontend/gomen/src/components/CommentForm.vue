@@ -21,7 +21,9 @@
   margin-top: 20px;
   display: flex;
   flex-direction: column;
+  padding: 0 40px; /* 좌우 패딩 추가해서 여백 조절 */
 }
+
 
 .comment-form textarea {
   padding: 12px;
