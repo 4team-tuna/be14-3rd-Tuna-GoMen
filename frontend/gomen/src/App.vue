@@ -1,15 +1,14 @@
 <template>
-
-    <Header/>
+  <Header/>
     <router-view /> <!-- 여기에 각 페이지들이 들어감 -->
-      <Footer/>
-  </template>
+  <Footer/>
+</template>
   
-  <script setup>
+<script setup>
   import Header from './components/common/Header.vue';
   import Footer from './components/common/Footer.vue';
- </script>
+</script>
   
-  <style scoped>
+<style scoped>
   
-  </style>
+</style>
