@@ -21,7 +21,7 @@ const routes = [
   { path: '/login', component: LoginPage},
   { path: '/main', component: MainPage},
   { path: '/myPage', component: MyPage},
-  { path: '/changeInfo', component: EditProfile}
+  { path: '/changeInfo', component: EditProfile},
   // { path: '/', component: FindPasswordPage}
   { path: '/boards/free/:id', name: 'FreeBoardPage', component: FreeBoardPage },
   { path: '/boards/free', name: 'FreeBoardList', component: BoardView },
