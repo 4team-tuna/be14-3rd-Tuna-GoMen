@@ -4,7 +4,7 @@
       <div class="modal-content">
         <h3>쪽지 보내기</h3>
   
-        <label>받는 사람 (loginId)</label>
+        <label>받는 사람 (Nickname)</label>
         <input v-model="messageTo" placeholder="닉네임 또는 ID 입력" />
   
         <label>내용</label>
@@ -46,7 +46,8 @@
 
   try {
     // 입력된 loginId 기준으로 사용자 정보 조회
-    const userRes = await axios.get(`http://localhost:3001/users?loginId=${messageTo.value}`)
+    
+    const userRes = await axios.get(`http://localhost:3001/users?nickname=${messageTo.value}`)
     const user = userRes.data[0] // loginId는 고유하다고 가정
 
     if (!user) {
@@ -108,6 +109,16 @@
     border-radius: 5px;
     border: 1px solid #ccc;
   }
+
+  .modal-content ::placeholder {
+  font-family: 'Pretendard', 'Noto Sans KR', sans-serif;
+  font-size: 14px;
+  color: #aaa;
+  font-style: italic;
+  letter-spacing: 0.5px;
+}
+
+
   
   .modal-actions {
     text-align: right;

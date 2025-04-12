@@ -181,6 +181,41 @@
       "receiverId": "5",
       "content": "뭐해?",
       "createdAt": "2025-04-12T03:33:39.349Z"
+    },
+    {
+      "id": "d067",
+      "senderId": "1",
+      "receiverId": "1744435132583",
+      "content": "어디야?",
+      "createdAt": "2025-04-12T05:59:36.268Z"
+    },
+    {
+      "id": "3758",
+      "senderId": "5",
+      "receiverId": "1744435132583",
+      "content": "헤이",
+      "createdAt": "2025-04-12T06:10:33.370Z"
+    },
+    {
+      "id": "8e72",
+      "senderId": "5",
+      "receiverId": "1744435132583",
+      "content": "뭐해",
+      "createdAt": "2025-04-12T06:12:45.650Z"
+    },
+    {
+      "id": "7374",
+      "senderId": "5",
+      "receiverId": "1",
+      "content": "ㅎㅎ",
+      "createdAt": "2025-04-12T06:13:22.081Z"
+    },
+    {
+      "id": "e7ea",
+      "senderId": "1744435132583",
+      "receiverId": "1",
+      "content": "나? 지금 집인데",
+      "createdAt": "2025-04-12T06:20:17.321Z"
     }
   ],
   "users": [
@@ -191,7 +226,7 @@
       "name": "김민지",
       "personalNumber": "900101-2000001",
       "phoneNumber": "010-1234-0001",
-      "nickname": "민지",
+      "nickname": "MinjiVely",
       "createdAt": "2024-03-01T10:00:00",
       "updatedAt": null,
       "willBeActivated": "2024-03-01T10:00:00",
@@ -275,7 +310,7 @@
       "name": "이철수",
       "personalNumber": "910505-1000005",
       "phoneNumber": "010-5678-0005",
-      "nickname": "철수",
+      "nickname": "chulsooBest",
       "createdAt": "2024-03-02T10:00:00",
       "updatedAt": null,
       "willBeActivated": "2024-03-02T10:00:00",
@@ -287,7 +322,7 @@
       "violationScore": 1,
       "averageRating": 4,
       "college": "서울과학기술대학교",
-      "blog": null
+      "blog": ""
     },
     {
       "id": "6",
@@ -513,7 +548,7 @@
       "isQuitted": "N",
       "githubAdress": "",
       "extensionCount": 0,
-      "careerInfo": "시재건설 (2024.12 ~ 2024.12) - 공사 관리\n더레전드 (2020.01 ~ 2024.12) - 조교알바",
+      "careerInfo": "시재건설 (2024.12 ~ 2024.12) - 공사 관리\n더레전드 (2020.01 ~ 2024.12) - 조교알바\nbeyondSW (2024.01 ~ 2024.12) - 코딩 공부",
       "isMentor": "N",
       "violationScore": 0,
       "averageRating": 0,

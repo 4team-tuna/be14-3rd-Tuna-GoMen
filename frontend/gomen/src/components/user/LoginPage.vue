@@ -56,6 +56,7 @@ const login = async () => {
       localStorage.setItem('user', JSON.stringify(user))
       localStorage.setItem('loginId', loginId);
       localStorage.setItem('userId', user.id);
+      localStorage.setItem('isLogin', true);
 
       // 홈으로 리다이렉트
       router.push('/main')

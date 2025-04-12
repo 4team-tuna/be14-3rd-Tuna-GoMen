@@ -51,12 +51,12 @@
   
   const company = ref('')
   const position = ref('')
-  const startYear = ref('2020')
-  const startMonth = ref('01')
-  const endYear = ref('2024')
-  const endMonth = ref('12')
+  const startYear = ref('')
+  const startMonth = ref('')
+  const endYear = ref('')
+  const endMonth = ref('')
   
-  const years = Array.from({ length: 30 }, (_, i) => String(1995 + i))
+  const years = Array.from({ length: 100 }, (_, i) => String(1950 + i))
   const months = Array.from({ length: 12 }, (_, i) => String(i + 1).padStart(2, '0'))
   
   function apply() {

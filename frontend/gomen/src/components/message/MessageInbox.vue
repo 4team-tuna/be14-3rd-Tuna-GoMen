@@ -83,7 +83,7 @@ const showModal = ref(false)
 const sentMessages = ref([])
 const receivedMessages = ref([])
 
-async function preloadLoginIds(messages) {
+async function preloadNicknames(messages) {
   const userIds = new Set();
   messages.forEach(msg => {
     userIds.add(String(msg.senderId));
@@ -95,7 +95,7 @@ async function preloadLoginIds(messages) {
       try {
         const numericId = id;
         const res = await axios.get(`http://localhost:3001/users?id=${numericId}`);
-        loginIdMap.value[id] = res.data[0]?.loginId;  // 여기 문자열 id로!
+        loginIdMap.value[id] = res.data[0]?.nickname;  // 여기 문자열 id로!
       } catch (err) {
         console.error(`ID ${id}의 로그인 ID 불러오기 실패`, err);
         loginIdMap.value[id] = 'unknown';
@@ -166,7 +166,7 @@ async function refresh() {
 
 
 
-    await preloadLoginIds(messages)
+    await preloadNicknames(messages)
   } catch (err) {
     console.error('새로고침 실패:', err)
   }

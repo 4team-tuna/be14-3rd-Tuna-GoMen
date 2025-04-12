@@ -3,8 +3,6 @@
       <div class="main-box">
         <img src="@/assets/gomen-logo.png" alt="GoMen Logo" class="logo" />
         <h1>GoMen에 오신 것을 환영합니다!🎉</h1>
-  
-        <button class="mail-button" @click="goToMail">✉️ 쪽지창 열기</button>
       </div>
     </div>
 
