@@ -23,6 +23,7 @@ import MentorRequestPage from '@/views/Admin/MentorRequestPage.vue'
 
 const routes = [
 <<<<<<< HEAD
+<<<<<<< HEAD
   // 기본 진입시 관리자 홈으로 리다이렉트
   { path: '/', redirect: '/admin' },
 
@@ -30,11 +31,17 @@ const routes = [
   { path: '/board/free', component: FreeBoardPage },
 
   // 관리자 페이지
+=======
+  { path: '/', redirect: '/admin' }, 
+>>>>>>> d52b2dab3f9f60d330322f03e43ad21ddc152d47
   { path: '/admin', component: AdminHomePage },
   { path: '/admin/reports', component: ReportPage },
   { path: '/admin/titles', component: TitlePage },
   { path: '/admin/mentors', component: MentorRequestPage },
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> d52b2dab3f9f60d330322f03e43ad21ddc152d47
   { path: '/board/free', component: FreeBoardPage },
   { path: '/mail', component: MessageInbox},
   { path: '/', component: StartPage},
@@ -50,7 +57,10 @@ const routes = [
     path: '/boards/free/write',name: 'WritePost',
     component: WritePost
   }
+<<<<<<< HEAD
 >>>>>>> be6c3d8a7e9cd84974ac82702cc2f2b2f479a9df
+=======
+>>>>>>> d52b2dab3f9f60d330322f03e43ad21ddc152d47
 ]
 
 
