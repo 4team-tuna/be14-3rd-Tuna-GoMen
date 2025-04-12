@@ -11,7 +11,9 @@
       <tbody>
         <tr v-for="(post, index) in paginated" :key="post.id">
           <td>{{ startIndex + index + 1 }}</td>
-          <td>{{ post.title }}</td>
+          <td>
+  <router-link :to="`/boards/free/${post.id}`" class="router-link">{{ post.title }}</router-link>
+</td>
           <td>{{ post.author }}</td>
           <td>{{ post.date }}</td>
         </tr>
@@ -62,5 +64,19 @@
     margin: 0 0.25rem;
     padding: 0.25rem 0.5rem;
   }
+  
+  .router-link {
+  text-decoration: none;
+  color: inherit;
+  transition: all 0.2s ease-in-out;
+}
+
+.router-link:hover {
+  transform: scale(1.02);
+  font-weight: 600;
+  color: #222;
+}
+
+
   </style>
   

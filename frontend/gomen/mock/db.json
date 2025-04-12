@@ -1,251 +1,396 @@
 {
-  "posts": [
+  "allposts": [
     {
       "id": 1,
-      "tag": "장비추천 게시판",
       "title": "코린이 노트북 추천해주세요 ㅜ",
-      "writer": "서버개발자희망",
+      "author": "서버개발자희망",
       "date": "2025.04.08 13:48",
+      "category": "장비추천",
       "views": 345,
       "likes": 12,
-      "content": "안녕하세요 이제 대학에 입학한 새내기예요. ... 다름이아니라 ㅇㅇㅇ디스코드(영어: Discord, 약칭: 디코)는 게이밍부터, 교육과 비즈니스 영역의 커뮤니티 생성을 목적으로 설계된 VoIP 응용 소프트웨어의 하나이다. 디스코드는 채팅 채널에 있는 유저 사이의 텍스트, 이미지, 비디오, 음성 커뮤니케이션에 특화되어있다. 디스코드는 마이크로소프트 윈도우, macOS, 안드로이드, iOS, 리눅스, 웹 브라우저에서 실행된다. 2019년 11월에는 개발자들이 디스코드에 약 4000만 이상의 사용자들이 있다고 발표하였다. 또 '봇'이라는 신개념 로봇이 도입되었는데, 이들은 디스코드 서버의 자동화된 기능을 할 수 있도록 도와준다. 봇은 대부분이 무료지만 일부 봇의 경우엔 봇 개발진의 결정으로 유료화되어 있다."
-    }
-  ],
-  "comments": [
-    {
-      "id": 1,
-      "postId": 1,
-      "writer": "안현경개발짱",
-      "content": "애.. 그냥 애플 써라...",
-      "date": "2025.04.09 14:47"
+      "content": "안녕하세요 이제 대학에 입학한 새내기예요. ...",
+      "comments": [
+        {
+          "id": 1,
+          "writer": "안현경개발짱",
+          "content": "애.. 그냥 애플 써라...",
+          "date": "2025.04.09 14:47"
+        },
+        {
+          "id": 2,
+          "writer": "소름돋긔",
+          "content": "새로 나온 LG 그램 가볍고 좋아요 저는...",
+          "date": "2025.04.09 16:33"
+        },
+        {
+          "id": 3,
+          "writer": "놀이터정모와이",
+          "content": "3년간 무상 보수 가능해요!",
+          "date": "2025.04.09 17:08"
+        }
+      ]
     },
     {
       "id": 2,
-      "postId": 1,
-      "writer": "소름돋긔",
-      "content": "새로 나온 LG 그램 가볍고 좋아요 저는...",
-      "date": "2025.04.09 16:33"
+      "title": "2025년 최신 개발용 랩탑 비교",
+      "author": "DevGuru",
+      "date": "25.04.04",
+      "category": "장비추천",
+      "views": 123,
+      "likes": 5,
+      "content": "..."
     },
     {
       "id": 3,
-      "postId": 1,
-      "writer": "놀이터정모와이",
-      "content": "3년간 무상 보수 가능해요!",
-      "date": "2025.04.09 17:08"
+      "title": "Vue.js로 컴포넌트 설계 어떻게 시작할까요?",
+      "author": "개린이",
+      "date": "25.04.05",
+      "category": "Q&A",
+      "views": 78,
+      "likes": 4,
+      "content": "Vue.js를 배우기 시작했는데 컴포넌트 설계가 어려워요. ...",
+      "comments": [
+        {
+          "id": 1,
+          "writer": "리액트왕",
+          "content": "컴포넌트 설계 시 부모-자식 관계를 잘 설정하세요!",
+          "date": "2025.04.06 10:10"
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "title": "최고의 모니터 세팅 팁 공유해요",
+      "author": "스택수집가",
+      "date": "25.04.05",
+      "category": "장비추천",
+      "views": 89,
+      "likes": 6,
+      "content": "모니터 세팅을 어떻게 해야 생산성이 높아질까요? ...",
+      "comments": []
+    },
+    {
+      "id": 5,
+      "title": "웹 디자인을 위한 최고의 마우스는?",
+      "author": "디자인고민중",
+      "date": "25.04.06",
+      "category": "장비추천",
+      "views": 134,
+      "likes": 11,
+      "content": "디자인 작업에 적합한 마우스를 찾고 있습니다. ...",
+      "comments": [
+        {
+          "id": 1,
+          "writer": "디자인왕",
+          "content": "애플 매직 마우스가 좋습니다!",
+          "date": "2025.04.06 15:32"
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "title": "백엔드 서버에 적합한 장비는 무엇이 좋을까요?",
+      "author": "백엔드지망",
+      "date": "25.04.06",
+      "category": "장비추천",
+      "views": 210,
+      "likes": 19,
+      "content": "백엔드 서버를 구성하려고 하는데 어떤 장비가 좋을까요?",
+      "comments": [
+        {
+          "id": 1,
+          "writer": "서버전문가",
+          "content": "클라우드 서버를 추천드립니다.",
+          "date": "2025.04.07 09:45"
+        }
+      ]
+    },
+    {
+      "id": 7,
+      "title": "파이어베이스 사용 경험자 있나요?",
+      "author": "배포초보",
+      "date": "25.04.06",
+      "category": "Q&A",
+      "views": 112,
+      "likes": 7,
+      "content": "파이어베이스를 사용해보려고 하는데 어떤 점이 장점인가요?",
+      "comments": [
+        {
+          "id": 1,
+          "writer": "클라우드도전",
+          "content": "파이어베이스는 설정이 간편하고 스케일링이 좋아요.",
+          "date": "2025.04.07 14:20"
+        }
+      ]
+    },
+    {
+      "id": 8,
+      "title": "프로젝트에서 자주 발생하는 문제들 공유해요!",
+      "author": "API헬퍼",
+      "date": "25.04.07",
+      "category": "잡담",
+      "views": 90,
+      "likes": 8,
+      "content": "개발하면서 자주 발생하는 문제들에 대해 이야기해요.",
+      "comments": []
+    },
+    {
+      "id": 9,
+      "title": "웹사이트의 모바일 최적화, 어떻게 해야 할까요?",
+      "author": "반응형초보",
+      "date": "25.04.07",
+      "category": "Q&A",
+      "views": 75,
+      "likes": 3,
+      "content": "모바일에 최적화된 웹사이트를 만드는 방법이 궁금합니다.",
+      "comments": []
+    },
+    {
+      "id": 10,
+      "title": "버전 관리 시스템, Git은 어떤 식으로 사용하는 게 좋을까요?",
+      "author": "Git왕초보",
+      "date": "25.04.07",
+      "category": "Q&A",
+      "views": 125,
+      "likes": 14,
+      "content": "Git을 잘 사용하려면 어떤 습관을 들여야 하나요?",
+      "comments": [
+        {
+          "id": 1,
+          "writer": "버전관리전문가",
+          "content": "Git은 커밋 메시지를 잘 써야 합니다.",
+          "date": "2025.04.08 11:25"
+        }
+      ]
+    },
+    {
+      "id": 11,
+      "title": "나만의 토이 프로젝트를 시작해보자!",
+      "author": "새싹개발자",
+      "date": "25.04.08",
+      "category": "잡담",
+      "views": 220,
+      "likes": 22,
+      "content": "토이 프로젝트를 시작하려고 하는데, 추천할 만한 프로젝트 있나요?",
+      "comments": []
+    },
+    {
+      "id": 12,
+      "title": "다크모드 구현의 어려움, 어떻게 해결하시나요?",
+      "author": "야근러",
+      "date": "25.04.08",
+      "category": "Q&A",
+      "views": 150,
+      "likes": 12,
+      "content": "다크모드 구현할 때 어려운 점이 많네요. 어떻게 해결하시나요?",
+      "comments": []
+    },
+    {
+      "id": 13,
+      "title": "Next.js 사용기, 장점과 단점은?",
+      "author": "풀스택꿈나무",
+      "date": "25.04.08",
+      "category": "Q&A",
+      "views": 110,
+      "likes": 9,
+      "content": "Next.js 사용을 시작했는데 장단점에 대해 궁금해요.",
+      "comments": []
+    },
+    {
+      "id": 14,
+      "title": "프론트엔드 포트폴리오 작성 팁",
+      "author": "이직준비생",
+      "date": "25.04.08",
+      "category": "잡담",
+      "views": 90,
+      "likes": 5,
+      "content": "프론트엔드 개발자로서 포트폴리오를 어떻게 작성해야 할까요?",
+      "comments": []
+    },
+    {
+      "id": 15,
+      "title": "컴포넌트 설계 잘하는 법, 누구나 알면 좋을 팁!",
+      "author": "구조화러버",
+      "date": "25.04.09",
+      "category": "Q&A",
+      "views": 50,
+      "likes": 3,
+      "content": "컴포넌트를 설계할 때 유용한 팁이 있나요?",
+      "comments": []
+    },
+    {
+      "id": 16,
+      "title": "React Native와 Flutter, 무엇을 선택할까요?",
+      "author": "모바일초심",
+      "date": "25.04.09",
+      "category": "Q&A",
+      "views": 88,
+      "likes": 6,
+      "content": "React Native와 Flutter의 차이점과 장단점은 무엇인가요?",
+      "comments": []
+    },
+    {
+      "id": 17,
+      "title": "MySQL에서 JOIN 최적화 팁",
+      "author": "DB초보",
+      "date": "25.04.09",
+      "category": "Q&A",
+      "views": 120,
+      "likes": 7,
+      "content": "MySQL에서 JOIN을 최적화하는 팁이 있나요?",
+      "comments": []
+    },
+    {
+      "id": 18,
+      "title": "Docker 초보자 가이드",
+      "author": "DevOps왕초보",
+      "date": "25.04.09",
+      "category": "Q&A",
+      "views": 135,
+      "likes": 13,
+      "content": "Docker를 처음 접하는데 어디서부터 시작해야 할지 모르겠어요.",
+      "comments": []
+    },
+    {
+      "id": 19,
+      "title": "Node.js에서 비동기 처리 잘하는 법",
+      "author": "비동기왕",
+      "date": "25.04.09",
+      "category": "Q&A",
+      "views": 250,
+      "likes": 15,
+      "content": "Node.js에서 비동기 처리를 잘하려면 어떤 점을 신경 써야 할까요?",
+      "comments": [
+        {
+          "id": 1,
+          "writer": "비동기노예",
+          "content": "Promise와 async/await를 잘 활용하세요.",
+          "date": "2025.04.10 09:45"
+        }
+      ]
+    },
+    {
+      "id": 20,
+      "title": "유지보수 쉬운 코드 작성법",
+      "author": "코딩규칙",
+      "date": "25.04.10",
+      "category": "Q&A",
+      "views": 95,
+      "likes": 6,
+      "content": "유지보수가 쉬운 코드를 작성하려면 어떤 규칙을 지켜야 할까요?",
+      "comments": []
+    },
+    {
+      "id": 21,
+      "title": "웹 애플리케이션의 성능 최적화 방법",
+      "author": "퍼포먼스매니아",
+      "date": "25.04.10",
+      "category": "Q&A",
+      "views": 110,
+      "likes": 8,
+      "content": "웹 애플리케이션의 성능을 최적화하려면 어떤 방법이 좋을까요?",
+      "comments": []
+    },
+    {
+      "id": 22,
+      "title": "자바스크립트로 할 수 있는 재미있는 프로젝트",
+      "author": "자바스크립트초보",
+      "date": "25.04.10",
+      "category": "잡담",
+      "views": 140,
+      "likes": 10,
+      "content": "자바스크립트로 할 수 있는 재미있는 프로젝트 추천해주세요.",
+      "comments": []
+    },
+    {
+      "id": 23,
+      "title": "파이썬으로 할 수 있는 재밌는 프로젝트",
+      "author": "파이썬왕초보",
+      "date": "25.04.10",
+      "category": "잡담",
+      "views": 200,
+      "likes": 14,
+      "content": "파이썬으로 할 수 있는 재밌는 프로젝트 추천해주세요.",
+      "comments": []
+    },
+    {
+      "id": 24,
+      "title": "게임 개발의 첫걸음, Unity 시작하기",
+      "author": "게임개발자꿈나무",
+      "date": "25.04.10",
+      "category": "잡담",
+      "views": 250,
+      "likes": 18,
+      "content": "Unity를 배우기 시작했어요! 어떻게 시작해야 할지 모르겠네요.",
+      "comments": []
+    },
+    {
+      "id": 25,
+      "title": "애자일 개발 방법론, 실전에서 어떻게 적용할까요?",
+      "author": "애자일왕",
+      "date": "25.04.10",
+      "category": "잡담",
+      "views": 150,
+      "likes": 9,
+      "content": "애자일 개발 방법론을 실전에 어떻게 적용할 수 있을까요?",
+      "comments": []
+    },
+    {
+      "id": 26,
+      "title": "웹사이트 보안, SSL 적용 방법",
+      "author": "보안전문가",
+      "date": "25.04.10",
+      "category": "Q&A",
+      "views": 130,
+      "likes": 7,
+      "content": "웹사이트에 SSL을 적용하는 방법을 알려주세요.",
+      "comments": []
+    },
+    {
+      "id": 27,
+      "title": "클라우드 컴퓨팅의 미래",
+      "author": "클라우드전문가",
+      "date": "25.04.10",
+      "category": "잡담",
+      "views": 180,
+      "likes": 12,
+      "content": "클라우드 컴퓨팅의 발전 방향은 어디로 가고 있을까요?",
+      "comments": []
+    },
+    {
+      "id": 28,
+      "title": "AI로 무엇을 만들 수 있을까요?",
+      "author": "AI연구자",
+      "date": "25.04.10",
+      "category": "잡담",
+      "views": 220,
+      "likes": 17,
+      "content": "AI를 활용한 재밌는 프로젝트를 공유해 주세요.",
+      "comments": []
+    },
+    {
+      "id": 29,
+      "title": "Node.js 성능 최적화, 팁이 있을까요?",
+      "author": "성능최적화전문가",
+      "date": "25.04.10",
+      "category": "Q&A",
+      "views": 190,
+      "likes": 16,
+      "content": "Node.js의 성능을 최적화하려면 어떻게 해야 할까요?",
+      "comments": []
+    },
+    {
+      "id": 30,
+      "title": "Vue.js에서 상태 관리, 어떻게 할까요?",
+      "author": "상태관리전문가",
+      "date": "25.04.10",
+      "category": "Q&A",
+      "views": 80,
+      "likes": 5,
+      "content": "Vue.js에서 상태 관리를 어떻게 효율적으로 할 수 있을까요?",
+      "comments": []
     }
-  ],
-    "allposts": [
-      {
-        "id": 1,
-        "title": "최고의 개발용 키보드 추천해주세요!",
-        "author": "새벽개발자",
-        "date": "25.04.04",
-        "category": "장비추천"
-      },
-      {
-        "id": 2,
-        "title": "2025년 최신 개발용 랩탑 비교",
-        "author": "DevGuru",
-        "date": "25.04.04",
-        "category": "장비추천"
-      },
-      {
-        "id": 3,
-        "title": "Vue.js로 컴포넌트 설계 어떻게 시작할까요?",
-        "author": "개린이",
-        "date": "25.04.05",
-        "category": "Q&A"
-      },
-      {
-        "id": 4,
-        "title": "최고의 모니터 세팅 팁 공유해요",
-        "author": "스택수집가",
-        "date": "25.04.05",
-        "category": "장비추천"
-      },
-      {
-        "id": 5,
-        "title": "웹 디자인을 위한 최고의 마우스는?",
-        "author": "디자인고민중",
-        "date": "25.04.06",
-        "category": "장비추천"
-      },
-      {
-        "id": 6,
-        "title": "백엔드 서버에 적합한 장비는 무엇이 좋을까요?",
-        "author": "백엔드지망",
-        "date": "25.04.06",
-        "category": "장비추천"
-      },
-      {
-        "id": 7,
-        "title": "파이어베이스 사용 경험자 있나요?",
-        "author": "배포초보",
-        "date": "25.04.06",
-        "category": "Q&A"
-      },
-      {
-        "id": 8,
-        "title": "프로젝트에서 자주 발생하는 문제들 공유해요!",
-        "author": "API헬퍼",
-        "date": "25.04.07",
-        "category": "잡담"
-      },
-      {
-        "id": 9,
-        "title": "웹사이트의 모바일 최적화, 어떻게 해야 할까요?",
-        "author": "반응형초보",
-        "date": "25.04.07",
-        "category": "Q&A"
-      },
-      {
-        "id": 10,
-        "title": "버전 관리 시스템, Git은 어떤 식으로 사용하는 게 좋을까요?",
-        "author": "Git왕초보",
-        "date": "25.04.07",
-        "category": "Q&A"
-      },
-      {
-        "id": 11,
-        "title": "나만의 토이 프로젝트를 시작해보자!",
-        "author": "새싹개발자",
-        "date": "25.04.08",
-        "category": "잡담"
-      },
-      {
-        "id": 12,
-        "title": "다크모드 구현의 어려움, 어떻게 해결하시나요?",
-        "author": "야근러",
-        "date": "25.04.08",
-        "category": "Q&A"
-      },
-      {
-        "id": 13,
-        "title": "Next.js 사용기, 장점과 단점은?",
-        "author": "풀스택꿈나무",
-        "date": "25.04.08",
-        "category": "Q&A"
-      },
-      {
-        "id": 14,
-        "title": "프론트엔드 포트폴리오 작성 팁",
-        "author": "이직준비생",
-        "date": "25.04.08",
-        "category": "잡담"
-      },
-      {
-        "id": 15,
-        "title": "컴포넌트 설계 잘하는 법, 누구나 알면 좋을 팁!",
-        "author": "구조화러버",
-        "date": "25.04.09",
-        "category": "Q&A"
-      },
-      {
-        "id": 16,
-        "title": "React Native와 Flutter, 무엇을 선택할까요?",
-        "author": "모바일초심",
-        "date": "25.04.09",
-        "category": "Q&A"
-      },
-      {
-        "id": 17,
-        "title": "Axios Interceptor 사용 시 주의할 점",
-        "author": "axios초보",
-        "date": "25.04.09",
-        "category": "Q&A"
-      },
-      {
-        "id": 18,
-        "title": "컴파일러와 인터프리터의 차이, 어떻게 이해하셨나요?",
-        "author": "이론왕",
-        "date": "25.04.09",
-        "category": "Q&A"
-      },
-      {
-        "id": 19,
-        "title": "Firebase Auth 경험이 있으신 분, 의견 부탁드려요!",
-        "author": "로그인지옥",
-        "date": "25.04.10",
-        "category": "Q&A"
-      },
-      {
-        "id": 20,
-        "title": "TypeScript를 배우는 이유와 장점은 무엇인가요?",
-        "author": "JS좋아",
-        "date": "25.04.10",
-        "category": "Q&A"
-      },
-      {
-        "id": 21,
-        "title": "비동기 로딩 시 깜빡임 없애는 방법, 뭐가 좋을까요?",
-        "author": "UX집착러",
-        "date": "25.04.10",
-        "category": "Q&A"
-      },
-      {
-        "id": 22,
-        "title": "Storybook 도입 경험 있으신 분, 알려주세요!",
-        "author": "문서화광",
-        "date": "25.04.10",
-        "category": "Q&A"
-      },
-      {
-        "id": 23,
-        "title": "eslint 설정이 왜 이렇게 어려운가요?",
-        "author": "규칙노예",
-        "date": "25.04.11",
-        "category": "Q&A"
-      },
-      {
-        "id": 24,
-        "title": "3대 프레임워크 비교, 의견 공유해요",
-        "author": "비교러버",
-        "date": "25.04.11",
-        "category": "잡담"
-      },
-      {
-        "id": 25,
-        "title": "SASS 강의 추천 부탁드려요!",
-        "author": "SCSS입문자",
-        "date": "25.04.11",
-        "category": "Q&A"
-      },
-      {
-        "id": 26,
-        "title": "JavaScript 호이스팅 개념을 정리한 자료 공유합니다!",
-        "author": "정리왕",
-        "date": "25.04.11",
-        "category": "Q&A"
-      },
-      {
-        "id": 27,
-        "title": "RESTful API 설계 원칙에 대해 궁금한 점",
-        "author": "API설계중",
-        "date": "25.04.12",
-        "category": "Q&A"
-      },
-      {
-        "id": 28,
-        "title": "이력서에 넣을만한 프로젝트 아이디어가 필요해요",
-        "author": "구직중",
-        "date": "25.04.12",
-        "category": "잡담"
-      },
-      {
-        "id": 29,
-        "title": "Webpack과 Vite, 무엇을 선택해야 할까요?",
-        "author": "번들러초보",
-        "date": "25.04.12",
-        "category": "잡담"
-      },
-      {
-        "id": 30,
-        "title": "OAuth2.0 개념, 어떻게 제대로 이해하고 계신가요?",
-        "author": "인증헬",
-        "date": "25.04.12",
-        "category": "Q&A"
-      }
-    ]
-  
+  ]
 }
+
   

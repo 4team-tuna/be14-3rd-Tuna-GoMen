@@ -1,75 +1,69 @@
 <template>
-    <div class="free-board-page">
-  
-      <main class="board-container">
-        <h2 class="board-title">📢 자유 게시판</h2>
-  
-        <PostCard v-if="post" :post="post" />
-  
-        <CommentList v-if="comments.length" :comments="comments" />
-        <CommentForm />
-      </main>
-    </div>
-  </template>
-  
+  <div class="free-board-page">
+    <main class="board-container">
+      <h2 class="board-title">📢 자유 게시판</h2>
 
-  <script setup>
-  import { ref, onMounted } from 'vue'
-  import axios from 'axios'
-  
-  // 공통 컴포넌트
-  import PostCard from '@/components/freeboard/PostCard.vue'
-  import CommentList from '@/components/freeboard/CommentList.vue'
-  import CommentForm from '@/components/freeboard/CommentForm.vue'
-  
-  const post = ref(null)
-  const comments = ref([])
-  
-  onMounted(async () => {
+      <PostCard v-if="post" :post="post" />
+
+      <!-- 댓글 목록을 post 내의 comments로 바로 처리 -->
+      <CommentList v-if="post && post.comments.length" :comments="post.comments" />
+      <CommentForm />
+    </main>
+  </div>
+</template>
+
+<script setup>
+import { ref, onMounted } from 'vue'
+import { useRoute } from 'vue-router'
+import axios from 'axios'
+
+// 공통 컴포넌트
+import PostCard from '@/components/freeboard/PostCard.vue'
+import CommentList from '@/components/freeboard/CommentList.vue'
+import CommentForm from '@/components/freeboard/CommentForm.vue'
+
+const post = ref(null)
+const route = useRoute()
+
+onMounted(async () => {
   try {
-    const postRes = await axios.get('/api/posts/1')
+    // 이제 하나의 요청으로 모든 데이터 (게시물 + 댓글) 받기
+    const postRes = await axios.get(`http://localhost:3001/allposts/${route.params.id}`)
     post.value = postRes.data
 
-    const commentRes = await axios.get('/api/comments?postId=1')
-    comments.value = commentRes.data
-
-    console.log('🔥 댓글 목록:', comments.value)
+    console.log('🔥 게시물과 댓글:', post.value)
   } catch (error) {
     console.error('데이터 로딩 실패:', error)
   }
 })
+</script>
 
-  </script>
-  
-  
-  <style scoped>
-  .free-board-page {
-    background: #f9f9fb;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-  }
-  
-  .board-container {
+<style scoped>
+.free-board-page {
+  background: #f9f9fb;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.board-container {
   width: 100%;
-  max-width: 1000px; /* 필요시 늘릴 수 있음 */
+  max-width: 1000px;
   margin: 40px auto;
   padding: 24px;
   background: white;
   border-radius: 12px;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
 
   display: flex;
   flex-direction: column;
   gap: 24px;
 }
 
-  
-  .board-title {
-    font-size: 30px;
-    font-weight: bold;
-    margin-left:30px;
-  }
-  </style>
-  
+.board-title {
+  font-size: 30px;
+  font-weight: bold;
+  margin-left: 30px;
+}
+</style>
