@@ -1,5 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import FreeBoardPage from '@/views/FreeBoard/FreeBoardPage.vue'
+import BoardView from '@/views/FreeBoard/BoardView.vue'
+import WritePost from '@/views/FreeBoard/WritePost.vue'
 import MessageInbox from '@/components/message/MessageInbox.vue'
 import LoginPage from '@/components/user/LoginPage.vue'
 import FindIdPage from '@/components/user/FindIdPage.vue'
@@ -21,7 +23,14 @@ const routes = [
   { path: '/main', component: MainPage},
   { path: '/myPage', component: MyPage},
   { path: '/changeInfo', component: EditProfile},
+  { path: '/changeInfo', component: EditProfile},
   // { path: '/', component: FindPasswordPage}
+  { path: '/boards/free/:id', name: 'FreeBoardPage', component: FreeBoardPage },
+  { path: '/boards/free', name: 'FreeBoardList', component: BoardView },
+  {
+    path: '/boards/free/write',name: 'WritePost',
+    component: WritePost
+  },
   { path: '/board/free', component: FreeBoardPage },
   { path: '/mentorlist', component: MentorListPage },
   {
@@ -30,6 +39,7 @@ const routes = [
     component: () => import('@/views/MentorList/MentorDetailPage.vue')
   }
 ]
+
 
 const router = createRouter({
   history: createWebHistory(),
