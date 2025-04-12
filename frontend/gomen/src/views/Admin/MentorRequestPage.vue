@@ -1,6 +1,7 @@
 <template>
     <div>
       <main>
+        <button class="floating-back" @click="goBack">관리자 HOME</button>
         <h2>멘토 요청 내역</h2>
         <div class="request-box">
           <div
@@ -22,6 +23,12 @@
   </template>
   
   <script setup>
+import { useRouter } from 'vue-router'
+const router = useRouter()
+
+const goBack = () => {
+  window.history.length > 1 ? router.back() : router.push('/admin')
+}
 import { ref, onMounted } from 'vue'
 import axios from 'axios'
 
@@ -122,6 +129,28 @@ const confirmAction = async (type, index) => {
 
 .reject:hover {
   background-color: #d075bb;
+}
+
+.floating-back {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  background-color: #7c72f0;
+  color: white;
+  padding: 12px 20px;
+  border-radius: 30px;
+  font-weight: bold;
+  font-size: 14px;
+  border: none;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  z-index: 999;
+  transition: background-color 0.3s, transform 0.2s;
+}
+
+.floating-back:hover {
+  background-color: #5d5fef;
+  transform: scale(1.05);
 }
 
   </style>
