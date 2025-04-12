@@ -8,7 +8,7 @@
   <router-link to="/team">팀 모집 게시판</router-link>
   <router-link to="/mentoring">멘토링</router-link>
   <router-link to="/mentorlist">멘토 리스트</router-link>
-</nav>
+  </nav>
     </div>
     
     <!-- 오른쪽 -->
