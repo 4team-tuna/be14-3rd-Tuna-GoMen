@@ -4,7 +4,9 @@ import TeamRecruitBoardPage from '@/views/teamRecruitBoard/TeamRecruitBoardPage.
 
 const routes = [
   { path: '/board/free', component: FreeBoardPage },
-  { path: '/board/team-recruit', name: 'TeamRecruitBoard', component: TeamRecruitBoardPage }
+  { path: '/board/team-recruit', name: 'TeamRecruitBoard', component: TeamRecruitBoardPage },
+  { path: '/board/team-recruit/:id', name: 'TeamRecruitDetail',
+    component: () => import('@/views/teamRecruitBoard/TeamRecruitBoardDetailPage.vue'),alias: '/recruit/:id' }
 ]
 
 const router = createRouter({

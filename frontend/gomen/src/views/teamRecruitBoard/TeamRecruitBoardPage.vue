@@ -4,7 +4,7 @@
       <CircleBackground />
 
       <div class="content-wrapper">
-        <h1 class="page-title">팀원 모집 게시판</h1>
+        <h1 class="page-title">팀 모집 게시판</h1>
 
         <FilterBar @search="handleSearch" />
 
