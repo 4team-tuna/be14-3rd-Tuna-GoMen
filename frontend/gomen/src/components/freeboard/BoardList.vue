@@ -52,20 +52,42 @@
   
   <style scoped>
   .board-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-bottom: 1rem;
-  }
-  .board-table th, .board-table td {
-    border: 1px solid #ddd;
-    padding: 0.5rem;
-  }
-  .pagination button {
-    margin: 0 0.25rem;
-    padding: 0.25rem 0.5rem;
-  }
-  
-  .router-link {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0 8px; /* 행 간격 */
+  font-family: 'Noto Sans KR', sans-serif;
+  font-size: 14px;
+  text-align: center;
+}
+
+.board-table thead th {
+  background-color: #f1f3f5;
+  color: #333;
+  font-weight: 600;
+  padding: 12px;
+  border: none;
+  border-top: 1px solid #dee2e6;
+  border-bottom: 2px solid #dee2e6;
+}
+
+.board-table tbody tr {
+  background-color: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  transition: transform 0.2s ease;
+}
+
+.board-table tbody tr:hover {
+  transform: scale(1.01);
+  background-color: #f8f9fa;
+}
+
+.board-table td {
+  padding: 12px;
+  border: none;
+}
+
+.router-link {
   text-decoration: none;
   color: inherit;
   transition: all 0.2s ease-in-out;
@@ -76,6 +98,34 @@
   font-weight: 600;
   color: #222;
 }
+
+/* 페이지네이션 버튼 */
+.pagination {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.pagination button {
+  background-color: #f1f3f5;
+  border: none;
+  padding: 8px 12px;
+  margin: 0 4px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: all 0.2s ease-in-out;
+}
+
+.pagination button:hover {
+  background-color: #dee2e6;
+}
+
+.pagination button:focus {
+  outline: none;
+  background-color: #ced4da;
+}
+
 
 
   </style>

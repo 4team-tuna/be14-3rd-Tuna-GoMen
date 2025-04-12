@@ -1,11 +1,11 @@
 <template>
   <section class="post-card">
     <div class="post-header">
-      <span class="tag">{{ post.tag }}</span>
+      <span class="tag">{{ post.category }}</span>
       <h3 class="post-title">{{ post.title }}</h3>
       <div class="post-meta">
   <div class="meta-left">
-    <span class="writer">{{ post.writer }}</span>
+    <span class="writer">{{ post.author }}</span>
     <span class="date">{{ post.date }}</span>
     <span class="views">조회수 {{ post.views }}</span>
   </div>
