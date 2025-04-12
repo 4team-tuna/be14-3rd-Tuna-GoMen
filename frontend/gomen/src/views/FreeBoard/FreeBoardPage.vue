@@ -20,7 +20,6 @@ import { ref, onMounted } from 'vue'
 import { useRoute } from 'vue-router'
 import axios from 'axios'
 
-// 공통 컴포넌트
 import PostCard from '@/components/freeboard/PostCard.vue'
 import CommentList from '@/components/freeboard/CommentList.vue'
 import CommentForm from '@/components/freeboard/CommentForm.vue'
@@ -30,8 +29,8 @@ const route = useRoute()
 
 onMounted(async () => {
   try {
-    // 이제 하나의 요청으로 모든 데이터 (게시물 + 댓글) 받기
-    const postRes = await axios.get(`http://localhost:3001/allposts/${route.params.id}`)
+    const postId = Number(route.params.id) // 문자열을 숫자로 변환!
+    const postRes = await axios.get(`http://localhost:3001/allposts/${postId}`)
     post.value = postRes.data
 
     console.log('🔥 게시물과 댓글:', post.value)

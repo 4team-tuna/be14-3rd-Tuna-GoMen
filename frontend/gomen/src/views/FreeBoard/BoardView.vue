@@ -1,77 +1,82 @@
 <template>
     <div class="board-container">
-        <h1 class="title">🌱 자유 게시판</h1>
-        <RouterLink to="/boards/free/write">
-            <button class="write-btn">글쓰기</button>
-        </RouterLink>
-
-
-        <div class="filters">
-            <div class="category-group">
-                <label>카테고리:</label>
-                <select v-model="selectedCategory" class="category-select">
-                    <option value="">전체</option>
-                    <option value="장비추천">장비추천</option>
-                    <option value="잡담">잡담</option>
-                    <option value="Q&A">Q&A</option>
-                </select>
-            </div>
-
-            <select v-model="sort">
-                <option value="date">최신순</option>
-                <option value="title">제목순</option>
-            </select>
-
-            <input v-model="search" placeholder="내용을 검색하세요" />
+      <h1 class="title">🌱 자유 게시판</h1>
+      <RouterLink to="/boards/free/write">
+        <button class="write-btn">글쓰기</button>
+      </RouterLink>
+  
+      <div class="filters">
+        <div class="category-group">
+          <label>카테고리:</label>
+          <select v-model="selectedCategory" class="category-select">
+            <option value="">전체</option>
+            <option value="장비추천">장비추천</option>
+            <option value="잡담">잡담</option>
+            <option value="Q&A">Q&A</option>
+          </select>
         </div>
-
-
-        <BoardList :posts="filteredPosts" :current-page="currentPage" :page-size="15"
-            @change-page="currentPage = $event" />
+  
+        <select v-model="sort">
+          <option value="date">최신순</option>
+          <option value="title">제목순</option>
+        </select>
+  
+        <input v-model="search" placeholder="내용을 검색하세요" />
+      </div>
+  
+      <BoardList :posts="filteredPosts" :current-page="currentPage" :page-size="15"
+        @change-page="currentPage = $event" />
     </div>
-</template>
-
-<script setup>
-import { ref, computed, onMounted } from 'vue'
-import axios from 'axios'
-import BoardList from '@/components/freeboard/BoardList.vue'
-
-const posts = ref([])
-const search = ref('')
-const sort = ref('date')
-const currentPage = ref(1)
-const selectedCategory = ref('')
-
-onMounted(async () => {
-    const res = await axios.get('http://localhost:3001/allposts') // 요기만 바꿨어!
-    posts.value = res.data
-})
-
-const filteredPosts = computed(() => {
+  </template>
+  
+  <script setup>
+  import { ref, computed, onMounted } from 'vue'
+  import axios from 'axios'
+  import BoardList from '@/components/freeboard/BoardList.vue'
+  
+  const search = ref('')
+  const sort = ref('date')
+  const currentPage = ref(1)
+  const selectedCategory = ref('')
+  
+  const posts = ref([])
+  
+  onMounted(async () => {
+    const raw = localStorage.getItem('allposts')
+    posts.value = raw ? JSON.parse(raw) : []
+  
+    try {
+      const res = await axios.get('http://localhost:3001/allposts')
+      posts.value = res.data
+      localStorage.setItem('allposts', JSON.stringify(res.data))
+    } catch (e) {
+      console.error('서버에서 데이터 가져오기 실패:', e)
+    }
+  })
+  
+  const filteredPosts = computed(() => {
     let result = posts.value
-
-    // ✅ 카테고리 선택 반영 (selectedCategory로 고쳐야 작동함!)
+  
     if (selectedCategory.value) {
-        result = result.filter(p => p.category === selectedCategory.value)
+      result = result.filter(p => p.category === selectedCategory.value)
     }
-
+  
     if (search.value) {
-        result = result.filter(p =>
-            p.title.toLowerCase().includes(search.value.toLowerCase())
-        )
+      result = result.filter(p =>
+        p.title.toLowerCase().includes(search.value.toLowerCase())
+      )
     }
-
+  
     if (sort.value === 'title') {
-        result = result.sort((a, b) => a.title.localeCompare(b.title))
+      result = result.sort((a, b) => a.title.localeCompare(b.title))
     } else {
-        result = result.sort((a, b) => b.id - a.id)
+      result = result.sort((a, b) => b.id - a.id)
     }
-
+  
     return result
-})
-
-</script>
-
+  })
+  </script>
+  
 <style scoped>
 .board-container {
     max-width: 960px;

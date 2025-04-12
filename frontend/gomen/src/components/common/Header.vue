@@ -5,9 +5,9 @@
       <img src="@/assets/gomen-logo.png" alt="GoMen Logo" class="logo" />
       <nav class="nav-links">
   <router-link to="/boards/free">자유 게시판</router-link>
-  <router-link to="#">팀 모집 게시판</router-link>
-  <router-link to="#">멘토링</router-link>
-  <router-link to="#">멘토 리스트</router-link>
+  <router-link to="/team">팀 모집 게시판</router-link>
+  <router-link to="/mentoring">멘토링</router-link>
+  <router-link to="/mentorlist">멘토 리스트</router-link>
 </nav>
     </div>
     
