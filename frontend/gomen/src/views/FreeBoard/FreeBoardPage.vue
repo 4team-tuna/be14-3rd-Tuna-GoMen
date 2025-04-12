@@ -9,18 +9,18 @@
         <CommentList v-if="comments.length" :comments="comments" />
         <CommentForm />
       </main>
-  
     </div>
   </template>
   
+
   <script setup>
   import { ref, onMounted } from 'vue'
   import axios from 'axios'
   
   // 공통 컴포넌트
-  import PostCard from '@/components/PostCard.vue'
-  import CommentList from '@/components/CommentList.vue'
-  import CommentForm from '@/components/CommentForm.vue'
+  import PostCard from '@/components/freeboard/PostCard.vue'
+  import CommentList from '@/components/freeboard/CommentList.vue'
+  import CommentForm from '@/components/freeboard/CommentForm.vue'
   
   const post = ref(null)
   const comments = ref([])
@@ -40,6 +40,7 @@
 })
 
   </script>
+  
   
   <style scoped>
   .free-board-page {

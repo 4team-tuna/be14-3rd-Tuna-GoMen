@@ -25,6 +25,7 @@
   </div>
 </template>
 
+
 <script setup>
 import { ref } from 'vue'
 
@@ -49,6 +50,7 @@ const reportComment = (id) => {
   alert(`댓글 (ID: ${id})을 신고하시겠습니까?`)
 }
 </script>
+
 
 <style scoped>
 .comment-form {
