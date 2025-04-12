@@ -63,7 +63,15 @@ const bookmarkImage = computed(() =>
 </script>
 
 <style scoped>
-/* 기존 스타일 유지 */
+
+.tag {
+  margin-bottom: 4px; /* 필요에 따라 조정 */
+}
+
+.post-title {
+  margin-top: 0;
+}
+
 .post-meta {
   display: flex;
   justify-content: space-between;
@@ -115,8 +123,9 @@ const bookmarkImage = computed(() =>
   margin-bottom: 16px;
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 4px; /* 원래 8px → 4px로 줄임 */
 }
+
 
 .post-actions {
   display: flex;

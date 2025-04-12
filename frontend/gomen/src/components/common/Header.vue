@@ -4,11 +4,11 @@
     <div class="left-group">
       <img src="@/assets/gomen-logo.png" alt="GoMen Logo" class="logo" />
       <nav class="nav-links">
-        <a href="#">자유 게시판</a>
-        <a href="#">팀 모집 게시판</a>
-        <a href="#">멘토링</a>
-        <a href="#">멘토 리스트</a>
-      </nav>
+  <router-link to="/boards/free">자유 게시판</router-link>
+  <router-link to="#">팀 모집 게시판</router-link>
+  <router-link to="#">멘토링</router-link>
+  <router-link to="#">멘토 리스트</router-link>
+</nav>
     </div>
     
     <!-- 오른쪽 -->

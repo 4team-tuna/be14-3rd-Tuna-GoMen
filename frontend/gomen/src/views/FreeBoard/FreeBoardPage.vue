@@ -1,7 +1,10 @@
 <template>
   <div class="free-board-page">
     <main class="board-container">
-      <h2 class="board-title">📢 자유 게시판</h2>
+      <h2 class="board-title">🌱 자유 게시판</h2>
+
+      <!-- 목록 버튼 -->
+  <router-link to="/boards/free" class="back-button">목록</router-link>
 
       <PostCard v-if="post" :post="post" />
 
@@ -58,12 +61,32 @@ onMounted(async () => {
 
   display: flex;
   flex-direction: column;
-  gap: 24px;
+  gap: 5px;
 }
 
 .board-title {
   font-size: 30px;
   font-weight: bold;
   margin-left: 30px;
+  margin-bottom:4px;
 }
+
+.back-button {
+  font-size: 12px;
+  align-self: flex-end;
+  background-color: #2563eb; /* Tailwind 기준으로는 'blue-600' */
+  color: white;
+  padding: 8px 15px;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: bold;
+  transition: background-color 0.3s;
+  margin-top:0;
+  margin-bottom:10px;
+}
+
+.back-button:hover {
+  background-color: #1d4ed8; /* 더 진한 파란색 */
+}
+
 </style>
