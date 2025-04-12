@@ -5,7 +5,16 @@
     <MentorSearch @search="handleSearch" />
 
     <h2 class="section-title">전체 멘토</h2>
-    <MentorList :mentors="paginatedMentors" />
+    <MentorList
+      :mentors="paginatedMentors"
+      @openApply="openApplyModal"
+    />
+
+    <MentorApplyModal
+      v-if="isModalOpen && selectedMentor"
+      :mentor="selectedMentor"
+      @close="isModalOpen = false"
+    />
 
     <MentorPagination
       :currentPage="currentPage"
@@ -22,6 +31,7 @@ import MentorHighlight from '@/components/mentorList/MentorHighlight.vue'
 import MentorSearch from '@/components/mentorList/MentorSearch.vue'
 import MentorList from '@/components/mentorList/MentorList.vue'
 import MentorPagination from '@/components/mentorList/MentorPagination.vue'
+import MentorApplyModal from '@/components/mentorList/MentorApplyModal.vue'
 
 export default {
   name: 'MentorListPage',
@@ -30,14 +40,17 @@ export default {
     MentorHighlight,
     MentorSearch,
     MentorList,
-    MentorPagination
+    MentorPagination,
+    MentorApplyModal
   },
   data() {
     return {
       mentors: [],
       filteredMentors: [],
       currentPage: 1,
-      itemsPerPage: 4
+      itemsPerPage: 4,
+      isModalOpen: false,
+      selectedMentor: null
     }
   },
   computed: {
@@ -51,23 +64,27 @@ export default {
   },
   methods: {
     handleSearch(keyword) {
-  this.currentPage = 1;
-  const lowerKeyword = keyword.toLowerCase();
+      this.currentPage = 1;
+      const lowerKeyword = keyword.toLowerCase();
 
-  this.filteredMentors = this.mentors.filter((mentor) => {
-    const name = mentor.name?.toLowerCase() || "";
-    const title = mentor.title?.toLowerCase() || "";
-    const skills = mentor.skills?.toLowerCase() || "";
+      this.filteredMentors = this.mentors.filter((mentor) => {
+        const name = mentor.name?.toLowerCase() || "";
+        const title = mentor.title?.toLowerCase() || "";
+        const skills = mentor.skills?.toLowerCase() || "";
 
-    return (
-      name.includes(lowerKeyword) ||
-      title.includes(lowerKeyword) ||
-      skills.includes(lowerKeyword)
-    );
-  });
-},
+        return (
+          name.includes(lowerKeyword) ||
+          title.includes(lowerKeyword) ||
+          skills.includes(lowerKeyword)
+        );
+      });
+    },
     handlePageChange(newPage) {
-      this.currentPage = newPage
+      this.currentPage = newPage;
+    },
+    openApplyModal(mentor) {
+      this.selectedMentor = mentor;
+      this.isModalOpen = true;
     }
   },
   mounted() {

@@ -4,7 +4,7 @@
     <img :src="getImageUrl(mentor.image)" alt="멘토 이미지" class="mentor-image" />
     <div class="mentor-info">
       <h3 class="mentor-name">{{ mentor.name }}</h3>
-      <p class="mentor-title">{{ mentor.title }}</p> <!-- ✅ 수정됨 -->
+      <p class="mentor-title">{{ mentor.title }}</p> 
       <p class="mentor-skills">{{ mentor.skills }}</p>
       <p class="mentor-description">{{ mentor.description }}</p>
     </div>
