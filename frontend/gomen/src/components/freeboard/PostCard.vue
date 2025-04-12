@@ -1,11 +1,11 @@
 <template>
   <section class="post-card">
     <div class="post-header">
-      <span class="tag">{{ post.tag }}</span>
+      <span class="tag">{{ post.category }}</span>
       <h3 class="post-title">{{ post.title }}</h3>
       <div class="post-meta">
   <div class="meta-left">
-    <span class="writer">{{ post.writer }}</span>
+    <span class="writer">{{ post.author }}</span>
     <span class="date">{{ post.date }}</span>
     <span class="views">조회수 {{ post.views }}</span>
   </div>
@@ -63,7 +63,15 @@ const bookmarkImage = computed(() =>
 </script>
 
 <style scoped>
-/* 기존 스타일 유지 */
+
+.tag {
+  margin-bottom: 4px; /* 필요에 따라 조정 */
+}
+
+.post-title {
+  margin-top: 0;
+}
+
 .post-meta {
   display: flex;
   justify-content: space-between;
@@ -115,8 +123,9 @@ const bookmarkImage = computed(() =>
   margin-bottom: 16px;
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 4px; /* 원래 8px → 4px로 줄임 */
 }
+
 
 .post-actions {
   display: flex;
