@@ -8,7 +8,7 @@
             v-for="(request, index) in requests"
             :key="index"
           >
-            <div class="user-id">{{ request.userId }}</div>
+            <div class="nickname">{{ request.nickname }}</div>
             <div v-if="request.done" class="done">처리 완료</div>
             <div v-else>
                 <button class="btn accept" @click="confirmAction('수락', index)">수락</button>
@@ -32,14 +32,25 @@ onMounted(async () => {
   requests.value = res.data
 })
 
-const confirmAction = (type, index) => {
+const confirmAction = async (type, index) => {
   const confirmed = window.confirm(`멘토 요청을 ${type}하시겠습니까?`)
-  if (confirmed) {
+  if (!confirmed) return
+
+  const target = requests.value[index]
+
+  try {
+    await axios.patch(`http://localhost:3001/mentorRequests/${target.id}`, {
+      done: true
+    })
+    target.done = true
     alert(`요청이 ${type} 처리되었습니다.`)
-    requests.value[index].done = true
+  } catch (error) {
+    console.error(`${type} 처리 실패:`, error)
+    alert('처리 중 오류가 발생했습니다.')
   }
 }
 </script>
+
 
   
   <style scoped>
