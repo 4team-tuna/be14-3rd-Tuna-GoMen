@@ -4,7 +4,12 @@ import MentorListPage from '@/views/MentorList/MentorListPage.vue'
 
 const routes = [
   { path: '/board/free', component: FreeBoardPage },
-  { path: '/mentorlist', component: MentorListPage }
+  { path: '/mentorlist', component: MentorListPage },
+  {
+    path: '/mentor/:id',
+    name: 'MentorDetail',
+    component: () => import('@/views/MentorDetailPage.vue')
+  }
 ]
 
 const router = createRouter({
