@@ -20,9 +20,8 @@ const routes = [
   { path: '/login', component: LoginPage},
   { path: '/main', component: MainPage},
   { path: '/myPage', component: MyPage},
-  { path: '/changeInfo', component: EditProfile}
+  { path: '/changeInfo', component: EditProfile},
   // { path: '/', component: FindPasswordPage}
-  
   { path: '/board/free', component: FreeBoardPage },
   { path: '/mentorlist', component: MentorListPage },
   {
