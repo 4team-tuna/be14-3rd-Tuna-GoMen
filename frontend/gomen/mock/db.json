@@ -1,38 +1,212 @@
 {
-    "posts": [
-      {
-        "id": 1,
-        "tag": "장비추천 게시판",
-        "title": "코린이 노트북 추천해주세요 ㅜ",
-        "writer": "서버개발자희망",
-        "date": "2025.04.08 13:48",
-        "views": 345,
-        "likes": 12,
-        "content": "안녕하세요 이제 대학에 입학한 새내기예요. ... 다름이아니라 ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ"
-      }
-    ],
-    "comments": [
-      {
-        "id": 1,
-        "postId": 1,
-        "writer": "안현경개발짱",
-        "content": "애.. 그냥 애플 써라...",
-        "date": "2025.04.09 14:47"
-      },
-      {
-        "id": 2,
-        "postId": 1,
-        "writer": "소름돋긔",
-        "content": "새로 나온 LG 그램 가볍고 좋아요 저는...",
-        "date": "2025.04.09 16:33"
-      },
-      {
-        "id": 3,
-        "postId": 1,
-        "writer": "놀이터정모와이",
-        "content": "3년간 무상 보수 가능해요!",
-        "date": "2025.04.09 17:08"
-      }
-    ]
-  }
-  
+  "posts": [
+    {
+      "id": "1",
+      "tag": "장비추천 게시판",
+      "title": "코린이 노트북 추천해주세요 ㅜ",
+      "writer": "서버개발자희망",
+      "date": "2025.04.08 13:48",
+      "views": 345,
+      "likes": 12,
+      "content": "안녕하세요 이제 대학에 입학한 새내기예요. ... 다름이아니라 ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ"
+    }
+  ],
+  "comments": [
+    {
+      "id": "1",
+      "postId": 1,
+      "writer": "안현경개발짱",
+      "content": "애.. 그냥 애플 써라...",
+      "date": "2025.04.09 14:47"
+    },
+    {
+      "id": "2",
+      "postId": 1,
+      "writer": "소름돋긔",
+      "content": "새로 나온 LG 그램 가볍고 좋아요 저는...",
+      "date": "2025.04.09 16:33"
+    },
+    {
+      "id": "3",
+      "postId": 1,
+      "writer": "놀이터정모와이",
+      "content": "3년간 무상 보수 가능해요!",
+      "date": "2025.04.09 17:08"
+    }
+  ],
+  "reports": [
+    {
+      "id": "1",
+      "targetUserId": "qwer1234",
+      "postId": 1,
+      "commentId": "한숭숭",
+      "reporterId": 1,
+      "status": "Y",
+      "is_blinded": "Y"
+    },
+    {
+      "id": "10",
+      "targetUserId": "abc1234",
+      "postId": 8,
+      "commentId": "한숭숭 아빠",
+      "reporterId": 1,
+      "status": "Y",
+      "is_blinded": "Y"
+    },
+    {
+      "id": "16",
+      "targetUserId": "han1234",
+      "postId": 4,
+      "commentId": "한숭숭 엄마",
+      "reporterId": 1,
+      "status": "Y",
+      "is_blinded": "Y"
+    },
+    {
+      "id": "56",
+      "targetUserId": "hjm1234",
+      "postId": 5,
+      "commentId": "한숭숭 동생",
+      "reporterId": 1,
+      "status": "N",
+      "is_blinded": "N"
+    },
+    {
+      "id": "25",
+      "targetUserId": "asdf1234",
+      "postId": 2,
+      "commentId": "한숭숭 형아",
+      "reporterId": 1,
+      "status": "N",
+      "is_blinded": "N"
+    },
+    {
+      "id": "87",
+      "targetUserId": "ehserg7574",
+      "postId": 9,
+      "commentId": "이혜영",
+      "reporterId": 1,
+      "status": "N",
+      "is_blinded": "N"
+    },
+    {
+      "id": "3",
+      "targetUserId": "dhskjrs123",
+      "postId": 10,
+      "commentId": "이준규",
+      "reporterId": 1,
+      "status": "N",
+      "is_blinded": "N"
+    },
+    {
+      "id": "24",
+      "targetUserId": "hgjthk443",
+      "postId": 7,
+      "commentId": "서민종",
+      "reporterId": 1,
+      "status": "N",
+      "is_blinded": "N"
+    },
+    {
+      "id": "98",
+      "targetUserId": "sjhrdhdr1234",
+      "postId": 2,
+      "commentId": "김성민",
+      "reporterId": 1,
+      "status": "N",
+      "is_blinded": "N"
+    },
+    {
+      "id": "49",
+      "targetUserId": "jfhtht7442",
+      "postId": 56,
+      "commentId": "고죠 사토루",
+      "reporterId": 1,
+      "status": "N",
+      "is_blinded": "N"
+    },
+    {
+      "id": "59",
+      "targetUserId": "jahefgerg123",
+      "postId": 78,
+      "commentId": "중남 왕대륙",
+      "reporterId": 1,
+      "status": "N",
+      "is_blinded": "N"
+    }
+  ],
+  "titles": [
+    {
+      "name": "장수 돌침대",
+      "condition": "멘토링 별정5점 10회 이상 달성",
+      "id": "68ff"
+    },
+    {
+      "name": "연장의 신",
+      "condition": "멘토링 연장 요청 횟수 30회 이상 달성",
+      "id": "71d2"
+    },
+    {
+      "id": "80bc",
+      "name": "중대장 ",
+      "condition": "실망 2회"
+    },
+    {
+      "id": "9ec5",
+      "name": "김성민",
+      "condition": "그램 구매 2회"
+    },
+    {
+      "id": "2084",
+      "name": "이혜영",
+      "condition": "50db 이상 3회"
+    },
+    {
+      "id": "56d3",
+      "name": "이햬영",
+      "condition": "100db 3회"
+    },
+    {
+      "id": "996f",
+      "name": "김동한",
+      "condition": "이제아네요 5회"
+    }
+  ],
+  "mentorRequests": [
+    {
+      "userId": "coolcat123",
+      "done": true,
+      "id": "64d7"
+    },
+    {
+      "userId": "mentee_king",
+      "done": false,
+      "id": "819c"
+    },
+    {
+      "userId": "vue_dev99",
+      "done": false,
+      "id": "7850"
+    },
+    {
+      "userId": "code_jane",
+      "done": true,
+      "id": "1dc2"
+    },
+    {
+      "userId": "kkl468",
+      "done": false,
+      "id": "1877"
+    },
+    {
+      "userId": "mj226",
+      "done": false,
+      "id": "6642"
+    },
+    {
+      "userId": "akiw456",
+      "done": true,
+      "id": "4d47"
+    }
+  ]
+}
