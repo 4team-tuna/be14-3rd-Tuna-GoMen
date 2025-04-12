@@ -1,4 +1,396 @@
 {
+  "allposts": [
+    {
+      "id": "1",
+      "title": "코린이 노트북 추천해주세요 ㅜ",
+      "author": "서버개발자희망",
+      "date": "2025.04.08 13:48",
+      "category": "장비추천",
+      "views": 345,
+      "likes": 12,
+      "content": "안녕하세요 이제 대학에 입학한 새내기예요. ...",
+      "comments": [
+        {
+          "id": 1,
+          "writer": "안현경개발짱",
+          "content": "애.. 그냥 애플 써라...",
+          "date": "2025.04.09 14:47"
+        },
+        {
+          "id": 2,
+          "writer": "소름돋긔",
+          "content": "새로 나온 LG 그램 가볍고 좋아요 저는...",
+          "date": "2025.04.09 16:33"
+        },
+        {
+          "id": 3,
+          "writer": "놀이터정모와이",
+          "content": "3년간 무상 보수 가능해요!",
+          "date": "2025.04.09 17:08"
+        }
+      ]
+    },
+    {
+      "id": "2",
+      "title": "2025년 최신 개발용 랩탑 비교",
+      "author": "DevGuru",
+      "date": "25.04.04",
+      "category": "장비추천",
+      "views": 123,
+      "likes": 5,
+      "content": "..."
+    },
+    {
+      "id": "3",
+      "title": "Vue.js로 컴포넌트 설계 어떻게 시작할까요?",
+      "author": "개린이",
+      "date": "25.04.05",
+      "category": "Q&A",
+      "views": 78,
+      "likes": 4,
+      "content": "Vue.js를 배우기 시작했는데 컴포넌트 설계가 어려워요. ...",
+      "comments": [
+        {
+          "id": 1,
+          "writer": "리액트왕",
+          "content": "컴포넌트 설계 시 부모-자식 관계를 잘 설정하세요!",
+          "date": "2025.04.06 10:10"
+        }
+      ]
+    },
+    {
+      "id": "4",
+      "title": "최고의 모니터 세팅 팁 공유해요",
+      "author": "스택수집가",
+      "date": "25.04.05",
+      "category": "장비추천",
+      "views": 89,
+      "likes": 6,
+      "content": "모니터 세팅을 어떻게 해야 생산성이 높아질까요? ...",
+      "comments": []
+    },
+    {
+      "id": "5",
+      "title": "웹 디자인을 위한 최고의 마우스는?",
+      "author": "디자인고민중",
+      "date": "25.04.06",
+      "category": "장비추천",
+      "views": 134,
+      "likes": 11,
+      "content": "디자인 작업에 적합한 마우스를 찾고 있습니다. ...",
+      "comments": [
+        {
+          "id": 1,
+          "writer": "디자인왕",
+          "content": "애플 매직 마우스가 좋습니다!",
+          "date": "2025.04.06 15:32"
+        }
+      ]
+    },
+    {
+      "id": "6",
+      "title": "백엔드 서버에 적합한 장비는 무엇이 좋을까요?",
+      "author": "백엔드지망",
+      "date": "25.04.06",
+      "category": "장비추천",
+      "views": 210,
+      "likes": 19,
+      "content": "백엔드 서버를 구성하려고 하는데 어떤 장비가 좋을까요?",
+      "comments": [
+        {
+          "id": 1,
+          "writer": "서버전문가",
+          "content": "클라우드 서버를 추천드립니다.",
+          "date": "2025.04.07 09:45"
+        }
+      ]
+    },
+    {
+      "id": "7",
+      "title": "파이어베이스 사용 경험자 있나요?",
+      "author": "배포초보",
+      "date": "25.04.06",
+      "category": "Q&A",
+      "views": 112,
+      "likes": 7,
+      "content": "파이어베이스를 사용해보려고 하는데 어떤 점이 장점인가요?",
+      "comments": [
+        {
+          "id": 1,
+          "writer": "클라우드도전",
+          "content": "파이어베이스는 설정이 간편하고 스케일링이 좋아요.",
+          "date": "2025.04.07 14:20"
+        }
+      ]
+    },
+    {
+      "id": "8",
+      "title": "프로젝트에서 자주 발생하는 문제들 공유해요!",
+      "author": "API헬퍼",
+      "date": "25.04.07",
+      "category": "잡담",
+      "views": 90,
+      "likes": 8,
+      "content": "개발하면서 자주 발생하는 문제들에 대해 이야기해요.",
+      "comments": []
+    },
+    {
+      "id": "9",
+      "title": "웹사이트의 모바일 최적화, 어떻게 해야 할까요?",
+      "author": "반응형초보",
+      "date": "25.04.07",
+      "category": "Q&A",
+      "views": 75,
+      "likes": 3,
+      "content": "모바일에 최적화된 웹사이트를 만드는 방법이 궁금합니다.",
+      "comments": []
+    },
+    {
+      "id": "10",
+      "title": "버전 관리 시스템, Git은 어떤 식으로 사용하는 게 좋을까요?",
+      "author": "Git왕초보",
+      "date": "25.04.07",
+      "category": "Q&A",
+      "views": 125,
+      "likes": 14,
+      "content": "Git을 잘 사용하려면 어떤 습관을 들여야 하나요?",
+      "comments": [
+        {
+          "id": 1,
+          "writer": "버전관리전문가",
+          "content": "Git은 커밋 메시지를 잘 써야 합니다.",
+          "date": "2025.04.08 11:25"
+        }
+      ]
+    },
+    {
+      "id": "11",
+      "title": "나만의 토이 프로젝트를 시작해보자!",
+      "author": "새싹개발자",
+      "date": "25.04.08",
+      "category": "잡담",
+      "views": 220,
+      "likes": 22,
+      "content": "토이 프로젝트를 시작하려고 하는데, 추천할 만한 프로젝트 있나요?",
+      "comments": []
+    },
+    {
+      "id": "12",
+      "title": "다크모드 구현의 어려움, 어떻게 해결하시나요?",
+      "author": "야근러",
+      "date": "25.04.08",
+      "category": "Q&A",
+      "views": 150,
+      "likes": 12,
+      "content": "다크모드 구현할 때 어려운 점이 많네요. 어떻게 해결하시나요?",
+      "comments": []
+    },
+    {
+      "id": "13",
+      "title": "Next.js 사용기, 장점과 단점은?",
+      "author": "풀스택꿈나무",
+      "date": "25.04.08",
+      "category": "Q&A",
+      "views": 110,
+      "likes": 9,
+      "content": "Next.js 사용을 시작했는데 장단점에 대해 궁금해요.",
+      "comments": []
+    },
+    {
+      "id": "14",
+      "title": "프론트엔드 포트폴리오 작성 팁",
+      "author": "이직준비생",
+      "date": "25.04.08",
+      "category": "잡담",
+      "views": 90,
+      "likes": 5,
+      "content": "프론트엔드 개발자로서 포트폴리오를 어떻게 작성해야 할까요?",
+      "comments": []
+    },
+    {
+      "id": "15",
+      "title": "컴포넌트 설계 잘하는 법, 누구나 알면 좋을 팁!",
+      "author": "구조화러버",
+      "date": "25.04.09",
+      "category": "Q&A",
+      "views": 50,
+      "likes": 3,
+      "content": "컴포넌트를 설계할 때 유용한 팁이 있나요?",
+      "comments": []
+    },
+    {
+      "id": "16",
+      "title": "React Native와 Flutter, 무엇을 선택할까요?",
+      "author": "모바일초심",
+      "date": "25.04.09",
+      "category": "Q&A",
+      "views": 88,
+      "likes": 6,
+      "content": "React Native와 Flutter의 차이점과 장단점은 무엇인가요?",
+      "comments": []
+    },
+    {
+      "id": "17",
+      "title": "MySQL에서 JOIN 최적화 팁",
+      "author": "DB초보",
+      "date": "25.04.09",
+      "category": "Q&A",
+      "views": 120,
+      "likes": 7,
+      "content": "MySQL에서 JOIN을 최적화하는 팁이 있나요?",
+      "comments": []
+    },
+    {
+      "id": "18",
+      "title": "Docker 초보자 가이드",
+      "author": "DevOps왕초보",
+      "date": "25.04.09",
+      "category": "Q&A",
+      "views": 135,
+      "likes": 13,
+      "content": "Docker를 처음 접하는데 어디서부터 시작해야 할지 모르겠어요.",
+      "comments": []
+    },
+    {
+      "id": "19",
+      "title": "Node.js에서 비동기 처리 잘하는 법",
+      "author": "비동기왕",
+      "date": "25.04.09",
+      "category": "Q&A",
+      "views": 250,
+      "likes": 15,
+      "content": "Node.js에서 비동기 처리를 잘하려면 어떤 점을 신경 써야 할까요?",
+      "comments": [
+        {
+          "id": 1,
+          "writer": "비동기노예",
+          "content": "Promise와 async/await를 잘 활용하세요.",
+          "date": "2025.04.10 09:45"
+        }
+      ]
+    },
+    {
+      "id": "20",
+      "title": "유지보수 쉬운 코드 작성법",
+      "author": "코딩규칙",
+      "date": "25.04.10",
+      "category": "Q&A",
+      "views": 95,
+      "likes": 6,
+      "content": "유지보수가 쉬운 코드를 작성하려면 어떤 규칙을 지켜야 할까요?",
+      "comments": []
+    },
+    {
+      "id": "21",
+      "title": "웹 애플리케이션의 성능 최적화 방법",
+      "author": "퍼포먼스매니아",
+      "date": "25.04.10",
+      "category": "Q&A",
+      "views": 110,
+      "likes": 8,
+      "content": "웹 애플리케이션의 성능을 최적화하려면 어떤 방법이 좋을까요?",
+      "comments": []
+    },
+    {
+      "id": "22",
+      "title": "자바스크립트로 할 수 있는 재미있는 프로젝트",
+      "author": "자바스크립트초보",
+      "date": "25.04.10",
+      "category": "잡담",
+      "views": 140,
+      "likes": 10,
+      "content": "자바스크립트로 할 수 있는 재미있는 프로젝트 추천해주세요.",
+      "comments": []
+    },
+    {
+      "id": "23",
+      "title": "파이썬으로 할 수 있는 재밌는 프로젝트",
+      "author": "파이썬왕초보",
+      "date": "25.04.10",
+      "category": "잡담",
+      "views": 200,
+      "likes": 14,
+      "content": "파이썬으로 할 수 있는 재밌는 프로젝트 추천해주세요.",
+      "comments": []
+    },
+    {
+      "id": "24",
+      "title": "게임 개발의 첫걸음, Unity 시작하기",
+      "author": "게임개발자꿈나무",
+      "date": "25.04.10",
+      "category": "잡담",
+      "views": 250,
+      "likes": 18,
+      "content": "Unity를 배우기 시작했어요! 어떻게 시작해야 할지 모르겠네요.",
+      "comments": []
+    },
+    {
+      "id": "25",
+      "title": "애자일 개발 방법론, 실전에서 어떻게 적용할까요?",
+      "author": "애자일왕",
+      "date": "25.04.10",
+      "category": "잡담",
+      "views": 150,
+      "likes": 9,
+      "content": "애자일 개발 방법론을 실전에 어떻게 적용할 수 있을까요?",
+      "comments": []
+    },
+    {
+      "id": "26",
+      "title": "웹사이트 보안, SSL 적용 방법",
+      "author": "보안전문가",
+      "date": "25.04.10",
+      "category": "Q&A",
+      "views": 130,
+      "likes": 7,
+      "content": "웹사이트에 SSL을 적용하는 방법을 알려주세요.",
+      "comments": []
+    },
+    {
+      "id": "27",
+      "title": "클라우드 컴퓨팅의 미래",
+      "author": "클라우드전문가",
+      "date": "25.04.10",
+      "category": "잡담",
+      "views": 180,
+      "likes": 12,
+      "content": "클라우드 컴퓨팅의 발전 방향은 어디로 가고 있을까요?",
+      "comments": []
+    },
+    {
+      "id": "28",
+      "title": "AI로 무엇을 만들 수 있을까요?",
+      "author": "AI연구자",
+      "date": "25.04.10",
+      "category": "잡담",
+      "views": 220,
+      "likes": 17,
+      "content": "AI를 활용한 재밌는 프로젝트를 공유해 주세요.",
+      "comments": []
+    },
+    {
+      "id": "29",
+      "title": "Node.js 성능 최적화, 팁이 있을까요?",
+      "author": "성능최적화전문가",
+      "date": "25.04.10",
+      "category": "Q&A",
+      "views": 190,
+      "likes": 16,
+      "content": "Node.js의 성능을 최적화하려면 어떻게 해야 할까요?",
+      "comments": []
+    },
+    {
+      "id": "30",
+      "title": "Vue.js에서 상태 관리, 어떻게 할까요?",
+      "author": "상태관리전문가",
+      "date": "25.04.10",
+      "category": "Q&A",
+      "views": 80,
+      "likes": 5,
+      "content": "Vue.js에서 상태 관리를 어떻게 효율적으로 할 수 있을까요?",
+      "comments": []
+    }
+  ],
   "posts": [
     {
       "id": "1",
@@ -34,6 +426,8 @@
       "date": "2025.04.09 17:08"
     }
   ],
+
+
   "reports": [
     {
       "id": "1",
@@ -203,6 +597,528 @@
       "id": "5df6",
       "name": "한숭숭",
       "condition": "바나나 섭취 100회 이상"
+    }
+  ],
+  "messages": [
+    {
+      "id": "1",
+      "senderId": "1",
+      "receiverId": "5",
+      "content": "안녕하세요! 요즘 어떻게 지내세요?",
+      "createdAt": "2024-04-01T09:00:00"
+    },
+    {
+      "id": "2",
+      "senderId": "5",
+      "receiverId": "1",
+      "content": "안녕하세요~ 요즘 사이드 프로젝트 하느라 바빠요!",
+      "createdAt": "2024-04-01T09:01:30"
+    },
+    {
+      "id": "3",
+      "senderId": "1",
+      "receiverId": "5",
+      "content": "오! 어떤 주제로 진행 중이세요?",
+      "createdAt": "2024-04-01T09:03:10"
+    },
+    {
+      "id": "4",
+      "senderId": "5",
+      "receiverId": "1",
+      "content": "크롤링 + 시각화 대시보드 만들어보는 중이에요.",
+      "createdAt": "2024-04-01T09:04:45"
+    },
+    {
+      "id": "5",
+      "senderId": "3",
+      "receiverId": "1",
+      "content": "스터디 오늘 몇 시부터 시작이죠?",
+      "createdAt": "2024-04-01T10:15:00"
+    },
+    {
+      "id": "6",
+      "senderId": "1",
+      "receiverId": "3",
+      "content": "오후 7시부터예요. 줌 링크는 곧 드릴게요!",
+      "createdAt": "2024-04-01T10:17:20"
+    },
+    {
+      "id": "7",
+      "senderId": "9",
+      "receiverId": "2",
+      "content": "어제 얘기한 API 설계안 좀 공유 가능할까요?",
+      "createdAt": "2024-04-02T11:00:00"
+    },
+    {
+      "id": "8",
+      "senderId": "2",
+      "receiverId": "9",
+      "content": "넵! 지금 정리해서 드릴게요.",
+      "createdAt": "2024-04-02T11:02:15"
+    },
+    {
+      "id": "9",
+      "senderId": "9",
+      "receiverId": "2",
+      "content": "감사합니다 :) 기대하고 있을게요~",
+      "createdAt": "2024-04-02T11:03:00"
+    },
+    {
+      "id": "10",
+      "senderId": "2",
+      "receiverId": "9",
+      "content": "정리 완료했습니다. 메일로도 보냈어요!",
+      "createdAt": "2024-04-02T11:05:42"
+    },
+    {
+      "id": "1856",
+      "senderId": "1",
+      "receiverId": "5",
+      "content": "asdf",
+      "createdAt": "2025-04-11T14:58:23.738Z"
+    },
+    {
+      "id": "d23d",
+      "senderId": "1",
+      "receiverId": "5",
+      "content": "잘못보냈어요 죄송..",
+      "createdAt": "2025-04-11T15:06:23.112Z"
+    },
+    {
+      "id": "49b8",
+      "senderId": "1",
+      "receiverId": "3",
+      "content": "하하",
+      "createdAt": "2025-04-11T15:06:34.310Z"
+    },
+    {
+      "id": "de7c",
+      "senderId": "1",
+      "receiverId": "5",
+      "content": "asdf",
+      "createdAt": "2025-04-11T15:08:04.455Z"
+    },
+    {
+      "id": "fb8d",
+      "senderId": "1",
+      "receiverId": "7",
+      "content": "spring boot 켜봤어요?",
+      "createdAt": "2025-04-11T15:19:58.366Z"
+    },
+    {
+      "id": "6547",
+      "senderId": "1",
+      "receiverId": "6",
+      "content": "어디에요?",
+      "createdAt": "2025-04-11T15:20:29.182Z"
+    },
+    {
+      "id": "3a26",
+      "senderId": "1",
+      "receiverId": "1744389791219",
+      "content": "안녕?",
+      "createdAt": "2025-04-11T16:43:51.169Z"
+    },
+    {
+      "id": "9622",
+      "senderId": "1744389791219",
+      "receiverId": "1",
+      "content": "오 안녕하세요!",
+      "createdAt": "2025-04-11T16:57:24.299Z"
+    },
+    {
+      "id": "0010",
+      "senderId": "1",
+      "receiverId": "1744389791219",
+      "content": "누구시죠",
+      "createdAt": "2025-04-11T17:12:03.650Z"
+    },
+    {
+      "id": "c1a5",
+      "senderId": "1744428136648",
+      "receiverId": "1",
+      "content": "안녕하세요!",
+      "createdAt": "2025-04-12T03:24:34.950Z"
+    },
+    {
+      "id": "192d",
+      "senderId": "1744428136648",
+      "receiverId": "5",
+      "content": "뭐해?",
+      "createdAt": "2025-04-12T03:33:39.349Z"
+    },
+    {
+      "id": "d067",
+      "senderId": "1",
+      "receiverId": "1744435132583",
+      "content": "어디야?",
+      "createdAt": "2025-04-12T05:59:36.268Z"
+    },
+    {
+      "id": "3758",
+      "senderId": "5",
+      "receiverId": "1744435132583",
+      "content": "헤이",
+      "createdAt": "2025-04-12T06:10:33.370Z"
+    },
+    {
+      "id": "8e72",
+      "senderId": "5",
+      "receiverId": "1744435132583",
+      "content": "뭐해",
+      "createdAt": "2025-04-12T06:12:45.650Z"
+    },
+    {
+      "id": "7374",
+      "senderId": "5",
+      "receiverId": "1",
+      "content": "ㅎㅎ",
+      "createdAt": "2025-04-12T06:13:22.081Z"
+    },
+    {
+      "id": "e7ea",
+      "senderId": "1744435132583",
+      "receiverId": "1",
+      "content": "나? 지금 집인데",
+      "createdAt": "2025-04-12T06:20:17.321Z"
+    }
+  ],
+  "users": [
+    {
+      "id": "1",
+      "loginId": "minji01",
+      "password": "encryptedPw1",
+      "name": "김민지",
+      "personalNumber": "900101-2000001",
+      "phoneNumber": "010-1234-0001",
+      "nickname": "MinjiVely",
+      "createdAt": "2024-03-01T10:00:00",
+      "updatedAt": null,
+      "willBeActivated": "2024-03-01T10:00:00",
+      "isQuitted": "N",
+      "githubAdress": "https://github.com/minji01",
+      "extensionCount": 0,
+      "careerInfo": "백엔드 개발자 3년차",
+      "isMentor": "Y",
+      "violationScore": 0,
+      "averageRating": 4.5,
+      "college": "카이스트",
+      "blog": "https://minji.dev"
+    },
+    {
+      "id": "2",
+      "loginId": "jihoon22",
+      "password": "encryptedPw2",
+      "name": "박지훈",
+      "personalNumber": "950202-1000002",
+      "phoneNumber": "010-2345-0002",
+      "nickname": "지훈",
+      "createdAt": "2024-03-01T11:00:00",
+      "updatedAt": null,
+      "willBeActivated": "2024-03-01T11:00:00",
+      "isQuitted": "N",
+      "githubAdress": null,
+      "extensionCount": 1,
+      "careerInfo": "프론트엔드 개발자 1년차",
+      "isMentor": "N",
+      "violationScore": 2,
+      "averageRating": 3.8,
+      "college": "고려대학교",
+      "blog": null
+    },
+    {
+      "id": "3",
+      "loginId": "soobin.dev",
+      "password": "encryptedPw3",
+      "name": "최수빈",
+      "personalNumber": "960303-2000003",
+      "phoneNumber": "010-3456-0003",
+      "nickname": "수빈",
+      "createdAt": "2024-03-01T12:00:00",
+      "updatedAt": null,
+      "willBeActivated": "2024-03-01T12:00:00",
+      "isQuitted": "N",
+      "githubAdress": "https://github.com/soobin-dev",
+      "extensionCount": 0,
+      "careerInfo": "디자이너 출신 프론트 개발자",
+      "isMentor": "N",
+      "violationScore": 0,
+      "averageRating": 4.2,
+      "college": "홍익대학교",
+      "blog": "https://soob.in"
+    },
+    {
+      "id": "4",
+      "loginId": "kth123",
+      "password": "encryptedPw4",
+      "name": "김태희",
+      "personalNumber": "930404-2000004",
+      "phoneNumber": "010-4567-0004",
+      "nickname": "태희",
+      "createdAt": "2024-03-02T09:30:00",
+      "updatedAt": null,
+      "willBeActivated": "2024-03-02T09:30:00",
+      "isQuitted": "N",
+      "githubAdress": null,
+      "extensionCount": 0,
+      "careerInfo": null,
+      "isMentor": "N",
+      "violationScore": 0,
+      "averageRating": 0,
+      "college": null,
+      "blog": null
+    },
+    {
+      "id": "5",
+      "loginId": "chulsoo05",
+      "password": "encryptedPw5",
+      "name": "이철수",
+      "personalNumber": "910505-1000005",
+      "phoneNumber": "010-5678-0005",
+      "nickname": "chulsooBest",
+      "createdAt": "2024-03-02T10:00:00",
+      "updatedAt": null,
+      "willBeActivated": "2024-03-02T10:00:00",
+      "isQuitted": "N",
+      "githubAdress": "https://github.com/chulsoo",
+      "extensionCount": 2,
+      "careerInfo": "DevOps 담당자",
+      "isMentor": "Y",
+      "violationScore": 1,
+      "averageRating": 4,
+      "college": "서울과학기술대학교",
+      "blog": ""
+    },
+    {
+      "id": "6",
+      "loginId": "hana_kim",
+      "password": "encryptedPw6",
+      "name": "김하나",
+      "personalNumber": "970606-2000006",
+      "phoneNumber": "010-6789-0006",
+      "nickname": "하나",
+      "createdAt": "2024-03-03T09:00:00",
+      "updatedAt": null,
+      "willBeActivated": "2024-03-03T09:00:00",
+      "isQuitted": "N",
+      "githubAdress": "https://github.com/hanakim",
+      "extensionCount": 1,
+      "careerInfo": "AI 엔지니어 지망생",
+      "isMentor": "N",
+      "violationScore": 0,
+      "averageRating": 4.6,
+      "college": "성균관대학교",
+      "blog": null
+    },
+    {
+      "id": "7",
+      "loginId": "jameslee",
+      "password": "encryptedPw7",
+      "name": "이제임스",
+      "personalNumber": "880707-1000007",
+      "phoneNumber": "010-7890-0007",
+      "nickname": "제임스",
+      "createdAt": "2024-03-03T10:00:00",
+      "updatedAt": null,
+      "willBeActivated": "2024-03-03T10:00:00",
+      "isQuitted": "N",
+      "githubAdress": "https://github.com/jameslee",
+      "extensionCount": 3,
+      "careerInfo": "스타트업 CTO",
+      "isMentor": "Y",
+      "violationScore": 0,
+      "averageRating": 4.9,
+      "college": "서울대학교",
+      "blog": "https://jameslee.dev"
+    },
+    {
+      "id": "8",
+      "loginId": "s2jung",
+      "password": "encryptedPw8",
+      "name": "정수지",
+      "personalNumber": "980808-2000008",
+      "phoneNumber": "010-8901-0008",
+      "nickname": "수지",
+      "createdAt": "2024-03-04T08:30:00",
+      "updatedAt": null,
+      "willBeActivated": "2024-03-04T08:30:00",
+      "isQuitted": "N",
+      "githubAdress": null,
+      "extensionCount": 0,
+      "careerInfo": null,
+      "isMentor": "N",
+      "violationScore": 0,
+      "averageRating": 0,
+      "college": "연세대학교",
+      "blog": null
+    },
+    {
+      "id": "9",
+      "loginId": "myid",
+      "password": "encryptedPw9",
+      "name": "홍길동",
+      "personalNumber": "900909-1000009",
+      "phoneNumber": "010-9012-0009",
+      "nickname": "나",
+      "createdAt": "2024-03-04T09:00:00",
+      "updatedAt": null,
+      "willBeActivated": "2024-03-04T09:00:00",
+      "isQuitted": "N",
+      "githubAdress": "https://github.com/myid",
+      "extensionCount": 0,
+      "careerInfo": "테스트용 계정",
+      "isMentor": "N",
+      "violationScore": 0,
+      "averageRating": 5,
+      "college": null,
+      "blog": null
+    },
+    {
+      "id": "10",
+      "loginId": "hojun.dev",
+      "password": "encryptedPw10",
+      "name": "남호준",
+      "personalNumber": "920101-1000010",
+      "phoneNumber": "010-1010-0010",
+      "nickname": "호준",
+      "createdAt": "2024-03-05T10:00:00",
+      "updatedAt": null,
+      "willBeActivated": "2024-03-05T10:00:00",
+      "isQuitted": "N",
+      "githubAdress": "https://github.com/hojun-dev",
+      "extensionCount": 0,
+      "careerInfo": "풀스택 개발자",
+      "isMentor": "Y",
+      "violationScore": 0,
+      "averageRating": 4.7,
+      "college": "한양대학교",
+      "blog": "https://hojun.blog"
+    },
+    {
+      "id": "11",
+      "loginId": "yeji1234",
+      "password": "encryptedPw11",
+      "name": "한예지",
+      "personalNumber": "970202-2000011",
+      "phoneNumber": "010-1111-0011",
+      "nickname": "예지",
+      "createdAt": "2024-03-06T09:45:00",
+      "updatedAt": null,
+      "willBeActivated": "2024-03-06T09:45:00",
+      "isQuitted": "N",
+      "githubAdress": null,
+      "extensionCount": 1,
+      "careerInfo": "신입 프론트엔드",
+      "isMentor": "N",
+      "violationScore": 0,
+      "averageRating": 3.9,
+      "college": "숙명여자대학교",
+      "blog": null
+    },
+    {
+      "id": "12",
+      "loginId": "donghyun44",
+      "password": "encryptedPw12",
+      "name": "정동현",
+      "personalNumber": "890303-1000012",
+      "phoneNumber": "010-1212-0012",
+      "nickname": "동현",
+      "createdAt": "2024-03-06T11:00:00",
+      "updatedAt": null,
+      "willBeActivated": "2024-03-06T11:00:00",
+      "isQuitted": "N",
+      "githubAdress": "https://github.com/donghyun44",
+      "extensionCount": 0,
+      "careerInfo": "서버 개발자",
+      "isMentor": "Y",
+      "violationScore": 1,
+      "averageRating": 4.2,
+      "college": "포항공대",
+      "blog": "https://donghyun.dev"
+    },
+    {
+      "id": "13",
+      "loginId": "yuna.dev",
+      "password": "encryptedPw13",
+      "name": "최유나",
+      "personalNumber": "940404-2000013",
+      "phoneNumber": "010-1313-0013",
+      "nickname": "유나",
+      "createdAt": "2024-03-07T08:20:00",
+      "updatedAt": null,
+      "willBeActivated": "2024-03-07T08:20:00",
+      "isQuitted": "N",
+      "githubAdress": "https://github.com/yuna-dev",
+      "extensionCount": 0,
+      "careerInfo": "프론트 개발 + PM 경험",
+      "isMentor": "Y",
+      "violationScore": 0,
+      "averageRating": 4.8,
+      "college": "이화여자대학교",
+      "blog": null
+    },
+    {
+      "id": "14",
+      "loginId": "junseo88",
+      "password": "encryptedPw14",
+      "name": "김준서",
+      "personalNumber": "930505-1000014",
+      "phoneNumber": "010-1414-0014",
+      "nickname": "준서",
+      "createdAt": "2024-03-07T09:10:00",
+      "updatedAt": null,
+      "willBeActivated": "2024-03-07T09:10:00",
+      "isQuitted": "N",
+      "githubAdress": "https://github.com/junseo88",
+      "extensionCount": 1,
+      "careerInfo": "데이터 엔지니어",
+      "isMentor": "Y",
+      "violationScore": 2,
+      "averageRating": 4.1,
+      "college": "부산대학교",
+      "blog": "https://junseo.dev"
+    },
+    {
+      "id": "15",
+      "loginId": "gyuri12",
+      "password": "encryptedPw15",
+      "name": "백규리",
+      "personalNumber": "990606-2000015",
+      "phoneNumber": "010-1515-0015",
+      "nickname": "규리",
+      "createdAt": "2024-03-08T10:00:00",
+      "updatedAt": null,
+      "willBeActivated": "2024-03-08T10:00:00",
+      "isQuitted": "N",
+      "githubAdress": null,
+      "extensionCount": 0,
+      "careerInfo": "CS 전공 학부생",
+      "isMentor": "N",
+      "violationScore": 0,
+      "averageRating": 3.5,
+      "college": "경희대학교",
+      "blog": null
+    },
+    {
+      "id": "1744435132583",
+      "loginId": "mj226",
+      "password": "a1234",
+      "name": "서민종",
+      "personalNumber": "19970226",
+      "phoneNumber": "01026437581",
+      "nickname": "MJay1",
+      "createdAt": "2025-04-12T05:18:52.583Z",
+      "updatedAt": null,
+      "willBeActivated": "2025-04-12T05:18:52.583Z",
+      "isQuitted": "N",
+      "githubAdress": "",
+      "extensionCount": 0,
+      "careerInfo": "시재건설 (2024.12 ~ 2024.12) - 공사 관리\n더레전드 (2020.01 ~ 2024.12) - 조교알바\nbeyondSW (2024.01 ~ 2024.12) - 코딩 공부",
+      "isMentor": "N",
+      "violationScore": 0,
+      "averageRating": 0,
+      "college": "한양대학교",
+      "blog": "tjalswhd1@naver.com"
     }
   ]
 }
