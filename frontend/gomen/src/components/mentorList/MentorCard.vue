@@ -113,6 +113,8 @@ function getImageUrl(path) {
   border-radius: 12px;
   cursor: pointer;
   transition: background-color 0.2s;
+  display: block;
+  margin: 0 auto;
 }
 
 .apply-button:hover {
