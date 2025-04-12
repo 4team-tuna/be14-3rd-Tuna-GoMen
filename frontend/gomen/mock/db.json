@@ -37,119 +37,119 @@
   "messages": [
     {
       "id": "1",
-      "senderId": 1,
-      "receiverId": 5,
+      "senderId": "1",
+      "receiverId": "5",
       "content": "안녕하세요! 요즘 어떻게 지내세요?",
       "createdAt": "2024-04-01T09:00:00"
     },
     {
       "id": "2",
-      "senderId": 5,
-      "receiverId": 1,
+      "senderId": "5",
+      "receiverId": "1",
       "content": "안녕하세요~ 요즘 사이드 프로젝트 하느라 바빠요!",
       "createdAt": "2024-04-01T09:01:30"
     },
     {
       "id": "3",
-      "senderId": 1,
-      "receiverId": 5,
+      "senderId": "1",
+      "receiverId": "5",
       "content": "오! 어떤 주제로 진행 중이세요?",
       "createdAt": "2024-04-01T09:03:10"
     },
     {
       "id": "4",
-      "senderId": 5,
-      "receiverId": 1,
+      "senderId": "5",
+      "receiverId": "1",
       "content": "크롤링 + 시각화 대시보드 만들어보는 중이에요.",
       "createdAt": "2024-04-01T09:04:45"
     },
     {
       "id": "5",
-      "senderId": 3,
-      "receiverId": 1,
+      "senderId": "3",
+      "receiverId": "1",
       "content": "스터디 오늘 몇 시부터 시작이죠?",
       "createdAt": "2024-04-01T10:15:00"
     },
     {
       "id": "6",
-      "senderId": 1,
-      "receiverId": 3,
+      "senderId": "1",
+      "receiverId": "3",
       "content": "오후 7시부터예요. 줌 링크는 곧 드릴게요!",
       "createdAt": "2024-04-01T10:17:20"
     },
     {
       "id": "7",
-      "senderId": 9,
-      "receiverId": 2,
+      "senderId": "9",
+      "receiverId": "2",
       "content": "어제 얘기한 API 설계안 좀 공유 가능할까요?",
       "createdAt": "2024-04-02T11:00:00"
     },
     {
       "id": "8",
-      "senderId": 2,
-      "receiverId": 9,
+      "senderId": "2",
+      "receiverId": "9",
       "content": "넵! 지금 정리해서 드릴게요.",
       "createdAt": "2024-04-02T11:02:15"
     },
     {
       "id": "9",
-      "senderId": 9,
-      "receiverId": 2,
+      "senderId": "9",
+      "receiverId": "2",
       "content": "감사합니다 :) 기대하고 있을게요~",
       "createdAt": "2024-04-02T11:03:00"
     },
     {
       "id": "10",
-      "senderId": 2,
-      "receiverId": 9,
+      "senderId": "2",
+      "receiverId": "9",
       "content": "정리 완료했습니다. 메일로도 보냈어요!",
       "createdAt": "2024-04-02T11:05:42"
     },
     {
       "id": "1856",
-      "senderId": 1,
+      "senderId": "1",
       "receiverId": "5",
       "content": "asdf",
       "createdAt": "2025-04-11T14:58:23.738Z"
     },
     {
       "id": "d23d",
-      "senderId": 1,
+      "senderId": "1",
       "receiverId": "5",
       "content": "잘못보냈어요 죄송..",
       "createdAt": "2025-04-11T15:06:23.112Z"
     },
     {
       "id": "49b8",
-      "senderId": 1,
+      "senderId": "1",
       "receiverId": "3",
       "content": "하하",
       "createdAt": "2025-04-11T15:06:34.310Z"
     },
     {
       "id": "de7c",
-      "senderId": 1,
+      "senderId": "1",
       "receiverId": "5",
       "content": "asdf",
       "createdAt": "2025-04-11T15:08:04.455Z"
     },
     {
       "id": "fb8d",
-      "senderId": 1,
+      "senderId": "1",
       "receiverId": "7",
       "content": "spring boot 켜봤어요?",
       "createdAt": "2025-04-11T15:19:58.366Z"
     },
     {
       "id": "6547",
-      "senderId": 1,
+      "senderId": "1",
       "receiverId": "6",
       "content": "어디에요?",
       "createdAt": "2025-04-11T15:20:29.182Z"
     },
     {
       "id": "3a26",
-      "senderId": 1,
+      "senderId": "1",
       "receiverId": "1744389791219",
       "content": "안녕?",
       "createdAt": "2025-04-11T16:43:51.169Z"
@@ -167,6 +167,20 @@
       "receiverId": "1744389791219",
       "content": "누구시죠",
       "createdAt": "2025-04-11T17:12:03.650Z"
+    },
+    {
+      "id": "c1a5",
+      "senderId": "1744428136648",
+      "receiverId": "1",
+      "content": "안녕하세요!",
+      "createdAt": "2025-04-12T03:24:34.950Z"
+    },
+    {
+      "id": "192d",
+      "senderId": "1744428136648",
+      "receiverId": "5",
+      "content": "뭐해?",
+      "createdAt": "2025-04-12T03:33:39.349Z"
     }
   ],
   "users": [
@@ -486,25 +500,25 @@
       "blog": null
     },
     {
-      "id": "1744389791219",
+      "id": "1744435132583",
       "loginId": "mj226",
       "password": "a1234",
       "name": "서민종",
-      "personalNumber": "970226",
-      "phoneNumber": "01022222222",
-      "nickname": "서민종",
-      "createdAt": "2025-04-11T16:43:11.219Z",
+      "personalNumber": "19970226",
+      "phoneNumber": "01026437581",
+      "nickname": "MJay1",
+      "createdAt": "2025-04-12T05:18:52.583Z",
       "updatedAt": null,
-      "willBeActivated": "2025-04-11T16:43:11.219Z",
+      "willBeActivated": "2025-04-12T05:18:52.583Z",
       "isQuitted": "N",
       "githubAdress": "",
       "extensionCount": 0,
-      "careerInfo": "",
+      "careerInfo": "시재건설 (2024.12 ~ 2024.12) - 공사 관리\n더레전드 (2020.01 ~ 2024.12) - 조교알바",
       "isMentor": "N",
       "violationScore": 0,
       "averageRating": 0,
-      "college": "",
-      "blog": ""
+      "college": "한양대학교",
+      "blog": "tjalswhd1@naver.com"
     }
   ]
 }

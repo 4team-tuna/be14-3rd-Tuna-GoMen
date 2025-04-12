@@ -13,12 +13,25 @@
     
     <!-- 오른쪽 -->
     <div class="actions">
-      <img src="@/assets/icon-message.png" class="icon-message" />
-      <img src="@/assets/icon-user.png" class="icon-user" />
+      <img src="@/assets/icon-message.png" class="icon-message" @click="goToMail" />
+      <img src="@/assets/icon-user.png" class="icon-user" @click="goToMyInfo" />
       <span>로그아웃</span>
     </div>
   </header>
 </template>
+
+<script setup>
+  import { useRouter } from 'vue-router';
+  const router = useRouter();
+
+  const goToMail = () => {
+    router.push('/mail')
+  }
+
+  const goToMyInfo = () => {
+    router.push('/myPage');
+  }
+</script>
 
 <style scoped>
 .header {
@@ -62,6 +75,7 @@
   height: 24px;
   width: auto;
   object-fit: contain;
+  
 }
 
 .icon-user{
@@ -70,5 +84,16 @@
   object-fit: contain;
 }
 
-</style>
+.icon-message,
+.icon-user {
+  filter: brightness(0) saturate(100%) invert(64%) sepia(6%) saturate(512%) hue-rotate(174deg) brightness(102%) contrast(91%);
+  transition: filter 0.2s ease-in-out;
+  cursor: pointer;
+}
 
+.icon-message:hover,
+.icon-user:hover {
+  filter: brightness(1.2) saturate(130%) invert(64%) sepia(6%) saturate(512%) hue-rotate(174deg) brightness(102%) contrast(91%);
+}
+
+</style>

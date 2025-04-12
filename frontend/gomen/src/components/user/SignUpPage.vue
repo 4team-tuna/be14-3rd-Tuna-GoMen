@@ -11,6 +11,7 @@
       <input v-model="form.password" type="password" placeholder="비밀번호" class="signup-input" />
 
       <input v-model="form.name" type="text" placeholder="이름" class="signup-input" />
+      <input v-model="form.nickname" type="text" placeholder="닉네임" class="signup-input" />
       <input v-model="form.personalNumber" type="text" placeholder="생년월일(8자리) + 뒷번호" class="signup-input" />
       <input v-model="form.phoneNumber" type="text" placeholder="휴대전화번호 (대한민국 +82)" class="signup-input" />
 
@@ -30,6 +31,7 @@ const form = reactive({
   loginId: '',
   password: '',
   name: '',
+  nickname: '',
   personalNumber: '',
   phoneNumber: '',
 })
@@ -38,6 +40,7 @@ const submitForm = async () => {
   if (!form.loginId || 
       !form.password || 
       !form.name || 
+      !form.nickname ||
       !form.personalNumber || 
       !form.phoneNumber) {
     alert('모든 항목을 입력해주세요!')
@@ -51,7 +54,7 @@ const submitForm = async () => {
       name: form.name,
       personalNumber: form.personalNumber,
       phoneNumber: form.phoneNumber,
-      nickname: form.name, // 임시 닉네임은 이름과 동일하게
+      nickname: form.nickname, // 임시 닉네임은 이름과 동일하게
       createdAt: new Date().toISOString(),
       updatedAt: null,
       willBeActivated: new Date().toISOString(),

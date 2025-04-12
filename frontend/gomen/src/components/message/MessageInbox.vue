@@ -15,13 +15,13 @@
     </div>
   
 <div class="message-view">
-  <template v-if="selectedUser">
-    <div class="message-header">
-      <strong>{{ getUserLabel(selectedUser) }}와의 대화</strong>
-      <div class="message-actions">
+  <div class="message-actions">
         <button @click="openModal">쪽지 보내기</button>
         <button @click="refresh">새로고침</button>
       </div>
+  <template v-if="selectedUser">
+    <div class="message-header">
+      <strong>{{ getUserLabel(selectedUser) }}와의 대화</strong>
     </div>
 
     <div class="conversation">
@@ -93,9 +93,9 @@ async function preloadLoginIds(messages) {
   for (const id of userIds) {
     if (!loginIdMap.value[id]) {
       try {
-        const numericId = Number(id);
-        const res = await axios.get(`http://localhost:3001/users/${numericId}`);
-        loginIdMap.value[id] = res.data.loginId;  // 여기 문자열 id로!
+        const numericId = id;
+        const res = await axios.get(`http://localhost:3001/users?id=${numericId}`);
+        loginIdMap.value[id] = res.data[0]?.loginId;  // 여기 문자열 id로!
       } catch (err) {
         console.error(`ID ${id}의 로그인 ID 불러오기 실패`, err);
         loginIdMap.value[id] = 'unknown';
@@ -126,7 +126,7 @@ function formatDateTime(isoString) {
 }
 
 function getUserLabel(userId) {
-  return loginIdMap.value[String(userId)] || '알 수 없음';
+  return loginIdMap.value[userId] || '알 수 없음';
 }
 
 function selectUser(userId) {

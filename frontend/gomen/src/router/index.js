@@ -7,6 +7,8 @@ import FindPasswordPage from '@/components/user/FindPasswordPage.vue'
 import SignUpPage from '@/components/user/SignUpPage.vue'
 import StartPage from '@/components/user/StartPage.vue'
 import MainPage from '@/components/user/MainPage.vue'
+import MyPage from '@/components/user/MyPage.vue'
+import EditProfile from '@/components/user/EditProfile.vue'
 
 
 const routes = [
@@ -15,7 +17,9 @@ const routes = [
   { path: '/', component: StartPage},
   { path: '/signup', component: SignUpPage},
   { path: '/login', component: LoginPage},
-  { path: '/main', component: MainPage}
+  { path: '/main', component: MainPage},
+  { path: '/myPage', component: MyPage},
+  { path: '/changeInfo', component: EditProfile}
   // { path: '/', component: FindPasswordPage}
   
 ]
