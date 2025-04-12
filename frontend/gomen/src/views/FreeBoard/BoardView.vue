@@ -1,7 +1,10 @@
 <template>
     <div class="board-container">
         <h1 class="title">🌱 자유 게시판</h1>
-        <button class="write-btn">글쓰기</button>
+        <RouterLink to="/boards/free/write">
+            <button class="write-btn">글쓰기</button>
+        </RouterLink>
+
 
         <div class="filters">
             <div class="category-group">
