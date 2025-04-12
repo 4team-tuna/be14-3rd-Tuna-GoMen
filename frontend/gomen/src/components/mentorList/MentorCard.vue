@@ -8,7 +8,9 @@
       <p class="mentor-skills">{{ mentor.skills }}</p>
       <p class="mentor-description">{{ mentor.description }}</p>
     </div>
-    <button class="apply-button" @click="$emit('openApply', mentor)">신청하기</button>
+    <router-link :to="`/mentor/${mentor.id}`" class="apply-button-link">
+      <button class="apply-button">신청하기</button>
+    </router-link>
   </div>
 </template>
 
@@ -113,5 +115,10 @@ function getImageUrl(path) {
 
 .apply-button:hover {
   background-color: #7c83ff;
+}
+
+.apply-button-link {
+  width: 100%;
+  text-decoration: none;
 }
 </style>

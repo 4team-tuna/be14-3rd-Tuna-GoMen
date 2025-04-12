@@ -8,7 +8,7 @@ const routes = [
   {
     path: '/mentor/:id',
     name: 'MentorDetail',
-    component: () => import('@/views/MentorDetailPage.vue')
+    component: () => import('@/views/MentorList/MentorDetailPage.vue')
   }
 ]
 

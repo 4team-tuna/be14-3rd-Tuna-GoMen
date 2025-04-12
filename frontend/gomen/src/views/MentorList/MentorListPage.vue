@@ -7,13 +7,7 @@
     <h2 class="section-title">전체 멘토</h2>
     <MentorList
       :mentors="paginatedMentors"
-      @openApply="openApplyModal"
-    />
-
-    <MentorApplyModal
-      v-if="isModalOpen && selectedMentor"
-      :mentor="selectedMentor"
-      @close="isModalOpen = false"
+      
     />
 
     <MentorPagination
@@ -31,7 +25,6 @@ import MentorHighlight from '@/components/mentorList/MentorHighlight.vue'
 import MentorSearch from '@/components/mentorList/MentorSearch.vue'
 import MentorList from '@/components/mentorList/MentorList.vue'
 import MentorPagination from '@/components/mentorList/MentorPagination.vue'
-import MentorApplyModal from '@/components/mentorList/MentorApplyModal.vue'
 
 export default {
   name: 'MentorListPage',
@@ -40,8 +33,7 @@ export default {
     MentorHighlight,
     MentorSearch,
     MentorList,
-    MentorPagination,
-    MentorApplyModal
+    MentorPagination
   },
   data() {
     return {
@@ -49,8 +41,8 @@ export default {
       filteredMentors: [],
       currentPage: 1,
       itemsPerPage: 4,
-      isModalOpen: false,
-      selectedMentor: null
+      
+      
     }
   },
   computed: {
@@ -82,10 +74,7 @@ export default {
     handlePageChange(newPage) {
       this.currentPage = newPage;
     },
-    openApplyModal(mentor) {
-      this.selectedMentor = mentor;
-      this.isModalOpen = true;
-    }
+    
   },
   mounted() {
     axios.get('http://localhost:3001/mentors').then((res) => {
