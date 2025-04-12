@@ -40,41 +40,58 @@
   const selectedCategory = ref('')
   
   const posts = ref([])
-  
+
   onMounted(async () => {
-    const raw = localStorage.getItem('allposts')
-    posts.value = raw ? JSON.parse(raw) : []
-  
-    try {
-      const res = await axios.get('http://localhost:3001/allposts')
-      posts.value = res.data
-      localStorage.setItem('allposts', JSON.stringify(res.data))
-    } catch (e) {
-      console.error('서버에서 데이터 가져오기 실패:', e)
-    }
-  })
-  
-  const filteredPosts = computed(() => {
-    let result = posts.value
-  
-    if (selectedCategory.value) {
-      result = result.filter(p => p.category === selectedCategory.value)
-    }
-  
-    if (search.value) {
-      result = result.filter(p =>
-        p.title.toLowerCase().includes(search.value.toLowerCase())
-      )
-    }
-  
-    if (sort.value === 'title') {
-      result = result.sort((a, b) => a.title.localeCompare(b.title))
-    } else {
-      result = result.sort((a, b) => b.id - a.id)
-    }
-  
-    return result
-  })
+  try {
+    const res = await axios.get('http://localhost:3001/allposts');
+    const sorted = res.data.sort((a, b) => {
+  const parseDate = (dateStr) => {
+    const [yy, mm, dd] = dateStr.trim().split('.').map(v => v.padStart(2, '0'));
+    return new Date(`20${yy}-${mm}-${dd}`); // ← 여기서 무조건 20 붙임!
+  };
+
+  const dateA = parseDate(a.date);
+  const dateB = parseDate(b.date);
+
+  if (dateA.getTime() === dateB.getTime()) {
+    return b.id.localeCompare(a.id, 'en', { numeric: true });
+  }
+
+  return dateB - dateA;
+});
+
+
+    console.log("Sorted data after sorting by ID and Date", sorted);
+
+
+    posts.value = sorted;
+    localStorage.setItem('allposts', JSON.stringify(sorted));
+  } catch (e) {
+    console.error('서버에서 데이터 가져오기 실패:', e);
+    const raw = localStorage.getItem('allposts');
+    posts.value = raw ? JSON.parse(raw) : [];
+  }
+});
+
+
+
+const filteredPosts = computed(() => {
+  let result = [...posts.value] // ✅ 복사본 생성
+
+  if (selectedCategory.value) {
+    result = result.filter(p => p.category === selectedCategory.value)
+  }
+
+  if (search.value) {
+    result = result.filter(p =>
+      p.title.toLowerCase().includes(search.value.toLowerCase())
+    )
+  }
+
+
+  return result
+})
+
   </script>
   
 <style scoped>

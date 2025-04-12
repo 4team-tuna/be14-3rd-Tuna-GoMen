@@ -60,7 +60,7 @@ const submitPost = async () => {
 
     const raw = localStorage.getItem('allposts')
     const posts = raw ? JSON.parse(raw) : []
-    posts.push(newPost)
+    posts.unshift(newPost) // ⬅ 이거! 최신 글을 맨 앞에 넣음
     localStorage.setItem('allposts', JSON.stringify(posts))
 
     alert('게시글이 등록되었습니다!')
