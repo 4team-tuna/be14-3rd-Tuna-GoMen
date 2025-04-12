@@ -35,11 +35,11 @@ const form = reactive({
 })
 
 const submitForm = async () => {
-  if (!form.loginId.value || 
-      !form.password.value || 
-      !form.name.value || 
-      !form.personalNumber.value || 
-      !form.phoneNumber.value) {
+  if (!form.loginId || 
+      !form.password || 
+      !form.name || 
+      !form.personalNumber || 
+      !form.phoneNumber) {
     alert('모든 항목을 입력해주세요!')
     return
   }
