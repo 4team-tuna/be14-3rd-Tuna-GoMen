@@ -1,75 +1,91 @@
 <template>
-    <div class="free-board-page">
-  
-      <main class="board-container">
-        <h2 class="board-title">자유 게시판</h2>
-  
-        <PostCard v-if="post" :post="post" />
-  
-        <CommentList v-if="comments.length" :comments="comments" />
-        <CommentForm />
-      </main>
-  
-    </div>
-  </template>
-  
-  <script setup>
-  import { ref, onMounted } from 'vue'
-  import axios from 'axios'
-  
-  // 공통 컴포넌트
-  import PostCard from '@/components/PostCard.vue'
-  import CommentList from '@/components/CommentList.vue'
-  import CommentForm from '@/components/CommentForm.vue'
-  
-  const post = ref(null)
-  const comments = ref([])
-  
-  onMounted(async () => {
+  <div class="free-board-page">
+    <main class="board-container">
+      <h2 class="board-title">🌱 자유 게시판</h2>
+
+      <!-- 목록 버튼 -->
+  <router-link to="/boards/free" class="back-button">목록</router-link>
+
+      <PostCard v-if="post" :post="post" />
+
+      <!-- 댓글 목록을 post 내의 comments로 바로 처리 -->
+      <CommentList v-if="post && post.comments.length" :comments="post.comments" />
+      <CommentForm />
+    </main>
+  </div>
+</template>
+
+<script setup>
+import { ref, onMounted } from 'vue'
+import { useRoute } from 'vue-router'
+import axios from 'axios'
+
+import PostCard from '@/components/freeboard/PostCard.vue'
+import CommentList from '@/components/freeboard/CommentList.vue'
+import CommentForm from '@/components/freeboard/CommentForm.vue'
+
+const post = ref(null)
+const route = useRoute()
+
+onMounted(async () => {
   try {
-    const postRes = await axios.get('/api/posts/1')
+    const postId = Number(route.params.id) // 문자열을 숫자로 변환!
+    const postRes = await axios.get(`http://localhost:3001/allposts/${postId}`)
     post.value = postRes.data
 
-    const commentRes = await axios.get('/api/comments?postId=1')
-    comments.value = commentRes.data
-
-    console.log('🔥 댓글 목록:', comments.value)
+    console.log('🔥 게시물과 댓글:', post.value)
   } catch (error) {
     console.error('데이터 로딩 실패:', error)
   }
 })
+</script>
 
-  </script>
-  
-  <style scoped>
-  .free-board-page {
-    background: #f9f9fb;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-  }
-  
-  .board-container {
+<style scoped>
+.free-board-page {
+  background: #f9f9fb;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.board-container {
   width: 100%;
-  max-width: 1200px; /* 필요시 늘릴 수 있음 */
+  max-width: 1000px;
   margin: 40px auto;
   padding: 24px;
   background: white;
   border-radius: 12px;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
 
   display: flex;
   flex-direction: column;
-  gap: 24px;
+  gap: 5px;
 }
 
-  
-  .board-title {
-    font-size: 24px;
-    font-weight: bold;
-    padding: 20px 0;
-    border-bottom: 1px solid #ddd;
-  }
-  </style>
-  
+.board-title {
+  font-size: 30px;
+  font-weight: bold;
+  margin-left: 30px;
+  margin-bottom:4px;
+}
+
+.back-button {
+  font-size: 12px;
+  align-self: flex-end;
+  background-color: #2563eb; /* Tailwind 기준으로는 'blue-600' */
+  color: white;
+  padding: 8px 15px;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: bold;
+  transition: background-color 0.3s;
+  margin-top:0;
+  margin-bottom:10px;
+}
+
+.back-button:hover {
+  background-color: #1d4ed8; /* 더 진한 파란색 */
+}
+
+</style>
