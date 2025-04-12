@@ -2,10 +2,9 @@
   <div class="mentor-list-wrapper">
     <div class="mentor-grid">
       <MentorCard
-        v-for="mentor in mentors"
+        v-for="mentor in mentorlist"
         :key="mentor.id"
-        :mentor="mentor"
-        @openApply="$emit('openApply', mentor)"
+        :mentorlist="mentor"
       />
     </div>
   </div>
@@ -15,7 +14,7 @@
 import MentorCard from './MentorCard.vue'
 
 defineProps({
-  mentors: {
+  mentorlist: {
     type: Array,
     required: true
   }

@@ -6,7 +6,7 @@
 
     <h2 class="section-title">전체 멘토</h2>
     <MentorList
-      :mentors="paginatedMentors"
+      :mentorlist="paginatedMentors"
       
     />
 
@@ -77,7 +77,7 @@ export default {
     
   },
   mounted() {
-    axios.get('http://localhost:3001/mentors').then((res) => {
+    axios.get('http://localhost:3001/mentorlist').then((res) => {
       this.mentors = res.data
       this.filteredMentors = res.data
     })

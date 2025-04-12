@@ -1,14 +1,16 @@
 <template>
   <div class="mentor-card">
-    <span class="mentor-rating">⭐ {{ mentor.rating }}</span>
-    <img :src="getImageUrl(mentor.image)" alt="멘토 이미지" class="mentor-image" />
+    <span class="mentor-rating">⭐ {{ mentorlist.rating }}</span>
+    <img :src="getImageUrl(mentorlist.image)" alt="멘토 이미지" class="mentor-image" />
     <div class="mentor-info">
-      <h3 class="mentor-name">{{ mentor.name }}</h3>
-      <p class="mentor-title">{{ mentor.title }}</p> 
-      <p class="mentor-skills">{{ mentor.skills }}</p>
-      <p class="mentor-description">{{ mentor.description }}</p>
+      <h3 class="mentor-name">{{ mentorlist.name }}</h3>
+      <p class="mentor-title">{{ mentorlist.title }}</p> 
+      <p class="mentor-skills">{{ mentorlist.skills }}</p>
+      <p class="mentor-description">
+        {{ mentorlist.description.length > 100 ? mentorlist.description.slice(0, 100) + '...' : mentorlist.description }}
+      </p>
     </div>
-    <router-link :to="`/mentor/${mentor.id}`" class="apply-button-link">
+    <router-link :to="`/mentorlist/${mentorlist.id}`" class="apply-button-link">
       <button class="apply-button">신청하기</button>
     </router-link>
   </div>
@@ -16,7 +18,7 @@
 
 <script setup>
 defineProps({
-  mentor: {
+  mentorlist: {
     type: Object,
     required: true
   }
@@ -77,16 +79,16 @@ function getImageUrl(path) {
 }
 
 .mentor-title {
-  font-size: 15px;         
-  font-weight: 600;        
-  color: #5d5fef;          
+  font-size: 15px;
+  font-weight: 600;
+  color: #5d5fef;
   margin-bottom: 6px;
 }
 
 .mentor-skills {
-  font-size: 14px;         
-  font-weight: 500;        
-  color: #444;             
+  font-size: 14px;
+  font-weight: 500;
+  color: #444;
   margin: 8px 0;
   text-align: center;
   white-space: normal;

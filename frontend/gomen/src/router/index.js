@@ -6,7 +6,7 @@ const routes = [
   { path: '/board/free', component: FreeBoardPage },
   { path: '/mentorlist', component: MentorListPage },
   {
-    path: '/mentor/:id',
+    path: '/mentorlist/:id',
     name: 'MentorDetail',
     component: () => import('@/views/MentorList/MentorDetailPage.vue')
   }
