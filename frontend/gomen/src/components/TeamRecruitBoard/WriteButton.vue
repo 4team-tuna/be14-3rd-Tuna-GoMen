@@ -1,7 +1,6 @@
 <!-- src/components/common/FloatingWriteButton.vue -->
 <template>
     <button class="floating-btn" @click="goToWritePage">
-      <!-- 연필 아이콘 (SVG로 변경 가능) -->
       ✏️
     </button>
   </template>
@@ -21,7 +20,7 @@
     position: fixed;
     bottom: 32px;
     right: 32px;
-    background-color: #5D5FEF; /* iris100 */
+    background-color: #5D5FEF;
     color: white;
     border: none;
     border-radius: 50%;
@@ -35,7 +34,7 @@
   }
   
   .floating-btn:hover {
-    background-color: #4a4cd1; /* hover 색상 */
+    background-color: #4a4cd1;
     transform: scale(1.05);
   }
   </style>

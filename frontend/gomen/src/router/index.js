@@ -7,6 +7,7 @@ import WritePost from '@/views/FreeBoard/WritePost.vue'
 
 // 팀모집 게시판
 import TeamRecruitBoardPage from '@/views/teamRecruitBoard/TeamRecruitBoardPage.vue'
+import TeamRecruitWritePage from '@/views/teamRecruitBoard/TeamRecruitWritePage.vue'
 
 // 메시지함 & 유저 관련
 import MessageInbox from '@/views/Message/MessageInbox.vue'
@@ -76,7 +77,14 @@ const routes = [
     path: '/board/team-recruit/:id/applicants',
     name: 'ApplicantList',
     component: ApplicantListPage
-  }
+  },
+
+// 팀모집 게시판 글쓰기 페이지
+{
+  path: '/board/team-recruit/write',
+  name: 'TeamRecruitWritePage',
+  component: () => import('@/views/teamRecruitBoard/TeamRecruitWritePage.vue'),
+}
 ]
 
 const router = createRouter({

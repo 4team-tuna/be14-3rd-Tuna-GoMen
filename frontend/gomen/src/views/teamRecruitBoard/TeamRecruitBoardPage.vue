@@ -3,7 +3,7 @@
     <div class="page-container">
 
       <div class="content-wrapper">
-        <h1 class="page-title">팀 모집 게시판</h1>
+        <h1 class="page-title">🧩팀 모집 게시판</h1>
 
         <FilterBar @search="handleSearch" />
 
@@ -94,7 +94,6 @@ const handlePageChange = (page) => {
   currentPage.value = page
 }
 
-//  mock 데이터 불러오기
 onMounted(async () => {
   const res = await fetch('http://localhost:3001/teamRecruitPosts')
   const data = await res.json()
@@ -124,11 +123,11 @@ onMounted(async () => {
 .page-title {
   font-size: 2rem;
   font-weight: bold;
-  margin-bottom: 1.5rem;
+  margin-bottom: 4.5rem;
 }
 
 .post-list {
-  margin-top: 1rem;
+  margin-top: 1.5rem;
   margin-bottom: 2rem;
   display: flex;
   flex-direction: column;
