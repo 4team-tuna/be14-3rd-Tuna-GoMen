@@ -2,9 +2,11 @@ import { createRouter, createWebHistory } from 'vue-router'
 
 // 기존 자유게시판
 import FreeBoardPage from '@/views/FreeBoard/FreeBoardPage.vue'
-import TeamRecruitBoardPage from '@/views/teamRecruitBoard/TeamRecruitBoardPage.vue'
 import BoardView from '@/views/FreeBoard/BoardView.vue'
 import WritePost from '@/views/FreeBoard/WritePost.vue'
+
+// 팀모집 게시판
+import TeamRecruitBoardPage from '@/views/teamRecruitBoard/TeamRecruitBoardPage.vue'
 
 // 메시지함 & 유저 관련
 import MessageInbox from '@/components/message/MessageInbox.vue'
@@ -28,7 +30,7 @@ import MentorRequestPage from '@/views/Admin/MentorRequestPage.vue'
 
 const routes = [
   // 기본 진입 시 관리자 홈으로 리다이렉트
-  { path: '/', redirect: '/admin' },
+  // { path: '/', redirect: '/admin' },
 
   // 자유게시판
   { path: '/board/free', component: FreeBoardPage },
@@ -37,9 +39,6 @@ const routes = [
   {
     path: '/boards/free/write',name: 'WritePost', component: WritePost
   },
-  { path: '/board/team-recruit', name: 'TeamRecruitBoard', component: TeamRecruitBoardPage },
-  { path: '/board/team-recruit/:id', name: 'TeamRecruitDetail',
-    component: () => import('@/views/teamRecruitBoard/TeamRecruitBoardDetailPage.vue'),alias: '/recruit/:id' },
 
   // 유저 관련
   { path: '/mail', component: MessageInbox },
@@ -56,7 +55,12 @@ const routes = [
   { path: '/admin', component: AdminHomePage },
   { path: '/admin/reports', component: ReportPage },
   { path: '/admin/titles', component: TitlePage },
-  { path: '/admin/mentors', component: MentorRequestPage }
+  { path: '/admin/mentors', component: MentorRequestPage },
+
+  // 팀 모집 게시판
+  { path: '/board/team-recruit', name: 'TeamRecruitBoard', component: TeamRecruitBoardPage },
+  { path: '/board/team-recruit/:id', name: 'TeamRecruitDetail',
+    component: () => import('@/views/teamRecruitBoard/TeamRecruitBoardDetailPage.vue'),alias: '/recruit/:id' }
 ]
 
 const router = createRouter({
