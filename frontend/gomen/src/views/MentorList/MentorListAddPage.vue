@@ -39,6 +39,10 @@
       alert('모든 항목을 입력해주세요.')
       return
     }
+
+    const user = JSON.parse(localStorage.getItem('user'))
+    form.userId = user.id
+    form.name = user.nickname
   
     try {
       await api.post('/mentorlist', form)

@@ -85,25 +85,25 @@ export default {
     }
   },
   mounted() {
-  // 멘토 리스트 불러오기
-  api.get('/mentorlist').then((res) => {
-    const reversed = res.data.slice().reverse()
-    this.mentors = reversed
-    this.filteredMentors = reversed
-  }).catch((err) => {
-    console.error('멘토 리스트 조회 실패:', err)
-  })
+    api.get('/mentorlist')
+      .then((res) => {
+        const reversed = res.data.slice().reverse()
+        this.mentors = reversed
+        this.filteredMentors = reversed
 
-  // ✅ 사용자 정보 localStorage에서 직접 가져오기
-  try {
-    const user = JSON.parse(localStorage.getItem('user'))
-    if (user && user.isMentor === 'Y') {
-      this.isMentor = true
-      this.isRegistered = localStorage.getItem('mentorRegistered') === 'true'
-    }
-  } catch (e) {
-    console.warn('로그인 사용자 정보 없음 또는 파싱 실패')
-    }
+        // ✅ 사용자 정보는 여기에서 처리해야 reversed를 사용할 수 있음
+        const user = JSON.parse(localStorage.getItem('user'))
+        if (user && user.isMentor === 'Y') {
+          this.isMentor = true
+
+          // ✅ 여기서만 reversed 사용 가능
+          const alreadyRegistered = reversed.some(mentor => mentor.userId === user.id)
+          this.isRegistered = alreadyRegistered
+        }
+      })
+      .catch((err) => {
+        console.error('멘토 리스트 조회 실패:', err)
+      })
   }
 }
 </script>
