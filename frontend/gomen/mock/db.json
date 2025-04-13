@@ -53,7 +53,7 @@
       "createdAt": "2025-04-09T10:30:00Z",
       "isActivated": "Y",
       "teamIntroduce": "자연어 처리 기반의 AI 챗봇을 만들고 있어요. Python, PyTorch 사용 중이고, AI에 관심 많고 열정 있는 분 환영해요! 데이터 수집부터 모델 학습까지 함께 해요.",
-      "isDeleted": "N"
+      "isDeleted": "Y"
     },
     {
       "id": "3",
@@ -61,7 +61,7 @@
       "teamName": "실시간챗팀",
       "nickname": "프론트선비",
       "createdAt": "2025-04-08T16:45:00Z",
-      "isActivated": "N",
+      "isActivated": "Y",
       "teamIntroduce": "WebSocket을 이용한 실시간 채팅 앱 개발 중이에요. 프론트는 Vue, 백엔드는 Node.js로 진행하고 있으며 실시간 통신이나 UX에 관심 있는 분을 찾고 있어요!",
       "isDeleted": "N"
     },
@@ -81,7 +81,7 @@
       "teamName": "Unity부스터",
       "nickname": "게임러버",
       "createdAt": "2025-04-06T09:15:00Z",
-      "isActivated": "N",
+      "isActivated": "Y",
       "teamIntroduce": "Unity 기반의 3D 액션 게임을 개발 중입니다. 모델링, 애니메이션, 게임 로직 등 다양한 분야의 협업이 필요해요. 게임 개발에 열정 있는 분들 모여주세요!",
       "isDeleted": "N"
     },

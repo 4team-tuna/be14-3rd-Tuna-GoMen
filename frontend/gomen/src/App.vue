@@ -1,7 +1,7 @@
 <template>
-  <Header/>
+  <Header />
     <router-view /> <!-- 여기에 각 페이지들이 들어감 -->
-  <Footer/>
+  <Footer />
 </template>
   
 <script setup>

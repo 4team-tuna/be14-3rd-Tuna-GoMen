@@ -5,14 +5,17 @@
       </transition>
   
       <main class="detail-container" v-if="post">
-        <!-- 상단 제목 -->
         <h2 class="board-title">팀 모집 게시판</h2>
   
-        <!-- 게시글 카드 -->
         <div class="post-card">
-          <span class="status" :class="{ recruiting: post.isActivated === 'Y' }">
-            {{ post.isActivated === 'Y' ? '모집중' : '모집완료' }}
-          </span>
+          <div class="top-row">
+            <span class="status" :class="{ recruiting: post.isActivated === 'Y' }">
+              {{ post.isActivated === 'Y' ? '모집중' : '모집완료' }}
+            </span>
+            <button class="activation-button" @click="toggleActivation">
+              {{ post.isActivated === 'Y' ? '모집 완료로 변경' : '모집중으로 변경' }}
+            </button>
+          </div>
   
           <h3 class="post-title">{{ post.title }}</h3>
   
@@ -24,47 +27,49 @@
           <div class="post-content">
             <p>{{ post.teamIntroduce }}</p>
           </div>
-  
-          <!-- 이전/다음 버튼 -->
-          <div class="button-group">
-            <button class="action-button" :disabled="!prevPostId" @click="goToPost(prevPostId)">
-              이전글
-            </button>
-            <button class="action-button" :disabled="!nextPostId" @click="goToPost(nextPostId)">
-              다음글
-            </button>
-          </div>
         </div>
   
-        <!-- 하단 버튼 -->
         <div class="button-group">
           <DeleteButton v-if="post" :postId="post.id" />
-          <button class="action-button" @click="toggleActivation">
-            {{ post.isActivated === 'Y' ? '모집 완료로 변경' : '모집중으로 변경' }}
-          </button>
+          <button class="action-button" @click="openModal">신청하기</button>
           <button class="action-button secondary" @click="goToList">목록</button>
         </div>
       </main>
   
       <div v-else class="loading">게시글을 불러오는 중...</div>
+  
+      <!-- 신청 모달 -->
+      <ApplyModal
+        v-if="isModalOpen"
+        @submit="handleSubmit"
+        @close="closeModal"
+      />
     </div>
   </template>
   
   <script setup>
-  import { onMounted, ref } from 'vue'
+  import { onMounted, ref, watch } from 'vue'
   import { useRoute, useRouter } from 'vue-router'
   import DeleteButton from '@/components/TeamRecruitBoard/DeleteButton.vue'
+  import ApplyModal from '@/components/TeamRecruitBoard/ApplyModal.vue'
   
   const route = useRoute()
   const router = useRouter()
   
   const post = ref(null)
   const showAlert = ref(false)
-  const prevPostId = ref(null)
-  const nextPostId = ref(null)
+  const isModalOpen = ref(false)
   
-  const fetchPost = async () => {
-    const res = await fetch(`http://localhost:3001/teamRecruitPosts/${route.params.id}`)
+  const openModal = () => isModalOpen.value = true
+  const closeModal = () => isModalOpen.value = false
+  
+  const handleSubmit = (intro) => {
+    alert(`팀 신청이 완료되었습니다!\n내용: ${intro}`)
+    closeModal()
+  }
+  
+  const fetchPost = async (id) => {
+    const res = await fetch(`http://localhost:3001/teamRecruitPosts/${id}`)
     post.value = await res.json()
   
     if (post.value.isDeleted === 'Y') {
@@ -73,24 +78,8 @@
     }
   }
   
-  const fetchAdjacentPostIds = async () => {
-    const res = await fetch('http://localhost:3001/teamRecruitPosts')
-    const posts = await res.json()
-    const currentIndex = posts.findIndex(p => p.id === Number(route.params.id))
-  
-    if (currentIndex !== -1) {
-      prevPostId.value = posts[currentIndex - 1]?.id || null
-      nextPostId.value = posts[currentIndex + 1]?.id || null
-    }
-  }
-  
-  const goToPost = (id) => {
-    router.push(`/board/team-recruit/${id}`)
-  }
-  
   const toggleActivation = async () => {
     const newStatus = post.value.isActivated === 'Y' ? 'N' : 'Y'
-  
     const res = await fetch(`http://localhost:3001/teamRecruitPosts/${post.value.id}`, {
       method: 'PATCH',
       headers: { 'Content-Type': 'application/json' },
@@ -101,7 +90,7 @@
       post.value.isActivated = newStatus
       showAlert.value = true
       setTimeout(() => {
-        router.back()
+        showAlert.value = false
       }, 1500)
     } else {
       alert('상태 변경에 실패했습니다.')
@@ -109,13 +98,14 @@
   }
   
   const formatDate = (dateStr) => new Date(dateStr).toLocaleDateString()
-  const goToList = () => {
-    router.push('/board/team-recruit')
-  }
+  const goToList = () => router.push('/board/team-recruit')
   
   onMounted(() => {
-    fetchPost()
-    fetchAdjacentPostIds()
+    fetchPost(route.params.id)
+  })
+  
+  watch(() => route.params.id, (newId) => {
+    fetchPost(newId)
   })
   </script>
   
@@ -155,6 +145,22 @@
     position: relative;
   }
   
+  .top-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .activation-button {
+    padding: 6px 10px;
+    border: none;
+    border-radius: 6px;
+    background: #4f46e5;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+  }
+  
   .post-title {
     font-size: 20px;
     font-weight: 600;
@@ -176,9 +182,6 @@
   }
   
   .status {
-    position: absolute;
-    top: 16px;
-    right: 20px;
     font-size: 13px;
     font-weight: 600;
     padding: 4px 10px;
