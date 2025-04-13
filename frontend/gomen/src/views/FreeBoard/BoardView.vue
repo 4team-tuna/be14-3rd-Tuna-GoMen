@@ -46,8 +46,8 @@
     // 서버에서 데이터를 가져오기
     const res = await axios.get('http://localhost:3001/allposts');
     const sorted = res.data.sort((a, b) => {
-  const dateA = new Date(a.createdAt || a.date); // ← 기존 글은 createdAt 없을 수 있으니 fallback
-  const dateB = new Date(b.createdAt || b.date);
+    const dateA = new Date(a.createdAt || a.date); // ← 기존 글은 createdAt 없을 수 있으니 fallback
+    const dateB = new Date(b.createdAt || b.date);
   return dateB - dateA;
 });
 

@@ -33,7 +33,6 @@ import { useRoute } from 'vue-router'
 
 const route = useRoute()
 const postId = route.params.id  // 예: /post/1 에서 "1" 가져옴
-console.log('현재 postId:', postId)
 
 const commentText = ref('')
 const comments = ref([])
