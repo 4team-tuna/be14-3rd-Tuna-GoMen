@@ -6,7 +6,13 @@
       <MentorSearch @search="handleSearch" />
 
       <div class="mentor-button-wrapper" v-if="isMentor">
-        <button class="status-btn" :class="{ active: isRegistered }">신청 현황</button>
+        <button
+          class="status-btn"
+          :class="{ active: isRegistered }"
+          @click="goToStatus"
+        >
+          신청 현황
+        </button>
         <button class="register-btn" @click="goToRegister" :disabled="isRegistered">
           등록하기
         </button>
@@ -82,6 +88,9 @@ export default {
     },
     goToRegister() {
       this.$router.push('/mentorlist/add') 
+    },
+    goToStatus() {
+      this.$router.push('/mentorlist/status')
     }
   },
   mounted() {

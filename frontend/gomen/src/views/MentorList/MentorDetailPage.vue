@@ -51,8 +51,22 @@ const getImageUrl = (path) => {
   }
 }
 
-const openModal = () => {
-  showModal.value = true
+const openModal = async () => {
+  const user = JSON.parse(localStorage.getItem('user'))
+
+  try {
+    await axios.post('http://localhost:3001/applications', {
+      mentorId: mentor.value.userId,  
+      menteeId: user.id,
+      name: user.nickname,
+      message: '멘토링 신청합니다!'
+    })
+
+    showModal.value = true
+  } catch (err) {
+    console.error('신청 실패:', err)
+    alert('신청 중 오류가 발생했습니다.')
+  }
 }
 
 const goToList = () => {
