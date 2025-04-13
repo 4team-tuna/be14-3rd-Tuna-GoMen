@@ -22,12 +22,12 @@ import ReportPage from '@/views/Admin/ReportPage.vue'
 import TitlePage from '@/views/Admin/TitlePage.vue'
 import MentorRequestPage from '@/views/Admin/MentorRequestPage.vue'
 
-// ✅ 신고 페이지
+// 신고 페이지
 import ReportFormPage from '@/views/Report/ReportPage.vue'
 
 const routes = [
-  // 기본 진입 시 관리자 홈으로 리다이렉트
-  { path: '/', redirect: '/admin' },
+  // 기본 진입 시 메인 화면으로~
+  { path: '/', redirect: '/main' },
 
   // 자유게시판
   { path: '/board/free', component: FreeBoardPage },
@@ -52,7 +52,7 @@ const routes = [
   { path: '/admin/titles', component: TitlePage },
   { path: '/admin/mentors', component: MentorRequestPage },
 
-  // ✅ 신고 페이지
+  // 신고 페이지
   { path: '/report', name: 'ReportPage', component: ReportFormPage }
 ]
 
