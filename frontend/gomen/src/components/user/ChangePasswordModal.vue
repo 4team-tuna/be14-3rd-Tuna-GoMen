@@ -63,12 +63,12 @@
   .modal-content {
     background: white;
     padding: 20px;
-    width: 300px;
+    width: 350px;
     border-radius: 10px;
   }
   
   input {
-    width: 100%;
+    width: 95%;
     margin: 10px 0;
     padding: 8px;
     border: 1px solid #ccc;
