@@ -94,7 +94,7 @@ const login = async () => {
   justify-content: center;
   align-items: center;
   height: 100vh;
-  background-color: #dcdcdc;
+  background: linear-gradient(to bottom right, #f5f7fa, #c3cfe2); /* ✨ 여기 변경 */
 }
 
 .login-box {

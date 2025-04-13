@@ -15,7 +15,7 @@
     <div class="actions">
       <img v-if="isLogin" src="@/assets/icon-message.png" class="icon-message" @click="goToMail" />
       <img v-if="isLogin" src="@/assets/icon-user.png" class="icon-user" @click="goToMyInfo" />
-      <button v-if="isLogin" @click="openLogOutModal">로그아웃</button>
+      <button v-if="isLogin" class="logout-btn" @click="openLogOutModal">로그아웃</button>
     </div>
   </header>
 
@@ -29,7 +29,7 @@
 
 
 <script setup>
-  import LogOutModal from '../message/LogOutModal.vue';
+  import LogOutModal from '../user/LogOutModal.vue';
   import { useRouter } from 'vue-router';
   import {ref} from 'vue';
 
@@ -80,9 +80,15 @@
 }
 
 .nav-links a {
-  color: #333;
+  margin-left: 20px;
+  font-weight: 500;
   text-decoration: none;
-  font-size: 14px;
+  color: #888; /* 연한 회색 */
+  transition: color 0.2s ease;
+}
+
+.nav-links a:hover {
+  color: #222; /* 진한 회색 */
 }
 
 .actions {
@@ -92,8 +98,31 @@
 }
 
 .logo {
-  height: 100px;
-  width: auto;
+  width: 120px;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.logo:hover {
+  transform: scale(1.2); /* 5% 커짐 */
+}
+
+.logout-btn {
+  background-color: transparent;
+  border: 1px solid #888;
+  border-radius: 6px;
+  padding: 6px 12px;
+  font-size: 14px;
+  color: #333;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  margin-left: 16px;
+}
+
+.logout-btn:hover {
+  background-color: #333;
+  color: white;
+  border-color: #333;
 }
 
 .icon-message {

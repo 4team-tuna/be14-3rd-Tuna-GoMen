@@ -117,9 +117,9 @@
 
 <script setup>
 // 추후 API로 사용자 정보, 북마크 게시글 불러올 수 있음
-  import CareerModal from './CareerModal.vue'
-  import ApplyMentorModal from './ApplyMentorModal.vue';
-  import ChangePasswordModal from './ChangePasswordModal.vue';
+  import CareerModal from '@/components/user/CareerModal.vue';
+  import ApplyMentorModal from '@/components/user/ApplyMentorModal.vue';
+  import ChangePasswordModal from '@/components/user/ChangePasswordModal.vue';
   import { ref, onMounted } from 'vue'
   import axios from 'axios'
   import { useRouter } from 'vue-router';
@@ -201,9 +201,9 @@
   const applyMentor = async (message) => {
     try {
       const payload = {
-        applicantId: myId,
-        userId: user.loginId,
-        nickname: user.nickname,
+        id: myId,
+        userId: user.value.loginId,
+        nickname: user.value.nickname,
         done: false,
         requestAt: new Date().toISOString(),
         message

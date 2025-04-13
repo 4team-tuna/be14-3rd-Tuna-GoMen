@@ -608,6 +608,13 @@
       "receiverId": "1",
       "content": "나? 지금 집인데",
       "createdAt": "2025-04-12T06:20:17.321Z"
+    },
+    {
+      "id": "6a50",
+      "senderId": "1744435132583",
+      "receiverId": "1744531166026",
+      "content": "aaa",
+      "createdAt": "2025-04-13T08:18:24.029Z"
     }
   ],
   "users": [
@@ -941,11 +948,32 @@
       "githubAdress": "tjalswhd1@github.com",
       "extensionCount": 0,
       "careerInfo": "시재건설 (2024.12 ~ 2024.12) - 공사 관리\n더레전드 (2020.01 ~ 2024.12) - 조교알바\nbeyondSW (2024.01 ~ 2024.12) - 코딩 공부",
-      "isMentor": "Y",
+      "isMentor": "N",
       "violationScore": 0,
       "averageRating": 0,
       "college": "한양대학교",
       "blog": "tjalswhd1@naver.com"
+    },
+    {
+      "id": "1744531166026",
+      "loginId": "aaa",
+      "password": "aaa",
+      "name": "aaa",
+      "personalNumber": "aaa",
+      "phoneNumber": "aaa",
+      "nickname": "aaa",
+      "createdAt": "2025-04-13T07:59:26.026Z",
+      "updatedAt": null,
+      "willBeActivated": "2025-04-13T07:59:26.026Z",
+      "isQuitted": "N",
+      "githubAdress": "",
+      "extensionCount": 0,
+      "careerInfo": "",
+      "isMentor": "N",
+      "violationScore": 0,
+      "averageRating": 0,
+      "college": "",
+      "blog": ""
     }
   ],
   "reports": [
@@ -1107,12 +1135,20 @@
       "message": "신청하신 멘토 권한이 승인되었습니다."
     },
     {
-      "id": "82ec",
-      "applicantId": "1744435132583",
+      "id": "1744435132583",
+      "userId": "mj226",
+      "nickname": "MJay1",
+      "done": true,
+      "requestAt": "2025-04-13T08:49:57.254Z",
+      "message": "aaa"
+    },
+    {
+      "id": "1744435132583",
+      "userId": "mj226",
+      "nickname": "MJay1",
       "done": false,
-      "requestAt": "2025-04-13T05:43:08.019Z",
-      "message": "멘토 ㄱㄱ"
-
+      "requestAt": "2025-04-13T08:56:50.998Z",
+      "message": "j"
     }
   ],
   "titles": [

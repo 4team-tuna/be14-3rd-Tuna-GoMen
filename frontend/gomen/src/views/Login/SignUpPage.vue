@@ -12,7 +12,7 @@
 
       <input v-model="form.name" type="text" placeholder="이름" class="signup-input" />
       <input v-model="form.nickname" type="text" placeholder="닉네임" class="signup-input" />
-      <input v-model="form.personalNumber" type="text" placeholder="생년월일(8자리)" class="signup-input" />
+      <input v-model="form.personalNumber" type="text" placeholder="주민등록번호호" class="signup-input" />
       <input v-model="form.phoneNumber" type="text" placeholder="휴대전화번호 (대한민국 +82)" class="signup-input" />
 
       <button class="signup-button" @click="submitForm">회원가입</button>
@@ -89,7 +89,7 @@ const goBack = () => {
   justify-content: center;
   align-items: center;
   height: 100vh;
-  background-color: #dcdcdc;
+  background: linear-gradient(to bottom right, #f5f7fa, #c3cfe2); /* ✨ 여기 변경 */
 }
 
 .signup-box {

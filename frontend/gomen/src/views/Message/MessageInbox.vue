@@ -14,75 +14,74 @@
       </div>
     </div>
   
-<div class="message-view">
-  <div class="message-actions">
-        <button @click="openModal">쪽지 보내기</button>
-        <button @click="refresh">새로고침</button>
-      </div>
-  <template v-if="selectedUser">
-    <div class="message-header">
-      <strong>{{ getUserLabel(selectedUser) }}와의 대화</strong>
+  <div class="message-view">
+    <div class="message-actions">
+      <button @click="openModal">쪽지 보내기</button>
+      <button @click="refresh">새로고침</button>
     </div>
-
-    <div class="conversation">
-  <div
-    v-for="msg in conversation"
-    :key="msg.id"
-    :class="['conversation-message-wrapper', String(msg.senderId) === String(myId) ? 'sent' : 'received']"
-  >
-  <div :class="['conversation-message', String(msg.senderId) === String(myId) ? 'sent' : 'received']">
-  <div class="label">
-    {{ String(msg.senderId) === String(myId) ? '발신' : '수신' }}
-  </div>
-    <div class="login-id">
-      {{ getUserLabel(msg.senderId) }}
+    <template v-if="selectedUser">
+      <div class="message-header">
+        <strong>{{ getUserLabel(selectedUser) }}와의 대화</strong>
       </div>
-      <div class="content">{{ msg.content }}</div>
-      <div class="timestamp">{{ formatDateTime(msg.createdAt) }}</div>
-    </div>
-  </div>
-</div>
 
-  </template>
-  
-  <template v-else>
-    <p class="placeholder">대화를 선택하세요.</p>
-  </template>
-</div>
+      <div class="conversation">
+        <div
+          v-for="msg in conversation"
+          :key="msg.id"
+          :class="['conversation-message-wrapper', String(msg.senderId) === String(myId) ? 'sent' : 'received']"
+        >
+          <div :class="['conversation-message', String(msg.senderId) === String(myId) ? 'sent' : 'received']">
+            <div class="label">
+              {{ String(msg.senderId) === String(myId) ? '발신' : '수신' }}
+            </div>
+            <div class="login-id">
+              {{ getUserLabel(msg.senderId) }}
+            </div>
+            <div class="content">{{ msg.content }}</div>
+            <div class="timestamp">{{ formatDateTime(msg.createdAt) }}</div>
+          </div>
+        </div>
+      </div>
+
+    </template>
+    <template v-else>
+      <p class="placeholder">대화를 선택하세요.</p>
+    </template>
+  </div>
   
       <!-- 쪽지 모달 -->
-      <MessageModal
-        v-if="showModal"
-        :receiverId="Number(selectedUser)"
-        :showModal="showModal"
-        @close="closeModal"
-        @send="sendMessage"
-      />
-    </div>
+  <MessageModal
+    v-if="showModal"
+    :receiverId="Number(selectedUser)"
+    :showModal="showModal"
+    @close="closeModal"
+    @send="sendMessage"
+  />
+  </div>
 
-  </template>
+</template>
   
-  <script setup>
+<script setup>
 import { ref, computed, onMounted } from 'vue'
 import axios from 'axios'
-import MessageModal from './MessageModal.vue'
+import MessageModal from '@/components/message/MessageModal.vue';
 import {useRouter} from 'vue-router'
 
 const router = useRouter();
-const goHome = () => {
-  router.push('/main');
-}
+const goHome = () => {router.push('/main');}
 
-const myLoginId = localStorage.getItem('loginId');
 const myId = localStorage.getItem('userId');
 const loginIdMap = ref({})
 
 const selectedUser = ref(null)
 const showModal = ref(false)
+const openModal = () => {showModal.value = true}
+const closeModal = () => {showModal.value = false}
 
 const sentMessages = ref([])
 const receivedMessages = ref([])
 
+// 메일을 주고받은 모든 회원들의 닉네임을 조회회
 async function preloadNicknames(messages) {
   const userIds = new Set();
   messages.forEach(msg => {
@@ -133,14 +132,6 @@ function selectUser(userId) {
   selectedUser.value = userId
 }
 
-function openModal() {
-  showModal.value = true
-}
-
-function closeModal() {
-  showModal.value = false
-}
-
 async function sendMessage(newMsg) {
   try {
     await axios.post('http://localhost:3001/messages', {
@@ -163,8 +154,6 @@ async function refresh() {
 
     sentMessages.value = messages.filter(msg => msg.senderId && String(msg.senderId) === String(myId))
     receivedMessages.value = messages.filter(msg => msg.receiverId && String(msg.receiverId) === String(myId))
-
-
 
     await preloadNicknames(messages)
   } catch (err) {
