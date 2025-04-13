@@ -24,6 +24,10 @@
     memberId: {
       type: [String, Number],
       required: true
+    },
+    leftoverQuestions: {
+        type: Number,
+        required: true
     }
   })
   
@@ -33,22 +37,22 @@
   
   const submitQuestion = async () => {
     if (!content.value.trim()) return
-  
+
     await api.post('/questions', {
-      mentoring_space_id: props.mentoringSpaceId,
-      member_id: props.memberId,
-      question_content: content.value,
-      question_created_time: new Date().toISOString(),
-      is_deleted: 'N'
+        mentoring_space_id: props.mentoringSpaceId,
+        member_id: props.memberId,
+        question_content: content.value,
+        question_created_time: new Date().toISOString(),
+        is_deleted: 'N'
     })
 
     await api.patch(`/mentoringMembers/${props.memberId}`, {
-        leftover_questions: leftoverQuestions.value - 1
+        leftover_questions: props.leftoverQuestions - 1
     })
-  
+
     content.value = ''
     emit('submitted') // 작성 후 새로고침용 콜백
-  }
+    }
   </script>
   
   <style scoped>
