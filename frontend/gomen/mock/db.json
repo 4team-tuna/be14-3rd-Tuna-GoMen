@@ -391,6 +391,41 @@
       "comments": []
     }
   ],
+  "posts": [
+    {
+      "id": "1",
+      "tag": "장비추천 게시판",
+      "title": "코린이 노트북 추천해주세요 ㅜ",
+      "writer": "서버개발자희망",
+      "date": "2025.04.08 13:48",
+      "views": 345,
+      "likes": 12,
+      "content": "안녕하세요 이제 대학에 입학한 새내기예요. ... 다름이아니라 ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ"
+    }
+  ],
+  "comments": [
+    {
+      "id": "1",
+      "postId": 1,
+      "writer": "안현경개발짱",
+      "content": "애.. 그냥 애플 써라...",
+      "date": "2025.04.09 14:47"
+    },
+    {
+      "id": "2",
+      "postId": 1,
+      "writer": "소름돋긔",
+      "content": "새로 나온 LG 그램 가볍고 좋아요 저는...",
+      "date": "2025.04.09 16:33"
+    },
+    {
+      "id": "3",
+      "postId": 1,
+      "writer": "놀이터정모와이",
+      "content": "3년간 무상 보수 가능해요!",
+      "date": "2025.04.09 17:08"
+    }
+  ],
   "messages": [
     {
       "id": "1",
@@ -573,6 +608,13 @@
       "receiverId": "1",
       "content": "나? 지금 집인데",
       "createdAt": "2025-04-12T06:20:17.321Z"
+    },
+    {
+      "id": "6a50",
+      "senderId": "1744435132583",
+      "receiverId": "1744531166026",
+      "content": "aaa",
+      "createdAt": "2025-04-13T08:18:24.029Z"
     }
   ],
   "users": [
@@ -903,7 +945,7 @@
       "updatedAt": null,
       "willBeActivated": "2025-04-12T05:18:52.583Z",
       "isQuitted": "N",
-      "githubAdress": "",
+      "githubAdress": "tjalswhd1@github.com",
       "extensionCount": 0,
       "careerInfo": "시재건설 (2024.12 ~ 2024.12) - 공사 관리\n더레전드 (2020.01 ~ 2024.12) - 조교알바\nbeyondSW (2024.01 ~ 2024.12) - 코딩 공부",
       "isMentor": "N",
@@ -911,6 +953,27 @@
       "averageRating": 0,
       "college": "한양대학교",
       "blog": "tjalswhd1@naver.com"
+    },
+    {
+      "id": "1744531166026",
+      "loginId": "aaa",
+      "password": "aaa",
+      "name": "aaa",
+      "personalNumber": "aaa",
+      "phoneNumber": "aaa",
+      "nickname": "aaa",
+      "createdAt": "2025-04-13T07:59:26.026Z",
+      "updatedAt": null,
+      "willBeActivated": "2025-04-13T07:59:26.026Z",
+      "isQuitted": "N",
+      "githubAdress": "",
+      "extensionCount": 0,
+      "careerInfo": "",
+      "isMentor": "N",
+      "violationScore": 0,
+      "averageRating": 0,
+      "college": "",
+      "blog": ""
     }
   ],
   "reports": [
@@ -1070,6 +1133,22 @@
       "done": false,
       "requestedAt": "2025-04-02T08:40:00",
       "message": "신청하신 멘토 권한이 승인되었습니다."
+    },
+    {
+      "id": "1744435132583",
+      "userId": "mj226",
+      "nickname": "MJay1",
+      "done": true,
+      "requestAt": "2025-04-13T08:49:57.254Z",
+      "message": "aaa"
+    },
+    {
+      "id": "1744435132583",
+      "userId": "mj226",
+      "nickname": "MJay1",
+      "done": false,
+      "requestAt": "2025-04-13T08:56:50.998Z",
+      "message": "j"
     }
   ],
   "titles": [
