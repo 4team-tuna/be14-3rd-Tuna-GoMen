@@ -1,7 +1,9 @@
 <template>
   <div class="applicant-list-page">
     <h2 class="title">팀 모집 게시판</h2>
-    <p class="description">‘{{ postTitle }}’ 게시글의 지원자 목록입니다.</p>
+    <p class="description" @click="goToPostPage">
+      ‘{{ postTitle }}’ 게시글의 지원자 목록입니다.
+    </p>
 
     <ChangeRecruitmentStatusButton />
 
@@ -24,7 +26,7 @@
 
 <script setup>
 import { ref, onMounted } from 'vue'
-import { useRoute } from 'vue-router'
+import { useRoute, useRouter } from 'vue-router'
 import axios from 'axios'
 import ApplicantCard from '@/components/Applicant/ApplicantCard.vue'
 import ChangeRecruitmentStatusButton from '@/components/Applicant/ChangeRecruitmentStatusButton.vue'
@@ -32,6 +34,7 @@ import ChangeRecruitmentStatusButton from '@/components/Applicant/ChangeRecruitm
 import profileImage from '@/assets/icon-user.png'
 
 const route = useRoute()
+const router = useRouter()
 const postId = route.params.id
 const applicants = ref([])
 const postTitle = ref('')
@@ -44,6 +47,10 @@ const fetchApplicants = async () => {
   } catch (error) {
     console.error("데이터 로딩 실패:", error)
   }
+}
+
+const goToPostPage = () => {
+  router.push(`/board/team-recruit/${postId}`)
 }
 
 onMounted(fetchApplicants)
@@ -68,6 +75,12 @@ onMounted(fetchApplicants)
   text-align: left;
   margin-left: 290px;
   margin-bottom: 24px;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.description:hover {
+  color: #6366f1;
 }
 
 .applicant-cards {
