@@ -94,6 +94,11 @@ const routes = [
     path: '/mentee/qna',
     name: 'MenteeQnaPage',
     component: () => import('@/views/Mentoring/MenteeQnaPage.vue')
+  },
+  {
+    path: '/mentee/qna/:questionId',
+    name: 'QuestionDetail',
+    component: () => import('@/views/Mentoring/QuestionDetailPage.vue')
   }
 ]
 
