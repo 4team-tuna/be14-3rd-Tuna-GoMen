@@ -1,152 +1,106 @@
 <template>
-  <div class="mentoring-wrapper">
+  <div class="mentoring-page">
     <h2 class="title">멘토링 공간</h2>
 
-    <div class="info-row">
-      <div class="mentor-box">
-        <p class="label">나의 멘토</p>
-        <img :src="getImageUrl(mentor.image)" alt="멘토 이미지" class="mentor-img" />
-        <p class="mentor-name">{{ mentor.name }}</p>
-      </div>
-
-      <div class="team-box">
-        <p class="label">나의 팀</p>
-        <p class="team-info">김성민/임은재/정건이<br />정우람/오현서/최다연<br />홍의정/류현우/강태윤</p>
-        <p class="question-count">남은 질문 개수 : <strong>{{ questionCount }}</strong>개</p>
-      </div>
+    <div class="cards">
+      <MyMentorCard :mentor="mentor" />
+      <MyTeamCard :teamMembers="teamMembers" :isTeam="isTeam" />
     </div>
 
-    <div class="section">
-      <h3 class="sub-title">Q&A</h3>
-      <div class="question-card" v-for="q in questions" :key="q.id">
-        <p class="question-title">{{ q.title }}</p>
-        <p class="question-preview">{{ q.preview }}</p>
-        <p class="question-date">{{ q.date }}</p>
-      </div>
-    </div>
+    <p class="left-question">남은 질문 개수 : {{ leftover }}</p>
 
-    <div class="pagination">
-      <span>이전</span>
-      <span v-for="n in 5" :key="n" class="page">{{ n }}</span>
-      <span>다음</span>
-    </div>
+    <QuestionList :questions="questions" />
+
+    <Pagination :current="currentPage" :total="totalPage" @change="changePage" />
   </div>
 </template>
 
 <script setup>
 import { ref, onMounted } from 'vue'
+import MyMentorCard from '@/components/mentoring/MyMentorCard.vue'
+import MyTeamCard from '@/components/mentoring/MyTeamCard.vue'
+import QuestionList from '@/components/mentoring/QuestionList.vue'
+import Pagination from '@/components/mentoring/Pagination.vue'
+import api from '@/api'
 
-const mentor = ref({
-  name: '찬승승🔥',
-  image: 'mentor-img.png' // 실제 이미지 파일명 또는 경로로 대체
+const mentor = ref({})
+const teamMembers = ref([])
+const leftover = ref(0)
+const isTeam = ref(false)
+
+const questions = ref([])
+const currentPage = ref(1)
+const totalPage = ref(1)
+
+const user = JSON.parse(localStorage.getItem('user'))
+
+onMounted(async () => {
+  // 1. 멘토링 공간 가져오기
+  const mentoring = await api.get(`/mentoringSpaces?userId=${user.id}`)
+  const space = mentoring.data[0]
+
+  // 2. 멘토 정보
+  const mentorRes = await api.get(`/users/${space.mentor_id}`)
+  mentor.value = mentorRes.data
+
+  // 3. 팀원 정보
+  const memberList = await api.get(`/mentoringMembers?mentoringSpaceId=${space.mentoring_space_id}`)
+
+  const resolved = await Promise.all(
+    memberList.data
+      .filter(m => m.user_id !== user.id)
+      .map(async (m) => {
+        const userRes = await api.get(`/users/${m.user_id}`)
+        return {
+          ...userRes.data,
+          leftover_questions: m.leftover_questions,
+        }
+      })
+  )
+
+  teamMembers.value = resolved
+  isTeam.value = resolved.length > 0
+
+  // 4. 내 질문 잔여 개수
+  const me = memberList.data.find(m => m.user_id === user.id)
+  leftover.value = me?.leftover_questions || 0
+
+  // 5. 질문 목록
+  const qnaRes = await api.get(`/questions?mentoringSpaceId=${space.mentoring_space_id}&_page=1&_limit=3`)
+  questions.value = qnaRes.data
+  totalPage.value = Math.ceil(qnaRes.headers['x-total-count'] / 3)
 })
 
-const questionCount = ref(1)
+const changePage = async (page) => {
+  currentPage.value = page
+  const mentoring = await api.get(`/mentoringSpaces?userId=${user.id}`)
+  const space = mentoring.data[0]
 
-const questions = ref([
-  { id: 1, title: 'java 오류가 많이 뜨네요', preview: 'java 칠 때마다 잠깐 로딩되다가 바르...', date: '2025.04.13' },
-  { id: 2, title: 'useState', preview: 'react에서 useState를 쓸 때 생명주기를...', date: '2025.04.13' },
-  { id: 3, title: '포트폴리오 작성시', preview: '제 포트폴리오에서 어떤 걸 더 추가...', date: '2025.04.13' },
-])
-
-function getImageUrl(path) {
-  try {
-    return new URL(`@/assets/${path}`, import.meta.url).href
-  } catch {
-    return new URL('@/assets/icon-basic-user.png', import.meta.url).href
-  }
+  const res = await api.get(`/questions?mentoringSpaceId=${space.mentoring_space_id}&_page=${page}&_limit=3`)
+  questions.value = res.data
 }
 </script>
 
 <style scoped>
-.mentoring-wrapper {
+.mentoring-page {
   max-width: 1000px;
-  margin: 0 auto;
+  margin: auto;
   padding: 40px 20px;
-  font-family: 'Pretendard';
 }
 .title {
   font-size: 24px;
   font-weight: bold;
-  margin-bottom: 32px;
+  margin-bottom: 24px;
 }
-.info-row {
+.cards {
   display: flex;
-  gap: 20px;
-  margin-bottom: 40px;
-}
-.mentor-box, .team-box {
-  flex: 1;
-  background-color: white;
-  border: 1px solid #ccc;
-  border-radius: 12px;
-  padding: 20px;
-  text-align: center;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-}
-.label {
-  font-weight: bold;
-  margin-bottom: 12px;
-}
-.mentor-img {
-  width: 64px;
-  height: 64px;
-  border-radius: 50%;
+  gap: 24px;
   margin-bottom: 8px;
-  object-fit: cover;
 }
-.mentor-name {
-  font-weight: bold;
-}
-.team-info {
-  font-size: 14px;
-  color: #444;
-  margin-bottom: 12px;
-  white-space: pre-line;
-}
-.question-count {
-  font-size: 14px;
-  color: #222;
-}
-.section {
-  margin-top: 40px;
-}
-.sub-title {
-  font-weight: bold;
-  font-size: 18px;
-  margin-bottom: 16px;
-}
-.question-card {
-  border: 1px solid #5d5fef;
-  border-radius: 12px;
-  padding: 16px;
-  margin-bottom: 12px;
-  background: #fff;
-}
-.question-title {
-  font-weight: bold;
-  color: #222;
-  margin-bottom: 6px;
-}
-.question-preview {
-  font-size: 14px;
-  color: #555;
-  margin-bottom: 6px;
-}
-.question-date {
-  font-size: 12px;
-  color: #999;
+.left-question {
   text-align: right;
-}
-.pagination {
-  display: flex;
-  justify-content: center;
-  gap: 8px;
-  margin-top: 24px;
-  font-size: 14px;
-  color: #444;
-}
-.page {
-  cursor: pointer;
+  font-weight: bold;
+  color: #5d5fef;
+  margin-bottom: 24px;
 }
 </style>
