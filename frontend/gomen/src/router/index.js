@@ -14,7 +14,6 @@ import EditProfile from '@/components/user/EditProfile.vue'
 
 
 const routes = [
-  { path: '/board/free', component: FreeBoardPage },
   { path: '/mail', component: MessageInbox},
   { path: '/', component: StartPage},
   { path: '/signup', component: SignUpPage},
