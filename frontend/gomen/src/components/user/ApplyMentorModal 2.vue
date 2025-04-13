@@ -58,7 +58,7 @@
     font-size: 1.5rem;
   }
   .modal-textarea {
-    width: 94%;
+    width: 100%;
     height: 100px;
     padding: 0.75rem;
     border-radius: 8px;
