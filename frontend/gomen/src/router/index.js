@@ -23,7 +23,7 @@ import TitlePage from '@/views/Admin/TitlePage.vue'
 import MentorRequestPage from '@/views/Admin/MentorRequestPage.vue'
 
 // ✅ 신고 페이지
-import ReportFormPage from '@/views/Report/ReportPage.vue'
+// import ReportFormPage from '@/views/Report/ReportPage.vue'
 
 const routes = [
   // 기본 진입 시 관리자 홈으로 리다이렉트
@@ -53,7 +53,7 @@ const routes = [
   { path: '/admin/mentors', component: MentorRequestPage },
 
   // ✅ 신고 페이지
-  { path: '/report', name: 'ReportPage', component: ReportFormPage }
+  // { path: '/report', name: 'ReportPage', component: ReportFormPage }
 ]
 
 const router = createRouter({
