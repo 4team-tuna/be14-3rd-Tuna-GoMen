@@ -47,6 +47,11 @@ const routes = [
     path: '/mentorlist/status',
     name: 'MentorStatus',
     component: () => import('@/views/MentorList/MentorStatusPage.vue') 
+  },
+  {
+    path: '/mentoring',
+    name: 'MentoringPage',
+    component: () => import('@/views/Mentoring/MentoringPage.vue')
   }
 ]
 
