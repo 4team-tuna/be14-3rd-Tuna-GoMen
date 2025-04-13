@@ -87,8 +87,9 @@ export default {
   mounted() {
   // 멘토 리스트 불러오기
   api.get('/mentorlist').then((res) => {
-    this.mentors = res.data
-    this.filteredMentors = res.data
+    const reversed = res.data.slice().reverse()
+    this.mentors = reversed
+    this.filteredMentors = reversed
   }).catch((err) => {
     console.error('멘토 리스트 조회 실패:', err)
   })
