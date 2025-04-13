@@ -36,13 +36,16 @@ const postId = route.params.id  // 예: /post/1 에서 "1" 가져옴
 
 const commentText = ref('')
 const comments = ref([])
+const user = JSON.parse(localStorage.getItem('user')) // 로컬스토리지에서 객체로 가져오기
+const nickname = ref('')
+nickname.value = user ? user.nickname : ''
 
 const submitComment = async () => {
   if (!commentText.value.trim()) return
 
   const newComment = {
     id: Date.now(),
-    writer: '익명',
+    writer: nickname.value,
     content: commentText.value,
     date: new Date().toLocaleString(),
   }

@@ -50,9 +50,14 @@ const dd = String(now.getDate()).padStart(2, '0')
 const formattedDate = `${yy}.${mm}.${dd}` // 👉 "25.04.13"
 
 
+const user = JSON.parse(localStorage.getItem('user')) // 로컬스토리지에서 객체로 가져오기
+const nickname = ref('')
+nickname.value = user ? user.nickname : ''
+
+
   const newPost = {
   title: title.value,
-  author: '익명',
+  author: nickname.value ,
   date: formattedDate, // ✅ 요 줄!
   createdAt: now.toISOString(),
   category: category.value,
