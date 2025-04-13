@@ -60,6 +60,10 @@
   const months = Array.from({ length: 12 }, (_, i) => String(i + 1).padStart(2, '0'))
   
   function apply() {
+    if(!company.value || !position.value || !startYear.value || !startMonth.value || !endYear.value || !endMonth.value){
+      alert('모든 항목을 입력해주세요!')
+      return
+    }
     const careerText = `${company.value} (${startYear.value}.${startMonth.value} ~ ${endYear.value}.${endMonth.value}) - ${position.value}`
     emit('apply', careerText)
     emit('close')

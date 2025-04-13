@@ -6,15 +6,15 @@ import BoardView from '@/views/FreeBoard/BoardView.vue'
 import WritePost from '@/views/FreeBoard/WritePost.vue'
 
 // 메시지함 & 유저 관련
-import MessageInbox from '@/components/message/MessageInbox.vue'
-import LoginPage from '@/components/user/LoginPage.vue'
-import FindIdPage from '@/components/user/FindIdPage.vue'
-import FindPasswordPage from '@/components/user/FindPasswordPage.vue'
-import SignUpPage from '@/components/user/SignUpPage.vue'
-import StartPage from '@/components/user/StartPage.vue'
-import MainPage from '@/components/user/MainPage.vue'
-import MyPage from '@/components/user/MyPage.vue'
-import EditProfile from '@/components/user/EditProfile.vue'
+import MessageInbox from '@/views/Message/MessageInbox.vue'
+import LoginPage from '@/views/Login/LoginPage.vue'
+import FindIdPage from '@/views/Login/FindIdPage.vue'
+import FindPasswordPage from '@/views/Login/FindPasswordPage.vue'
+import SignUpPage from '@/views/Login/SignUpPage.vue'
+import StartPage from '@/views/StartPage.vue'
+import MainPage from '@/views/MainPage.vue'
+import MyPage from '@/views/MyInfo/MyPage.vue'
+import EditProfile from '@/views/MyInfo/EditProfile.vue'
 
 import MentorListPage from '@/views/MentorList/MentorListPage.vue'
 // 관리자 페이지들
@@ -31,6 +31,7 @@ const routes = [
   // { path: '/', redirect: '/admin' },
 
   { path: '/', component: StartPage},
+  { path: '/main', component: MainPage},
 
   // 자유게시판
   // { path: '/', component: FindPasswordPage}
@@ -39,15 +40,15 @@ const routes = [
   { path: '/boards/free/write', name: 'WritePost', component: WritePost },
 
   // 유저 관련
-  { path: '/mail', component: MessageInbox },
-  { path: '/signup', component: SignUpPage },
+  { path: '/signUp', component: SignUpPage},
   { path: '/login', component: LoginPage },
-  { path: '/main', component: MainPage },
   { path: '/myPage', component: MyPage },
-  { path: '/changeInfo', component: EditProfile },
-  { path: '/find-id', component: FindIdPage },
-  { path: '/find-password', component: FindPasswordPage },
-  { path: '/start', component: StartPage },
+  { path: '/changeInfo', component: EditProfile},
+  { path: '/findId', component:FindIdPage},
+  { path: '/findPassword', component: FindPasswordPage},
+
+  // 쪽지 관련
+  { path: '/mail', component: MessageInbox},
 
   // 관리자 페이지
   { path: '/admin', component: AdminHomePage },
