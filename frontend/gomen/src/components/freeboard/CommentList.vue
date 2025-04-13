@@ -1,21 +1,12 @@
-<<<<<<< HEAD
-<!-- CommentList.vue -->
-<template>
-  <section class="comments" v-if="comments && comments.length">
-    <div class="comment" v-for="comment in comments" :key="comment.id">
-=======
 <template>
   <section class="comments" v-if="comments.length">
     <div v-for="comment in comments" :key="comment.id" class="comment">
->>>>>>> e62e6a571f743ea81c63f81b7de9c54042424247
       <div class="comment-header">
         <strong>{{ comment.writer }}</strong>
         <span class="report" @click="reportComment(comment.id)">🚨 신고</span>
       </div>
       <p>{{ comment.content }}</p>
       <span class="comment-date">{{ comment.date }}</span>
-<<<<<<< HEAD
-=======
 
       <button class="reply-btn" @click="toggleReply(comment.id)">
         {{ replyTargetId === comment.id ? '답글 취소' : '답글 달기' }}
@@ -35,21 +26,10 @@
           <span class="comment-date">{{ reply.date }}</span>
         </div>
       </div>
->>>>>>> e62e6a571f743ea81c63f81b7de9c54042424247
     </div>
   </section>
 </template>
 
-<<<<<<< HEAD
-  
-<script setup>
-const props = defineProps({
-  comments: {
-    type: Array,
-    default: () => [], // <-- 기본값 설정!
-  },
-})
-=======
 <script setup>
 import { ref } from 'vue'
 
@@ -84,27 +64,18 @@ const submitReply = (commentId) => {
   replyText.value = ''
   replyTargetId.value = null
 }
->>>>>>> e62e6a571f743ea81c63f81b7de9c54042424247
 
 const reportComment = (id) => {
   alert(`댓글 (ID: ${id})을 신고하시겠습니까?`)
 }
 </script>
 
-<<<<<<< HEAD
-  
-  <style scoped>
-=======
 <style scoped>
->>>>>>> e62e6a571f743ea81c63f81b7de9c54042424247
 .comments {
   display: flex;
   flex-direction: column;
   gap: 16px;
-<<<<<<< HEAD
-=======
   margin: 0 24px; /* 상단 마진 제거 */
->>>>>>> e62e6a571f743ea81c63f81b7de9c54042424247
 }
 
 .comment {
@@ -124,18 +95,6 @@ const reportComment = (id) => {
   font-size: 12px;
   color: #aaa;
   margin-top: 4px;
-<<<<<<< HEAD
-}
-
-  .report {
-    font-size: 12px;
-    cursor: pointer;
-    color: red;
-    font-weight: bold;
-  }
-  </style>
-  
-=======
   display: inline-block;
 }
 
@@ -199,4 +158,3 @@ const reportComment = (id) => {
 }
 
 </style>
->>>>>>> e62e6a571f743ea81c63f81b7de9c54042424247

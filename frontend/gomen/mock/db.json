@@ -8,7 +8,7 @@
       "createdAt": "2025-04-10T12:00:00Z",
       "isActivated": "Y",
       "teamIntroduce": "Vue 3와 Spring Boot를 활용해 실전 커뮤니티 웹 서비스를 만들고 있어요. GitHub와 Notion으로 협업하고 있으며, UI/UX에도 신경 쓰고 있습니다. 프론트와 백엔드 모두 함께 성장할 팀원을 모집합니다!",
-      "isDeleted": "Y"
+      "isDeleted": "N"
     },
     {
       "id": "2",
@@ -18,7 +18,7 @@
       "createdAt": "2025-04-09T10:30:00Z",
       "isActivated": "Y",
       "teamIntroduce": "자연어 처리 기반의 AI 챗봇을 만들고 있어요. Python, PyTorch 사용 중이고, AI에 관심 많고 열정 있는 분 환영해요! 데이터 수집부터 모델 학습까지 함께 해요.",
-      "isDeleted": "Y"
+      "isDeleted": "N"
     },
     {
       "id": "3",
@@ -26,7 +26,7 @@
       "teamName": "실시간챗팀",
       "nickname": "프론트선비",
       "createdAt": "2025-04-08T16:45:00Z",
-      "isActivated": "Y",
+      "isActivated": "N",
       "teamIntroduce": "WebSocket을 이용한 실시간 채팅 앱 개발 중이에요. 프론트는 Vue, 백엔드는 Node.js로 진행하고 있으며 실시간 통신이나 UX에 관심 있는 분을 찾고 있어요!",
       "isDeleted": "N"
     },
@@ -36,7 +36,7 @@
       "teamName": "포폴장인들",
       "nickname": "개발멘토",
       "createdAt": "2025-04-07T11:00:00Z",
-      "isActivated": "N",
+      "isActivated": "Y",
       "teamIntroduce": "취업 준비 중인 분들을 위한 실전 프로젝트를 함께 하고 있습니다. 디자인부터 기획, 개발까지 전 과정을 같이 경험하며 좋은 포트폴리오를 만들어요!",
       "isDeleted": "N"
     },

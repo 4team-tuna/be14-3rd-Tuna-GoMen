@@ -1,24 +1,4 @@
 <template>
-<<<<<<< HEAD
-    <div class="comment-form">
-      <textarea placeholder="댓글을 남겨보세요." rows="3" v-model="commentText" />
-      <button @click="submitComment">등록</button>
-    </div>
-  </template>
-  
-  <script setup>
-  import { ref } from 'vue'
-  const commentText = ref('')
-  
-  const submitComment = () => {
-    if (!commentText.value.trim()) return
-    alert(`댓글 등록: ${commentText.value}`)
-    commentText.value = ''
-  }
-  </script>
-  
-  <style scoped>
-=======
   <div class="comment-form">
     <!-- 댓글 목록 먼저 표시 -->
     <div class="comment-list" v-if="comments.length">
@@ -73,15 +53,11 @@ const reportComment = (id) => {
 
 
 <style scoped>
->>>>>>> e62e6a571f743ea81c63f81b7de9c54042424247
 .comment-form {
   margin-top: 20px;
   display: flex;
   flex-direction: column;
-<<<<<<< HEAD
-=======
   padding: 0 24px;
->>>>>>> e62e6a571f743ea81c63f81b7de9c54042424247
 }
 
 .comment-form textarea {
@@ -90,10 +66,7 @@ const reportComment = (id) => {
   border-radius: 8px;
   border: 1px solid #ccc;
   resize: none;
-<<<<<<< HEAD
-=======
   margin-top: 20px;
->>>>>>> e62e6a571f743ea81c63f81b7de9c54042424247
 }
 
 .comment-form button {
@@ -108,12 +81,6 @@ const reportComment = (id) => {
   cursor: pointer;
 }
 
-<<<<<<< HEAD
-  .comment-form button:hover {
-    background-color: #3730a3;
-  }
-  </style>
-=======
 .comment-form button:hover {
   background-color: #3730a3;
 }
@@ -168,5 +135,4 @@ const reportComment = (id) => {
 
 
 
->>>>>>> e62e6a571f743ea81c63f81b7de9c54042424247
   
