@@ -9,7 +9,43 @@
       "isActivated": "Y",
       "teamIntroduce": "Vue 3와 Spring Boot를 활용해 실전 커뮤니티 웹 서비스를 만들고 있어요. GitHub와 Notion으로 협업하고 있으며, UI/UX에도 신경 쓰고 있습니다. 프론트와 백엔드 모두 함께 성장할 팀원을 모집합니다!",
       "isDeleted": "N",
-      "applicants": []
+      "applicants": [
+        {
+          "nickname": "하나",
+          "introduction": "그냥\n",
+          "blog": "",
+          "appliedAt": "2025-04-09T14:57:01.196Z",
+          "isProcessed": "Y"
+        },
+        {
+          "nickname": "제임스",
+          "introduction": "그냥\n",
+          "blog": "https://jameslee.dev",
+          "appliedAt": "2025-04-08T14:57:01.196Z",
+          "isProcessed": null
+        },
+        {
+          "nickname": "수지",
+          "introduction": "그냥\n",
+          "blog": "",
+          "appliedAt": "2025-04-07T14:57:01.196Z",
+          "isProcessed": "Y"
+        },
+        {
+          "nickname": "나",
+          "introduction": "그냥\n",
+          "blog": "",
+          "appliedAt": "2025-04-06T14:57:01.196Z",
+          "isProcessed": null
+        },
+        {
+          "nickname": "나ㅁㄴㅇ",
+          "introduction": "그냥\n",
+          "blog": "",
+          "appliedAt": "2025-04-06T14:57:01.196Z",
+          "isProcessed": null
+        }
+      ]
     },
     {
       "id": "2",

@@ -28,6 +28,9 @@ import MentorRequestPage from '@/views/Admin/MentorRequestPage.vue'
 // ✅ 신고 페이지
 // import ReportFormPage from '@/views/Report/ReportPage.vue'
 
+// 지원자 페이지
+import ApplicantListPage from "@/views/Applicant/ApplicantListPage.vue";
+
 const routes = [
   // 기본 진입 시 관리자 홈으로 리다이렉트
   // { path: '/', redirect: '/admin' },
@@ -66,7 +69,14 @@ const routes = [
   // 팀 모집 게시판
   { path: '/board/team-recruit', name: 'TeamRecruitBoard', component: TeamRecruitBoardPage },
   { path: '/board/team-recruit/:id', name: 'TeamRecruitDetail',
-    component: () => import('@/views/teamRecruitBoard/TeamRecruitBoardDetailPage.vue'),alias: '/recruit/:id' }
+    component: () => import('@/views/teamRecruitBoard/TeamRecruitBoardDetailPage.vue'),alias: '/recruit/:id' },
+
+  // 지원자 리스트
+  {
+    path: '/board/team-recruit/:id/applicants',
+    name: 'ApplicantList',
+    component: ApplicantListPage
+  }
 ]
 
 const router = createRouter({

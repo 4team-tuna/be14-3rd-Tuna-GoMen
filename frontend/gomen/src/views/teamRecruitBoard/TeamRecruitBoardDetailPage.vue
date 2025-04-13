@@ -6,7 +6,9 @@
 
     <main class="detail-container" v-if="post">
       <h2 class="board-title">팀 모집 게시판</h2>
-
+      <div style="display: flex; justify-content: flex-end; margin-bottom: 1rem;">
+     <ApplicantListButton v-if="post && post.nickname === userNickname" :postId="post.id" />
+      </div>
       <div class="post-card">
         <div class="top-row">
           <span class="status" :class="{ recruiting: post.isActivated === 'Y' }">
@@ -58,6 +60,7 @@ import { onMounted, ref, watch } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import DeleteButton from '@/components/TeamRecruitBoard/DeleteButton.vue'
 import ApplyModal from '@/components/TeamRecruitBoard/ApplyModal.vue'
+import ApplicantListButton from '@/components/Applicant/ApplicantListButton.vue'
 
 const route = useRoute()
 const router = useRouter()
@@ -86,7 +89,7 @@ const handleSubmit = async (payload) => {
   const applicant = {
     nickname,
     introduction,
-    blog: blog, // 이게 문자열이 맞는지 확인!
+    blog: blog,
     appliedAt: new Date().toISOString(),
   }
 
