@@ -62,21 +62,21 @@ onMounted(async () => {
   // 3. 팀원 정보
   const memberList = await api.get(`/mentoringMembers?mentoring_space_id=${space.mentoring_space_id}`)
   const resolved = await Promise.all(
-    memberList.data
-      .filter(m => m.user_id !== user.id)
-      .map(async (m) => {
-        const userRes = await api.get(`/users/${m.user_id}`)
-        return {
-          ...userRes.data,
-          leftover_questions: m.leftover_questions
-        }
-      })
-  )
+  memberList.data
+    .filter(m => String(m.user_id) !== String(user.id))  // ✅ 수정된 부분
+    .map(async (m) => {
+      const userRes = await api.get(`/users/${m.user_id}`)
+      return {
+        ...userRes.data,
+        leftover_questions: m.leftover_questions
+      }
+    })
+)
   teamMembers.value = resolved
   isTeam.value = resolved.length > 0
 
   // 4. 내 질문 잔여 개수
-  const me = memberList.data.find(m => m.user_id === user.id)
+  const me = memberList.data.find(m => String(m.user_id) === String(user.id))
   leftover.value = me?.leftover_questions || 0
 
   // 5. 질문 목록 (닉네임 포함)

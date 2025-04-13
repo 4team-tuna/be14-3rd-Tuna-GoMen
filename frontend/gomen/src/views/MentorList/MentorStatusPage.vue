@@ -57,10 +57,10 @@
     // 2. 멘토링 멤버로 신청자 등록
     await api.post('/mentoringMembers', {
       mentoring_space_id: mentoringSpaceId,
-      user_id: applicant.userId,
+      user_id: applicant.menteeId,
       leftover_questions: 10
     })
-
+    
     // 3. 신청 상태 업데이트 (is_accepted: 'Y' 처리)
     await api.patch(`/applications/${applicant.id}`, {
       is_accepted: 'Y'
