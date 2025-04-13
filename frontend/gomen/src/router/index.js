@@ -57,6 +57,9 @@ const routes = [
   { path: '/admin/titles', component: TitlePage },
   { path: '/admin/mentors', component: MentorRequestPage },
 
+    // ✅ 신고 페이지
+  // { path: '/report', name: 'ReportPage', component: ReportFormPage }
+
   // 팀 모집 게시판
   { path: '/board/team-recruit', name: 'TeamRecruitBoard', component: TeamRecruitBoardPage },
   { path: '/board/team-recruit/:id', name: 'TeamRecruitDetail',

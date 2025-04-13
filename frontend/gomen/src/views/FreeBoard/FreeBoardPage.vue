@@ -15,6 +15,7 @@
   
   <script setup>
   import { ref, onMounted } from 'vue'
+  import { useRoute } from 'vue-router'
   import axios from 'axios'
   
   // 공통 컴포넌트
@@ -22,21 +23,22 @@
   import CommentList from '@/components/freeboard/CommentList.vue'
   import CommentForm from '@/components/freeboard/CommentForm.vue'
   
+  const route = useRoute()
   const post = ref(null)
   const comments = ref([])
   
   onMounted(async () => {
-  try {
-    const postId = Number(route.params.id) // 문자열을 숫자로 변환!
-    const postRes = await axios.get(`http://localhost:3001/allposts/${postId}`)
-    post.value = postRes.data
-
-    console.log('🔥 게시물과 댓글:', post.value)
-  } catch (error) {
-    console.error('데이터 로딩 실패:', error)
-  }
-})
-</script>
+    try {
+      const postId = Number(route.params.id) // 문자열을 숫자로 변환!
+      const postRes = await axios.get(`http://localhost:3001/allposts/${postId}`)
+      post.value = postRes.data
+  
+      console.log('🔥 게시물과 댓글:', post.value)
+    } catch (error) {
+      console.error('데이터 로딩 실패:', error)
+    }
+  })
+  </script>
 
 <style scoped>
 .free-board-page {
