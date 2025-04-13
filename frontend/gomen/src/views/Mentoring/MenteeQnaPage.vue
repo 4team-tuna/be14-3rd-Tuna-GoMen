@@ -33,14 +33,19 @@
   const totalPage = ref(1)
   
   const fetchQuestions = async (page = 1) => {
-    const allRes = await api.get(`/questions?mentoring_space_id=${mentoringSpaceId.value}&_sort=question_created_time&_order=desc`)
+    const allRes = await api.get(`/questions?mentoring_space_id=${mentoringSpaceId.value}`)
     const allQuestions = allRes.data
 
-    const paged = allQuestions.slice((page - 1) * 10, page * 10)
+    // ✅ 클라이언트에서 강제로 최신순 정렬 (문자열이라도 확실하게 처리)
+    const sorted = [...allQuestions].sort(
+        (a, b) => new Date(b.question_created_time) - new Date(a.question_created_time)
+    )
+
+    // ✅ 페이지 범위로 잘라서 보여줌
+    const paged = sorted.slice((page - 1) * 10, page * 10)
 
     questions.value = paged
-    totalPage.value = Math.ceil(allQuestions.length / 10)
-
+    totalPage.value = Math.ceil(sorted.length / 10)
     }
   
   const handlePageChange = async (page) => {
