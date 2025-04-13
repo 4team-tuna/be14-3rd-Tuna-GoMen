@@ -7,21 +7,71 @@
 
       <div class="findid-title">아이디 찾기</div>
 
-      <input type="text" placeholder="이름" class="findid-input" />
-      <input type="text" placeholder="생년월일(8자리)" class="findid-input" />
+      <input v-model="name" type="text" placeholder="이름" class="findid-input" />
+      <input v-model="personalNumber" type="text" placeholder="주민등록번호" class="findid-input" />
 
       <div class="findid-phone-group">
-        <input type="text" placeholder="휴대전화번호 (대한민국 +82)" class="findid-input" />
-        <button class="findid-small-button">인증번호 받기</button>
+        <input v-model="phoneNumber" type="text" placeholder="휴대전화번호 (대한민국 +82)" class="findid-input" />
+        <!-- <button class="findid-small-button">인증번호 받기</button> -->
       </div>
 
-      <input type="text" placeholder="인증번호 6자리 숫자 입력" class="findid-input" />
+      <!-- <input type="text" placeholder="인증번호 6자리 숫자 입력" class="findid-input" /> -->
 
-      <button class="findid-button">아이디 찾기</button>
-      <button class="findid-back-button">뒤로 가기</button>
+      <button class="findid-button" @click="findId">아이디 찾기</button>
+      <button class="findid-back-button" @click="goBack">뒤로 가기</button>
     </div>
   </div>
 </template>
+
+
+
+
+
+<script setup>
+  import {ref} from 'vue';
+  import axios from 'axios'
+  import {useRouter} from 'vue-router'
+
+  const router = useRouter();
+
+  const goBack = () => {router.push('/login')}
+
+  const name = ref('')
+  const personalNumber = ref('')
+  const phoneNumber = ref('')
+
+  const findId = async () => {
+    if (!name.value || !personalNumber.value || !phoneNumber.value) {
+    alert('모든 항목을 입력해주세요!')
+    return
+    }
+    try {
+      const response = await axios.get('http://localhost:3001/users', {
+        params: {
+          name: name.value,
+          personalNumber: personalNumber.value,
+          phoneNumber: phoneNumber.value
+        }
+      })
+
+      if (response.data.length > 0) {
+        // 아이디 찾기 성공
+        const user = response.data[0]
+        console.log('✅ 아이디 찾기 성공!', user)
+        
+        alert(`✅ 아이디 찾기 완료! 회원님의 ID는 ${user.loginId}입니다! 로그인해주세요.`)
+        router.push('/login');
+      }
+    } catch (error) {
+      console.error('아이디 찾기 중 에러 발생:', error)
+      alert('서버와의 통신 중 오류가 발생했습니다.')
+    }
+  }
+</script>
+
+
+
+
 
 <style scoped>
 .findid-wrapper {

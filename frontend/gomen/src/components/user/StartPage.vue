@@ -1,8 +1,8 @@
 <template>
     <div class="main-wrapper">
       <h1>GoMen</h1>
-      <button @click="goLogin">로그인하기</button>
-      <button @click="goSignup">회원가입하기</button>
+      <button @click="goLoginPage">로그인하기</button>
+      <button @click="goSignUpPage">회원가입하기</button>
     </div>
   </template>
   
@@ -10,12 +10,12 @@
   import { useRouter } from 'vue-router'
   const router = useRouter()
   
-  const goLogin = () => {
+  const goLoginPage = () => {
     router.push('/login')
   }
   
-  const goSignup = () => {
-    router.push('/signup')
+  const goSignUpPage = () => {
+    router.push('/signUp')
   }
   </script>
   

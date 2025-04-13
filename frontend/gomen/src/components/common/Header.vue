@@ -31,12 +31,14 @@
 <script setup>
   import LogOutModal from '../message/LogOutModal.vue';
   import { useRouter } from 'vue-router';
-  import {ref, watchEffect} from 'vue';
+  import {ref} from 'vue';
 
-  const isLogin = ref(localStorage.getItem('isLogin') === 'true')
-  watchEffect(() => {
-  isLogin.value = localStorage.getItem('isLogin') === 'true'
-})
+  import { useUserStore } from '@/stores/useUserStore'
+  import { storeToRefs } from 'pinia'
+
+  const userStore = useUserStore()
+  const { isLogin } = storeToRefs(userStore) // 반응형 ref로 가져오기
+
   const router = useRouter();
   const showModal = ref(false);
   const openLogOutModal = () => {showModal.value = true;}
@@ -48,8 +50,7 @@
   const goToMail = () => {router.push('/mail')}
   const goToMyInfo = () => {router.push('/myPage');}
   const logout = () => {
-    localStorage.removeItem('isLogin') // 로그아웃 시 제거해주는 것도 좋음!
-    isLogin.value = false;
+    userStore.logout()
     router.push('/')
     closeLogOutModal();
   };

@@ -12,7 +12,7 @@
 
       <input v-model="form.name" type="text" placeholder="이름" class="signup-input" />
       <input v-model="form.nickname" type="text" placeholder="닉네임" class="signup-input" />
-      <input v-model="form.personalNumber" type="text" placeholder="생년월일(8자리) + 뒷번호" class="signup-input" />
+      <input v-model="form.personalNumber" type="text" placeholder="생년월일(8자리)" class="signup-input" />
       <input v-model="form.phoneNumber" type="text" placeholder="휴대전화번호 (대한민국 +82)" class="signup-input" />
 
       <button class="signup-button" @click="submitForm">회원가입</button>

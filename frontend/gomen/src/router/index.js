@@ -17,12 +17,13 @@ const routes = [
   { path: '/board/free', component: FreeBoardPage },
   { path: '/mail', component: MessageInbox},
   { path: '/', component: StartPage},
-  { path: '/signup', component: SignUpPage},
+  { path: '/signUp', component: SignUpPage},
   { path: '/login', component: LoginPage},
+  { path: '/findId', component:FindIdPage},
+  { path: '/findPassword', component: FindPasswordPage},
   { path: '/main', component: MainPage},
   { path: '/myPage', component: MyPage},
   { path: '/changeInfo', component: EditProfile},
-  // { path: '/', component: FindPasswordPage}
   { path: '/boards/free/:id', name: 'FreeBoardPage', component: FreeBoardPage },
   { path: '/boards/free', name: 'FreeBoardList', component: BoardView },
   {

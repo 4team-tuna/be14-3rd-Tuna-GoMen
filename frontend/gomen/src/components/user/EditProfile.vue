@@ -19,6 +19,11 @@
         <input id="blog" v-model="form.blog" type="text" />
       </div>
 
+      <div class="form-group">
+        <label for="githubAdress">github 주소</label>
+        <input id="githubAdress" v-model="form.githubAdress" type="text" />
+      </div>
+
       <div class="button-group">
         <button type="submit" class="apply-btn">적용</button>
         <button type="button" class="cancel-btn" @click="cancelChanges">취소</button>
@@ -39,7 +44,8 @@ const user = ref({});
 const form = ref({
   nickname: '',
   college: '',
-  blog: ''
+  blog: '',
+  githubAdress: ''
 })
 
 // 사용자 정보 가져와서 form에 세팅
@@ -52,6 +58,7 @@ onMounted(async () => {
       form.value.nickname = user.value.nickname || ''
       form.value.college = user.value.college || ''
       form.value.blog = user.value.blog || ''
+      form.value.githubAdress = user.value.githubAdress || ''
     } else {
       alert('❌ 로그인된 사용자 정보를 찾을 수 없습니다.')
     }
