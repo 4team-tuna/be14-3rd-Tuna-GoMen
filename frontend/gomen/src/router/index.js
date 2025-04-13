@@ -58,11 +58,6 @@ const routes = [
   // ✅ 신고 페이지
   // { path: '/report', name: 'ReportPage', component: ReportFormPage }
 
-  {
-    path: '/boards/free/write',name: 'WritePost',
-    component: WritePost
-  },
-  { path: '/board/free', component: FreeBoardPage },
   { path: '/mentorlist', component: MentorListPage },
   {
     path: '/mentorlist/:id',
