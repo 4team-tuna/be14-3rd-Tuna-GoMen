@@ -11,8 +11,8 @@
 
 <script setup>
 import { ref, onMounted } from 'vue'
-import MentorView from '@/components/mentoring/MentorView.vue'
-import MenteeView from '@/components/mentoring/MenteeView.vue'
+import MentorView from '@/views/Mentoring/MentorView.vue'
+import MenteeView from '@/views/Mentoring/MenteeView.vue'
 import api from '@/api'
 
 const user = JSON.parse(localStorage.getItem('user'))

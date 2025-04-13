@@ -79,6 +79,11 @@ const routes = [
     path: '/mentoring',
     name: 'MentoringPage',
     component: () => import('@/views/Mentoring/MentoringPage.vue')
+  },
+  {
+    path: '/mentee/qna',
+    name: 'MenteeQnaPage',
+    component: () => import('@/views/Mentoring/MenteeQnaPage.vue')
   }
 ]
 

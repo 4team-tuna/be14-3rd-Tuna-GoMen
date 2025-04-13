@@ -1,13 +1,18 @@
 <template>
   <div class="mentor-card">
-    <p class="label">멘토</p>
-    <div class="profile">
-      <img :src="getImageUrl(mentor.image)" class="profile-img" alt="프로필" />
-      <div class="info">
-        <p class="name">{{ mentor.nickname }}</p>
-        <p class="title">{{ mentor.career_info }}</p>
-      </div>
-    </div>
+    <img class="profile" :src="mentorImage" alt="멘토 프로필" />
+    <h3 class="nickname">{{ mentor.nickname }} <span class="name">({{ mentor.name }})</span></h3>
+    <p class="career">{{ mentor.careerInfo || '직무 정보 없음' }}</p>
+    <p class="school">{{ mentor.college || '학교 정보 없음' }}</p>
+
+    <a
+      v-if="mentor.githubAdress"
+      class="github-link"
+      :href="mentor.githubAdress"
+      target="_blank"
+    >
+      GitHub 보기 →
+    </a>
   </div>
 </template>
 
@@ -19,53 +24,56 @@ defineProps({
   }
 })
 
-function getImageUrl(path) {
-  try {
-    return new URL(`@/assets/${path || 'icon-basic-user.png'}`, import.meta.url).href
-  } catch {
-    return new URL('@/assets/icon-basic-user.png', import.meta.url).href
-  }
-}
+const mentorImage = '@/assets/profile-default.png' // 추후 mentor.profileImage 로 대체 가능
 </script>
 
 <style scoped>
 .mentor-card {
   flex: 1;
-  border: 1px solid #e0e0e0;
-  border-radius: 10px;
-  padding: 20px;
-  background-color: white;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
-}
-
-.label {
-  font-weight: bold;
-  font-size: 14px;
-  margin-bottom: 12px;
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  padding: 24px;
+  text-align: center;
+  background-color: #fff;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.04);
 }
 
 .profile {
-  display: flex;
-  align-items: center;
-  gap: 16px;
-}
-
-.profile-img {
-  width: 48px;
-  height: 48px;
+  width: 80px;
+  height: 80px;
   border-radius: 50%;
   object-fit: cover;
-  border: 1px solid #ccc;
+  margin-bottom: 12px;
 }
 
-.info .name {
-  font-size: 15px;
+.nickname {
+  font-size: 18px;
   font-weight: bold;
-  color: #333;
+  margin-bottom: 4px;
 }
 
-.info .title {
-  font-size: 13px;
-  color: #666;
+.name {
+  font-size: 14px;
+  font-weight: normal;
+  color: #888;
+}
+
+.career,
+.school {
+  font-size: 14px;
+  color: #555;
+  margin: 4px 0;
+}
+
+.github-link {
+  display: inline-block;
+  margin-top: 12px;
+  font-size: 14px;
+  color: #5865F2;
+  text-decoration: none;
+  font-weight: 500;
+}
+.github-link:hover {
+  text-decoration: underline;
 }
 </style>

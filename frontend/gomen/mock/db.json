@@ -1166,9 +1166,7 @@
       "rating": 4.7
     }
   ],
-  "applications": [
-
-  ],
+  "applications": [],
   "mentoringSpaces": [
     {
       "id": "1000",
@@ -1186,19 +1184,19 @@
       "id": "m100",
       "mentoring_space_id": "1000",
       "user_id": 11,
-      "leftover_questions": 9
+      "leftover_questions": 1
     },
     {
       "id": "m101",
       "mentoring_space_id": "1000",
       "user_id": 12,
-      "leftover_questions": 10
+      "leftover_questions": 5
     },
     {
       "id": "m102",
       "mentoring_space_id": "1000",
       "user_id": 13,
-      "leftover_questions": 8
+      "leftover_questions": 6
     }
   ],
   "questions": [
@@ -1240,6 +1238,86 @@
       "member_id": 12,
       "question_content": "프로젝트에서 Swagger를 적용하는 이유와 방법은?",
       "question_created_time": "2025-04-14T09:35:00",
+      "is_deleted": "N"
+    },
+    {
+      "id": "q2001",
+      "mentoring_space_id": "1000",
+      "member_id": 11,
+      "question_content": "Spring에서 AOP를 활용한 로깅은 어떻게 하나요?",
+      "question_created_time": "2025-04-13T09:10:00",
+      "is_deleted": "N"
+    },
+    {
+      "id": "q2002",
+      "mentoring_space_id": "1000",
+      "member_id": 12,
+      "question_content": "JPA fetch join과 lazy loading의 차이점이 뭔가요?",
+      "question_created_time": "2025-04-13T10:00:00",
+      "is_deleted": "N"
+    },
+    {
+      "id": "q2003",
+      "mentoring_space_id": "1000",
+      "member_id": 13,
+      "question_content": "Spring Security에서 필터 순서는 어떻게 제어하나요?",
+      "question_created_time": "2025-04-13T10:20:00",
+      "is_deleted": "N"
+    },
+    {
+      "id": "q2004",
+      "mentoring_space_id": "1000",
+      "member_id": 11,
+      "question_content": "서버 로그 구조를 어떻게 설계해야 하나요?",
+      "question_created_time": "2025-04-13T10:40:00",
+      "is_deleted": "N"
+    },
+    {
+      "id": "q2005",
+      "mentoring_space_id": "1000",
+      "member_id": 12,
+      "question_content": "JWT를 사용할 때 Refresh Token은 꼭 필요할까요?",
+      "question_created_time": "2025-04-13T11:00:00",
+      "is_deleted": "N"
+    },
+    {
+      "id": "q2006",
+      "mentoring_space_id": "1000",
+      "member_id": 13,
+      "question_content": "Redis Pub/Sub과 Message Queue의 차이는?",
+      "question_created_time": "2025-04-13T11:20:00",
+      "is_deleted": "N"
+    },
+    {
+      "id": "q2007",
+      "mentoring_space_id": "1000",
+      "member_id": 11,
+      "question_content": "RestControllerAdvice의 활용 사례가 궁금합니다.",
+      "question_created_time": "2025-04-13T11:40:00",
+      "is_deleted": "N"
+    },
+    {
+      "id": "q2008",
+      "mentoring_space_id": "1000",
+      "member_id": 12,
+      "question_content": "Spring의 async 처리와 스레드 풀 관련 질문입니다.",
+      "question_created_time": "2025-04-13T12:00:00",
+      "is_deleted": "N"
+    },
+    {
+      "id": "q2009",
+      "mentoring_space_id": "1000",
+      "member_id": 13,
+      "question_content": "예외 처리 시 사용자 메시지와 시스템 로그 분리 방법은?",
+      "question_created_time": "2025-04-13T12:20:00",
+      "is_deleted": "N"
+    },
+    {
+      "id": "q2010",
+      "mentoring_space_id": "1000",
+      "member_id": 11,
+      "question_content": "Java에서 record 타입은 언제 쓰는게 좋을까요?",
+      "question_created_time": "2025-04-13T12:40:00",
       "is_deleted": "N"
     }
   ]
