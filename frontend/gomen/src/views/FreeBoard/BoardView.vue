@@ -46,20 +46,11 @@
     // 서버에서 데이터를 가져오기
     const res = await axios.get('http://localhost:3001/allposts');
     const sorted = res.data.sort((a, b) => {
-      const parseDate = (dateStr) => {
-        const [yy, mm, dd] = dateStr.trim().split('.').map(v => v.padStart(2, '0'));
-        return new Date(`20${yy}-${mm}-${dd}`);
-      };
+  const dateA = new Date(a.createdAt || a.date); // ← 기존 글은 createdAt 없을 수 있으니 fallback
+  const dateB = new Date(b.createdAt || b.date);
+  return dateB - dateA;
+});
 
-      const dateA = parseDate(a.date);
-      const dateB = parseDate(b.date);
-
-      if (dateA.getTime() === dateB.getTime()) {
-        return b.id.localeCompare(a.id, 'en', { numeric: true });
-      }
-
-      return dateB - dateA;
-    });
 
     // 서버에서 데이터를 받아온 후 상태 갱신
     posts.value = sorted;

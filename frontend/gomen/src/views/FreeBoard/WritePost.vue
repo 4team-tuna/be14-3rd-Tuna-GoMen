@@ -54,6 +54,7 @@ const formattedDate = `${yy}.${mm}.${dd}` // 👉 "25.04.13"
   title: title.value,
   author: '익명',
   date: formattedDate, // ✅ 요 줄!
+  createdAt: now.toISOString(),
   category: category.value,
   views: 0,
   likes: 0,
