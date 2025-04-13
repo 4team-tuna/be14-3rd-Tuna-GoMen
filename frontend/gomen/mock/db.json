@@ -1169,5 +1169,80 @@
   "applications": [
     
   ],
-  "mentoringSpaces": []
+  "mentoringMembers": [
+    {
+      "id": 1001,
+      "mentoring_space_id": 100,
+      "user_id": 11,
+      "leftover_questions": 10
+    },
+    {
+      "id": 1002,
+      "mentoring_space_id": 100,
+      "user_id": 12,
+      "leftover_questions": 7
+    },
+    {
+      "id": 1003,
+      "mentoring_space_id": 100,
+      "user_id": 13,
+      "leftover_questions": 9
+    },
+    {
+      "id": 1004,
+      "mentoring_space_id": 100,
+      "user_id": 14,
+      "leftover_questions": 6
+    }
+  ],
+  "questions": [
+    {
+      "id": 2001,
+      "mentoring_space_id": 100,
+      "member_id": 1002,
+      "question_content": "멘토링 첫 질문입니다. Spring Boot와 JPA의 차이점은 뭔가요?",
+      "question_created_time": "2025-04-13T10:00:00",
+      "is_deleted": "N"
+    },
+    {
+      "id": 2002,
+      "mentoring_space_id": 100,
+      "member_id": 1003,
+      "question_content": "Docker 환경에서 MySQL을 설정하는 방법이 궁금합니다.",
+      "question_created_time": "2025-04-13T10:05:00",
+      "is_deleted": "N"
+    },
+    {
+      "id": 2003,
+      "mentoring_space_id": 100,
+      "member_id": 1004,
+      "question_content": "트랜잭션 전파 옵션에 대해 설명해주세요.",
+      "question_created_time": "2025-04-13T10:10:00",
+      "is_deleted": "N"
+    },
+    {
+      "id": 2004,
+      "mentoring_space_id": 100,
+      "member_id": 1002,
+      "question_content": "Java에서 Checked Exception과 Unchecked Exception의 차이는 무엇인가요?",
+      "question_created_time": "2025-04-13T10:15:00",
+      "is_deleted": "N"
+    },
+    {
+      "id": 2005,
+      "mentoring_space_id": 100,
+      "member_id": 1001,
+      "question_content": "RESTful API 설계 시 가장 중요한 원칙은 무엇인가요?",
+      "question_created_time": "2025-04-13T10:20:00",
+      "is_deleted": "N"
+    },
+    {
+      "id": 2006,
+      "mentoring_space_id": 100,
+      "member_id": 1001,
+      "question_content": "Git에서 rebase와 merge의 차이를 설명해주세요.",
+      "question_created_time": "2025-04-13T10:25:00",
+      "is_deleted": "N"
+    }
+  ]
 }

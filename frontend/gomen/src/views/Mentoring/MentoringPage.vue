@@ -4,10 +4,8 @@
 
     <div class="cards">
       <MyMentorCard :mentor="mentor" />
-      <MyTeamCard :teamMembers="teamMembers" :isTeam="isTeam" />
+      <MyTeamCard :teamMembers="teamMembers" :isTeam="isTeam" :leftoverQuestions="leftover" />
     </div>
-
-    <p class="left-question">남은 질문 개수 : {{ leftover }}</p>
 
     <QuestionList :questions="questions" />
 
@@ -34,6 +32,24 @@ const totalPage = ref(1)
 
 const user = JSON.parse(localStorage.getItem('user'))
 
+// ✅ 공통 로직으로 분리
+const fetchQuestionsWithNicknames = async (spaceId, page) => {
+  const qnaRes = await api.get(`/questions?mentoring_space_id=${spaceId}&_page=${page}&_limit=3`)
+  const allMembers = await api.get(`/mentoringMembers?mentoring_space_id=${spaceId}`)
+  const allUsers = await api.get(`/users`)
+
+  questions.value = qnaRes.data.map(q => {
+    const member = allMembers.data.find(m => m.id === q.member_id)
+    const user = allUsers.data.find(u => u.id === member?.user_id)
+    return {
+      ...q,
+      nickname: user?.nickname || '익명'
+    }
+  })
+
+  totalPage.value = Math.ceil(qnaRes.headers['x-total-count'] / 3)
+}
+
 onMounted(async () => {
   // 1. 멘토링 공간 가져오기
   const mentoring = await api.get(`/mentoringSpaces?userId=${user.id}`)
@@ -44,8 +60,7 @@ onMounted(async () => {
   mentor.value = mentorRes.data
 
   // 3. 팀원 정보
-  const memberList = await api.get(`/mentoringMembers?mentoringSpaceId=${space.mentoring_space_id}`)
-
+  const memberList = await api.get(`/mentoringMembers?mentoring_space_id=${space.mentoring_space_id}`)
   const resolved = await Promise.all(
     memberList.data
       .filter(m => m.user_id !== user.id)
@@ -53,11 +68,10 @@ onMounted(async () => {
         const userRes = await api.get(`/users/${m.user_id}`)
         return {
           ...userRes.data,
-          leftover_questions: m.leftover_questions,
+          leftover_questions: m.leftover_questions
         }
       })
   )
-
   teamMembers.value = resolved
   isTeam.value = resolved.length > 0
 
@@ -65,19 +79,15 @@ onMounted(async () => {
   const me = memberList.data.find(m => m.user_id === user.id)
   leftover.value = me?.leftover_questions || 0
 
-  // 5. 질문 목록
-  const qnaRes = await api.get(`/questions?mentoringSpaceId=${space.mentoring_space_id}&_page=1&_limit=3`)
-  questions.value = qnaRes.data
-  totalPage.value = Math.ceil(qnaRes.headers['x-total-count'] / 3)
+  // 5. 질문 목록 (닉네임 포함)
+  await fetchQuestionsWithNicknames(space.mentoring_space_id, 1)
 })
 
 const changePage = async (page) => {
   currentPage.value = page
   const mentoring = await api.get(`/mentoringSpaces?userId=${user.id}`)
   const space = mentoring.data[0]
-
-  const res = await api.get(`/questions?mentoringSpaceId=${space.mentoring_space_id}&_page=${page}&_limit=3`)
-  questions.value = res.data
+  await fetchQuestionsWithNicknames(space.mentoring_space_id, page)
 }
 </script>
 
@@ -95,12 +105,6 @@ const changePage = async (page) => {
 .cards {
   display: flex;
   gap: 24px;
-  margin-bottom: 8px;
-}
-.left-question {
-  text-align: right;
-  font-weight: bold;
-  color: #5d5fef;
   margin-bottom: 24px;
 }
 </style>

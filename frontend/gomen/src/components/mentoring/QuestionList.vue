@@ -17,7 +17,7 @@
   <script setup>
   import { ref, watch, onMounted } from 'vue'
   import api from '@/api'
-  import { useUserStore } from '@/stores/user'
+//   import { useUserStore } from '@/stores/user'
   
   const props = defineProps({
     questions: {

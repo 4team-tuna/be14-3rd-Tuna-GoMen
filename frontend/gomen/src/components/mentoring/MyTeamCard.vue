@@ -13,7 +13,6 @@
         </div>
       </div>
   
-      <p class="leftover-questions">남은 질문 {{ leftoverQuestions }}개</p>
     </div>
   </template>
   
@@ -22,20 +21,16 @@
     teamMembers: {
       type: Array,
       required: true
-    },
-    leftoverQuestions: {
-      type: Number,
-      required: true
     }
   })
   
   function getImageUrl(path) {
-    try {
-      return new URL(`@/assets/${path || 'icon-basic-user.png'}`, import.meta.url).href
-    } catch {
-      return new URL('@/assets/icon-basic-user.png', import.meta.url).href
-    }
+  try {
+    return new URL(`@/assets/${path || 'icon-basic-user.png'}`, import.meta.url).href
+  } catch {
+    return new URL('@/assets/icon-basic-user.png', import.meta.url).href
   }
+}
   </script>
   
   <style scoped>
@@ -82,12 +77,5 @@
     text-align: center;
   }
   
-  .leftover-questions {
-    margin-top: 16px;
-    font-size: 14px;
-    font-weight: bold;
-    color: #5d5fef;
-    text-align: center;
-  }
   </style>
   
