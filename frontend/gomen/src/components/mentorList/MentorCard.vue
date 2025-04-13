@@ -1,16 +1,16 @@
 <template>
   <div class="mentor-card">
-    <span class="mentor-rating">⭐ {{ mentorlist.rating }}</span>
-    <img :src="getImageUrl(mentorlist.image)" alt="멘토 이미지" class="mentor-image" />
+    <span class="mentor-rating">⭐ {{ mentor.rating }}</span>
+    <img :src="getImageUrl(mentor.image)" alt="멘토 이미지" class="mentor-image" />
     <div class="mentor-info">
-      <h3 class="mentor-name">{{ mentorlist.name }}</h3>
-      <p class="mentor-title">{{ mentorlist.title }}</p> 
-      <p class="mentor-skills">{{ mentorlist.skills }}</p>
+      <h3 class="mentor-name">{{ mentor.name }}</h3>
+      <p class="mentor-title">{{ mentor.title }}</p> 
+      <p class="mentor-skills">{{ mentor.skills }}</p>
       <p class="mentor-description">
-        {{ mentorlist.description.length > 100 ? mentorlist.description.slice(0, 100) + '...' : mentorlist.description }}
+        {{ mentor.description.length > 100 ? mentor.description.slice(0, 100) + '...' : mentor.description }}
       </p>
     </div>
-    <router-link :to="`/mentorlist/${mentorlist.id}`" class="apply-button-link">
+    <router-link :to="`/mentorlist/${mentor.id}`" class="apply-button-link">
       <button class="apply-button">신청하기</button>
     </router-link>
   </div>
@@ -18,7 +18,7 @@
 
 <script setup>
 defineProps({
-  mentorlist: {
+  mentor: {
     type: Object,
     required: true
   }

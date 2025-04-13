@@ -2,13 +2,19 @@
   <div class="mentor-list-page">
     <MentorTitle />
     <MentorHighlight />
-    <MentorSearch @search="handleSearch" />
+    <div class="search-and-buttons">
+      <MentorSearch @search="handleSearch" />
+
+      <div class="mentor-button-wrapper" v-if="isMentor">
+        <button class="status-btn" :class="{ active: isRegistered }">신청 현황</button>
+        <button class="register-btn" @click="goToRegister" :disabled="isRegistered">
+          등록하기
+        </button>
+      </div>
+    </div>
 
     <h2 class="section-title">전체 멘토</h2>
-    <MentorList
-      :mentorlist="paginatedMentors"
-      
-    />
+    <MentorList :mentorlist="paginatedMentors" />
 
     <MentorPagination
       :currentPage="currentPage"
@@ -19,7 +25,7 @@
 </template>
 
 <script>
-import axios from 'axios'
+import api from '@/api'
 import MentorTitle from '@/components/mentorList/MentorTitle.vue'
 import MentorHighlight from '@/components/mentorList/MentorHighlight.vue'
 import MentorSearch from '@/components/mentorList/MentorSearch.vue'
@@ -41,8 +47,8 @@ export default {
       filteredMentors: [],
       currentPage: 1,
       itemsPerPage: 4,
-      
-      
+      isMentor: false,
+      isRegistered: false
     }
   },
   computed: {
@@ -74,13 +80,29 @@ export default {
     handlePageChange(newPage) {
       this.currentPage = newPage;
     },
-    
+    goToRegister() {
+      this.$router.push('/mentorlist/add') 
+    }
   },
   mounted() {
-    axios.get('http://localhost:3001/mentorlist').then((res) => {
-      this.mentors = res.data
-      this.filteredMentors = res.data
-    })
+  // 멘토 리스트 불러오기
+  api.get('/mentorlist').then((res) => {
+    this.mentors = res.data
+    this.filteredMentors = res.data
+  }).catch((err) => {
+    console.error('멘토 리스트 조회 실패:', err)
+  })
+
+  // ✅ 사용자 정보 localStorage에서 직접 가져오기
+  try {
+    const user = JSON.parse(localStorage.getItem('user'))
+    if (user && user.isMentor === 'Y') {
+      this.isMentor = true
+      this.isRegistered = localStorage.getItem('mentorRegistered') === 'true'
+    }
+  } catch (e) {
+    console.warn('로그인 사용자 정보 없음 또는 파싱 실패')
+    }
   }
 }
 </script>
@@ -98,5 +120,41 @@ export default {
   font-weight: bold;
   margin: 32px 0 20px;
   color: #222;
+}
+
+.search-and-buttons {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.mentor-button-wrapper button {
+  margin-left: 8px;
+  padding: 8px 16px;
+  font-weight: bold;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+}
+
+.status-btn {
+  background-color: #e0e0e0;
+  color: #333;
+}
+
+.register-btn {
+  background-color: #7364ff;
+  color: white;
+}
+
+.register-btn:disabled {
+  background-color: #ccc;
+  color: #999;
+  cursor: not-allowed;
+}
+
+.status-btn.active {
+  background-color: #5d5fef;
+  color: white;
 }
 </style>

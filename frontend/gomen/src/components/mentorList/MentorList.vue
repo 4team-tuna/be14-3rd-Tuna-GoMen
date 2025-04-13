@@ -4,7 +4,9 @@
       <MentorCard
         v-for="mentor in mentorlist"
         :key="mentor.id"
-        :mentorlist="mentor"
+        :mentor="mentor"
+        :isMentor="isMentor"
+        :currentUser="currentUser"
       />
     </div>
   </div>

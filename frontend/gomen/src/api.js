@@ -2,7 +2,7 @@
 import axios from 'axios'
 
 const api = axios.create({
-  baseURL: 'http://localhost:8000/gomen', // 백엔드 API 주소
+  baseURL: 'http://localhost:3001', // 백엔드 API 주소
 })
 
 // 매 요청마다 토큰 자동으로 넣어주기
