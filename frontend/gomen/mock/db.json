@@ -938,8 +938,10 @@
       "updatedAt": null,
       "willBeActivated": "2025-04-12T05:18:52.583Z",
       "isQuitted": "N",
+      "githubAdress": "",
       "githubAdress": "tjalswhd1@github.com",
       "extensionCount": 0,
+      "careerInfo": "시재건설 (2024.12 ~ 2024.12) - 공사 관리\n더레전드 (2020.01 ~ 2024.12) - 조교알바\nbeyondSW (2024.01 ~ 2024.12) - 코딩 공부",
       "careerInfo": "시재건설 (2024.12 ~ 2024.12) - 공사 관리\nbeyondSW (2024.01 ~ 2024.12) - 코딩 공부",
       "isMentor": "Y",
       "violationScore": 0,
@@ -1105,6 +1107,7 @@
       "done": false,
       "requestedAt": "2025-04-02T08:40:00",
       "message": "신청하신 멘토 권한이 승인되었습니다."
+<<<<<<< HEAD
     },
     {
       "id": "82ec",
@@ -1112,6 +1115,8 @@
       "done": false,
       "requestAt": "2025-04-13T05:43:08.019Z",
       "message": "멘토 ㄱㄱ"
+=======
+>>>>>>> develop
     }
   ],
   "titles": [
