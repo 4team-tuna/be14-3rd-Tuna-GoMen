@@ -1,7 +1,6 @@
 <template>
   <div class="team-recruit-board-page">
     <div class="page-container">
-      <CircleBackground />
 
       <div class="content-wrapper">
         <h1 class="page-title">팀 모집 게시판</h1>
@@ -36,10 +35,10 @@ import WriteButton from '@/components/TeamRecruitBoard/WriteButton.vue'
 
 import { ref, computed, onMounted } from 'vue'
 
-// ✅ 전체 게시글 목록
+//  전체 게시글 목록
 const posts = ref([])
 
-// ✅ 검색 및 필터 상태
+//  검색 및 필터 상태
 const searchParams = ref({ category: 'all', keyword: '', filter: 'all' })
 
 const handleSearch = (params) => {
@@ -47,7 +46,7 @@ const handleSearch = (params) => {
   currentPage.value = 1 // 검색 시 페이지를 1로 초기화
 }
 
-// ✅ 필터링된 게시글
+//  필터링된 게시글
 const filteredPosts = computed(() => {
   const keyword = searchParams.value.keyword.toLowerCase()
   const filterType = searchParams.value.filter
@@ -77,7 +76,7 @@ const filteredPosts = computed(() => {
   })
 })
 
-// ✅ Pagination
+//  Pagination
 const currentPage = ref(1)
 const postsPerPage = 10
 
@@ -95,7 +94,7 @@ const handlePageChange = (page) => {
   currentPage.value = page
 }
 
-// ✅ mock 데이터 불러오기
+//  mock 데이터 불러오기
 onMounted(async () => {
   const res = await fetch('http://localhost:3001/teamRecruitPosts')
   const data = await res.json()

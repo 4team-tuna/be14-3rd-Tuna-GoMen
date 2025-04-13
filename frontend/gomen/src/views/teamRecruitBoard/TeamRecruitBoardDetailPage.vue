@@ -1,268 +1,341 @@
 <template>
-    <div class="team-recruit-detail-page">
-      <transition name="fade">
-        <div class="alert" v-if="showAlert">모집 상태가 변경되었습니다</div>
-      </transition>
-  
-      <main class="detail-container" v-if="post">
-        <h2 class="board-title">팀 모집 게시판</h2>
-  
-        <div class="post-card">
-          <div class="top-row">
-            <span class="status" :class="{ recruiting: post.isActivated === 'Y' }">
-              {{ post.isActivated === 'Y' ? '모집중' : '모집완료' }}
-            </span>
-            <button class="activation-button" @click="toggleActivation">
-              {{ post.isActivated === 'Y' ? '모집 완료로 변경' : '모집중으로 변경' }}
-            </button>
-          </div>
-  
-          <h3 class="post-title">{{ post.title }}</h3>
-  
-          <div class="post-info">
-            <p>{{ post.nickname }}</p>
-            <p>{{ formatDate(post.createdAt) }}</p>
-          </div>
-  
-          <div class="post-content">
-            <p>{{ post.teamIntroduce }}</p>
-          </div>
+  <div class="team-recruit-detail-page">
+    <transition name="fade">
+      <div class="alert" v-if="showAlert">모집 상태가 변경되었습니다</div>
+    </transition>
+
+    <main class="detail-container" v-if="post">
+      <h2 class="board-title">팀 모집 게시판</h2>
+
+      <div class="post-card">
+        <div class="top-row">
+          <span class="status" :class="{ recruiting: post.isActivated === 'Y' }">
+            {{ post.isActivated === 'Y' ? '모집중' : '모집완료' }}
+          </span>
+          <button class="activation-button" @click="toggleActivation">
+            {{ post.isActivated === 'Y' ? '모집 완료로 변경' : '모집중으로 변경' }}
+          </button>
         </div>
-  
-        <div class="button-group">
+
+        <h3 class="post-title">{{ post.title }}</h3>
+
+        <div class="post-info">
+          <p>{{ post.nickname }}</p>
+          <p>{{ formatDate(post.createdAt) }}</p>
+        </div>
+
+        <div class="post-content">
+          <p>{{ post.teamIntroduce }}</p>
+        </div>
+      </div>
+
+      <div class="button-group">
+        <div class="left-buttons">
           <DeleteButton v-if="post" :postId="post.id" />
-          <button class="action-button" @click="openModal">신청하기</button>
+        </div>
+        <div class="right-buttons">
           <button class="action-button secondary" @click="goToList">목록</button>
         </div>
-      </main>
-  
-      <div v-else class="loading">게시글을 불러오는 중...</div>
-  
-      <!-- 신청 모달 -->
-      <ApplyModal
-        v-if="isModalOpen"
-        @submit="handleSubmit"
-        @close="closeModal"
-      />
-    </div>
-  </template>
-  
-  <script setup>
-  import { onMounted, ref, watch } from 'vue'
-  import { useRoute, useRouter } from 'vue-router'
-  import DeleteButton from '@/components/TeamRecruitBoard/DeleteButton.vue'
-  import ApplyModal from '@/components/TeamRecruitBoard/ApplyModal.vue'
-  
-  const route = useRoute()
-  const router = useRouter()
-  
-  const post = ref(null)
-  const showAlert = ref(false)
-  const isModalOpen = ref(false)
-  
-  const openModal = () => isModalOpen.value = true
-  const closeModal = () => isModalOpen.value = false
-  
-  const handleSubmit = (intro) => {
-    alert(`팀 신청이 완료되었습니다!\n내용: ${intro}`)
+      </div>
+
+      <div class="apply-row">
+        <button class="action-button apply" @click="openModal">신청하기</button>
+      </div>
+    </main>
+
+    <div v-else class="loading">게시글을 불러오는 중...</div>
+
+    <ApplyModal
+      v-if="isModalOpen"
+      @submit="handleSubmit"
+      @close="closeModal"
+    />
+  </div>
+</template>
+
+<script setup>
+import { onMounted, ref, watch } from 'vue'
+import { useRoute, useRouter } from 'vue-router'
+import DeleteButton from '@/components/TeamRecruitBoard/DeleteButton.vue'
+import ApplyModal from '@/components/TeamRecruitBoard/ApplyModal.vue'
+
+const route = useRoute()
+const router = useRouter()
+
+const post = ref(null)
+const showAlert = ref(false)
+const isModalOpen = ref(false)
+
+const openModal = () => isModalOpen.value = true
+const closeModal = () => isModalOpen.value = false
+
+
+const user = localStorage.getItem('user')
+const nickname=ref('')
+const introduction=ref('')
+const appliedAt = ref('')
+const blog = ref('')
+
+const handleSubmit = async (payload) => {
+  const { nickname, introduction, blog } = payload
+
+  if (!introduction.trim()) {
+    alert('자기소개를 작성해주세요!')
+    return
+  }
+
+  const applicant = {
+    nickname,
+    introduction,
+    blog: blog, // 이게 문자열이 맞는지 확인!
+    appliedAt: new Date().toISOString(),
+  }
+
+  const postId = route.params.id
+  const currentPost = await getPostData(postId)
+
+  const updatedApplicants = [...(currentPost.applicants || []), applicant]
+
+  const response = await fetch(`http://localhost:3001/teamRecruitPosts/${postId}`, {
+    method: 'PATCH',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ applicants: updatedApplicants }),
+  })
+
+  if (response.ok) {
+    alert('신청이 완료되었습니다!')
+    closeModal()
+  } else {
+    alert('신청에 실패했습니다. 다시 시도해 주세요.')
     closeModal()
   }
-  
-  const fetchPost = async (id) => {
-    const res = await fetch(`http://localhost:3001/teamRecruitPosts/${id}`)
-    post.value = await res.json()
-  
-    if (post.value.isDeleted === 'Y') {
-      alert('삭제된 게시글입니다.')
-      router.push('/board/team-recruit')
-    }
+}
+
+const getPostData = async (postId) => {
+  const res = await fetch(`http://localhost:3001/teamRecruitPosts/${postId}`)
+  if (!res.ok) throw new Error('게시글 데이터를 불러올 수 없습니다.')
+  return await res.json()
+}
+
+const fetchPost = async (id) => {
+  const res = await fetch(`http://localhost:3001/teamRecruitPosts/${id}`)
+  post.value = await res.json()
+
+  if (post.value.isDeleted === 'Y') {
+    alert('삭제된 게시글입니다.')
+    router.push('/board/team-recruit')
   }
-  
-  const toggleActivation = async () => {
-    const newStatus = post.value.isActivated === 'Y' ? 'N' : 'Y'
-    const res = await fetch(`http://localhost:3001/teamRecruitPosts/${post.value.id}`, {
-      method: 'PATCH',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ isActivated: newStatus })
-    })
-  
-    if (res.ok) {
-      post.value.isActivated = newStatus
-      showAlert.value = true
-      setTimeout(() => {
-        showAlert.value = false
-      }, 1500)
-    } else {
-      alert('상태 변경에 실패했습니다.')
-    }
-  }
-  
-  const formatDate = (dateStr) => new Date(dateStr).toLocaleDateString()
-  const goToList = () => router.push('/board/team-recruit')
-  
-  onMounted(() => {
-    fetchPost(route.params.id)
+}
+
+const toggleActivation = async () => {
+  const newStatus = post.value.isActivated === 'Y' ? 'N' : 'Y'
+  const res = await fetch(`http://localhost:3001/teamRecruitPosts/${post.value.id}`, {
+    method: 'PATCH',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ isActivated: newStatus })
   })
-  
-  watch(() => route.params.id, (newId) => {
-    fetchPost(newId)
-  })
-  </script>
-  
-  <style scoped>
-  .team-recruit-detail-page {
-    background: #f9f9fb;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
+
+  if (res.ok) {
+    post.value.isActivated = newStatus
+    showAlert.value = true
+    setTimeout(() => {
+      showAlert.value = false
+      goToList()
+    }, 1500)
+  } else {
+    alert('상태 변경에 실패했습니다.')
   }
-  
-  .detail-container {
-    width: 100%;
-    max-width: 800px;
-    margin: 40px auto;
-    padding: 24px;
-    display: flex;
-    flex-direction: column;
-    gap: 24px;
-  }
-  
-  .board-title {
-    font-size: 24px;
-    font-weight: bold;
-    padding: 20px 0;
-    border-bottom: 1px solid #ddd;
-  }
-  
-  .post-card {
-    background: rgba(255, 255, 255, 0.9);
-    border-radius: 12px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
-    padding: 24px;
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-    position: relative;
-  }
-  
-  .top-row {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-  
-  .activation-button {
-    padding: 6px 10px;
-    border: none;
-    border-radius: 6px;
-    background: #4f46e5;
-    color: white;
-    font-weight: bold;
-    cursor: pointer;
-  }
-  
-  .post-title {
-    font-size: 20px;
-    font-weight: 600;
-    color: #333;
-  }
-  
-  .post-info {
-    font-size: 14px;
-    color: #666;
-    display: flex;
-    justify-content: space-between;
-  }
-  
-  .post-content {
-    font-size: 15px;
-    line-height: 1.6;
-    color: #444;
-    white-space: pre-line;
-  }
-  
-  .status {
-    font-size: 13px;
-    font-weight: 600;
-    padding: 4px 10px;
-    border-radius: 8px;
-    background-color: #e0e7ff;
-    color: #4f46e5;
-  }
-  
-  .status:not(.recruiting) {
-    background-color: #f3f4f6;
-    color: #6b7280;
-  }
-  
-  .recruiting {
-    color: #4f46e5;
-  }
-  
-  .button-group {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-top: 2rem;
-    gap: 1rem;
-  }
-  
-  .action-button {
-    padding: 0.6rem 1.2rem;
-    background-color: #6366f1;
-    color: white;
-    border: none;
-    border-radius: 8px;
-    font-weight: bold;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-  }
-  
-  .action-button:hover {
-    background-color: #4f46e5;
-  }
-  
-  .action-button.secondary {
-    background-color: #6366f1;
-    color: white;
-  }
-  
-  .action-button.secondary:hover {
-    background-color: #4f46e5;
-  }
-  
-  .alert {
-    position: fixed;
-    top: 20px;
-    left: 50%;
-    transform: translateX(-50%);
-    background: rgba(74, 222, 128, 0.9);
-    color: #fff;
-    padding: 0.9rem 1.7rem;
-    border-radius: 12px;
-    font-weight: 600;
-    font-size: 1rem;
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
-    z-index: 1000;
-    backdrop-filter: blur(4px);
-  }
-  
-  .alert::after {
-    content: '✔️';
-    font-size: 1.2rem;
-    margin-left: 0.5rem;
-  }
-  
-  .fade-enter-active, .fade-leave-active {
-    transition: all 0.5s ease;
-  }
-  .fade-enter-from {
-    opacity: 0;
-    transform: translateY(-10px);
-  }
-  .fade-leave-to {
-    opacity: 0;
-    transform: translateY(-10px);
-  }
-  </style>
-  
+}
+
+const formatDate = (dateStr) => new Date(dateStr).toLocaleDateString()
+const goToList = () => router.push('/board/team-recruit')
+
+onMounted(() => {
+  fetchPost(route.params.id)
+})
+
+watch(() => route.params.id, (newId) => {
+  fetchPost(newId)
+})
+</script>
+
+<style scoped>
+.team-recruit-detail-page {
+  background: #f9f9fb;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.detail-container {
+  width: 100%;
+  max-width: 800px;
+  margin: 40px auto;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.board-title {
+  font-size: 24px;
+  font-weight: bold;
+  padding: 20px 0;
+  border-bottom: 1px solid #ddd;
+}
+
+.post-card {
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  position: relative;
+}
+
+.top-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.activation-button {
+  padding: 6px 10px;
+  border: none;
+  border-radius: 6px;
+  background: #4f46e5;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.post-title {
+  font-size: 20px;
+  font-weight: 600;
+  color: #333;
+}
+
+.post-info {
+  font-size: 14px;
+  color: #666;
+  display: flex;
+  justify-content: space-between;
+}
+
+.post-content {
+  font-size: 15px;
+  line-height: 1.6;
+  color: #444;
+  white-space: pre-line;
+}
+
+.status {
+  font-size: 13px;
+  font-weight: 600;
+  padding: 4px 10px;
+  border-radius: 8px;
+  background-color: #e0e7ff;
+  color: #4f46e5;
+}
+
+.status:not(.recruiting) {
+  background-color: #f3f4f6;
+  color: #6b7280;
+}
+
+.recruiting {
+  color: #4f46e5;
+}
+
+.button-group {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 2rem;
+  gap: 1rem;
+}
+
+.left-buttons,
+.right-buttons {
+  display: flex;
+  gap: 0.5rem;
+}
+
+/* 신청하기 버튼만 별도 */
+.apply-row {
+  margin-top: 3rem;
+  display: flex;
+  justify-content: center;
+}
+
+.apply-row .action-button.apply {
+  padding: 1rem 2rem;
+  font-size: 1.25rem;
+  border-radius: 10px;
+  background-color: #4f46e5;
+  font-weight: 700;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s ease;
+}
+
+.apply-row .action-button.apply:hover {
+  background-color: #4338ca;
+}
+
+.action-button {
+  padding: 0.6rem 1.2rem;
+  background-color: #6366f1;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.action-button.secondary {
+  background-color: #6366f1;
+  color: white;
+}
+
+.action-button:hover,
+.action-button.secondary:hover {
+  background-color: #4f46e5;
+}
+
+.alert {
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(74, 222, 128, 0.9);
+  color: #fff;
+  padding: 0.9rem 1.7rem;
+  border-radius: 12px;
+  font-weight: 600;
+  font-size: 1rem;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  backdrop-filter: blur(4px);
+}
+
+.alert::after {
+  content: '✔️';
+  font-size: 1.2rem;
+  margin-left: 0.5rem;
+}
+
+.fade-enter-active, .fade-leave-active {
+  transition: all 0.5s ease;
+}
+.fade-enter-from {
+  opacity: 0;
+  transform: translateY(-10px);
+}
+.fade-leave-to {
+  opacity: 0;
+  transform: translateY(-10px);
+}
+</style>
