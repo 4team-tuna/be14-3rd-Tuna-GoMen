@@ -42,17 +42,25 @@ const submitPost = async () => {
     alert('모든 항목을 입력해주세요!')
     return
   }
+  const now = new Date()
+const yy = String(now.getFullYear()).slice(2)
+const mm = String(now.getMonth() + 1).padStart(2, '0')
+const dd = String(now.getDate()).padStart(2, '0')
+
+const formattedDate = `${yy}.${mm}.${dd}` // 👉 "25.04.13"
+
 
   const newPost = {
-    title: title.value,
-    author: '익명',
-    date: new Date().toISOString().slice(2, 10).replace(/-/g, '.'),
-    category: category.value,
-    views: 0,
-    likes: 0,
-    content: content.value,
-    comments: [],
-  }
+  title: title.value,
+  author: '익명',
+  date: formattedDate, // ✅ 요 줄!
+  category: category.value,
+  views: 0,
+  likes: 0,
+  content: content.value,
+  comments: [],
+}
+
 
   try {
     const res = await axios.post('http://localhost:3001/allposts', newPost)

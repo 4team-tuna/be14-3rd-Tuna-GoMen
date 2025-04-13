@@ -43,33 +43,30 @@
 
   onMounted(async () => {
   try {
+    // 서버에서 데이터를 가져오기
     const res = await axios.get('http://localhost:3001/allposts');
     const sorted = res.data.sort((a, b) => {
-  const parseDate = (dateStr) => {
-    const [yy, mm, dd] = dateStr.trim().split('.').map(v => v.padStart(2, '0'));
-    return new Date(`20${yy}-${mm}-${dd}`); // ← 여기서 무조건 20 붙임!
-  };
+      const parseDate = (dateStr) => {
+        const [yy, mm, dd] = dateStr.trim().split('.').map(v => v.padStart(2, '0'));
+        return new Date(`20${yy}-${mm}-${dd}`);
+      };
 
-  const dateA = parseDate(a.date);
-  const dateB = parseDate(b.date);
+      const dateA = parseDate(a.date);
+      const dateB = parseDate(b.date);
 
-  if (dateA.getTime() === dateB.getTime()) {
-    return b.id.localeCompare(a.id, 'en', { numeric: true });
-  }
+      if (dateA.getTime() === dateB.getTime()) {
+        return b.id.localeCompare(a.id, 'en', { numeric: true });
+      }
 
-  return dateB - dateA;
-});
+      return dateB - dateA;
+    });
 
-
-    console.log("Sorted data after sorting by ID and Date", sorted);
-
-
+    // 서버에서 데이터를 받아온 후 상태 갱신
     posts.value = sorted;
-    localStorage.setItem('allposts', JSON.stringify(sorted));
+
   } catch (e) {
     console.error('서버에서 데이터 가져오기 실패:', e);
-    const raw = localStorage.getItem('allposts');
-    posts.value = raw ? JSON.parse(raw) : [];
+    posts.value = [] // 서버 실패시 데이터 초기화
   }
 });
 
