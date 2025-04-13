@@ -6,7 +6,7 @@
         :key="question.question_id"
       >
         <div class="question-header">
-          <p class="author">작성자: {{ getUserNickname(question.member_id) }}</p>
+          <p>작성자: {{ question.nickname }}</p>
           <p class="time">{{ formatTime(question.question_created_time) }}</p>
         </div>
         <p class="content">{{ question.question_content }}</p>
