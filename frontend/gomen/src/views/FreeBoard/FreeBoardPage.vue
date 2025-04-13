@@ -1,44 +1,44 @@
 <template>
-  <div class="free-board-page">
-    <main class="board-container">
-      <h2 class="board-title">🌱 자유 게시판</h2>
-
-      <!-- 목록 버튼 -->
-  <router-link to="/boards/free" class="back-button">목록</router-link>
-
-      <PostCard v-if="post" :post="post" />
-
-      <!-- 댓글 목록을 post 내의 comments로 바로 처리 -->
-      <CommentList v-if="post && post.comments.length" :comments="post.comments" />
-      <CommentForm />
-    </main>
-  </div>
-</template>
-
-<script setup>
-import { ref, onMounted } from 'vue'
-import { useRoute } from 'vue-router'
-import axios from 'axios'
-
-import PostCard from '@/components/freeboard/PostCard.vue'
-import CommentList from '@/components/freeboard/CommentList.vue'
-import CommentForm from '@/components/freeboard/CommentForm.vue'
-
-const post = ref(null)
-const route = useRoute()
-
-onMounted(async () => {
-  try {
-    const postId = Number(route.params.id) // 문자열을 숫자로 변환!
-    const postRes = await axios.get(`http://localhost:3001/allposts/${postId}`)
-    post.value = postRes.data
-
-    console.log('🔥 게시물과 댓글:', post.value)
-  } catch (error) {
-    console.error('데이터 로딩 실패:', error)
-  }
-})
-</script>
+    <div class="free-board-page">
+  
+      <main class="board-container">
+        <h2 class="board-title">자유 게시판</h2>
+  
+        <PostCard v-if="post" :post="post" />
+  
+        <CommentList v-if="comments.length" :comments="comments" />
+        <CommentForm />
+      </main>
+  
+    </div>
+  </template>
+  
+  <script setup>
+  import { ref, onMounted } from 'vue'
+  import { useRoute } from 'vue-router'
+  import axios from 'axios'
+  
+  // 공통 컴포넌트
+  import PostCard from '@/components/freeboard/PostCard.vue'
+  import CommentList from '@/components/freeboard/CommentList.vue'
+  import CommentForm from '@/components/freeboard/CommentForm.vue'
+  
+  const route = useRoute()
+  const post = ref(null)
+  const comments = ref([])
+  
+  onMounted(async () => {
+    try {
+      const postId = Number(route.params.id) // 문자열을 숫자로 변환!
+      const postRes = await axios.get(`http://localhost:3001/allposts/${postId}`)
+      post.value = postRes.data
+  
+      console.log('🔥 게시물과 댓글:', post.value)
+    } catch (error) {
+      console.error('데이터 로딩 실패:', error)
+    }
+  })
+  </script>
 
 <style scoped>
 .free-board-page {

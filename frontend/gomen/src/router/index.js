@@ -5,6 +5,9 @@ import FreeBoardPage from '@/views/FreeBoard/FreeBoardPage.vue'
 import BoardView from '@/views/FreeBoard/BoardView.vue'
 import WritePost from '@/views/FreeBoard/WritePost.vue'
 
+// 팀모집 게시판
+import TeamRecruitBoardPage from '@/views/teamRecruitBoard/TeamRecruitBoardPage.vue'
+
 // 메시지함 & 유저 관련
 import MessageInbox from '@/views/Message/MessageInbox.vue'
 import LoginPage from '@/views/Login/LoginPage.vue'
@@ -33,11 +36,14 @@ const routes = [
   { path: '/', component: StartPage},
   { path: '/main', component: MainPage},
 
+
   // 자유게시판
   // { path: '/', component: FindPasswordPage}
   { path: '/boards/free/:id', name: 'FreeBoardPage', component: FreeBoardPage },
   { path: '/boards/free', name: 'FreeBoardList', component: BoardView },
-  { path: '/boards/free/write', name: 'WritePost', component: WritePost },
+  {
+    path: '/boards/free/write',name: 'WritePost', component: WritePost
+  },
 
   // 유저 관련
   { path: '/signUp', component: SignUpPage},
@@ -56,8 +62,13 @@ const routes = [
   { path: '/admin/titles', component: TitlePage },
   { path: '/admin/mentors', component: MentorRequestPage },
 
-  // ✅ 신고 페이지
+    // ✅ 신고 페이지
   // { path: '/report', name: 'ReportPage', component: ReportFormPage }
+
+  // 팀 모집 게시판
+  { path: '/board/team-recruit', name: 'TeamRecruitBoard', component: TeamRecruitBoardPage },
+  { path: '/board/team-recruit/:id', name: 'TeamRecruitDetail',
+    component: () => import('@/views/teamRecruitBoard/TeamRecruitBoardDetailPage.vue'),alias: '/recruit/:id' },
 
   { path: '/mentorlist', component: MentorListPage },
   {
