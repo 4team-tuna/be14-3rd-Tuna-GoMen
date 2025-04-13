@@ -16,6 +16,7 @@
       <img v-if="isLogin" src="@/assets/icon-message.png" class="icon-message" @click="goToMail" />
       <img v-if="isLogin" src="@/assets/icon-user.png" class="icon-user" @click="goToMyInfo" />
       <button v-if="isLogin" class="logout-btn" @click="openLogOutModal">로그아웃</button>
+      <button v-else class="login-btn" @click="goToLoginPage">로그인</button>
     </div>
   </header>
 
@@ -49,6 +50,7 @@
   const goToMainPage = () => {router.push('/main')}
   const goToMail = () => {router.push('/mail')}
   const goToMyInfo = () => {router.push('/myPage');}
+  const goToLoginPage = () => {router.push('/login')}
   const logout = () => {
     userStore.logout()
     router.push('/')
@@ -120,6 +122,24 @@
 }
 
 .logout-btn:hover {
+  background-color: #333;
+  color: white;
+  border-color: #333;
+}
+
+.login-btn {
+  background-color: transparent;
+  border: 1px solid #888;
+  border-radius: 6px;
+  padding: 6px 12px;
+  font-size: 14px;
+  color: #333;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  margin-left: 16px;
+}
+
+.login-btn:hover {
   background-color: #333;
   color: white;
   border-color: #333;
