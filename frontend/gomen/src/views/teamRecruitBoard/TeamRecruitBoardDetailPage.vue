@@ -31,7 +31,7 @@
 
       <div class="button-group">
         <div class="left-buttons">
-          <DeleteButton v-if="post" :postId="post.id" />
+        <DeleteButton v-if="post && post.nickname === userNickname" :postId="post.id" />
         </div>
         <div class="right-buttons">
           <button class="action-button secondary" @click="goToList">목록</button>
@@ -71,10 +71,9 @@ const closeModal = () => isModalOpen.value = false
 
 
 const user = localStorage.getItem('user')
-const nickname=ref('')
-const introduction=ref('')
-const appliedAt = ref('')
-const blog = ref('')
+const userRaw = user
+const parsedUser = userRaw ? JSON.parse(userRaw) : null
+const userNickname = parsedUser?.nickname || ''
 
 const handleSubmit = async (payload) => {
   const { nickname, introduction, blog } = payload
