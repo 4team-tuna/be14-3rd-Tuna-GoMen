@@ -18,12 +18,16 @@
   
   const props = defineProps({
     mentoringSpaceId: {
-      type: String,
-      required: true
+        type: String,
+        required: true
     },
     memberId: {
-      type: [String, Number],
-      required: true
+        type: [String, Number],
+        required: true
+    },
+    mentoringMemberId: {
+        type: String,
+        required: true
     },
     leftoverQuestions: {
         type: Number,
@@ -46,7 +50,7 @@
         is_deleted: 'N'
     })
 
-    await api.patch(`/mentoringMembers/${props.memberId}`, {
+    await api.patch(`/mentoringMembers/${props.mentoringMemberId}`, {
         leftover_questions: props.leftoverQuestions - 1
     })
 

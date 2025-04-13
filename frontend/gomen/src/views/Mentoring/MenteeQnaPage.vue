@@ -5,6 +5,8 @@
       <QuestionForm
         :mentoringSpaceId="mentoringSpaceId"
         :memberId="user.id"
+        :mentoringMemberId="mentoringMemberId"
+        :leftoverQuestions="leftoverQuestions"
         @submitted="handleNewQuestion"
       />
   
@@ -28,6 +30,9 @@
   const user = JSON.parse(localStorage.getItem('user'))
   
   const mentoringSpaceId = ref(null)
+  const mentoringMemberId = ref('')
+  const leftoverQuestions = ref(0)
+  
   const questions = ref([])
   const currentPage = ref(1)
   const totalPage = ref(1)
@@ -35,18 +40,16 @@
   const fetchQuestions = async (page = 1) => {
     const allRes = await api.get(`/questions?mentoring_space_id=${mentoringSpaceId.value}`)
     const allQuestions = allRes.data
-
-    // ✅ 클라이언트에서 강제로 최신순 정렬 (문자열이라도 확실하게 처리)
+  
     const sorted = [...allQuestions].sort(
-        (a, b) => new Date(b.question_created_time) - new Date(a.question_created_time)
+      (a, b) => new Date(b.question_created_time) - new Date(a.question_created_time)
     )
-
-    // ✅ 페이지 범위로 잘라서 보여줌
+  
     const paged = sorted.slice((page - 1) * 10, page * 10)
-
+  
     questions.value = paged
     totalPage.value = Math.ceil(sorted.length / 10)
-    }
+  }
   
   const handlePageChange = async (page) => {
     currentPage.value = page
@@ -54,14 +57,19 @@
   }
   
   const handleNewQuestion = async () => {
-    await fetchQuestions(currentPage.value)
+    currentPage.value = 1
+    await fetchQuestions(1)
   }
   
   onMounted(async () => {
     const memberRes = await api.get(`/mentoringMembers?user_id=${user.id}`)
     const member = memberRes.data[0]
     if (!member) return
+  
+    mentoringMemberId.value = member.id
+    leftoverQuestions.value = member.leftover_questions
     mentoringSpaceId.value = member.mentoring_space_id
+  
     await fetchQuestions(currentPage.value)
   })
   </script>
