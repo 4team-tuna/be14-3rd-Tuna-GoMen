@@ -34,9 +34,16 @@
         </div>
       </div>
 
-      <div class="apply-row">
-        <button class="action-button apply" @click="openModal">신청하기</button>
-      </div>
+      <div class="apply-row" v-if="post.nickname !== userNickname">
+  <button
+    class="action-button apply"
+    :disabled="post.isActivated !== 'Y'"
+    :class="{ disabled: post.isActivated !== 'Y' }"
+    @click="openModal"
+  >
+    {{ post.isActivated === 'Y' ? '신청하기' : '모집이 종료되었습니다' }}
+  </button>
+</div>
     </main>
 
     <div v-else class="loading">게시글을 불러오는 중...</div>
@@ -302,5 +309,16 @@ watch(() => route.params.id, (newId) => {
 .action-button:hover,
 .action-button.secondary:hover {
   background-color: #4f46e5;
+}
+
+.apply-row .action-button.disabled {
+  border-radius: 10px;
+  font-size: 1.25rem;
+  font-weight: 700;
+  padding: 0.6rem 1.2rem;
+  background-color: #ccc;
+  cursor: not-allowed;
+  color: #999;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 </style>
