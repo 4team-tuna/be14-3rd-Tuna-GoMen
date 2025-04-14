@@ -1,12 +1,19 @@
 <template>
     <div class="question-form">
       <h3 class="form-title">질문 작성</h3>
+  
+      <input
+        v-model="title"
+        class="title-input"
+        placeholder="질문 제목을 입력하세요"
+      />
+  
       <textarea
-        v-model="content"
-        placeholder="멘토에게 궁금한 내용을 입력하세요"
+        v-model="detail"
+        placeholder="질문 상세 내용을 입력하세요"
       ></textarea>
   
-      <button :disabled="!content.trim()" @click="submitQuestion">
+      <button :disabled="!title.trim() || !detail.trim()" @click="submitQuestion">
         작성하기
       </button>
     </div>
@@ -18,45 +25,48 @@
   
   const props = defineProps({
     mentoringSpaceId: {
-        type: String,
-        required: true
+      type: String,
+      required: true
     },
     memberId: {
-        type: [String, Number],
-        required: true
+      type: [String, Number],
+      required: true
     },
     mentoringMemberId: {
-        type: String,
-        required: true
+      type: String,
+      required: true
     },
     leftoverQuestions: {
-        type: Number,
-        required: true
+      type: Number,
+      required: true
     }
   })
   
   const emit = defineEmits(['submitted'])
   
-  const content = ref('')
+  const title = ref('')
+  const detail = ref('')
   
   const submitQuestion = async () => {
-    if (!content.value.trim()) return
-
+    if (!title.value.trim() || !detail.value.trim()) return
+  
     await api.post('/questions', {
-        mentoring_space_id: props.mentoringSpaceId,
-        member_id: props.memberId,
-        question_content: content.value,
-        question_created_time: new Date().toISOString(),
-        is_deleted: 'N'
+      mentoring_space_id: props.mentoringSpaceId,
+      member_id: props.memberId,
+      question_content: title.value,
+      question_detail: detail.value,
+      question_created_time: new Date().toISOString(),
+      is_deleted: 'N'
     })
-
+  
     await api.patch(`/mentoringMembers/${props.mentoringMemberId}`, {
-        leftover_questions: props.leftoverQuestions - 1
+      leftover_questions: props.leftoverQuestions - 1
     })
-
-    content.value = ''
-    emit('submitted') // 작성 후 새로고침용 콜백
-    }
+  
+    title.value = ''
+    detail.value = ''
+    emit('submitted')
+  }
   </script>
   
   <style scoped>
@@ -71,6 +81,14 @@
     font-size: 18px;
     margin-bottom: 10px;
     font-weight: bold;
+  }
+  .title-input {
+    width: 100%;
+    padding: 12px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    margin-bottom: 12px;
   }
   textarea {
     width: 100%;

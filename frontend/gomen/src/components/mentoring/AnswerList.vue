@@ -9,7 +9,7 @@
           class="answer-card"
         >
           <div class="answer-meta">
-            <span class="nickname">{{ getNickname(answer.mentor_id) }}</span>
+            <span class="nickname">{{ answer.nickname }}</span>
             <span class="time">{{ formatDate(answer.answer_created_time) }}</span>
           </div>
           <p class="content">{{ answer.answer_content }}</p>
@@ -19,42 +19,49 @@
   </template>
   
   <script setup>
-  import { ref, watch, onMounted } from 'vue'
-  import api from '@/api'
-  
-  const props = defineProps({
+    import { ref, watch, onMounted } from 'vue'
+    import api from '@/api'
+
+    const props = defineProps({
     questionId: {
-      type: String,
-      required: true
+        type: String,
+        required: true
     }
-  })
-  
-  const answers = ref([])
-  const nicknames = ref({})
-  
-  const fetchAnswers = async () => {
+    })
+
+    const answers = ref([])
+    const nicknames = ref({})
+
+    const fetchAnswers = async () => {
     const res = await api.get(`/answers?question_id=${props.questionId}`)
     answers.value = res.data
-  
-    const mentorIds = [...new Set(res.data.map(a => a.mentor_id))]
-    const users = await Promise.all(mentorIds.map(id => api.get(`/users/${id}`)))
-    users.forEach(user => {
-      nicknames.value[user.data.id] = user.data.nickname
+
+    // answers 안의 user_id 모아서
+    const userIds = [...new Set(answers.value.map(a => a.user_id))]
+
+    // user 정보 가져오기
+    const userResList = await Promise.all(
+        userIds.map(id => api.get(`/users/${id}`))
+    )
+
+    userResList.forEach(res => {
+        nicknames.value[res.data.id] = res.data.nickname
     })
-  }
-  
-  const getNickname = (mentorId) => {
-    return nicknames.value[mentorId] || `멘토 ${mentorId}`
-  }
-  
-  const formatDate = (str) => {
+
+    // 닉네임 매핑
+    answers.value.forEach(answer => {
+        answer.nickname = nicknames.value[answer.user_id] || `유저 ${answer.user_id}`
+    })
+    }
+
+    const formatDate = (str) => {
     const d = new Date(str)
     return `${d.getFullYear()}.${d.getMonth() + 1}.${d.getDate()} ${d.getHours()}시`
-  }
-  
-  onMounted(fetchAnswers)
-  watch(() => props.questionId, fetchAnswers)
-  </script>
+    }
+
+    onMounted(fetchAnswers)
+    watch(() => props.questionId, fetchAnswers)
+    </script>
   
   <style scoped>
   .answer-list {

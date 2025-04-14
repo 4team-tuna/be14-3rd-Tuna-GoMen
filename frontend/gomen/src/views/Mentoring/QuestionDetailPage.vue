@@ -6,7 +6,7 @@
         <span class="time">{{ formatDate(question.question_created_time) }}</span>
       </div>
       <div class="question-body">
-        {{ question.detail || '상세 내용이 없습니다.' }}
+        {{ question.question_detail || '상세 내용이 없습니다.' }}
       </div>
   
       <hr />
@@ -34,9 +34,7 @@
     question.value = res.data
   
     // 작성자 닉네임도 불러오기
-    const memberRes = await api.get(`/mentoringMembers?id=${res.data.member_id}`)
-    const member = memberRes.data[0]
-    const userRes = await api.get(`/users/${member.user_id}`)
+    const userRes = await api.get(`/users/${res.data.member_id}`)
     nickname.value = userRes.data.nickname
   }
   
