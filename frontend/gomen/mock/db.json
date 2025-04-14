@@ -262,14 +262,7 @@
       "isActivated": "Y",
       "teamIntroduce": "Django 기반의 MVP 웹 서비스를 빠르게 만들고 있습니다. 관리자 페이지, 로그인 기능 등 실무 기능 위주로 개발 중이에요!",
       "isDeleted": "N",
-      "applicants": [
-        {
-          "nickname": "MinjiVely",
-          "introduction": "ㅁㄴㅇㅁㄴㅇ",
-          "blog": "https://minji.dev",
-          "appliedAt": "2025-04-14T01:06:03.497Z"
-        }
-      ]
+      "applicants": []
     },
     {
       "id": "25",

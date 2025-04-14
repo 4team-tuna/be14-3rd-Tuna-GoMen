@@ -6,13 +6,7 @@
     </div>
 
     <div class="introduction-wrapper">
-      <textarea
-        v-model="introduction"
-        :maxlength="200"
-        placeholder="자기소개를 입력하세요 (최대 200자)"
-        readonly
-      ></textarea>
-      <p class="char-count">{{ introduction.length }} / 200자</p>
+      <div class="introduction-text">{{ applicant.introduction }}</div>
     </div>
 
     <div class="button-container">
@@ -37,7 +31,7 @@
 </template>
 
 <script setup>
-import { ref, watchEffect } from 'vue'
+import { defineProps, defineEmits } from 'vue'
 import axios from 'axios'
 
 const props = defineProps({
@@ -47,12 +41,6 @@ const props = defineProps({
 })
 
 const emit = defineEmits(['update-status'])
-
-const introduction = ref('')
-
-watchEffect(() => {
-  introduction.value = props.applicant.introduction || ''
-})
 
 const handleAccept = async () => {
   await updateStatus('Y')
@@ -87,7 +75,7 @@ const updateStatus = async (status) => {
 <style scoped>
 .applicant-card {
   width: 450px;
-  height: 380px;
+  height: 360px;
   border-radius: 12px;
   border: 1px solid #d4d4d4;
   background-color: rgba(255, 255, 255, 0.86);
@@ -125,28 +113,12 @@ const updateStatus = async (status) => {
   box-sizing: border-box;
 }
 
-textarea {
-  width: 100%;
-  height: 100px;
-  padding: 8px;
+.introduction-text {
+  white-space: pre-wrap;
   font-size: 1rem;
-  border-radius: 8px;
-  border: 1px solid #ccc;
-  resize: none;
-  background-color: #f9f9f9;
   color: #333;
-}
-
-textarea:read-only {
-  background-color: #f5f5f5;
-  cursor: default;
-}
-
-.char-count {
-  text-align: right;
-  font-size: 0.85rem;
-  color: #888;
-  margin-top: 4px;
+  min-height: 100px;
+  padding: 8px 0;
 }
 
 .button-container {
