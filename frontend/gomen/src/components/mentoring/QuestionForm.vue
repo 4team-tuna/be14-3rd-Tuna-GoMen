@@ -13,14 +13,20 @@
         placeholder="질문 상세 내용을 입력하세요"
       ></textarea>
   
-      <button :disabled="!title.trim() || !detail.trim()" @click="submitQuestion">
+      <button
+        :disabled="isSubmitDisabled"
+        @click="submitQuestion"
+      >
         작성하기
       </button>
+      <p v-if="props.leftoverQuestions <= 0" class="warning">
+        ⚠ 질문 가능 횟수를 모두 사용했습니다. 연장이 필요합니다.
+      </p>
     </div>
   </template>
   
   <script setup>
-  import { ref } from 'vue'
+  import { ref, computed } from 'vue'
   import api from '@/api'
   
   const props = defineProps({
@@ -47,8 +53,16 @@
   const title = ref('')
   const detail = ref('')
   
+  // 버튼 비활성화 조건
+  const isSubmitDisabled = computed(() =>
+    !title.value.trim() || !detail.value.trim() || props.leftoverQuestions <= 0
+  )
+  
   const submitQuestion = async () => {
-    if (!title.value.trim() || !detail.value.trim()) return
+    if (props.leftoverQuestions <= 0) {
+      alert('질문 가능 횟수를 모두 사용했습니다. 연장이 필요합니다.')
+      return
+    }
   
     await api.post('/questions', {
       mentoring_space_id: props.mentoringSpaceId,
@@ -112,6 +126,11 @@
   button:disabled {
     background-color: #ccc;
     cursor: not-allowed;
+  }
+  .warning {
+    margin-top: 10px;
+    font-size: 13px;
+    color: red;
   }
   </style>
   
