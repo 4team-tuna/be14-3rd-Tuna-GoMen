@@ -35,15 +35,15 @@
       </div>
 
       <div class="apply-row" v-if="post.nickname !== userNickname">
-  <button
-    class="action-button apply"
-    :disabled="post.isActivated !== 'Y'"
-    :class="{ disabled: post.isActivated !== 'Y' }"
-    @click="openModal"
-  >
-    {{ post.isActivated === 'Y' ? '신청하기' : '모집이 종료되었습니다' }}
-  </button>
-</div>
+        <button
+          class="action-button apply"
+          :disabled="post.isActivated !== 'Y'"
+          :class="{ disabled: post.isActivated !== 'Y' }"
+          @click="handleApply"
+        >
+          {{ post.isActivated === 'Y' ? '신청하기' : '모집이 종료되었습니다' }}
+        </button>
+      </div>
     </main>
 
     <div v-else class="loading">게시글을 불러오는 중...</div>
@@ -59,6 +59,7 @@
 <script setup>
 import { onMounted, ref, watch } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
+import { useUserStore } from '@/stores/useUserStore.js'
 import DeleteButton from '@/components/TeamRecruitBoard/DeleteButton.vue'
 import ApplyModal from '@/components/TeamRecruitBoard/ApplyModal.vue'
 import ApplicantListButton from '@/components/Applicant/ApplicantListButton.vue'
@@ -72,12 +73,19 @@ const isModalOpen = ref(false)
 const openModal = () => isModalOpen.value = true
 const closeModal = () => isModalOpen.value = false
 
-const user = localStorage.getItem('user')
-const userRaw = user
-const parsedUser = userRaw ? JSON.parse(userRaw) : null
-const userNickname = parsedUser?.nickname || ''
+// Pinia에서 userStore 가져오기
+const userStore = useUserStore()
+
+// 로그인 상태 가져오기
+const userNickname = userStore.isLogin ? JSON.parse(localStorage.getItem('user')).nickname : ''
 
 const handleSubmit = async (payload) => {
+  if (!userStore.isLogin) {
+    alert('로그인 후 신청 가능합니다.')
+    closeModal()
+    return
+  }
+
   const { nickname, introduction, blog } = payload
 
   if (post.value.nickname === userNickname) {
@@ -154,6 +162,15 @@ const formatDate = (dateStr) => {
 }
 
 const goToList = () => router.push('/board/team-recruit')
+
+// Apply 버튼 클릭 시 로그인 상태 확인 후 모달 띄우기
+const handleApply = () => {
+  if (!userStore.isLogin) {
+    alert('로그인 후 신청 가능합니다.')
+  } else {
+    openModal()
+  }
+}
 
 onMounted(() => {
   fetchPost(route.params.id)
@@ -320,5 +337,11 @@ watch(() => route.params.id, (newId) => {
   cursor: not-allowed;
   color: #999;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.warning-message {
+  color: #e53e3e;
+  font-size: 14px;
+  margin-top: 10px;
 }
 </style>

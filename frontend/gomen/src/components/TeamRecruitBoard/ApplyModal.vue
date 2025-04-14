@@ -22,11 +22,6 @@ import { ref } from 'vue'
 
 const introduction = ref('')
 
-// localStorage에서 user 정보를 가져와 nickname을 추출
-const user = JSON.parse(localStorage.getItem('user')) || {}
-const nickname = user.nickname || '익명'
-const blog = ref(user.blog || '')
-
 const emit = defineEmits(['submit', 'close'])
 
 const submit = () => {
@@ -35,10 +30,15 @@ const submit = () => {
     return
   }
 
+  const user = JSON.parse(localStorage.getItem('user')) || {}
+  const nickname = user.nickname
+  const blog = user.blog || ''
+
+  // 자기소개를 제출하며 부모 컴포넌트로 전달
   emit('submit', {
     nickname,
     introduction: introduction.value,
-    blog: blog.value
+    blog: blog
   })
 }
 </script>
