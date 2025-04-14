@@ -248,18 +248,18 @@
     fetchBookmarkedPosts()
   })
 
+   // 멘토 신청
+const applyMentor = async (message) => {
+  try {
+    const payload = {
+      id: 'req_' + Date.now(),         // 고유한 요청 ID 생성
+      userId: user.value.id,           // ✅ 유저 고유 ID (users의 id 필드)
+      nickname: user.value.nickname,
+      done: false,
+      requestAt: new Date().toISOString(),
+      message
+    }
 
-  // 멘토 신청
-  const applyMentor = async (message) => {
-    try {
-      const payload = {
-        id: userId,
-        userId: user.value.loginId,
-        nickname: user.value.nickname,
-        done: false,
-        requestAt: new Date().toISOString(),
-        message
-      }
 
       await axios.post('http://localhost:3001/mentorRequests', payload)
 
