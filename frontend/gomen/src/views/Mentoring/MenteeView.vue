@@ -8,14 +8,13 @@
       <MyTeamCard :teamMembers="teamMembers" :isTeam="isTeam" />
     </div>
 
-    <!-- 연장하기 버튼과 남은 질문 개수 -->
     <div class="status-bar">
       <button
         class="extension-btn"
-        :disabled="leftoverQuestions > 0"
+        :disabled="leftoverQuestions > 0 || extensionRequested"
         @click="requestExtension"
       >
-        연장하기
+        {{ extensionRequested ? '요청됨' : '연장하기' }}
       </button>
       <span class="leftover-text">
         남은 질문 개수: <b>{{ leftoverQuestions }}</b>
@@ -64,6 +63,7 @@ const leftoverQuestions = ref(0)
 const questions = ref([])
 const mentoringSpaceId = ref(null)
 const mentoringMemberId = ref(null)
+const extensionRequested = ref(false) // ✅ 요청 여부 상태
 
 const fetchQuestions = async (spaceId) => {
   const res = await api.get(
@@ -82,6 +82,10 @@ const fetchMemberInfo = async () => {
   mentoringSpaceId.value = member.mentoring_space_id
   mentoringMemberId.value = member.id
   leftoverQuestions.value = member.leftover_questions
+
+    const spaceRes = await api.get(`/mentoringSpaces/${member.mentoring_space_id}`)
+  extensionRequested.value = spaceRes.data.extension_requested === 'Y'
+
   return member
 }
 
@@ -111,9 +115,20 @@ const fetchAll = async () => {
 
 onMounted(fetchAll)
 
+// ✅ 연장 요청 처리
 const requestExtension = async () => {
-  if (leftoverQuestions.value > 0) return
-  alert('연장 요청이 전송되었습니다.')
+  if (leftoverQuestions.value > 0 || extensionRequested.value) return
+
+  try {
+    await api.patch(`/mentoringSpaces/${mentoringSpaceId.value}`, {
+      extension_requested: 'Y'
+    })
+    extensionRequested.value = true
+    alert('연장 요청이 전송되었습니다.')
+  } catch (e) {
+    console.error(e)
+    alert('연장 요청에 실패했습니다.')
+  }
 }
 
 const goToQnaPage = () => {

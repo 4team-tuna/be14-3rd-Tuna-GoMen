@@ -33,40 +33,34 @@ const filteredTeam = computed(() => {
 <style scoped>
 .team-card {
   flex: 1;
-  border: 1px solid #ddd;
+  padding: 20px;
+  border: 2px solid #a8a8ff;
   border-radius: 12px;
-  padding: 24px;
   background-color: #fff;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.04);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.02);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 12px;
 }
-h3 {
-  font-size: 18px;
+
+.team-card-title {
   font-weight: bold;
-  margin-bottom: 16px;
+  font-size: 16px;
+  color: #222;
+  margin-bottom: 8px;
 }
-.member-list {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-.member-list li {
+
+.team-member {
   display: flex;
   justify-content: space-between;
-  padding: 8px 0;
+  font-size: 14px;
+  color: #444;
   border-bottom: 1px solid #eee;
-  font-size: 14px;
+  padding: 6px 0;
 }
-.member-list li:last-child {
+
+.team-member:last-child {
   border-bottom: none;
-}
-.nickname {
-  font-weight: 500;
-}
-.leftover {
-  color: #888;
-}
-.no-team {
-  font-size: 14px;
-  color: #999;
 }
 </style>

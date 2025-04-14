@@ -1,169 +1,296 @@
 <template>
-  <div class="mentoring-page">
-    <h2 class="title">멘토링 공간 (멘토)</h2>
+  <div class="mentor-view">
+    <h2 class="title">멘토링 공간</h2>
 
-    <!-- 팀 정보 카드 -->
-    <section class="team-card">
-      <h3>나의 팀</h3>
-      <div class="team-members">
-        <div class="profile" v-for="member in teamMembers" :key="member.id">
-          <img src="@/assets/icon-basic-user.png" alt="프로필" />
-          <p>{{ member.nickname }}</p>
+    <!-- 멘토, 멘티 잔여 질문 카드 -->
+    <div class="top-section" v-if="mentor && teamMembers.length">
+      <!-- 멘토 박스 -->
+      <div class="mentor-box">
+        <MyMentorCard :mentor="mentor" />
+      </div>
+
+      <!-- 멘티 잔여 질문 횟수 박스 -->
+      <div class="team-box">
+        <div class="team-title">멘티 질문 잔여 횟수</div>
+        <ul class="team-list">
+          <li
+            v-for="member in teamMembers"
+            :key="member.id"
+            class="team-item"
+          >
+            <span class="name">{{ member.name }}</span>
+            <span class="count">{{ member.leftover_questions }}회 남음</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Q&A 섹션 -->
+    <div class="qna-section">
+      <div class="qna-title-row">
+        <h3 class="section-title">Q&A</h3>
+        <RouterLink :to="`/mentoring/${mentoringSpaceId}/qna`" class="more-btn">더보기 ></RouterLink>
+      </div>
+      <div v-if="visibleQuestions.length === 0" class="empty-msg">
+        등록된 질문이 아직 없습니다.
+      </div>
+      <div class="question-list" v-else>
+        <div
+          v-for="question in visibleQuestions"
+          :key="question.id"
+          class="question-box"
+        >
+          <div class="question-title">{{ question.question_content.slice(0, 50) }}{{ question.question_content.length > 50 ? '...' : '' }}</div>
+          <div class="question-preview">{{ question.preview }}</div>
+          <div class="question-footer">
+            <span class="author">작성자: {{ question.writer_name || '알 수 없음' }}</span>
+            <span class="date">{{ formatDateTime(question.question_created_time) }}</span>
+          </div>
         </div>
       </div>
-    </section>
+    </div>
 
-    <!-- 질문 리스트 -->
-    <section class="question-list">
-      <div
-        class="question-card"
-        v-for="question in questions"
-        :key="question.id"
-      >
-        <div class="q-header">
-          <span class="writer">작성자: {{ question.nickname }}</span>
-          <span class="time">{{ formatTime(question.question_created_time) }}</span>
-        </div>
-        <p class="content">{{ question.question_content }}</p>
-      </div>
-    </section>
-
-    <!-- 페이지네이션 -->
-    <Pagination :current="currentPage" :total="totalPage" @change="changePage" />
+    <!-- 멘토링 연장 요청 -->
+    <div class="extension-request-wrapper" v-if="extensionRequested">
+      <ExtensionRequest
+        :requester="`멘토링 공간 ${mentoringSpaceId}`"
+        @accept="handleAccept"
+        @reject="handleReject"
+      />
+    </div>
   </div>
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue'
-import Pagination from '@/components/mentoring/Pagination.vue'
-import api from '@/api'
+import { ref, onMounted, computed } from 'vue'
+import axios from 'axios'
+import { RouterLink } from 'vue-router'
 
+import MyMentorCard from '@/components/mentoring/MyMentorCard.vue'
+import MyTeamCard from '@/components/mentoring/MyTeamCard.vue'
+import ExtensionRequest from '@/components/mentoring/ExtensionRequest.vue'
+
+const mentoringSpaceId = 1000
+
+const mentor = ref(null)
 const teamMembers = ref([])
-const isTeam = ref(false)
-
 const questions = ref([])
-const currentPage = ref(1)
-const totalPage = ref(1)
+const extensionRequested = ref(false)
+const visibleCount = ref(3)
 
-const user = JSON.parse(localStorage.getItem('user'))
+const visibleQuestions = computed(() => questions.value.slice(0, visibleCount.value))
 
-const fetchQuestionsWithNicknames = async (spaceId, page) => {
-  const qnaRes = await api.get(`/questions?mentoring_space_id=${spaceId}&_page=${page}&_limit=3`)
-  const allMembers = await api.get(`/mentoringMembers?mentoring_space_id=${spaceId}`)
-  const allUsers = await api.get(`/users`)
-
-  questions.value = qnaRes.data.map((q) => {
-    const member = allMembers.data.find(m => Number(m.user_id) === Number(q.member_id))
-    const user = allUsers.data.find(u => Number(u.id) === Number(q.member_id))
-    return {
-      ...q,
-      nickname: user?.nickname || '익명'
-    }
-  })
-
-  totalPage.value = Math.ceil(qnaRes.headers['x-total-count'] / 3)
+const formatDateTime = (dateStr) => {
+  const d = new Date(dateStr)
+  return `${d.getFullYear()}. ${String(d.getMonth() + 1).padStart(2, '0')}. ${String(d.getDate()).padStart(2, '0')} ${d.getHours()}시 ${String(d.getMinutes()).padStart(2, '0')}분`
 }
 
 onMounted(async () => {
-  const res = await api.get(`/mentoringSpaces?mentor_id=${user.id}`)
-  const space = res.data[0]
-  if (!space) return
+  try {
+    const spaceRes = await axios.get(`http://localhost:3001/mentoringSpaces/${mentoringSpaceId}`)
+    const space = spaceRes.data
+    extensionRequested.value = space.extension_requested === 'Y'
 
-  const memberList = await api.get(`/mentoringMembers?mentoring_space_id=${space.id}`)
+    console.log('space.extension_requested:', space.extension_requested)
+    console.log('extensionRequested.value:', extensionRequested.value)
 
-  const resolved = await Promise.all(
-    memberList.data.map(async (m) => {
-      const userRes = await api.get(`/users/${m.user_id}`)
+    const usersRes = await axios.get(`http://localhost:3001/users`)
+    const allUsers = usersRes.data
+
+    const mentorRes = allUsers.find(u => u.id === String(space.mentor_id))
+    mentor.value = mentorRes
+
+    const membersRes = await axios.get(`http://localhost:3001/mentoringMembers?mentoring_space_id=${mentoringSpaceId}`)
+    const memberList = membersRes.data
+
+    teamMembers.value = memberList.map(m => {
+      const user = allUsers.find(u => u.id === String(m.user_id))
       return {
-        ...userRes.data,
+        ...m,
+        name: user?.name || user?.nickname || '알 수 없음',
         leftover_questions: m.leftover_questions
       }
     })
-  )
 
-  teamMembers.value = resolved
-  isTeam.value = resolved.length > 1
-  await fetchQuestionsWithNicknames(space.id, 1)
+    const questionsRes = await axios.get(`http://localhost:3001/questions?mentoring_space_id=${mentoringSpaceId}`)
+    questions.value = questionsRes.data.map(q => {
+      const member = memberList.find(m => String(m.user_id) === String(q.member_id))
+      const writer = member ? allUsers.find(u => String(u.id) === String(member.user_id)) : null
+      return {
+        ...q,
+        writer_name: writer?.name || writer?.nickname || '알 수 없음',
+        preview: q.question_content.slice(0, 50) + (q.question_content.length > 50 ? '...' : '')
+      }
+    })
+  } catch (err) {
+    console.error('데이터 로딩 실패', err)
+  }
 })
 
-const changePage = async (page) => {
-  currentPage.value = page
-  const res = await api.get(`/mentoringSpaces?mentor_id=${user.id}`)
-  const space = res.data[0]
-  await fetchQuestionsWithNicknames(space.id, page)
+async function handleAccept() {
+  try {
+    const res = await axios.get(`http://localhost:3001/mentoringMembers?mentoring_space_id=${mentoringSpaceId}`)
+    await Promise.all(
+      res.data.map(member =>
+        axios.patch(`http://localhost:3001/mentoringMembers/${member.id}`, {
+          leftover_questions: member.leftover_questions + 10
+        })
+      )
+    )
+    alert('질문 횟수가 10회 추가되었습니다.')
+  } catch (err) {
+    console.error('연장 수락 실패:', err)
+  }
 }
 
-const formatTime = (timeStr) => {
-  const date = new Date(timeStr)
-  return date.toLocaleString('ko-KR', {
-    year: 'numeric',
-    month: 'numeric',
-    day: 'numeric',
-    hour: 'numeric',
-    minute: 'numeric'
-  })
+async function handleReject() {
+  try {
+    await axios.patch(`http://localhost:3001/mentoringSpaces/${mentoringSpaceId}`, {
+      is_activated: "N"
+    })
+    alert('멘토링 공간이 비활성화되었습니다.')
+  } catch (err) {
+    console.error('연장 거절 실패:', err)
+  }
 }
 </script>
 
 <style scoped>
-.mentoring-page {
+.mentor-view {
   max-width: 1000px;
-  margin: auto;
-  padding: 40px 20px;
+  margin: 0 auto;
+  padding: 20px;
+  font-family: 'Pretendard', sans-serif;
 }
+
+/* 제목 */
 .title {
   font-size: 24px;
-  font-weight: bold;
   margin-bottom: 24px;
+  font-weight: 700;
 }
-.team-card {
-  border: 1px solid #ddd;
-  border-radius: 12px;
-  padding: 20px;
+
+/* 멘토/멘티 정보 박스 */
+.top-section {
+  display: flex;
+  gap: 20px;
   margin-bottom: 40px;
 }
-.team-card h3 {
+
+.mentor-box,
+.team-box {
+  flex: 1;
+  border: 1px solid #c6c6f6;
+  border-radius: 12px;
+  background-color: #f9f9ff;
+  padding: 20px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
+}
+
+/* 멘티 질문 잔여 횟수 */
+.team-title {
+  font-weight: bold;
   font-size: 18px;
-  margin-bottom: 16px;
+  margin-bottom: 12px;
+  color: #111;
 }
-.team-members {
-  display: flex;
-  gap: 32px;
-  flex-wrap: wrap;
+
+.team-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
 }
-.profile {
+
+.team-item {
   display: flex;
-  flex-direction: column;
+  justify-content: space-between;
   align-items: center;
+  font-size: 16px;
+  padding: 8px 0;
+  color: #222;
+}
+.team-item .name {
+  font-weight: 600;
+  font-size: 17px;
+}
+
+.team-item .count {
+  color: #6c63ff;
+  font-weight: 600;
+  font-size: 17px;
+}
+
+/* Q&A 영역 */
+.qna-section {
+  margin-bottom: 40px;
+}
+
+.qna-title-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.section-title {
+  font-size: 18px;
+  margin-bottom: 12px;
+  font-weight: 600;
+}
+
+.more-btn {
   font-size: 14px;
+  color: #6c63ff;
+  text-decoration: none;
 }
-.profile img {
-  width: 60px;
-  height: 60px;
-  border-radius: 100%;
-  object-fit: cover;
-  margin-bottom: 6px;
+
+.empty-msg {
+  margin-top: 12px;
+  font-size: 14px;
+  color: #888;
 }
+
+/* 질문 박스 */
 .question-list {
   display: flex;
   flex-direction: column;
   gap: 16px;
-  margin-bottom: 32px;
+  margin-top: 12px;
 }
-.question-card {
-  border: 1px solid #ccc;
-  border-radius: 10px;
-  padding: 16px;
-  background-color: #fff;
-}
-.q-header {
+
+.question-box {
+  padding: 16px 20px;
+  border: 2px solid #a8a8ff;
+  border-radius: 12px;
+  background-color: white;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.02);
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.question-title {
+  font-weight: bold;
+  font-size: 16px;
+  color: #111;
+}
+
+.question-preview {
   font-size: 14px;
   color: #666;
-  margin-bottom: 8px;
 }
-.content {
-  font-size: 16px;
+
+.question-footer {
+  display: flex;
+  justify-content: space-between;
+  font-size: 13px;
+  color: #999;
+}
+
+.extension-request-wrapper {
+  margin-bottom: 32px;
+}
+
+.author {
+  font-weight: 500;
 }
 </style>
