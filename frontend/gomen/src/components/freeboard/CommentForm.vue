@@ -44,9 +44,10 @@ const commentText = ref('')
 const comments = ref([])
 const user = JSON.parse(localStorage.getItem('user')) // 로컬스토리지에서 객체로 가져오기
 const nickname = ref('')
+const emit = defineEmits(['add-comment'])
 nickname.value = user ? user.nickname : ''
 
-// 댓글 제출
+// 댓글 등록
 const submitComment = async () => {
   if (!commentText.value.trim()) return
 
@@ -54,24 +55,10 @@ const submitComment = async () => {
     id: Date.now(),
     writer: nickname.value,
     content: commentText.value,
-    date: new Date().toLocaleString(),
+    date: new Date().toISOString(),
   }
 
-  // 게시글 데이터 불러오기
-  const res = await axios.get(`http://localhost:3001/allposts/${postId}`)
-  const post = res.data
-
-  // 기존 댓글 배열에 새 댓글 추가
-  const updatedComments = [...post.comments, newComment]
-
-  // 게시글 전체 업데이트
-  await axios.put(`http://localhost:3001/allposts/${postId}`, {
-    ...post,
-    comments: updatedComments
-  })
-
-  // 로컬 상태 업데이트
-  comments.value.push(newComment)
+  emit('add-comment', newComment)
   commentText.value = ''
 }
 
@@ -187,10 +174,4 @@ const deleteComment = (id) => {
   text-decoration: none;
 }
 </style>
-
-
-
-
-
-
   
