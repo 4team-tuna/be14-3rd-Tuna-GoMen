@@ -8,6 +8,7 @@ import EditPost from '@/views/FreeBoard/EditPost.vue'
 
 // 팀모집 게시판
 import TeamRecruitBoardPage from '@/views/teamRecruitBoard/TeamRecruitBoardPage.vue'
+import TeamRecruitWritePage from '@/views/teamRecruitBoard/TeamRecruitWritePage.vue'
 
 // 메시지함 & 유저 관련
 import MessageInbox from '@/views/Message/MessageInbox.vue'
@@ -28,7 +29,10 @@ import TitlePage from '@/views/Admin/TitlePage.vue'
 import MentorRequestPage from '@/views/Admin/MentorRequestPage.vue'
 
 // ✅ 신고 페이지
-// import ReportFormPage from '@/views/Report/ReportPage.vue'
+import ReportForm from '@/views/Report/ReportForm.vue'
+
+// 지원자 페이지
+import ApplicantListPage from "@/views/Applicant/ApplicantListPage.vue";
 
 const routes = [
   { path: '/mail', component: MessageInbox},
@@ -66,12 +70,26 @@ const routes = [
   { path: '/admin/mentors', component: MentorRequestPage },
 
     // ✅ 신고 페이지
-  // { path: '/report', name: 'ReportPage', component: ReportFormPage }
+  { path: '/report', name: 'ReportForm', component: ReportForm },
 
   // 팀 모집 게시판
   { path: '/board/team-recruit', name: 'TeamRecruitBoard', component: TeamRecruitBoardPage },
   { path: '/board/team-recruit/:id', name: 'TeamRecruitDetail',
     component: () => import('@/views/teamRecruitBoard/TeamRecruitBoardDetailPage.vue'),alias: '/recruit/:id' },
+
+  // 지원자 리스트
+  {
+    path: '/board/team-recruit/:id/applicants',
+    name: 'ApplicantList',
+    component: ApplicantListPage
+  },
+
+// 팀모집 게시판 글쓰기 페이지
+{
+  path: '/board/team-recruit/write',
+  name: 'TeamRecruitWritePage',
+  component: () => import('@/views/teamRecruitBoard/TeamRecruitWritePage.vue'),
+},
 
   { path: '/mentorlist', component: MentorListPage },
   {
