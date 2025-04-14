@@ -28,11 +28,14 @@ import ReportPage from '@/views/Admin/ReportPage.vue'
 import TitlePage from '@/views/Admin/TitlePage.vue'
 import MentorRequestPage from '@/views/Admin/MentorRequestPage.vue'
 
-// ✅ 신고 페이지
+// 신고 페이지
 import ReportForm from '@/views/Report/ReportForm.vue'
 
 // 지원자 페이지
 import ApplicantListPage from "@/views/Applicant/ApplicantListPage.vue";
+
+// 리뷰 작성 페이지
+import ReviewWritePage from '@/views/Mentoring/Review/ReviewWritePage.vue';
 
 const routes = [
   { path: '/mail', component: MessageInbox},
@@ -70,7 +73,7 @@ const routes = [
   { path: '/admin/titles', component: TitlePage },
   { path: '/admin/mentors', component: MentorRequestPage },
 
-    // ✅ 신고 페이지
+  // 신고 페이지
   { path: '/report', name: 'ReportForm', component: ReportForm },
 
   // 팀 모집 게시판
@@ -85,12 +88,14 @@ const routes = [
     component: ApplicantListPage
   },
 
-// 팀모집 게시판 글쓰기 페이지
-{
-  path: '/board/team-recruit/write',
-  name: 'TeamRecruitWritePage',
-  component: () => import('@/views/teamRecruitBoard/TeamRecruitWritePage.vue'),
-},
+  // 팀모집 게시판 글쓰기 페이지
+  {
+    path: '/board/team-recruit/write',
+    name: 'TeamRecruitWritePage',
+    component: () => import('@/views/teamRecruitBoard/TeamRecruitWritePage.vue'),
+  },
+
+  // 멘토 리스트
   { path: '/mentorlist', component: MentorListPage },
   {
     path: '/mentorlist/:id',
@@ -131,6 +136,13 @@ const routes = [
     path: '/mentoring/:id',
     name: 'MentoringDetail',
     component: () => import('@/views/Mentoring/MentorView.vue') 
+  },
+
+  // 리뷰 작성 페이지
+  {
+    path: '/review/write',
+    name: 'ReviewWritePage',
+    component: () => import('@/views/Mentoring/Review/ReviewWritePage.vue')
   }
 ]
 

@@ -10,7 +10,6 @@
 
       <div class="post-card">
         <div class="top-row">
-          <!-- 모집 상태 관련 기능 제거됨 -->
         </div>
 
         <h3 class="post-title">{{ post.title }}</h3>
