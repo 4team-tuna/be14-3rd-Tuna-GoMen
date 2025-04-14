@@ -20,6 +20,7 @@ import MainPage from '@/views/MainPage.vue'
 import MyPage from '@/views/MyInfo/MyPage.vue'
 import EditProfile from '@/views/MyInfo/EditProfile.vue'
 
+import MentorListPage from '@/views/MentorList/MentorListPage.vue'
 // 관리자 페이지들
 import AdminHomePage from '@/views/Admin/AdminHomePage.vue'
 import ReportPage from '@/views/Admin/ReportPage.vue'
@@ -33,14 +34,15 @@ import MentorRequestPage from '@/views/Admin/MentorRequestPage.vue'
 import ApplicantListPage from "@/views/Applicant/ApplicantListPage.vue";
 
 const routes = [
+  { path: '/mail', component: MessageInbox},
   // 기본 진입 시 관리자 홈으로 리다이렉트
   // { path: '/', redirect: '/admin' },
+
   { path: '/', component: StartPage},
   { path: '/main', component: MainPage},
 
 
   // 자유게시판
-  { path: '/board/free', component: FreeBoardPage },
   { path: '/boards/free/:id', name: 'FreeBoardPage', component: FreeBoardPage },
   { path: '/boards/free', name: 'FreeBoardList', component: BoardView },
   {
@@ -84,8 +86,26 @@ const routes = [
   path: '/board/team-recruit/write',
   name: 'TeamRecruitWritePage',
   component: () => import('@/views/teamRecruitBoard/TeamRecruitWritePage.vue'),
-}
+},
+
+  { path: '/mentorlist', component: MentorListPage },
+  {
+    path: '/mentorlist/:id',
+    name: 'MentorDetail',
+    component: () => import('@/views/MentorList/MentorDetailPage.vue')
+  },
+  {
+    path: '/mentorlist/add',
+    name: 'MentorListAdd',
+    component: () => import('@/views/MentorList/MentorListAddPage.vue') 
+  },
+  {
+    path: '/mentorlist/status',
+    name: 'MentorStatus',
+    component: () => import('@/views/MentorList/MentorStatusPage.vue') 
+  }
 ]
+
 
 const router = createRouter({
   history: createWebHistory(),

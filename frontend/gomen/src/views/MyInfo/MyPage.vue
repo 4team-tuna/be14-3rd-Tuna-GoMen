@@ -1,27 +1,35 @@
 <template>
   <div class="mypage-container">
     <h1>My Page</h1>
-
-    <!-- 기본 정보 -->
+  
+    <!-- 프로필 이미지 및 추가 버튼 -->
     <section class="info-box" v-if="user">
       <h2>기본 정보</h2>
       <div class="info-card">
         <div class="info-grid">
           <div class="info-text">
-              <p>이름 | {{ user.name }}</p>
-              <p>주민등록번호 | {{ user.personalNumber }}</p>
-              <p>전화번호 | {{ user.phoneNumber }}</p>
-              <p>ID | {{ user.loginId }}</p>
-              <p>닉네임 | {{ user.nickname }}</p>
-              <p>학교 | {{ user.college || '미입력' }}</p>
-              <p>블로그 | {{ user.blog || '미입력' }}</p>
-              <p>깃허브 주소 | {{ user.githubAdress || '미입력' }}</p>
+            <p>이름 | {{ user.name }}</p>
+            <p>주민등록번호 | {{ user.personalNumber }}</p>
+            <p>전화번호 | {{ user.phoneNumber }}</p>
+            <p>ID | {{ user.loginId }}</p>
+            <p>닉네임 | {{ user.nickname }}</p>
+            <p>학교 | {{ user.college || '미입력' }}</p>
+            <p>블로그 | {{ user.blog || '미입력' }}</p>
+            <p>깃허브 주소 | {{ user.githubAdress || '미입력' }}</p>
           </div>
-          <div class="profile-pic-box">
-            <button class="profile-pic-placeholder" @click="addProfilePic">📷</button>
+
+          <!-- 프로필 이미지 및 추가 버튼 (우측 상단) -->
+          <div class="profile-box">
+            <div class="profile-img-box">
+              <img v-if="user.image" :src="user.image" alt="프로필 이미지" class="profile-img" />
+              <div v-else class="profile-placeholder">🙎‍♂️</div>
+            </div>
+            <button class="profile-add-button" @click="openProfileUploaderModal">프로필 추가</button>
           </div>
         </div>
+
         <button class="action-button" @click="changeInfo">정보 수정</button>
+        <button class="small-btn" @click="openChangePasswordModal">비밀번호 변경</button>
       </div>
     </section>
 
@@ -70,20 +78,10 @@
       </div>
     </section>
   
-      <!-- 비밀번호 변경 -->
-      <section class="simple-box">
-        <div class="box-content">
-          <p>최근 변경일: 2024.12.01</p>
-          <p class="label">비밀번호</p>
-          <p>●●●●●●●●●●</p>
-          <button class="small-btn" @click="openChangePasswordModal">비밀번호 변경</button>
-        </div>
-      </section>
-  
       <!-- 멤버 유형 -->
       <section class="simple-box" v-if="user">
         <div class="box-content">
-          <p>최근 신청일: 2024.12.01</p>
+          <p>현재 멘토 여부 상태:</p>
           <p class="label">{{ user.isMentor === 'Y' ? '멘토(Mentor)' : '멘티(Mentee)' }}</p>
           <button v-if="user.isMentor !== 'Y'" class="small-btn" @click="openApplyMentorModal">
             멘토 신청
@@ -110,6 +108,12 @@
     @changePassword="changePassword"
     @close="closeChangePasswordModal"
     />
+
+  <ProfileUploaderModal
+    v-if="showProfileUploaderModal"
+    @imageSelected="addProfilePic"
+    @close="closeProfileUploaderModal"
+  />
 </template>
   
 
@@ -120,6 +124,7 @@
   import CareerModal from '@/components/user/CareerModal.vue';
   import ApplyMentorModal from '@/components/user/ApplyMentorModal.vue';
   import ChangePasswordModal from '@/components/user/ChangePasswordModal.vue';
+  import ProfileUploaderModal from '@/components/user/ProfileUploaderModal.vue';
   import { ref, onMounted } from 'vue'
   import axios from 'axios'
   import { useRouter } from 'vue-router';
@@ -139,6 +144,10 @@
   const showChangePasswordModal = ref(false);
   const openChangePasswordModal = () => { showChangePasswordModal.value = true }
   const closeChangePasswordModal = () => { showChangePasswordModal.value = false }
+  const showProfileUploaderModal = ref(false);
+  const openProfileUploaderModal = () => { console.log('모달 오픈!');
+  showProfileUploaderModal.value = true;}
+  const closeProfileUploaderModal = () => { showProfileUploaderModal.value = false;}
   
   // 회원 정보 조회해서 띄우기
   const user = ref(null)
@@ -156,6 +165,22 @@
     }
   })
 
+  // 회원 프로필 사진
+  const addProfilePic = async (base64Image) => {
+  try {
+    await axios.patch(`http://localhost:3001/users/${myId}`, {
+      image: base64Image,
+    })
+    alert('프로필 사진이 등록되었습니다!')
+    user.value.image = base64Image
+    
+    closeProfileUploaderModal()
+  } catch (error) {
+    console.error('프로필 사진 등록 실패:', error)
+    alert('등록에 실패했습니다.')
+  }
+}
+
   // 경력 추가
   const addCareer = async (careerText) => {
     try {
@@ -170,6 +195,7 @@
 
       user.value.careerInfo = updatedCareer // 로컬도 갱신
       alert('경력 정보가 저장되었습니다.')
+      closeProfileUploaderModal()
     } catch (error) {
       console.error('경력 저장 실패:', error)
       alert('경력 저장 중 오류가 발생했습니다.')
@@ -197,17 +223,17 @@
     }
   }
 
-  // 멘토 신청
-  const applyMentor = async (message) => {
-    try {
-      const payload = {
-        id: myId,
-        userId: user.value.loginId,
-        nickname: user.value.nickname,
-        done: false,
-        requestAt: new Date().toISOString(),
-        message
-      }
+   // 멘토 신청
+const applyMentor = async (message) => {
+  try {
+    const payload = {
+      id: 'req_' + Date.now(),         // 고유한 요청 ID 생성
+      userId: user.value.id,           // ✅ 유저 고유 ID (users의 id 필드)
+      nickname: user.value.nickname,
+      done: false,
+      requestAt: new Date().toISOString(),
+      message
+    }
 
       await axios.post('http://localhost:3001/mentorRequests', payload)
 
@@ -241,84 +267,133 @@
 </script>
   
 <style scoped>
-  .mypage-container {
-    max-width: 720px;
-    margin: 0 auto;
-    padding: 40px 20px;
-    background-color: #f6f6f6;
-    font-family: 'Pretendard', sans-serif;
-  }
 
-  h1 {
-    font-size: 26px;
-    margin-bottom: 20px;
-    font-weight: bold;
-  }
+.mypage-container {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 40px 20px;
+  background-color: #f6f6f6;
+  font-family: 'Pretendard', sans-serif;
+}
 
-  .info-box,
-  .bookmark-box,
-  .simple-box {
+h1 {
+  font-size: 26px;
+  margin-bottom: 20px;
+  font-weight: bold;
+}
+
+.info-box, .bookmark-box, .simple-box {
+  background-color: white;
+  border-radius: 16px;
+  padding: 24px;
+  margin-bottom: 24px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+}
+
+.info-card .info-grid {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.info-text p {
+  margin: 4px 0;
+  font-size: 15px;
+  line-height: 1.4;
+  color: #333;
+}
+
+.profile-box {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.profile-img-box {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  overflow: hidden;
+  background-color: #eee;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 0;
+}
+
+.profile-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.profile-placeholder {
+  font-size: 32px;
+  color: #aaa;
+}
+
+.profile-pic-box {
+  width: 120px;
+  text-align: center;
+  margin-top: 8px; /* 프로필 사진과 버튼 간의 간격을 좁힘 */
+}
+
+.profile-pic-placeholder:hover {
+  background-color: #e0e0e0;
+}
+
+.profile-add-button {
+  margin-top: 10px;
+  padding: 8px 16px;
+  background-color: #007BFF;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.profile-add-button:hover {
+  background-color: #0056b3;
+}
+
+.action-button {
+  margin-top: 20px;
+  background-color: #000;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 12px;
+  font-size: 14px;
+  cursor: pointer;
+  border: none;
+}
+
+.small-btn {
     background-color: white;
-    border-radius: 16px;
-    padding: 24px;
-    margin-bottom: 24px;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.05);
-  }
-
-  .info-card .info-grid {
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
-  }
-
-  .info-text p {
-    
-    margin: 4px 0;
-    font-size: 15px;
-    line-height: 1.4;
-    color: #333;
-  }
-
-  .profile-pic-box {
-    width: 80px;
-    height: 80px;
-    background-color: #eee;
-    border-radius: 12px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .profile-pic-placeholder {
-    font-size: 40px;
-  }
-
-  .action-button {
-    margin-top: 20px;
-    background-color: #000;
-    color: white;
-    padding: 10px 20px;
-    border-radius: 12px;
-    font-size: 14px;
+    color: black;
+    border: 1px solid #aaa;
+    padding: 8px 16px;
+    border-radius: 10px;
     cursor: pointer;
-    border: none;
+    float: right;
   }
+
+.plus-button {
+  font-size: 18px;
+  background-color: #000;
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+}
 
   .section-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin-bottom: 12px;
-  }
-
-  .plus-button {
-    font-size: 18px;
-    background-color: #000;
-    color: white;
-    border: none;
-    padding: 6px 12px;
-    border-radius: 8px;
-    cursor: pointer;
   }
 
   .career-line {
@@ -388,13 +463,5 @@
     margin: 6px 0;
   }
 
-  .small-btn {
-    background-color: white;
-    color: black;
-    border: 1px solid #aaa;
-    padding: 8px 16px;
-    border-radius: 10px;
-    cursor: pointer;
-    float: right;
-  }
+
 </style>

@@ -27,24 +27,47 @@
 
 
 <script setup>
+import axios from 'axios'
 import { ref } from 'vue'
+import { useRoute } from 'vue-router'
+
+const route = useRoute()
+const postId = route.params.id  // 예: /post/1 에서 "1" 가져옴
 
 const commentText = ref('')
 const comments = ref([])
+const user = JSON.parse(localStorage.getItem('user')) // 로컬스토리지에서 객체로 가져오기
+const nickname = ref('')
+nickname.value = user ? user.nickname : ''
 
-const submitComment = () => {
+const submitComment = async () => {
   if (!commentText.value.trim()) return
 
   const newComment = {
     id: Date.now(),
-    writer: '익명',
+    writer: nickname.value,
     content: commentText.value,
     date: new Date().toLocaleString(),
   }
 
-  comments.value.push(newComment) // 작성순서 유지 (오래된 댓글이 위로)
+  // 게시글 데이터 불러오기
+  const res = await axios.get(`http://localhost:3001/allposts/${postId}`)
+  const post = res.data
+
+  // 기존 댓글 배열에 새 댓글 추가
+  const updatedComments = [...post.comments, newComment]
+
+  // 게시글 전체 업데이트
+  await axios.put(`http://localhost:3001/allposts/${postId}`, {
+    ...post,
+    comments: updatedComments
+  })
+
+  // 로컬 상태 업데이트
+  comments.value.push(newComment)
   commentText.value = ''
 }
+
 
 const reportComment = (id) => {
   alert(`댓글 (ID: ${id})을 신고하시겠습니까?`)
