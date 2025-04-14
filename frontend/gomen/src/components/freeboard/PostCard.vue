@@ -14,12 +14,15 @@
             <span class="views">조회수 {{ post.views }}</span>
           </div>
 
-          <div class="meta-right" v-if="isAuthor">
-            <button class="edit-btn" @click="editPost">수정</button>
-            <button class="delete-btn" @click="deletePost">삭제</button>
-          </div>
+          <div class="meta-right">
+  <template v-if="isAuthor">
+    <button class="edit-btn" @click="editPost">수정</button>
+    <button class="delete-btn" @click="deletePost">삭제</button>
+  </template>
+  <span class="report" v-if="!isAuthor" @click="reportPost">🚨 신고</span>
 
-          <span class="report" @click="reportPost">🚨 신고</span>
+</div>
+
         </div>
       </div>
 
