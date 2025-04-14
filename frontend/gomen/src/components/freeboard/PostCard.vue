@@ -152,14 +152,17 @@ onMounted(async () => {
 })
 </script>
 
+
 <style scoped>
 .tag {
   margin-bottom: 4px;
 }
+
 .post-title {
   margin-top: 0;
   font-size: 30px;
 }
+
 .post-meta {
   display: flex;
   justify-content: space-between;
@@ -167,7 +170,6 @@ onMounted(async () => {
   font-size: 14px;
   color: #888;
 }
-
 /* 오른쪽 정렬 그룹 */
 .meta-right {
   display: flex;
@@ -178,11 +180,13 @@ onMounted(async () => {
 /* 기존 edit-btn, delete-btn 제거 */
 .edit-btn,
 .delete-btn {
-  all: unset; /* 버튼 스타일 초기화 */
+  all: unset;
+  /* 버튼 스타일 초기화 */
   font-size: 14px;
   color: #888;
   cursor: pointer;
-  margin-right: 10px; /* 간격 주기 */
+  margin-right: 10px;
+  /* 간격 주기 */
 }
 
 .edit-btn:hover,
@@ -229,21 +233,25 @@ onMounted(async () => {
   display: flex;
   gap: 10px;
 }
+
 .post-content {
   margin: 16px 0;
 }
+
 .post-card {
   border: 1px solid #e5e7eb;
   border-radius: 12px;
   padding: 50px 70px;
   background-color: #fff;
 }
+
 .post-header {
   margin-bottom: 16px;
   display: flex;
   flex-direction: column;
   gap: 4px;
 }
+
 .post-actions {
   display: flex;
   justify-content: space-between;
@@ -251,6 +259,7 @@ onMounted(async () => {
   color: #e74c3c;
   font-size: 14px;
 }
+
 .likes {
   font-size: 26px;
   cursor: pointer;
@@ -259,6 +268,7 @@ onMounted(async () => {
   align-items: center;
   gap: 6px;
 }
+
 .bookmark-icon {
   width: 40px;
   height: 40px;
@@ -266,13 +276,14 @@ onMounted(async () => {
   user-select: none;
   transition: transform 0.2s;
 }
+
 .bookmark-icon:hover {
   transform: scale(1.1);
 }
+
 .report {
   cursor: pointer;
   color: red;
   font-weight: bold;
 }
 </style>
-

@@ -618,7 +618,15 @@
       "views": 200,
       "likes": 14,
       "content": "파이썬으로 할 수 있는 재밌는 프로젝트 추천해주세요.",
-      "comments": []
+      "comments": [
+        {
+          "id": 1744612451253,
+          "writer": "수빈",
+          "content": "aaaddddddddzz",
+          "date": "2025-04-14T06:34:18.087Z"
+        }
+      ],
+      "is_blinded": "Y"
     },
     {
       "id": "24",
@@ -725,6 +733,11 @@
       "id": "ec74",
       "postId": "7e43",
       "userId": "1"
+    },
+    {
+      "id": "3950",
+      "postId": "23",
+      "userId": "11"
     }
   ],
   "bookmark": [
@@ -742,6 +755,11 @@
       "id": "4f51",
       "postId": "7e43",
       "userId": "1"
+    },
+    {
+      "id": "1b17",
+      "postId": "23",
+      "userId": "11"
     }
   ],
   "messages": [
@@ -1372,6 +1390,17 @@
       "reporterId": 1,
       "status": "N",
       "is_blinded": "N"
+    },
+    {
+      "id": "0cda",
+      "postId": "23",
+      "reporterId": "3",
+      "targetUserId": "파이썬왕초보",
+      "type": "post",
+      "reason": "zz",
+      "reportedAt": "2025-04-14T06:35:58.647Z",
+      "status": "Y",
+      "is_blinded": "Y"
     }
   ],
   "mentorRequests": [
