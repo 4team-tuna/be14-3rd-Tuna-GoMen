@@ -107,6 +107,22 @@ const submitReply = (commentId) => {
   replyTargetId.value = null
 }
 
+const handleEditComment = async ({ id, newContent }) => {
+  const updatedComments = post.value.comments.map(comment =>
+    comment.id === id
+      ? { ...comment, content: newContent, date: new Date().toISOString() }
+      : comment
+  )
+
+  await axios.put(`http://localhost:3001/allposts/${postId}`, {
+    ...post.value,
+    comments: updatedComments
+  })
+
+  post.value = { ...post.value, comments: updatedComments }
+}
+
+
 const reportComment = (id) => {
   alert(`댓글 (ID: ${id})을 신고하시겠습니까?`)
 }

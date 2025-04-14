@@ -66,6 +66,23 @@ const handleAddComment = async (newComment) => {
   post.value = { ...post.value, comments: updatedComments }
 }
 
+const handleEditComment = async ({ id, newContent }) => {
+  const updatedComments = post.value.comments.map(comment =>
+    comment.id === id
+      ? { ...comment, content: newContent, date: new Date().toISOString() }
+      : comment
+  )
+
+  await axios.put(`http://localhost:3001/allposts/${postId}`, {
+    ...post.value,
+    comments: updatedComments
+  })
+
+  // 반응성 강제 트리거!
+  post.value = { ...post.value, comments: updatedComments }
+}
+
+
 const handleDeleteComment = async (id) => {
   console.log('삭제 처리 시작:', id)
 
