@@ -746,11 +746,14 @@
       "id": "ec74",
       "postId": "7e43",
       "userId": "1"
+<<<<<<< HEAD
     },
     {
       "id": "3950",
       "postId": "23",
       "userId": "11"
+=======
+>>>>>>> 82b20e66f231be9167a76d55b2d430a0d587b2b5
     }
   ],
   "bookmark": [
@@ -768,11 +771,14 @@
       "id": "4f51",
       "postId": "7e43",
       "userId": "1"
+<<<<<<< HEAD
     },
     {
       "id": "1b17",
       "postId": "23",
       "userId": "11"
+=======
+>>>>>>> 82b20e66f231be9167a76d55b2d430a0d587b2b5
     }
   ],
   "messages": [

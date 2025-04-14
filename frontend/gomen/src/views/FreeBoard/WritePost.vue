@@ -66,6 +66,7 @@ const submitPost = async () => {
   comments: [],
   is_blinded: "N" // ✅ 블라인드 기본값 추가
 }
+
   try {
     const res = await axios.post('http://localhost:3001/allposts', newPost)
     newPost.id = res.data.id
