@@ -1,20 +1,25 @@
-<template>
+<template> 
   <div class="free-board-page">
     <main class="board-container">
       <h2 class="board-title">🌱 자유 게시판</h2>
 
       <router-link to="/boards/free" class="back-button">목록</router-link>
 
-      <!-- post 데이터가 로드되고, category와 title 등이 존재할 때만 PostCard 렌더링 -->
       <PostCard v-if="post && post.category && post.title" :post="post" :isAuthor="isAuthor" />
       
-      <!-- post와 comments 배열이 존재하고, comments 배열이 비어있지 않을 때만 CommentList 렌더링 -->
-      <CommentList v-if="post && Array.isArray(post.comments) && post.comments.length > 0" :comments="post.comments" />
-      
-      <!-- 댓글 폼 -->
-      <CommentForm />
-    </main>
-  </div>
+      <!-- 🔥 댓글 목록 -->
+      <CommentList
+  v-if="post && Array.isArray(post.comments)"
+  :key="post.comments.length"
+  :comments="post.comments"
+  @edit-comment="handleEditComment"
+  @delete-comment="handleDeleteComment"
+  @add-reply="handleAddReply"
+/>
+    <!-- 댓글 폼 -->
+    <CommentForm  @add-comment="handleAddComment" />
+  </main>
+</div>
 </template>
 
 <script setup>
@@ -28,25 +33,82 @@ import CommentForm from '@/components/freeboard/CommentForm.vue'
 
 const post = ref(null)
 const route = useRoute()
+const postId = route.params.id
 const user = JSON.parse(localStorage.getItem('user'))
 
-// 작성자인지 여부를 확인하는 computed 속성
+// ✔ 작성자인지 여부
 const isAuthor = computed(() => {
   return post.value && user && post.value.author === user.nickname
 })
 
+// ✔ 게시글 데이터 로딩
 onMounted(async () => {
+  await fetchPost()
+})
+
+const fetchPost = async () => {
   try {
-    const postId = route.params.id
     const res = await axios.get(`http://localhost:3001/allposts/${postId}`)
     post.value = res.data
-    console.log('🔥 게시물:', post.value)
   } catch (error) {
     console.error('데이터 로딩 실패:', error)
   }
-})
-</script>
+}
 
+// ✅ 댓글 수정
+const handleAddComment = async (newComment) => {
+  const updatedComments = [...post.value.comments, newComment]
+
+  await axios.put(`http://localhost:3001/allposts/${postId}`, {
+    ...post.value,
+    comments: updatedComments
+  })
+
+  post.value = { ...post.value, comments: updatedComments }
+}
+
+const handleDeleteComment = async (id) => {
+  console.log('삭제 처리 시작:', id)
+
+  const updatedComments = post.value.comments.filter(
+    (comment) => String(comment.id) !== String(id)
+  )
+
+  console.log('업데이트된 댓글 목록:', updatedComments)
+
+  try {
+    await axios.put(`http://localhost:3001/allposts/${postId}`, {
+      ...post.value,
+      comments: updatedComments,
+    })
+
+    console.log('서버 업데이트 완료')
+    post.value.comments = JSON.parse(JSON.stringify(updatedComments))
+    console.log('post.value.comments 갱신됨')
+  } catch (error) {
+    console.error('삭제 에러:', error)
+  }
+}
+
+
+
+// ✅ 대댓글 추가
+const handleAddReply = async ({ commentId, reply }) => {
+  const updatedComments = post.value.comments.map(comment =>
+    comment.id === commentId
+      ? { ...comment, replies: [...(comment.replies || []), reply] }
+      : comment
+  )
+
+  await axios.put(`http://localhost:3001/allposts/${postId}`, {
+    ...post.value,
+    comments: updatedComments
+  })
+
+  post.value.comments = updatedComments
+}
+
+</script>
 
 <style scoped>
 .free-board-page {
