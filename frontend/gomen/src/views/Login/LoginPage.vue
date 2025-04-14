@@ -59,13 +59,19 @@ const login = async () => {
     })
 
     if (response.data.length > 0) {
-      // 로그인 성공
+      // 회원 정보 불러오기 성공
       const user = response.data[0]
-      console.log('✅ 로그인 성공!', user)
+      console.log('✅ 회원 정보 불러오기 성공!', user)
+
+      const userStatus = user.isQuitted
+      if(userStatus === 'Y'){
+        alert('❌ 탈퇴 처리된 회원입니다!')
+        return
+      }
       
       // 예: 로그인 상태 저장 (로컬스토리지 사용)
       localStorage.setItem('user', JSON.stringify(user))
-      localStorage.setItem('loginId', loginId);
+      localStorage.setItem('loginId', loginId.value);
       localStorage.setItem('userId', user.id);
 
       // 🔥 Pinia 상태 반영
