@@ -1,9 +1,10 @@
+리뷰
 <template>
     <div>
       <div class="review-container">
         <div class="review-header">
           <h2>별점 리뷰 작성</h2>
-          <button class="submit-button">제출하기</button>
+          <button class="submit-button" @click="submitReview">제출하기</button>
         </div>
   
         <ReviewTextarea />
@@ -13,6 +14,7 @@
   </template>
   
   <script>
+  import { useRouter, useRoute } from 'vue-router' //
   import HeaderComponent from '@/components/common/Header.vue'
   import FooterComponent from '@/components/common/Footer.vue'
   import ReviewTextarea from '@/components/Review/ReviewTextArea.vue'
@@ -25,6 +27,22 @@
       ReviewTextarea,
       StarRating,
     },
+    setup() {
+    const router = useRouter()
+    const route = useRoute()
+
+    const submitReview = async () => {
+      try {
+        alert('✅ 리뷰가 제출되었습니다.')
+        router.push('/main')
+      } catch (err) {
+        console.error('리뷰 제출 실패:', err)
+        alert('⚠️ 리뷰 제출 중 오류가 발생했어요.')
+      }
+    }
+
+    return { submitReview }
+  }
   }
   </script>
   
