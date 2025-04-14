@@ -67,6 +67,7 @@ const submitForm = async () => {
       averageRating: 0,
       college: '',
       blog: '',
+      violationScore: 0
     }
 
     await axios.post('http://localhost:3001/users', newUser)
