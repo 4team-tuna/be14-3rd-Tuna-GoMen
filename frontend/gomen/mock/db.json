@@ -703,6 +703,57 @@
       "likes": 5,
       "content": "Vue.js에서 상태 관리를 어떻게 효율적으로 할 수 있을까요?",
       "comments": []
+    },
+    {
+      "id": "7e43",
+      "title": "aaa",
+      "author": "aaa",
+      "date": "25.04.14",
+      "createdAt": "2025-04-14T00:31:02.975Z",
+      "category": "장비추천",
+      "views": 0,
+      "likes": 0,
+      "content": "aaa",
+      "comments": []
+    }
+  ],
+  "likes": [
+    {
+      "id": "0721",
+      "postId": "7e43",
+      "userId": "1744531166026"
+    },
+    {
+      "id": "b553",
+      "postId": "23",
+      "userId": "1744531166026"
+    },
+    {
+      "id": "fcde",
+      "postId": "25",
+      "userId": "1744531166026"
+    },
+    {
+      "id": "ec74",
+      "postId": "7e43",
+      "userId": "1"
+    }
+  ],
+  "bookmark": [
+    {
+      "id": "f60a",
+      "postId": "7e43",
+      "userId": "1744531166026"
+    },
+    {
+      "id": "4e4b",
+      "postId": "25",
+      "userId": "1744531166026"
+    },
+    {
+      "id": "4f51",
+      "postId": "7e43",
+      "userId": "1"
     }
   ],
   "messages": [

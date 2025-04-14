@@ -19,7 +19,7 @@
 
     <div class="post-actions">
       <span class="likes" @click="toggleLike">
-  {{ liked ? '❤️' : '🤍' }} {{ likeCount }}
+  {{ liked ? '❤️' : '🤍' }} {{ likesCount }}
 </span>
 
 <span class="bookmark" @click="toggleBookmark">
@@ -30,37 +30,102 @@
   </section>
 </template>
 
+
+
+
+
 <script setup>
-import { ref, computed } from 'vue'
+import { ref, computed, onMounted } from 'vue'
+import axios from 'axios'
 
 const props = defineProps({ post: Object })
+
+const myId = localStorage.getItem('userId')
 
 const reportPost = () => {
   alert('이 게시글을 신고하시겠습니까?')
 }
 
+  // 좋아요 관련
 const liked = ref(false)
 const likeCount = ref(props.post.likes)
 
-const toggleLike = () => {
+const toggleLike = async () => {
   liked.value = !liked.value
   likeCount.value += liked.value ? 1 : -1
+
+  const endpoint = 'http://localhost:3001/likes'
+  const payload = { postId: props.post.id, userId: myId }
+
+  if (liked.value) {
+    await axios.post(endpoint, payload)
+  } else {
+    // 이미 있는 like를 찾아서 삭제
+    const res = await axios.get(`${endpoint}?postId=${props.post.id}&userId=${myId}`)
+    if (res.data.length > 0) {
+      await axios.delete(`${endpoint}/${res.data[0].id}`)
+    }
+  }
+  // ✅ 서버에서 최신 좋아요 수 가져오기
+  await fetchLikesCount()
+}
+
+// 좋아요 갯수
+const likesCount = ref(0)
+
+const fetchLikesCount = async () => {
+  try {
+    const response = await axios.get('http://localhost:3001/likes', {
+      params: {
+        postId: props.post.id
+      }
+    })
+    console.log('✅ likes 데이터:', response.data)
+    likesCount.value = response.data.length
+  } catch (error) {
+    console.error('❌ 좋아요 수 불러오기 실패:', error)
+  }
 }
 
 // 북마크 관련
 const bookmarked = ref(false)
-const toggleBookmark = () => {
+const toggleBookmark = async () => {
   bookmarked.value = !bookmarked.value
+
+  const endpoint = 'http://localhost:3001/bookmark'
+  const payload = { postId: props.post.id, userId: myId }
+
+  if (bookmarked.value) {
+    await axios.post(endpoint, payload)
+  } else {
+    const res = await axios.get(`${endpoint}?postId=${props.post.id}&userId=${myId}`)
+    if (res.data.length > 0) {
+      await axios.delete(`${endpoint}/${res.data[0].id}`)
+    }
+  }
 }
 
-// 이미지 경로는 실제 네 경로에 맞게 조정해줘야 함!
 const bookmarkImage = computed(() =>
   bookmarked.value
     ? new URL('@/assets/bookmark-filled.png', import.meta.url).href
     : new URL('@/assets/bookmark-empty.png', import.meta.url).href
 )
 
+
+  // 최초 조회 시에 좋아요/북마크 상태 로딩
+  onMounted(async () => {
+    const likeRes = await axios.get(`http://localhost:3001/likes?postId=${props.post.id}&userId=${myId}`)
+    liked.value = likeRes.data.length > 0
+
+    const bookmarkRes = await axios.get(`http://localhost:3001/bookmark?postId=${props.post.id}&userId=${myId}`)
+    bookmarked.value = bookmarkRes.data.length > 0
+
+    fetchLikesCount()
+  })
 </script>
+
+
+
 
 <style scoped>
 
