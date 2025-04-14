@@ -246,7 +246,7 @@
       "id": "23",
       "title": "Next.js로 SSR 블로그 플랫폼 만들 사람?",
       "teamName": "넥스트레벨",
-      "nickname": "SSR연구가",
+      "nickname": "준서",
       "createdAt": "2025-04-12T10:10:00Z",
       "isActivated": "Y",
       "teamIntroduce": "Next.js의 SSR 기능을 활용해 SEO 친화적인 블로그 플랫폼을 만들고 있어요. 정적 페이지, 동적 라우팅 등에 관심 있다면 참여해요!",
@@ -262,7 +262,14 @@
       "isActivated": "Y",
       "teamIntroduce": "Django 기반의 MVP 웹 서비스를 빠르게 만들고 있습니다. 관리자 페이지, 로그인 기능 등 실무 기능 위주로 개발 중이에요!",
       "isDeleted": "N",
-      "applicants": []
+      "applicants": [
+        {
+          "nickname": "MinjiVely",
+          "introduction": "ㅁㄴㅇㅁㄴㅇ",
+          "blog": "https://minji.dev",
+          "appliedAt": "2025-04-14T01:06:03.497Z"
+        }
+      ]
     },
     {
       "id": "25",

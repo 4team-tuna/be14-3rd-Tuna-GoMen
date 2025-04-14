@@ -1,10 +1,13 @@
 <template>
   <div class="team-recruit-detail-page">
     <main class="detail-container" v-if="post">
-      <h2 class="board-title">팀 모집 게시판</h2>
-      <div style="display: flex; justify-content: flex-end; margin-bottom: 1rem;">
-        <ApplicantListButton v-if="post && post.nickname === userNickname" :postId="post.id" />
+      <div class="board-header">
+        <h2 class="board-title">팀 모집 게시판</h2>
+        <div class="applicant-button-wrapper">
+          <ApplicantListButton v-if="post && post.nickname === userNickname" :postId="post.id" />
+        </div>
       </div>
+
       <div class="post-card">
         <div class="top-row">
           <!-- 모집 상태 관련 기능 제거됨 -->
@@ -70,7 +73,6 @@ const userNickname = parsedUser?.nickname || ''
 const handleSubmit = async (payload) => {
   const { nickname, introduction, blog } = payload
 
-  // 자신이 작성한 게시글에는 신청할 수 없도록 처리
   if (post.value.nickname === userNickname) {
     alert('본인이 작성한 게시글에는 신청할 수 없습니다.')
     closeModal()
@@ -85,7 +87,6 @@ const handleSubmit = async (payload) => {
   const postId = route.params.id
   const currentPost = await getPostData(postId)
 
-  // 중복 지원 체크
   const isAlreadyApplied = currentPost.applicants.some(applicant => applicant.nickname === userNickname)
   if (isAlreadyApplied) {
     alert('이미 지원한 팀입니다.')
@@ -174,11 +175,23 @@ watch(() => route.params.id, (newId) => {
   gap: 24px;
 }
 
+.board-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 20px;
+  border-bottom: 1px solid #ddd;
+}
+
 .board-title {
   font-size: 24px;
   font-weight: bold;
-  padding: 20px 0;
-  border-bottom: 1px solid #ddd;
+  margin: 0;
+}
+
+.applicant-button-wrapper {
+  display: flex;
+  align-items: center;
 }
 
 .post-card {
