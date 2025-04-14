@@ -87,6 +87,7 @@ const applyAsTeam = async () => {
 const applyAsIndividual = async () => {
   try {
     const payload = {
+      type: 'individual',
       mentorId: mentor.value.userId,
       menteeId: user.id,
       name: user.nickname,
