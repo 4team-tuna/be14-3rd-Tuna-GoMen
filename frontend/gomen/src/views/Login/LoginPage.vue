@@ -71,7 +71,7 @@ const login = async () => {
       
       // 예: 로그인 상태 저장 (로컬스토리지 사용)
       localStorage.setItem('user', JSON.stringify(user))
-      localStorage.setItem('loginId', loginId);
+      localStorage.setItem('loginId', loginId.value);
       localStorage.setItem('userId', user.id);
 
       // 🔥 Pinia 상태 반영
