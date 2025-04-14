@@ -46,16 +46,26 @@ const confirmAction = async (type, index) => {
   const target = requests.value[index]
 
   try {
+    // 요청 상태 처리 완료
     await axios.patch(`http://localhost:3001/mentorRequests/${target.id}`, {
       done: true
     })
     target.done = true
+
+    // 💡 '수락'일 경우 해당 유저의 isMentor 값도 업데이트
+    if (type === '수락') {
+      await axios.patch(`http://localhost:3001/users/${target.userId}`, {
+        isMentor: 'Y'
+      })
+    }
+
     alert(`요청이 ${type} 처리되었습니다.`)
   } catch (error) {
     console.error(`${type} 처리 실패:`, error)
     alert('처리 중 오류가 발생했습니다.')
   }
 }
+
 </script>
 
 
