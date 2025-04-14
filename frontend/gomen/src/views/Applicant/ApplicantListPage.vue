@@ -7,6 +7,11 @@
 
     <ChangeRecruitmentStatusButton />
 
+    <!-- 지원자가 없을 때 문구 표시 -->
+    <div v-if="applicants.length === 0" class="no-applicants-message">
+      지원자가 없습니다.
+    </div>
+
     <div class="applicant-cards">
       <div
         v-for="(applicant, index) in applicants"
@@ -49,10 +54,10 @@ const fetchApplicants = async () => {
   }
 
   if (data.isActivated === 'N') {
-  alert('모집이 종료되어 지원자 정보를 볼 수 없습니다.')
-  router.push('/board/team-recruit')
-  return
-}
+    alert('모집이 종료되어 지원자 정보를 볼 수 없습니다.')
+    router.push('/board/team-recruit')
+    return
+  }
 }
 
 const goToPostPage = () => {
@@ -102,5 +107,13 @@ onMounted(fetchApplicants)
   flex: 0 0 calc(50% - 16px);
   display: flex;
   justify-content: center;
+}
+
+/* 지원자가 없을 때 문구 스타일 */
+.no-applicants-message {
+  font-size: 1.25rem;
+  color: #888;
+  text-align: center;
+  margin-top: 40px;
 }
 </style>
