@@ -67,20 +67,38 @@ const handleProcess = async (reportId) => {
   }
 }
 
-// 블라인드 여부 PATCH
 const handleBlind = async (reportId) => {
   try {
+    const report = reports.value.find(r => r.id === reportId)
+    if (!report) return
+
+    // 1. report 객체의 is_blinded: 'Y' 처리
     await axios.patch(`http://localhost:3001/reports/${reportId}`, {
       is_blinded: 'Y'
     })
-    const target = reports.value.find(r => r.id === reportId)
-    if (target) target.is_blinded = 'Y'
+    report.is_blinded = 'Y'
+
+    // 2. 게시글 블라인드 처리 (postId가 존재할 경우)
+    if (report.postId) {
+      await axios.patch(`http://localhost:3001/allposts/${report.postId}`, {
+        is_blinded: 'Y'
+      })
+    }
+
+    // ✅ 향후 댓글 신고일 경우에도 대응 가능
+    // if (report.commentId) {
+    //   await axios.patch(`http://localhost:3001/comments/${report.commentId}`, {
+    //     is_blinded: 'Y'
+    //   })
+    // }
+
     alert('블라인드 처리되었습니다.')
   } catch (error) {
     console.error('블라인드 처리 실패:', error)
     alert('블라인드 처리 중 오류가 발생했습니다.')
   }
 }
+
 </script>
 
   

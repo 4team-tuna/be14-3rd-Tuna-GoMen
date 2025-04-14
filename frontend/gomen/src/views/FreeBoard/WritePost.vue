@@ -65,6 +65,7 @@ nickname.value = user ? user.nickname : ''
   likes: 0,
   content: content.value,
   comments: [],
+  is_blinded: "N" // ✅ 블라인드 기본값 추가
 }
 
 
