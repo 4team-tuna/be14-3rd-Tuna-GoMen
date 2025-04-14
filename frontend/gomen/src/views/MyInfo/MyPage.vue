@@ -1,6 +1,13 @@
 <template>
   <div class="mypage-container">
     <h1>My Page</h1>
+    <!-- 관리자 메뉴 버튼 -->
+    <button 
+      v-if="isAdmin" 
+      class="admin-button" 
+      @click="goToAdminPage">
+      관리자 메뉴
+    </button>
   
     <!-- 프로필 이미지 및 추가 버튼 -->
     <section class="info-box" v-if="user">
@@ -76,6 +83,13 @@
         <div class="more">더 보기 &gt;</div>
         </div>
       </section>
+
+      <!-- 🔐 비밀번호 변경 버튼 (북마크 게시글 아래) -->
+    <section class="info-box">
+      <h2>비밀번호 변경</h2>
+      <p>비밀번호를 변경하려면 아래 버튼을 눌러주세요.</p>
+      <button class="action-button" @click="openChangePasswordModal">비밀번호 변경</button>
+    </section>
   
       <!-- 멤버 유형 -->
       <section class="simple-box" v-if="user">
@@ -87,6 +101,12 @@
           </button>
         </div>
       </section>
+
+      <!-- 🔴 회원 탈퇴 버튼 -->
+    <section class="info-box">
+      <h2>회원 탈퇴</h2>
+      <button class="danger-button" @click="openPasswordCheckModal">회원 탈퇴</button>
+    </section>
 
   </div>
 
@@ -113,6 +133,12 @@
     @imageSelected="addProfilePic"
     @close="closeProfileUploaderModal"
   />
+
+  <PasswordCheckModal
+  v-if="showPasswordCheckModal"
+  @password-confirmed="checkPassword"
+  @close="closePasswordCheckModal"
+  />
 </template>
   
 
@@ -124,6 +150,7 @@
   import ApplyMentorModal from '@/components/user/ApplyMentorModal.vue';
   import ChangePasswordModal from '@/components/user/ChangePasswordModal.vue';
   import ProfileUploaderModal from '@/components/user/ProfileUploaderModal.vue';
+  import PasswordCheckModal from '@/components/user/PasswordCheckModal.vue';
   import { ref, onMounted } from 'vue'
   import axios from 'axios'
   import { useRouter } from 'vue-router';
@@ -132,6 +159,12 @@
   const changeInfo = () => {router.push('/changeInfo')}
   
   const userId = localStorage.getItem('userId');
+  
+  // 관리자용 기능
+  const isAdmin = ref(localStorage.getItem('loginId') === 'ADMIN')
+  const goToAdminPage = () => {
+    router.push('/admin')  // 관리자 페이지 라우터로 이동
+  }
 
   // Modal창 띄우기용
   const showCareerModal = ref(false);
@@ -144,9 +177,11 @@
   const openChangePasswordModal = () => { showChangePasswordModal.value = true }
   const closeChangePasswordModal = () => { showChangePasswordModal.value = false }
   const showProfileUploaderModal = ref(false);
-  const openProfileUploaderModal = () => { console.log('모달 오픈!');
-  showProfileUploaderModal.value = true;}
+  const openProfileUploaderModal = () => { showProfileUploaderModal.value = true;}
   const closeProfileUploaderModal = () => { showProfileUploaderModal.value = false;}
+  const showPasswordCheckModal = ref(false);
+  const openPasswordCheckModal = () => { showPasswordCheckModal.value = true;}
+  const closePasswordCheckModal = () => { showPasswordCheckModal.value = false;}
   
   // 회원 정보 조회해서 띄우기
   const user = ref(null)
@@ -248,6 +283,28 @@
     fetchBookmarkedPosts()
   })
 
+    // 비밀번호 변경
+    const changePassword = async ({ currentPassword, newPassword }) => {
+  try {
+    if (user.value.password !== currentPassword) {
+      alert('현재 비밀번호가 일치하지 않습니다.');
+      return;
+    }
+
+    await axios.patch(`http://localhost:3001/users/${userId}`, {
+      password: newPassword
+    });
+
+    user.value.password = newPassword; // 로컬 정보도 갱신
+    alert('비밀번호가 변경되었습니다.');
+    closeChangePasswordModal()
+  } catch (err) {
+    console.error('비밀번호 변경 실패:', err);
+    alert('비밀번호 변경 중 오류가 발생했습니다.');
+    closeChangePasswordModal()
+  }
+};
+
    // 멘토 신청
 const applyMentor = async (message) => {
   try {
@@ -270,30 +327,55 @@ const applyMentor = async (message) => {
     }
   }
 
-  // 비밀번호 변경
-  const changePassword = async ({ currentPassword, newPassword }) => {
+  // 회원 탈퇴
+  const checkPassword = async (password) => {
   try {
-    if (user.value.password !== currentPassword) {
-      alert('현재 비밀번호가 일치하지 않습니다.');
-      return;
+    if (user.value.password !== password) {
+      alert('❌ 비밀번호가 일치하지 않습니다.')
+      return
     }
 
-    await axios.patch(`http://localhost:3001/users/${userId}`, {
-      password: newPassword
-    });
+    const confirmed = confirm('정말로 회원을 탈퇴하시겠습니까? 이 작업은 되돌릴 수 없습니다.')
+    if (!confirmed) return
 
-    user.value.password = newPassword; // 로컬 정보도 갱신
-    alert('비밀번호가 변경되었습니다.');
-    closeChangePasswordModal()
+    await axios.patch(`http://localhost:3001/users/${userId}`, {
+      isQuitted: 'Y'
+    })
+
+    alert('😢 회원 탈퇴가 완료되었습니다. 안녕히 가세요.')
+    localStorage.clear()
+
+    router.push('/')
   } catch (err) {
-    console.error('비밀번호 변경 실패:', err);
-    alert('비밀번호 변경 중 오류가 발생했습니다.');
-    closeChangePasswordModal()
+    console.error('회원 탈퇴 실패:', err)
+    alert('탈퇴 중 오류가 발생했습니다.')
+  } finally {
+    
   }
-};
+}
+
+
 </script>
   
 <style scoped>
+
+.admin-button {
+  position: absolute; /* 부모 요소(mypage-container) 기준으로 절대 위치 설정 */
+  top: 10px; /* 상단에서 10px 떨어지게 */
+  right: 10px; /* 오른쪽에서 10px 떨어지게 */
+  background-color: #fff; /* 기본 배경색 */
+  padding: 10px 20px;
+  border-radius: 5px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* 그림자 효과 */
+  font-size: 14px;
+  color: #333;
+  transition: background-color 0.3s ease; /* 색 변경 효과 */
+}
+
+.admin-button:hover {
+  background-color: #4CAF50; /* hover 시 배경색을 다른 색으로 변경 */
+  color: #fff; /* hover 시 글자색을 흰색으로 변경 */
+}
 
 .mypage-container {
   max-width: 720px;
@@ -301,6 +383,8 @@ const applyMentor = async (message) => {
   padding: 40px 20px;
   background-color: #f6f6f6;
   font-family: 'Pretendard', sans-serif;
+  position: relative; /* 자식 요소의 절대 위치를 잡기 위해 relative 설정 */
+
 }
 
 h1 {
@@ -499,5 +583,19 @@ h1 {
     text-decoration: underline;
     color: #0ea5e9; /* Tailwind의 sky-500 */
   }
+
+  .danger-button {
+  background-color: #dc3545;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 10px;
+  font-size: 14px;
+  border: none;
+  cursor: pointer;
+}
+
+.danger-button:hover {
+  background-color: #b02a37;
+}
 
 </style>
