@@ -61,10 +61,12 @@ const fetchApplicants = async () => {
     const userRes = await axios.get('http://localhost:3001/users')
     const users = userRes.data
 
+    const defaultImage = new URL('@/assets/icon-user.png', import.meta.url).href
+
     const imageMap = {}
     nicknames.forEach(nick => {
       const found = users.find(u => u.nickname === nick)
-      imageMap[nick] = found?.image || require('@/assets/icon-user.png') 
+      imageMap[nick] = found?.image || defaultImage
     })
 
     profileImages.value = imageMap

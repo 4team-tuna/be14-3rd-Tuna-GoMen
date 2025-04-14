@@ -40,6 +40,7 @@
   const title = ref('')
   const teamName = ref('')
   const content = ref('')
+  const applicants = ref([])
   
   // 로그인한 사용자 정보 가져오기
   const user = JSON.parse(localStorage.getItem('user')) || {}
@@ -62,8 +63,8 @@
       createdAt: new Date().toISOString(),
       isActivated: 'Y',
       isDeleted: 'N',
-      applicants: selectedApplicants.value.map(a => ({
-        user_id: a.user_id,              
+      applicants: applicants.value.map(a => ({
+        user_id: a.user_id,
         nickname: a.nickname,
         introduction: a.introduction
       }))

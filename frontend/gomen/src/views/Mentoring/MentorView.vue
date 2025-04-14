@@ -70,7 +70,14 @@ import MyMentorCard from '@/components/mentoring/MyMentorCard.vue'
 import MyTeamCard from '@/components/mentoring/MyTeamCard.vue'
 import ExtensionRequest from '@/components/mentoring/ExtensionRequest.vue'
 
-const mentoringSpaceId = 1000
+const props = defineProps({
+  spaceId: {
+    type: [String, Number],
+    required: true
+  }
+})
+
+const mentoringSpaceId = props.spaceId
 
 const mentor = ref(null)
 const teamMembers = ref([])
@@ -102,7 +109,8 @@ onMounted(async () => {
     const memberList = membersRes.data
 
     teamMembers.value = memberList.map(m => {
-      const user = allUsers.find(u => u.id === String(m.user_id))
+      const user = allUsers.find(u => String(u.id) === String(m.user_id))
+      console.log('🧩 매칭된 유저:', user)
       return {
         ...m,
         name: user?.name || user?.nickname || '알 수 없음',

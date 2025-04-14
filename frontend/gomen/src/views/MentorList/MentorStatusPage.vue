@@ -48,7 +48,6 @@ const getImageUrl = (img) => {
 
 const acceptApplicant = async (applicant) => {
   try {
-    console.log('👀 등록 대상 멤버:', applicant.applicants)
     const mentorUser = JSON.parse(localStorage.getItem('user'))
 
     // 1. 멘토링 공간 생성
@@ -64,7 +63,7 @@ const acceptApplicant = async (applicant) => {
 
     const mentoringSpaceId = spaceRes.data.id
 
-    // ✅ 2. 멘토링 멤버 등록 (개인 or 팀)
+    // 2. 멘토링 멤버 등록
     if (applicant.type === 'individual') {
       await api.post('/mentoringMembers', {
         mentoring_space_id: mentoringSpaceId,
@@ -72,10 +71,28 @@ const acceptApplicant = async (applicant) => {
         leftover_questions: 10
       })
     } else if (applicant.type === 'team') {
+      // ✅ 팀장 user_id 조회
+      const usersRes = await api.get('/users')
+      const users = usersRes.data
+      const leader = users.find(u => u.nickname === applicant.leaderNickname)
+
+      if (!leader) {
+        alert(`팀장(${applicant.leaderNickname})의 정보를 찾을 수 없습니다.`)
+        return
+      }
+
+      // ✅ 팀장 등록
+      await api.post('/mentoringMembers', {
+        mentoring_space_id: mentoringSpaceId,
+        user_id: leader.id,
+        leftover_questions: 10
+      })
+
+      // ✅ 팀원 등록
       for (const mentee of applicant.applicants) {
         await api.post('/mentoringMembers', {
           mentoring_space_id: mentoringSpaceId,
-          user_id: mentee.id,  // ⚠ user_id가 있어야 함!
+          user_id: mentee.id,
           leftover_questions: 10
         })
       }
@@ -91,7 +108,7 @@ const acceptApplicant = async (applicant) => {
     router.push('/mentoring')
 
   } catch (error) {
-    console.error('멘토링 공간 생성 실패:', error)
+    console.error('멘토링 수락 중 오류:', error)
     alert('멘토링 수락 중 오류가 발생했습니다.')
   }
 }

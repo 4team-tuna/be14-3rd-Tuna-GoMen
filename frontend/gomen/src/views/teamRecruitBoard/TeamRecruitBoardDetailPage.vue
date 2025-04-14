@@ -86,7 +86,7 @@ const handleSubmit = async (payload) => {
     return
   }
 
-  const { nickname, introduction, blog } = payload
+  const { user_id, nickname, introduction, blog } = payload
 
   if (post.value.nickname === userNickname) {
     alert('본인이 작성한 게시글에는 신청할 수 없습니다.')
@@ -110,6 +110,7 @@ const handleSubmit = async (payload) => {
   }
 
   const applicant = {
+    user_id,
     nickname,
     introduction,
     blog,

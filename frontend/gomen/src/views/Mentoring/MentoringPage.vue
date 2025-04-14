@@ -1,6 +1,5 @@
 <template>
   <div class="mentoring-page">
-    <!-- 로딩 중일 때는 아무 것도 렌더링하지 않음 -->
     <div v-if="spaceId">
       <MentorView v-if="isMentor" :spaceId="spaceId" />
       <MenteeView v-else :spaceId="spaceId" />
@@ -23,20 +22,42 @@ const router = useRouter()
 
 onMounted(async () => {
   try {
-    const res = await api.get(`/mentoringSpaces?userId=${user.id}`)
-    const mySpace = res.data[0]
-    if (!mySpace) return
-    console.log('mySpace:', mySpace)
-    console.log('🔍 is_activated:', mySpace.is_activated)
-    if (mySpace.is_activated !== 'Y') {
-      alert('⛔ 종료된 멘토링 공간입니다.')
-      return router.push('/main')
+    // 1. 멘티로 등록된 공간 먼저 조회
+    const memberRes = await api.get(`/mentoringMembers?user_id=${user.id}`)
+    const myMembership = memberRes.data[0]
+
+    if (myMembership) {
+      const spaceRes = await api.get(`/mentoringSpaces/${myMembership.mentoring_space_id}`)
+      const mySpace = spaceRes.data
+
+      if (mySpace.is_activated !== 'Y') {
+        alert('⛔ 종료된 멘토링 공간입니다.')
+        return router.push('/main')
+      }
+
+      spaceId.value = mySpace.id
+      isMentor.value = false
+      console.log('🧑‍🎓 멘티로 참여한 공간:', mySpace.id)
+      return
     }
 
-    spaceId.value = mySpace.id  // ✅ 확정적으로 id 사용
-    isMentor.value = String(mySpace.mentor_id) === String(user.id) // ✅ 타입 강제 일치
+    // 2. 멘토로 등록된 공간 조회
+    const mentorRes = await api.get(`/mentoringSpaces?mentor_id=${user.id}&is_activated=Y`)
+    const myMentorSpace = mentorRes.data[0]
+
+    if (myMentorSpace) {
+      spaceId.value = myMentorSpace.id
+      isMentor.value = true
+      console.log('🧑‍🏫 멘토로 운영 중인 공간:', myMentorSpace.id)
+      return
+    }
+
+    // 3. 둘 다 없으면
+    alert('멘토링 공간에 속해 있지 않습니다.')
+    router.push('/main')
   } catch (e) {
     console.error('멘토링 공간 조회 실패:', e)
+    alert('멘토링 공간을 불러오지 못했습니다.')
     router.push('/main')
   }
 })
