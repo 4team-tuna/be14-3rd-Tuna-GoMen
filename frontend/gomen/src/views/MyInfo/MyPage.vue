@@ -83,6 +83,13 @@
         <div class="more">더 보기 &gt;</div>
         </div>
       </section>
+
+      <!-- 🔐 비밀번호 변경 버튼 (북마크 게시글 아래) -->
+    <section class="info-box">
+      <h2>비밀번호 변경</h2>
+      <p>비밀번호를 변경하려면 아래 버튼을 눌러주세요.</p>
+      <button class="action-button" @click="openChangePasswordModal">비밀번호 변경</button>
+    </section>
   
       <!-- 멤버 유형 -->
       <section class="simple-box" v-if="user">
@@ -94,6 +101,12 @@
           </button>
         </div>
       </section>
+
+      <!-- 🔴 회원 탈퇴 버튼 -->
+    <section class="info-box">
+      <h2>회원 탈퇴</h2>
+      <button class="danger-button" @click="openPasswordCheckModal">회원 탈퇴</button>
+    </section>
 
   </div>
 
@@ -120,6 +133,12 @@
     @imageSelected="addProfilePic"
     @close="closeProfileUploaderModal"
   />
+
+  <PasswordCheckModal
+  v-if="showPasswordCheckModal"
+  @password-confirmed="checkPassword"
+  @close="closePasswordCheckModal"
+  />
 </template>
   
 
@@ -131,6 +150,7 @@
   import ApplyMentorModal from '@/components/user/ApplyMentorModal.vue';
   import ChangePasswordModal from '@/components/user/ChangePasswordModal.vue';
   import ProfileUploaderModal from '@/components/user/ProfileUploaderModal.vue';
+  import PasswordCheckModal from '@/components/user/PasswordCheckModal.vue';
   import { ref, onMounted } from 'vue'
   import axios from 'axios'
   import { useRouter } from 'vue-router';
@@ -157,9 +177,11 @@
   const openChangePasswordModal = () => { showChangePasswordModal.value = true }
   const closeChangePasswordModal = () => { showChangePasswordModal.value = false }
   const showProfileUploaderModal = ref(false);
-  const openProfileUploaderModal = () => { console.log('모달 오픈!');
-  showProfileUploaderModal.value = true;}
+  const openProfileUploaderModal = () => { showProfileUploaderModal.value = true;}
   const closeProfileUploaderModal = () => { showProfileUploaderModal.value = false;}
+  const showPasswordCheckModal = ref(false);
+  const openPasswordCheckModal = () => { showPasswordCheckModal.value = true;}
+  const closePasswordCheckModal = () => { showPasswordCheckModal.value = false;}
   
   // 회원 정보 조회해서 띄우기
   const user = ref(null)
@@ -261,6 +283,28 @@
     fetchBookmarkedPosts()
   })
 
+    // 비밀번호 변경
+    const changePassword = async ({ currentPassword, newPassword }) => {
+  try {
+    if (user.value.password !== currentPassword) {
+      alert('현재 비밀번호가 일치하지 않습니다.');
+      return;
+    }
+
+    await axios.patch(`http://localhost:3001/users/${userId}`, {
+      password: newPassword
+    });
+
+    user.value.password = newPassword; // 로컬 정보도 갱신
+    alert('비밀번호가 변경되었습니다.');
+    closeChangePasswordModal()
+  } catch (err) {
+    console.error('비밀번호 변경 실패:', err);
+    alert('비밀번호 변경 중 오류가 발생했습니다.');
+    closeChangePasswordModal()
+  }
+};
+
    // 멘토 신청
 const applyMentor = async (message) => {
   try {
@@ -283,27 +327,34 @@ const applyMentor = async (message) => {
     }
   }
 
-  // 비밀번호 변경
-  const changePassword = async ({ currentPassword, newPassword }) => {
+  // 회원 탈퇴
+  const checkPassword = async (password) => {
   try {
-    if (user.value.password !== currentPassword) {
-      alert('현재 비밀번호가 일치하지 않습니다.');
-      return;
+    if (user.value.password !== password) {
+      alert('❌ 비밀번호가 일치하지 않습니다.')
+      return
     }
 
-    await axios.patch(`http://localhost:3001/users/${userId}`, {
-      password: newPassword
-    });
+    const confirmed = confirm('정말로 회원을 탈퇴하시겠습니까? 이 작업은 되돌릴 수 없습니다.')
+    if (!confirmed) return
 
-    user.value.password = newPassword; // 로컬 정보도 갱신
-    alert('비밀번호가 변경되었습니다.');
-    closeChangePasswordModal()
+    await axios.patch(`http://localhost:3001/users/${userId}`, {
+      isQuitted: 'Y'
+    })
+
+    alert('😢 회원 탈퇴가 완료되었습니다. 안녕히 가세요.')
+    localStorage.clear()
+
+    router.push('/')
   } catch (err) {
-    console.error('비밀번호 변경 실패:', err);
-    alert('비밀번호 변경 중 오류가 발생했습니다.');
-    closeChangePasswordModal()
+    console.error('회원 탈퇴 실패:', err)
+    alert('탈퇴 중 오류가 발생했습니다.')
+  } finally {
+    
   }
-};
+}
+
+
 </script>
   
 <style scoped>
@@ -532,5 +583,19 @@ h1 {
     text-decoration: underline;
     color: #0ea5e9; /* Tailwind의 sky-500 */
   }
+
+  .danger-button {
+  background-color: #dc3545;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 10px;
+  font-size: 14px;
+  border: none;
+  cursor: pointer;
+}
+
+.danger-button:hover {
+  background-color: #b02a37;
+}
 
 </style>
