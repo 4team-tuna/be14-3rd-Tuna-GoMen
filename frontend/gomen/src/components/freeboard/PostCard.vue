@@ -1,44 +1,79 @@
 <template>
-  <section class="post-card">
-    <div class="post-header">
-      <span class="tag">{{ post.category }}</span>
-      <h3 class="post-title">{{ post.title }}</h3>
-      <div class="post-meta">
-  <div class="meta-left">
-    <span class="writer">{{ post.author }}</span>
-    <span class="date">{{ post.date }}</span>
-    <span class="views">조회수 {{ post.views }}</span>
+  <div v-if="post">
+    <!-- post가 null이 아니면 게시글 내용을 렌더링 -->
+    <section class="post-card">
+      <div class="post-header">
+        <span class="tag">{{ post.category }}</span>
+        <h3 class="post-title">{{ post.title }}</h3>
+        <div class="post-meta">
+          <div class="meta-left">
+            <span class="writer">{{ post.author }}</span>
+            <span class="date">{{ post.date }}</span>
+            <span class="views">조회수 {{ post.views }}</span>
+          </div>
+
+          <div class="meta-right">
+            <div v-if="isAuthor">
+              <button class="edit-btn" @click="editPost"> 수정</button>
+              <button class="delete-btn" @click="deletePost">삭제</button>
+            </div>
+
+            <span class="report" @click="reportPost">🚨 신고</span>
+          </div>
+        </div>
+      </div>
+      <p class="post-content" v-html="post.content"></p>
+
+      <div class="post-actions">
+        <span class="likes" @click="toggleLike">
+          {{ liked ? '❤️' : '🤍' }} {{ likesCount }}
+        </span>
+
+        <span class="bookmark" @click="toggleBookmark">
+          <img :src="bookmarkImage" alt="북마크" class="bookmark-icon" />
+        </span>
+      </div>
+    </section>
   </div>
-  <span class="report" @click="reportPost">🚨 신고</span>
-</div>
-
-    </div>
-
-    <!-- p 태그를 수정했습니다. -->
-    <p class="post-content" v-html="post.content"></p>
-
-    <div class="post-actions">
-      <span class="likes" @click="toggleLike">
-  {{ liked ? '❤️' : '🤍' }} {{ likesCount }}
-</span>
-
-<span class="bookmark" @click="toggleBookmark">
-  <img :src="bookmarkImage" alt="북마크" class="bookmark-icon" />
-</span>
-
-    </div>
-  </section>
 </template>
-
-
-
-
 
 <script setup>
 import { ref, computed, onMounted } from 'vue'
+import { useRouter } from 'vue-router'
 import axios from 'axios'
 
-const props = defineProps({ post: Object })
+// props를 defineProps로 정의
+const props = defineProps({
+  post: Object,
+  isAuthor: Boolean,
+})
+
+
+// 이렇게 하면 더 깔끔하게 사용할 수 있어요
+const post = computed(() => props.post)
+
+const loading = ref(true)
+
+
+console.log(props)
+
+const router = useRouter()
+
+const editPost = () => {
+  router.push(`/boards/free/edit/${props.post.id}`)
+}
+
+const deletePost = async () => {
+  if (!confirm('정말 삭제하시겠습니까?')) return
+  try {
+    await axios.delete(`http://localhost:3001/allposts/${props.post.id}`)
+    alert('삭제되었습니다.')
+    router.push('/boards/free')
+  } catch (error) {
+    console.error('삭제 실패:', error)
+    alert('삭제 중 오류가 발생했습니다.')
+  }
+}
 
 const myId = localStorage.getItem('userId')
 
@@ -47,6 +82,7 @@ const reportPost = () => {
 }
 
   // 좋아요 관련
+
 const liked = ref(false)
 const likeCount = ref(props.post.likes)
 
@@ -128,9 +164,9 @@ const bookmarkImage = computed(() =>
 
 
 <style scoped>
-
 .tag {
-  margin-bottom: 4px; /* 필요에 따라 조정 */
+  margin-bottom: 4px;
+  /* 필요에 따라 조정 */
 }
 
 .post-title {
@@ -143,6 +179,29 @@ const bookmarkImage = computed(() =>
   align-items: center;
   font-size: 14px;
   color: #888;
+}
+
+/* 오른쪽 정렬 그룹 */
+.meta-right {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* 기존 edit-btn, delete-btn 제거 */
+.edit-btn,
+.delete-btn {
+  all: unset; /* 버튼 스타일 초기화 */
+  font-size: 14px;
+  color: #888;
+  cursor: pointer;
+  margin-right: 10px; /* 간격 주기 */
+}
+
+.edit-btn:hover,
+.delete-btn:hover {
+  text-decoration: underline;
+  color: #555;
 }
 
 .bookmark-icon {
@@ -160,8 +219,10 @@ const bookmarkImage = computed(() =>
 
 .likes {
   font-size: 26px;
-  cursor: pointer;    /* 클릭 가능 표시로 바뀜 */
-  user-select: none;  /* 텍스트 선택 안 되게 */
+  cursor: pointer;
+  /* 클릭 가능 표시로 바뀜 */
+  user-select: none;
+  /* 텍스트 선택 안 되게 */
   display: flex;
   align-items: center;
   gap: 6px;
@@ -170,11 +231,12 @@ const bookmarkImage = computed(() =>
 
 .meta-left {
   display: flex;
-  gap: 10px; /* 요소 간 적당한 간격 */
+  gap: 10px;
+  /* 요소 간 적당한 간격 */
 }
 
 .post-title {
-  font-size:30px;
+  font-size: 30px;
 }
 
 .post-card {
@@ -188,7 +250,8 @@ const bookmarkImage = computed(() =>
   margin-bottom: 16px;
   display: flex;
   flex-direction: column;
-  gap: 4px; /* 원래 8px → 4px로 줄임 */
+  gap: 4px;
+  /* 원래 8px → 4px로 줄임 */
 }
 
 
@@ -206,5 +269,3 @@ const bookmarkImage = computed(() =>
   font-weight: bold;
 }
 </style>
-
-  

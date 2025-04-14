@@ -20,7 +20,6 @@
     </div>
   </div>
 </template>
-
 <script setup>
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
@@ -43,29 +42,29 @@ const submitPost = async () => {
     return
   }
   const now = new Date()
-const yy = String(now.getFullYear()).slice(2)
-const mm = String(now.getMonth() + 1).padStart(2, '0')
-const dd = String(now.getDate()).padStart(2, '0')
+  const yy = String(now.getFullYear()).slice(2)
+  const mm = String(now.getMonth() + 1).padStart(2, '0')
+  const dd = String(now.getDate()).padStart(2, '0')
 
-const formattedDate = `${yy}.${mm}.${dd}` // 👉 "25.04.13"
+  const formattedDate = `${yy}.${mm}.${dd}` // 👉 "25.04.13"
 
 
-const user = JSON.parse(localStorage.getItem('user')) // 로컬스토리지에서 객체로 가져오기
-const nickname = ref('')
-nickname.value = user ? user.nickname : ''
+  const user = JSON.parse(localStorage.getItem('user')) // 로컬스토리지에서 객체로 가져오기
+  const nickname = ref('')
+  nickname.value = user ? user.nickname : ''
 
 
   const newPost = {
-  title: title.value,
-  author: nickname.value ,
-  date: formattedDate, // ✅ 요 줄!
-  createdAt: now.toISOString(),
-  category: category.value,
-  views: 0,
-  likes: 0,
-  content: content.value,
-  comments: [],
-}
+    title: title.value,
+    author: nickname.value,
+    date: formattedDate, // ✅ 요 줄!
+    createdAt: now.toISOString(),
+    category: category.value,
+    views: 0,
+    likes: 0,
+    content: content.value,
+    comments: [],
+  }
 
 
   try {
@@ -85,7 +84,6 @@ nickname.value = user ? user.nickname : ''
   }
 }
 </script>
-
 <style scoped>
 .write-container {
   max-width: 700px;
@@ -115,8 +113,7 @@ nickname.value = user ? user.nickname : ''
   border: 1px solid #ccc;
   border-radius: 12px;
   appearance: none;
-  background: url("data:image/svg+xml;utf8,<svg fill='gray' height='16' viewBox='0 0 24 24' width='16' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/></svg>")
-    no-repeat right 1rem center;
+  background: url("data:image/svg+xml;utf8,<svg fill='gray' height='16' viewBox='0 0 24 24' width='16' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/></svg>") no-repeat right 1rem center;
   background-color: white;
   background-size: 1rem;
   padding-right: 2.5rem;

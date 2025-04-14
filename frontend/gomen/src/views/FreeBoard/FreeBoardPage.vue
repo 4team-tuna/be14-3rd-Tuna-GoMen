@@ -5,15 +5,20 @@
 
       <router-link to="/boards/free" class="back-button">목록</router-link>
 
-      <PostCard v-if="post" :post="post" />
-      <CommentList v-if="post && post.comments.length" :comments="post.comments" />
+      <!-- post 데이터가 로드되고, category와 title 등이 존재할 때만 PostCard 렌더링 -->
+      <PostCard v-if="post && post.category && post.title" :post="post" :isAuthor="isAuthor" />
+      
+      <!-- post와 comments 배열이 존재하고, comments 배열이 비어있지 않을 때만 CommentList 렌더링 -->
+      <CommentList v-if="post && Array.isArray(post.comments) && post.comments.length > 0" :comments="post.comments" />
+      
+      <!-- 댓글 폼 -->
       <CommentForm />
     </main>
   </div>
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue'
+import { ref, onMounted, computed } from 'vue'
 import { useRoute } from 'vue-router'
 import axios from 'axios'
 
@@ -23,6 +28,12 @@ import CommentForm from '@/components/freeboard/CommentForm.vue'
 
 const post = ref(null)
 const route = useRoute()
+const user = JSON.parse(localStorage.getItem('user'))
+
+// 작성자인지 여부를 확인하는 computed 속성
+const isAuthor = computed(() => {
+  return post.value && user && post.value.author === user.nickname
+})
 
 onMounted(async () => {
   try {
@@ -35,6 +46,7 @@ onMounted(async () => {
   }
 })
 </script>
+
 
 <style scoped>
 .free-board-page {
