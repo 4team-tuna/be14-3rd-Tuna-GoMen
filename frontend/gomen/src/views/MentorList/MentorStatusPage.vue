@@ -41,21 +41,40 @@
   try {
     const mentorUser = JSON.parse(localStorage.getItem('user'))
 
-    const res = await api.post('/mentoringSpaces', {
-      mentorId: mentorUser.id,
-      menteeId: applicant.userId,
-      createdAt: new Date().toISOString()
+    // 1. 멘토링 공간 생성
+    const spaceRes = await api.post('/mentoringSpaces', {
+      mentor_id: mentorUser.id,
+      personal_information: '',
+      information_is_opened: 'N',
+      personal_info_requested: 'N',
+      extension_count: 0,
+      extension_requested: 'N',
+      is_activated: 'Y'
     })
 
-        // 신청자 리스트에서 제거
-        applicants.value = applicants.value.filter(a => a.id !== applicant.id)
+    const mentoringSpaceId = spaceRes.data.id
 
-        // mentoring 공간으로 이동
-        router.push('/mentoring')
+    // 2. 멘토링 멤버로 신청자 등록
+    await api.post('/mentoringMembers', {
+      mentoring_space_id: mentoringSpaceId,
+      user_id: applicant.menteeId,
+      leftover_questions: 10
+    })
+    
+    // 3. 신청 상태 업데이트 (is_accepted: 'Y' 처리)
+    await api.patch(`/applications/${applicant.id}`, {
+      is_accepted: 'Y'
+    })
+
+    // 4. 리스트에서 제거 + 페이지 이동
+    applicants.value = applicants.value.filter(a => a.id !== applicant.id)
+    router.push('/mentoring')
+
     } catch (error) {
         console.error('멘토링 공간 생성 실패:', error)
-        }
+        alert('멘토링 수락 중 오류가 발생했습니다.')
     }
+}
 
 onMounted(async () => {
   const user = JSON.parse(localStorage.getItem('user'))

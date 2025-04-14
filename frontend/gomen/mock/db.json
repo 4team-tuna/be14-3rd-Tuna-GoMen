@@ -958,13 +958,6 @@
       "receiverId": "1",
       "content": "나? 지금 집인데",
       "createdAt": "2025-04-12T06:20:17.321Z"
-    },
-    {
-      "id": "6a50",
-      "senderId": "1744435132583",
-      "receiverId": "1744531166026",
-      "content": "aaa",
-      "createdAt": "2025-04-13T08:18:24.029Z"
     }
   ],
   "users": [
@@ -1295,7 +1288,7 @@
       "updatedAt": null,
       "willBeActivated": "2025-04-12T05:18:52.583Z",
       "isQuitted": "N",
-      "githubAdress": "tjalswhd1@github.com",
+      "githubAdress": "",
       "extensionCount": 0,
       "careerInfo": "시재건설 (2024.12 ~ 2024.12) - 공사 관리\n더레전드 (2020.01 ~ 2024.12) - 조교알바\nbeyondSW (2024.01 ~ 2024.12) - 코딩 공부",
       "isMentor": "N",
@@ -1473,22 +1466,6 @@
       "done": false,
       "requestedAt": "2025-04-02T08:40:00",
       "message": "신청하신 멘토 권한이 승인되었습니다."
-    },
-    {
-      "id": "1744435132583",
-      "userId": "mj226",
-      "nickname": "MJay1",
-      "done": true,
-      "requestAt": "2025-04-13T08:49:57.254Z",
-      "message": "aaa"
-    },
-    {
-      "id": "1744435132583",
-      "userId": "mj226",
-      "nickname": "MJay1",
-      "done": false,
-      "requestAt": "2025-04-13T08:56:50.998Z",
-      "message": "j"
     }
   ],
   "titles": [
@@ -1583,6 +1560,537 @@
       "skills": "Figma, Sketch, UX 리서치",
       "description": "Figma를 활용해 UI/UX 시안 제작 및 개발자 전달을 위한 디자인 시스템을 구성했습니다. 또한 Sketch를 이용한 와이어프레임 제작 및 사용자 플로우 설계 경험이 있습니다. 그리고 UX 리서치를 통해 사용자 니즈를 분석하고 인터페이스 개선 방안을 도출한 경험이 있습니다.",
       "rating": 4.7
+    }
+  ],
+  "mentoringSpaces": [
+    {
+      "id": "1000",
+      "mentor_id": 1,
+      "personal_information": "연락처: 010-1234-5678, 카카오톡 ID: mentor1",
+      "information_is_opened": "Y",
+      "personal_info_requested": "N",
+      "extension_count": 0,
+      "extension_requested": "N",
+      "is_activated": "Y"
+    }
+  ],
+  "mentoringMembers": [
+    {
+      "id": "m100",
+      "mentoring_space_id": "1000",
+      "user_id": 11,
+      "leftover_questions": 1
+    },
+    {
+      "id": "m101",
+      "mentoring_space_id": "1000",
+      "user_id": 12,
+      "leftover_questions": 5
+    },
+    {
+      "id": "m102",
+      "mentoring_space_id": "1000",
+      "user_id": 13,
+      "leftover_questions": 6
+    }
+  ],
+  "questions": [
+    {
+      "id": "q1001",
+      "mentoring_space_id": "1000",
+      "member_id": 11,
+      "question_content": "Spring Boot에서 JPA를 사용할 때 성능 최적화를 위한 전략은 무엇인가요?",
+      "question_detail": "JPA 사용 시 N+1 문제, Lazy vs Eager 로딩 전략, Query 최적화와 관련된 상황에 대해 고민이 많습니다. 어떤 전략을 실제 프로젝트에서 적용해야 하는지 구체적인 조언이 필요합니다.",
+      "question_created_time": "2025-04-14T09:10:00",
+      "is_deleted": "N"
+    },
+    {
+      "id": "q1002",
+      "mentoring_space_id": "1000",
+      "member_id": 12,
+      "question_content": "API 요청과 응답을 로깅하는 가장 좋은 방법은 무엇인가요?",
+      "question_detail": "개발 중 API 요청과 응답 전체를 기록해야 할 필요가 생겼습니다. 보안, 성능, 유지보수 등을 고려했을 때 어떤 로깅 방식이 실무에 적합할지 알고 싶습니다.",
+      "question_created_time": "2025-04-14T09:05:00",
+      "is_deleted": "N"
+    },
+    {
+      "id": "q1003",
+      "mentoring_space_id": "1000",
+      "member_id": 13,
+      "question_content": "Java에서 Optional을 활용할 때 주의할 점은 어떤 것이 있나요?",
+      "question_detail": "Optional을 남용하면 성능 저하나 코드 복잡도가 증가할 수 있다는 이야기를 들었습니다. 실제 사용 시 유의할 점과 Optional의 적절한 활용법을 알고 싶습니다.",
+      "question_created_time": "2025-04-14T09:00:00",
+      "is_deleted": "N"
+    },
+    {
+      "id": "q1004",
+      "mentoring_space_id": "1000",
+      "member_id": 11,
+      "question_content": "서비스 레이어에서 트랜잭션 처리는 어떻게 설계해야 하나요?",
+      "question_detail": "서비스 계층에서 트랜잭션을 어디에 두는 것이 적절한지, 트랜잭션 범위 설정 및 롤백 처리는 어떻게 구성해야 실무적으로 안정적일지 궁금합니다.",
+      "question_created_time": "2025-04-14T08:55:00",
+      "is_deleted": "N"
+    },
+    {
+      "id": "q1005",
+      "mentoring_space_id": "1000",
+      "member_id": 12,
+      "question_content": "프로젝트에서 Swagger를 적용하는 이유와 방법은?",
+      "question_detail": "API 문서화를 위해 Swagger를 적용하려고 합니다. 적용 목적과 함께 springdoc-openapi 등 구체적인 적용 방법을 알고 싶습니다.",
+      "question_created_time": "2025-04-14T08:50:00",
+      "is_deleted": "N"
+    },
+    {
+      "id": "q2001",
+      "mentoring_space_id": "1000",
+      "member_id": 13,
+      "question_content": "Spring에서 AOP를 활용한 로깅은 어떻게 하나요?",
+      "question_detail": "서비스 로직에서 공통된 로깅을 분리하고 싶은데 AOP를 활용하면 좋다고 들었습니다. 어떤 방식으로 적용하는 게 좋을지 예제가 있으면 함께 알고 싶습니다.",
+      "question_created_time": "2025-04-14T08:45:00",
+      "is_deleted": "N"
+    },
+    {
+      "id": "q2002",
+      "mentoring_space_id": "1000",
+      "member_id": 11,
+      "question_content": "JPA fetch join과 lazy loading의 차이점이 뭔가요?",
+      "question_detail": "JPA에서 연관관계 데이터를 불러올 때 성능 차이가 발생한다고 하는데, fetch join과 lazy loading의 근본적인 차이와 적용 기준이 궁금합니다.",
+      "question_created_time": "2025-04-14T08:40:00",
+      "is_deleted": "N"
+    },
+    {
+      "id": "q2003",
+      "mentoring_space_id": "1000",
+      "member_id": 12,
+      "question_content": "Spring Security에서 필터 순서는 어떻게 제어하나요?",
+      "question_detail": "필터를 추가하거나 커스터마이징할 때 순서에 따라 동작이 달라지는 문제를 겪었습니다. 필터 순서를 명확히 제어하는 방법이 알고 싶습니다.",
+      "question_created_time": "2025-04-14T08:35:00",
+      "is_deleted": "N"
+    },
+    {
+      "id": "q2004",
+      "mentoring_space_id": "1000",
+      "member_id": 13,
+      "question_content": "서버 로그 구조를 어떻게 설계해야 하나요?",
+      "question_detail": "운영 환경에서 문제 추적을 위해 효율적인 로그 설계가 필요합니다. 로그 레벨 분리, 포맷 구성, 로그 파일 관리 방식 등을 어떻게 해야 할지 조언이 필요합니다.",
+      "question_created_time": "2025-04-14T08:30:00",
+      "is_deleted": "N"
+    },
+    {
+      "id": "q2005",
+      "mentoring_space_id": "1000",
+      "member_id": 11,
+      "question_content": "JWT를 사용할 때 Refresh Token은 꼭 필요할까요?",
+      "question_detail": "Access Token만으로 인증 처리를 하다가 만료 문제가 생겨 Refresh Token 도입을 고려 중입니다. 반드시 사용해야 하는지, 보안상 이점이 무엇인지 궁금합니다.",
+      "question_created_time": "2025-04-14T08:25:00",
+      "is_deleted": "N"
+    },
+    {
+      "id": "q2006",
+      "mentoring_space_id": "1000",
+      "member_id": 12,
+      "question_content": "Redis Pub/Sub과 Message Queue의 차이는?",
+      "question_detail": "Redis와 RabbitMQ를 비교하면서 Pub/Sub 방식과 MQ 방식의 개념적 차이와 실무 적용에서의 장단점을 알고 싶습니다.",
+      "question_created_time": "2025-04-14T08:20:00",
+      "is_deleted": "N"
+    },
+    {
+      "id": "q2007",
+      "mentoring_space_id": "1000",
+      "member_id": 13,
+      "question_content": "RestControllerAdvice의 활용 사례가 궁금합니다.",
+      "question_detail": "예외 처리를 일괄적으로 관리하기 위해 RestControllerAdvice를 사용한다고 들었는데, 구체적인 활용 사례와 구현 예제가 궁금합니다.",
+      "question_created_time": "2025-04-14T08:15:00",
+      "is_deleted": "N"
+    },
+    {
+      "id": "q2008",
+      "mentoring_space_id": "1000",
+      "member_id": 11,
+      "question_content": "Spring의 async 처리와 스레드 풀 관련 질문입니다.",
+      "question_detail": "@Async 애노테이션을 통해 비동기 처리를 하고 싶은데, 스레드 풀 설정 및 예외 처리 방법 등도 함께 고려해야 하는지 알고 싶습니다.",
+      "question_created_time": "2025-04-14T08:10:00",
+      "is_deleted": "N"
+    },
+    {
+      "id": "q2009",
+      "mentoring_space_id": "1000",
+      "member_id": 12,
+      "question_content": "예외 처리 시 사용자 메시지와 시스템 로그 분리 방법은?",
+      "question_detail": "사용자에게는 간단한 오류 메시지를, 서버에는 상세 로그를 남기고 싶은데 이걸 어떻게 구현해야 할지 궁금합니다.",
+      "question_created_time": "2025-04-14T08:05:00",
+      "is_deleted": "N"
+    },
+    {
+      "id": "q2010",
+      "mentoring_space_id": "1000",
+      "member_id": 13,
+      "question_content": "Java에서 record 타입은 언제 쓰는게 좋을까요?",
+      "question_detail": "최근 Java에서 등장한 record 타입이 데이터 객체를 간단히 표현할 수 있다고 들었습니다. 사용하는 기준과 실무 적용 사례가 궁금합니다.",
+      "question_created_time": "2025-04-14T08:00:00",
+      "is_deleted": "N"
+    }
+  ],
+  "answers": [
+    {
+      "id": "a3000",
+      "question_id": "q1001",
+      "parent_answer_id": null,
+      "user_id": 1,
+      "answer_content": "Spring Boot에서 JPA를 사용할 때 성능 최적화를 위한 전략은 무엇인가요?에 대해 설명드리자면, 핵심은 데이터의 효율적인 처리와 실무 적용 가능성입니다. 예를 들어, 실제 시스템에서는 해당 주제를 어떻게 최적화하고 있는지를 다양한 사례로 접근하는 것이 좋습니다.",
+      "answer_created_time": "2025-04-14T13:00:00"
+    },
+    {
+      "id": "a3001",
+      "question_id": "q1001",
+      "parent_answer_id": "a3000",
+      "user_id": 13,
+      "answer_content": "Spring Boot에서 JPA를 사용할 때 성능 최적화를 위한 전략은 무엇인가요?에 대해 추가적으로 궁금한 점이 있습니다. 특히 실무에서 발생할 수 있는 예외나 문제가 있을 경우, 어떤 방식으로 대응하고 계신지 알고 싶습니다.",
+      "answer_created_time": "2025-04-14T13:01:00"
+    },
+    {
+      "id": "a3002",
+      "question_id": "q1001",
+      "parent_answer_id": "a3001",
+      "user_id": 1,
+      "answer_content": "좋은 질문 감사합니다. 'Spring Boot에서 JPA를 사용할 때 성능 최적화를 위한 전략은 무엇인가요?'에 대한 추가적인 설명을 드리자면, 실무에서는 로깅, 트랜잭션 정책, 리팩토링, 테스트 코드 등을 통해 해당 문제를 효과적으로 다룰 수 있습니다.",
+      "answer_created_time": "2025-04-14T13:02:00"
+    },
+    {
+      "id": "a3003",
+      "question_id": "q1002",
+      "parent_answer_id": null,
+      "user_id": 1,
+      "answer_content": "API 요청과 응답을 로깅하는 가장 좋은 방법은 무엇인가요?에 대해 설명드리자면, 핵심은 데이터의 효율적인 처리와 실무 적용 가능성입니다. 예를 들어, 실제 시스템에서는 해당 주제를 어떻게 최적화하고 있는지를 다양한 사례로 접근하는 것이 좋습니다.",
+      "answer_created_time": "2025-04-14T13:03:00"
+    },
+    {
+      "id": "a3004",
+      "question_id": "q1002",
+      "parent_answer_id": "a3003",
+      "user_id": 13,
+      "answer_content": "API 요청과 응답을 로깅하는 가장 좋은 방법은 무엇인가요?에 대해 추가적으로 궁금한 점이 있습니다. 특히 실무에서 발생할 수 있는 예외나 문제가 있을 경우, 어떤 방식으로 대응하고 계신지 알고 싶습니다.",
+      "answer_created_time": "2025-04-14T13:04:00"
+    },
+    {
+      "id": "a3005",
+      "question_id": "q1002",
+      "parent_answer_id": "a3004",
+      "user_id": 1,
+      "answer_content": "좋은 질문 감사합니다. 'API 요청과 응답을 로깅하는 가장 좋은 방법은 무엇인가요?'에 대한 추가적인 설명을 드리자면, 실무에서는 로깅, 트랜잭션 정책, 리팩토링, 테스트 코드 등을 통해 해당 문제를 효과적으로 다룰 수 있습니다.",
+      "answer_created_time": "2025-04-14T13:05:00"
+    },
+    {
+      "id": "a3006",
+      "question_id": "q1003",
+      "parent_answer_id": null,
+      "user_id": 1,
+      "answer_content": "Java에서 Optional을 활용할 때 주의할 점은 어떤 것이 있나요?에 대해 설명드리자면, 핵심은 데이터의 효율적인 처리와 실무 적용 가능성입니다. 예를 들어, 실제 시스템에서는 해당 주제를 어떻게 최적화하고 있는지를 다양한 사례로 접근하는 것이 좋습니다.",
+      "answer_created_time": "2025-04-14T13:06:00"
+    },
+    {
+      "id": "a3007",
+      "question_id": "q1003",
+      "parent_answer_id": "a3006",
+      "user_id": 13,
+      "answer_content": "Java에서 Optional을 활용할 때 주의할 점은 어떤 것이 있나요?에 대해 추가적으로 궁금한 점이 있습니다. 특히 실무에서 발생할 수 있는 예외나 문제가 있을 경우, 어떤 방식으로 대응하고 계신지 알고 싶습니다.",
+      "answer_created_time": "2025-04-14T13:07:00"
+    },
+    {
+      "id": "a3008",
+      "question_id": "q1003",
+      "parent_answer_id": "a3007",
+      "user_id": 1,
+      "answer_content": "좋은 질문 감사합니다. 'Java에서 Optional을 활용할 때 주의할 점은 어떤 것이 있나요?'에 대한 추가적인 설명을 드리자면, 실무에서는 로깅, 트랜잭션 정책, 리팩토링, 테스트 코드 등을 통해 해당 문제를 효과적으로 다룰 수 있습니다.",
+      "answer_created_time": "2025-04-14T13:08:00"
+    },
+    {
+      "id": "a3009",
+      "question_id": "q1004",
+      "parent_answer_id": null,
+      "user_id": 1,
+      "answer_content": "서비스 레이어에서 트랜잭션 처리는 어떻게 설계해야 하나요?에 대해 설명드리자면, 핵심은 데이터의 효율적인 처리와 실무 적용 가능성입니다. 예를 들어, 실제 시스템에서는 해당 주제를 어떻게 최적화하고 있는지를 다양한 사례로 접근하는 것이 좋습니다.",
+      "answer_created_time": "2025-04-14T13:09:00"
+    },
+    {
+      "id": "a3010",
+      "question_id": "q1004",
+      "parent_answer_id": "a3009",
+      "user_id": 13,
+      "answer_content": "서비스 레이어에서 트랜잭션 처리는 어떻게 설계해야 하나요?에 대해 추가적으로 궁금한 점이 있습니다. 특히 실무에서 발생할 수 있는 예외나 문제가 있을 경우, 어떤 방식으로 대응하고 계신지 알고 싶습니다.",
+      "answer_created_time": "2025-04-14T13:10:00"
+    },
+    {
+      "id": "a3011",
+      "question_id": "q1004",
+      "parent_answer_id": "a3010",
+      "user_id": 1,
+      "answer_content": "좋은 질문 감사합니다. '서비스 레이어에서 트랜잭션 처리는 어떻게 설계해야 하나요?'에 대한 추가적인 설명을 드리자면, 실무에서는 로깅, 트랜잭션 정책, 리팩토링, 테스트 코드 등을 통해 해당 문제를 효과적으로 다룰 수 있습니다.",
+      "answer_created_time": "2025-04-14T13:11:00"
+    },
+    {
+      "id": "a3012",
+      "question_id": "q1005",
+      "parent_answer_id": null,
+      "user_id": 1,
+      "answer_content": "프로젝트에서 Swagger를 적용하는 이유와 방법은?에 대해 설명드리자면, 핵심은 데이터의 효율적인 처리와 실무 적용 가능성입니다. 예를 들어, 실제 시스템에서는 해당 주제를 어떻게 최적화하고 있는지를 다양한 사례로 접근하는 것이 좋습니다.",
+      "answer_created_time": "2025-04-14T13:12:00"
+    },
+    {
+      "id": "a3013",
+      "question_id": "q1005",
+      "parent_answer_id": "a3012",
+      "user_id": 13,
+      "answer_content": "프로젝트에서 Swagger를 적용하는 이유와 방법은?에 대해 추가적으로 궁금한 점이 있습니다. 특히 실무에서 발생할 수 있는 예외나 문제가 있을 경우, 어떤 방식으로 대응하고 계신지 알고 싶습니다.",
+      "answer_created_time": "2025-04-14T13:13:00"
+    },
+    {
+      "id": "a3014",
+      "question_id": "q1005",
+      "parent_answer_id": "a3013",
+      "user_id": 1,
+      "answer_content": "좋은 질문 감사합니다. '프로젝트에서 Swagger를 적용하는 이유와 방법은?'에 대한 추가적인 설명을 드리자면, 실무에서는 로깅, 트랜잭션 정책, 리팩토링, 테스트 코드 등을 통해 해당 문제를 효과적으로 다룰 수 있습니다.",
+      "answer_created_time": "2025-04-14T13:14:00"
+    },
+    {
+      "id": "a3015",
+      "question_id": "q2001",
+      "parent_answer_id": null,
+      "user_id": 1,
+      "answer_content": "Spring에서 AOP를 활용한 로깅은 어떻게 하나요?에 대해 설명드리자면, 핵심은 데이터의 효율적인 처리와 실무 적용 가능성입니다. 예를 들어, 실제 시스템에서는 해당 주제를 어떻게 최적화하고 있는지를 다양한 사례로 접근하는 것이 좋습니다.",
+      "answer_created_time": "2025-04-14T13:15:00"
+    },
+    {
+      "id": "a3016",
+      "question_id": "q2001",
+      "parent_answer_id": "a3015",
+      "user_id": 13,
+      "answer_content": "Spring에서 AOP를 활용한 로깅은 어떻게 하나요?에 대해 추가적으로 궁금한 점이 있습니다. 특히 실무에서 발생할 수 있는 예외나 문제가 있을 경우, 어떤 방식으로 대응하고 계신지 알고 싶습니다.",
+      "answer_created_time": "2025-04-14T13:16:00"
+    },
+    {
+      "id": "a3017",
+      "question_id": "q2001",
+      "parent_answer_id": "a3016",
+      "user_id": 1,
+      "answer_content": "좋은 질문 감사합니다. 'Spring에서 AOP를 활용한 로깅은 어떻게 하나요?'에 대한 추가적인 설명을 드리자면, 실무에서는 로깅, 트랜잭션 정책, 리팩토링, 테스트 코드 등을 통해 해당 문제를 효과적으로 다룰 수 있습니다.",
+      "answer_created_time": "2025-04-14T13:17:00"
+    },
+    {
+      "id": "a3018",
+      "question_id": "q2002",
+      "parent_answer_id": null,
+      "user_id": 1,
+      "answer_content": "JPA fetch join과 lazy loading의 차이점이 뭔가요?에 대해 설명드리자면, 핵심은 데이터의 효율적인 처리와 실무 적용 가능성입니다. 예를 들어, 실제 시스템에서는 해당 주제를 어떻게 최적화하고 있는지를 다양한 사례로 접근하는 것이 좋습니다.",
+      "answer_created_time": "2025-04-14T13:18:00"
+    },
+    {
+      "id": "a3019",
+      "question_id": "q2002",
+      "parent_answer_id": "a3018",
+      "user_id": 13,
+      "answer_content": "JPA fetch join과 lazy loading의 차이점이 뭔가요?에 대해 추가적으로 궁금한 점이 있습니다. 특히 실무에서 발생할 수 있는 예외나 문제가 있을 경우, 어떤 방식으로 대응하고 계신지 알고 싶습니다.",
+      "answer_created_time": "2025-04-14T13:19:00"
+    },
+    {
+      "id": "a3020",
+      "question_id": "q2002",
+      "parent_answer_id": "a3019",
+      "user_id": 1,
+      "answer_content": "좋은 질문 감사합니다. 'JPA fetch join과 lazy loading의 차이점이 뭔가요?'에 대한 추가적인 설명을 드리자면, 실무에서는 로깅, 트랜잭션 정책, 리팩토링, 테스트 코드 등을 통해 해당 문제를 효과적으로 다룰 수 있습니다.",
+      "answer_created_time": "2025-04-14T13:20:00"
+    },
+    {
+      "id": "a3021",
+      "question_id": "q2003",
+      "parent_answer_id": null,
+      "user_id": 1,
+      "answer_content": "Spring Security에서 필터 순서는 어떻게 제어하나요?에 대해 설명드리자면, 핵심은 데이터의 효율적인 처리와 실무 적용 가능성입니다. 예를 들어, 실제 시스템에서는 해당 주제를 어떻게 최적화하고 있는지를 다양한 사례로 접근하는 것이 좋습니다.",
+      "answer_created_time": "2025-04-14T13:21:00"
+    },
+    {
+      "id": "a3022",
+      "question_id": "q2003",
+      "parent_answer_id": "a3021",
+      "user_id": 13,
+      "answer_content": "Spring Security에서 필터 순서는 어떻게 제어하나요?에 대해 추가적으로 궁금한 점이 있습니다. 특히 실무에서 발생할 수 있는 예외나 문제가 있을 경우, 어떤 방식으로 대응하고 계신지 알고 싶습니다.",
+      "answer_created_time": "2025-04-14T13:22:00"
+    },
+    {
+      "id": "a3023",
+      "question_id": "q2003",
+      "parent_answer_id": "a3022",
+      "user_id": 1,
+      "answer_content": "좋은 질문 감사합니다. 'Spring Security에서 필터 순서는 어떻게 제어하나요?'에 대한 추가적인 설명을 드리자면, 실무에서는 로깅, 트랜잭션 정책, 리팩토링, 테스트 코드 등을 통해 해당 문제를 효과적으로 다룰 수 있습니다.",
+      "answer_created_time": "2025-04-14T13:23:00"
+    },
+    {
+      "id": "a3024",
+      "question_id": "q2004",
+      "parent_answer_id": null,
+      "user_id": 1,
+      "answer_content": "서버 로그 구조를 어떻게 설계해야 하나요?에 대해 설명드리자면, 핵심은 데이터의 효율적인 처리와 실무 적용 가능성입니다. 예를 들어, 실제 시스템에서는 해당 주제를 어떻게 최적화하고 있는지를 다양한 사례로 접근하는 것이 좋습니다.",
+      "answer_created_time": "2025-04-14T13:24:00"
+    },
+    {
+      "id": "a3025",
+      "question_id": "q2004",
+      "parent_answer_id": "a3024",
+      "user_id": 13,
+      "answer_content": "서버 로그 구조를 어떻게 설계해야 하나요?에 대해 추가적으로 궁금한 점이 있습니다. 특히 실무에서 발생할 수 있는 예외나 문제가 있을 경우, 어떤 방식으로 대응하고 계신지 알고 싶습니다.",
+      "answer_created_time": "2025-04-14T13:25:00"
+    },
+    {
+      "id": "a3026",
+      "question_id": "q2004",
+      "parent_answer_id": "a3025",
+      "user_id": 1,
+      "answer_content": "좋은 질문 감사합니다. '서버 로그 구조를 어떻게 설계해야 하나요?'에 대한 추가적인 설명을 드리자면, 실무에서는 로깅, 트랜잭션 정책, 리팩토링, 테스트 코드 등을 통해 해당 문제를 효과적으로 다룰 수 있습니다.",
+      "answer_created_time": "2025-04-14T13:26:00"
+    },
+    {
+      "id": "a3027",
+      "question_id": "q2005",
+      "parent_answer_id": null,
+      "user_id": 1,
+      "answer_content": "JWT를 사용할 때 Refresh Token은 꼭 필요할까요?에 대해 설명드리자면, 핵심은 데이터의 효율적인 처리와 실무 적용 가능성입니다. 예를 들어, 실제 시스템에서는 해당 주제를 어떻게 최적화하고 있는지를 다양한 사례로 접근하는 것이 좋습니다.",
+      "answer_created_time": "2025-04-14T13:27:00"
+    },
+    {
+      "id": "a3028",
+      "question_id": "q2005",
+      "parent_answer_id": "a3027",
+      "user_id": 13,
+      "answer_content": "JWT를 사용할 때 Refresh Token은 꼭 필요할까요?에 대해 추가적으로 궁금한 점이 있습니다. 특히 실무에서 발생할 수 있는 예외나 문제가 있을 경우, 어떤 방식으로 대응하고 계신지 알고 싶습니다.",
+      "answer_created_time": "2025-04-14T13:28:00"
+    },
+    {
+      "id": "a3029",
+      "question_id": "q2005",
+      "parent_answer_id": "a3028",
+      "user_id": 1,
+      "answer_content": "좋은 질문 감사합니다. 'JWT를 사용할 때 Refresh Token은 꼭 필요할까요?'에 대한 추가적인 설명을 드리자면, 실무에서는 로깅, 트랜잭션 정책, 리팩토링, 테스트 코드 등을 통해 해당 문제를 효과적으로 다룰 수 있습니다.",
+      "answer_created_time": "2025-04-14T13:29:00"
+    },
+    {
+      "id": "a3030",
+      "question_id": "q2006",
+      "parent_answer_id": null,
+      "user_id": 1,
+      "answer_content": "Redis Pub/Sub과 Message Queue의 차이는?에 대해 설명드리자면, 핵심은 데이터의 효율적인 처리와 실무 적용 가능성입니다. 예를 들어, 실제 시스템에서는 해당 주제를 어떻게 최적화하고 있는지를 다양한 사례로 접근하는 것이 좋습니다.",
+      "answer_created_time": "2025-04-14T13:30:00"
+    },
+    {
+      "id": "a3031",
+      "question_id": "q2006",
+      "parent_answer_id": "a3030",
+      "user_id": 13,
+      "answer_content": "Redis Pub/Sub과 Message Queue의 차이는?에 대해 추가적으로 궁금한 점이 있습니다. 특히 실무에서 발생할 수 있는 예외나 문제가 있을 경우, 어떤 방식으로 대응하고 계신지 알고 싶습니다.",
+      "answer_created_time": "2025-04-14T13:31:00"
+    },
+    {
+      "id": "a3032",
+      "question_id": "q2006",
+      "parent_answer_id": "a3031",
+      "user_id": 1,
+      "answer_content": "좋은 질문 감사합니다. 'Redis Pub/Sub과 Message Queue의 차이는?'에 대한 추가적인 설명을 드리자면, 실무에서는 로깅, 트랜잭션 정책, 리팩토링, 테스트 코드 등을 통해 해당 문제를 효과적으로 다룰 수 있습니다.",
+      "answer_created_time": "2025-04-14T13:32:00"
+    },
+    {
+      "id": "a3033",
+      "question_id": "q2007",
+      "parent_answer_id": null,
+      "user_id": 1,
+      "answer_content": "RestControllerAdvice의 활용 사례가 궁금합니다.에 대해 설명드리자면, 핵심은 데이터의 효율적인 처리와 실무 적용 가능성입니다. 예를 들어, 실제 시스템에서는 해당 주제를 어떻게 최적화하고 있는지를 다양한 사례로 접근하는 것이 좋습니다.",
+      "answer_created_time": "2025-04-14T13:33:00"
+    },
+    {
+      "id": "a3034",
+      "question_id": "q2007",
+      "parent_answer_id": "a3033",
+      "user_id": 13,
+      "answer_content": "RestControllerAdvice의 활용 사례가 궁금합니다.에 대해 추가적으로 궁금한 점이 있습니다. 특히 실무에서 발생할 수 있는 예외나 문제가 있을 경우, 어떤 방식으로 대응하고 계신지 알고 싶습니다.",
+      "answer_created_time": "2025-04-14T13:34:00"
+    },
+    {
+      "id": "a3035",
+      "question_id": "q2007",
+      "parent_answer_id": "a3034",
+      "user_id": 1,
+      "answer_content": "좋은 질문 감사합니다. 'RestControllerAdvice의 활용 사례가 궁금합니다.'에 대한 추가적인 설명을 드리자면, 실무에서는 로깅, 트랜잭션 정책, 리팩토링, 테스트 코드 등을 통해 해당 문제를 효과적으로 다룰 수 있습니다.",
+      "answer_created_time": "2025-04-14T13:35:00"
+    },
+    {
+      "id": "a3036",
+      "question_id": "q2008",
+      "parent_answer_id": null,
+      "user_id": 1,
+      "answer_content": "Spring의 async 처리와 스레드 풀 관련 질문입니다.에 대해 설명드리자면, 핵심은 데이터의 효율적인 처리와 실무 적용 가능성입니다. 예를 들어, 실제 시스템에서는 해당 주제를 어떻게 최적화하고 있는지를 다양한 사례로 접근하는 것이 좋습니다.",
+      "answer_created_time": "2025-04-14T13:36:00"
+    },
+    {
+      "id": "a3037",
+      "question_id": "q2008",
+      "parent_answer_id": "a3036",
+      "user_id": 13,
+      "answer_content": "Spring의 async 처리와 스레드 풀 관련 질문입니다.에 대해 추가적으로 궁금한 점이 있습니다. 특히 실무에서 발생할 수 있는 예외나 문제가 있을 경우, 어떤 방식으로 대응하고 계신지 알고 싶습니다.",
+      "answer_created_time": "2025-04-14T13:37:00"
+    },
+    {
+      "id": "a3038",
+      "question_id": "q2008",
+      "parent_answer_id": "a3037",
+      "user_id": 1,
+      "answer_content": "좋은 질문 감사합니다. 'Spring의 async 처리와 스레드 풀 관련 질문입니다.'에 대한 추가적인 설명을 드리자면, 실무에서는 로깅, 트랜잭션 정책, 리팩토링, 테스트 코드 등을 통해 해당 문제를 효과적으로 다룰 수 있습니다.",
+      "answer_created_time": "2025-04-14T13:38:00"
+    },
+    {
+      "id": "a3039",
+      "question_id": "q2009",
+      "parent_answer_id": null,
+      "user_id": 1,
+      "answer_content": "예외 처리 시 사용자 메시지와 시스템 로그 분리 방법은?에 대해 설명드리자면, 핵심은 데이터의 효율적인 처리와 실무 적용 가능성입니다. 예를 들어, 실제 시스템에서는 해당 주제를 어떻게 최적화하고 있는지를 다양한 사례로 접근하는 것이 좋습니다.",
+      "answer_created_time": "2025-04-14T13:39:00"
+    },
+    {
+      "id": "a3040",
+      "question_id": "q2009",
+      "parent_answer_id": "a3039",
+      "user_id": 13,
+      "answer_content": "예외 처리 시 사용자 메시지와 시스템 로그 분리 방법은?에 대해 추가적으로 궁금한 점이 있습니다. 특히 실무에서 발생할 수 있는 예외나 문제가 있을 경우, 어떤 방식으로 대응하고 계신지 알고 싶습니다.",
+      "answer_created_time": "2025-04-14T13:40:00"
+    },
+    {
+      "id": "a3041",
+      "question_id": "q2009",
+      "parent_answer_id": "a3040",
+      "user_id": 1,
+      "answer_content": "좋은 질문 감사합니다. '예외 처리 시 사용자 메시지와 시스템 로그 분리 방법은?'에 대한 추가적인 설명을 드리자면, 실무에서는 로깅, 트랜잭션 정책, 리팩토링, 테스트 코드 등을 통해 해당 문제를 효과적으로 다룰 수 있습니다.",
+      "answer_created_time": "2025-04-14T13:41:00"
+    },
+    {
+      "id": "a3042",
+      "question_id": "q2010",
+      "parent_answer_id": null,
+      "user_id": 1,
+      "answer_content": "Java에서 record 타입은 언제 쓰는게 좋을까요?에 대해 설명드리자면, 핵심은 데이터의 효율적인 처리와 실무 적용 가능성입니다. 예를 들어, 실제 시스템에서는 해당 주제를 어떻게 최적화하고 있는지를 다양한 사례로 접근하는 것이 좋습니다.",
+      "answer_created_time": "2025-04-14T13:42:00"
+    },
+    {
+      "id": "a3043",
+      "question_id": "q2010",
+      "parent_answer_id": "a3042",
+      "user_id": 13,
+      "answer_content": "Java에서 record 타입은 언제 쓰는게 좋을까요?에 대해 추가적으로 궁금한 점이 있습니다. 특히 실무에서 발생할 수 있는 예외나 문제가 있을 경우, 어떤 방식으로 대응하고 계신지 알고 싶습니다.",
+      "answer_created_time": "2025-04-14T13:43:00"
+    },
+    {
+      "id": "a3044",
+      "question_id": "q2010",
+      "parent_answer_id": "a3043",
+      "user_id": 1,
+      "answer_content": "좋은 질문 감사합니다. 'Java에서 record 타입은 언제 쓰는게 좋을까요?'에 대한 추가적인 설명을 드리자면, 실무에서는 로깅, 트랜잭션 정책, 리팩토링, 테스트 코드 등을 통해 해당 문제를 효과적으로 다룰 수 있습니다.",
+      "answer_created_time": "2025-04-14T13:44:00"
     }
   ],
   "applications": []

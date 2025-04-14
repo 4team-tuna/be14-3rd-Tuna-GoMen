@@ -39,6 +39,7 @@ const routes = [
   // 기본 진입 시 관리자 홈으로 리다이렉트
   // { path: '/', redirect: '/admin' },
 
+  
   { path: '/', component: StartPage},
   { path: '/main', component: MainPage},
 
@@ -90,7 +91,6 @@ const routes = [
   name: 'TeamRecruitWritePage',
   component: () => import('@/views/teamRecruitBoard/TeamRecruitWritePage.vue'),
 },
-
   { path: '/mentorlist', component: MentorListPage },
   {
     path: '/mentorlist/:id',
@@ -106,6 +106,31 @@ const routes = [
     path: '/mentorlist/status',
     name: 'MentorStatus',
     component: () => import('@/views/MentorList/MentorStatusPage.vue') 
+  },
+  {
+    path: '/mentoring',
+    name: 'MentoringPage',
+    component: () => import('@/views/Mentoring/MentoringPage.vue')
+  },
+  {
+    path: '/mentee/qna',
+    name: 'MenteeQnaPage',
+    component: () => import('@/views/Mentoring/MenteeQnaPage.vue')
+  },
+  {
+    path: '/mentee/qna/:questionId',
+    name: 'QuestionDetail',
+    component: () => import('@/views/Mentoring/QuestionDetailPage.vue')
+  },
+  {
+    path: '/mentoring/:id/qna/mentor',
+    name: 'MentorQnaPage',
+    component: () => import('@/views/Mentoring/MentorQnaPage.vue')
+  },
+  {
+    path: '/mentoring/:id',
+    name: 'MentoringDetail',
+    component: () => import('@/views/Mentoring/MentorView.vue') 
   }
 ]
 
