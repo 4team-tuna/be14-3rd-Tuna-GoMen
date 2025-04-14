@@ -22,15 +22,11 @@
           <span class="report" @click="reportPost">🚨 신고</span>
         </div>
       </div>
-<<<<<<< HEAD
-      <p class="post-content" v-html="post.content"></p>
-=======
 
       <div v-if="post.is_blinded === 'Y'" class="blinded-message">
         ⚠️ 블라인드 처리된 게시글입니다.
       </div>
       <p v-else class="post-content" v-html="post.content"></p>
->>>>>>> develop
 
       <div class="post-actions">
         <span class="likes" @click="toggleLike">
