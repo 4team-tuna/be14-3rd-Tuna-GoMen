@@ -36,6 +36,7 @@ const submit = () => {
 
   // 자기소개를 제출하며 부모 컴포넌트로 전달
   emit('submit', {
+    user_id: user.id,
     nickname,
     introduction: introduction.value,
     blog: blog
