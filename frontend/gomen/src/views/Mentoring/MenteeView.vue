@@ -2,13 +2,13 @@
   <div class="mentee-view">
     <h2 class="title">멘토링 공간</h2>
 
-    <!-- 멘토 & 팀 구성 -->
+    <!-- 멘토, 팀원 카드 -->
     <div class="top-section" v-if="mentor && teamMembers.length">
       <MyMentorCard :mentor="mentor" />
       <MyTeamCard :teamMembers="teamMembers" :isTeam="isTeam" />
     </div>
 
-    <!-- 연장하기 버튼 -->
+    <!-- 연장하기 버튼과 남은 질문 개수 -->
     <div class="status-bar">
       <button
         class="extension-btn"
@@ -22,7 +22,17 @@
       </span>
     </div>
 
-    <!-- Q&A 섹션 -->
+    <!-- ✅ 질문 작성 폼 -->
+    <QuestionForm
+      v-if="mentoringSpaceId && mentoringMemberId !== null"
+      :mentoringSpaceId="mentoringSpaceId"
+      :mentoringMemberId="mentoringMemberId"
+      :memberId="user.id"
+      :leftoverQuestions="leftoverQuestions"
+      @submitted="fetchAll"
+    />
+
+    <!-- Q&A -->
     <div class="qna-header">
       <h3>Q&A</h3>
       <button class="more-btn" @click="goToQnaPage">더보기 &gt;</button>
@@ -31,8 +41,6 @@
     <div class="questions">
       <QuestionList :questions="questions" />
     </div>
-
-    <Pagination :current="currentPage" :total="totalPage" @change="changePage" />
   </div>
 </template>
 
@@ -42,7 +50,7 @@ import { useRouter } from 'vue-router'
 import MyMentorCard from '@/components/mentoring/MyMentorCard.vue'
 import MyTeamCard from '@/components/mentoring/MyTeamCard.vue'
 import QuestionList from '@/components/mentoring/QuestionList.vue'
-import Pagination from '@/components/mentoring/Pagination.vue'
+import QuestionForm from '@/components/mentoring/QuestionForm.vue' // ✅ import 누락 시 추가
 import api from '@/api'
 
 const router = useRouter()
@@ -54,24 +62,32 @@ const isTeam = ref(false)
 const leftoverQuestions = ref(0)
 
 const questions = ref([])
-const currentPage = ref(1)
-const totalPage = ref(1)
-
 const mentoringSpaceId = ref(null)
+const mentoringMemberId = ref(null)
 
-const fetchQuestions = async (spaceId, page) => {
-  const res = await api.get(`/questions?mentoring_space_id=${spaceId}&member_id=${user.id}&_page=${page}&_limit=3`)
-  questions.value = res.data
-  totalPage.value = Math.ceil(res.headers['x-total-count'] / 3)
+const fetchQuestions = async (spaceId) => {
+  const res = await api.get(
+    `/questions?mentoring_space_id=${spaceId}&_sort=question_created_time&_order=desc&_limit=3`
+  )
+  questions.value = res.data.sort(
+    (a, b) => new Date(b.question_created_time) - new Date(a.question_created_time)
+  )
 }
 
-onMounted(async () => {
+const fetchMemberInfo = async () => {
   const myMemberships = await api.get(`/mentoringMembers?user_id=${user.id}`)
   const member = myMemberships.data[0]
-  if (!member) return
+  if (!member) return null
 
   mentoringSpaceId.value = member.mentoring_space_id
+  mentoringMemberId.value = member.id
   leftoverQuestions.value = member.leftover_questions
+  return member
+}
+
+const fetchAll = async () => {
+  const member = await fetchMemberInfo()
+  if (!member) return
 
   const spaceRes = await api.get(`/mentoringSpaces/${member.mentoring_space_id}`)
   const mentorRes = await api.get(`/users/${spaceRes.data.mentor_id}`)
@@ -90,13 +106,10 @@ onMounted(async () => {
   teamMembers.value = resolved
   isTeam.value = resolved.length > 1
 
-  await fetchQuestions(member.mentoring_space_id, currentPage.value)
-})
-
-const changePage = async (page) => {
-  currentPage.value = page
-  await fetchQuestions(mentoringSpaceId.value, page)
+  await fetchQuestions(member.mentoring_space_id)
 }
+
+onMounted(fetchAll)
 
 const requestExtension = async () => {
   if (leftoverQuestions.value > 0) return
@@ -104,7 +117,7 @@ const requestExtension = async () => {
 }
 
 const goToQnaPage = () => {
-  router.push('/mentee/qna') // 너의 라우팅에 맞게 수정 가능
+  router.push('/mentee/qna')
 }
 </script>
 
