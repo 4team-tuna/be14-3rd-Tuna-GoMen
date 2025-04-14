@@ -27,7 +27,7 @@ import TitlePage from '@/views/Admin/TitlePage.vue'
 import MentorRequestPage from '@/views/Admin/MentorRequestPage.vue'
 
 // ✅ 신고 페이지
-// import ReportFormPage from '@/views/Report/ReportPage.vue'
+import ReportForm from '@/views/Report/ReportForm.vue'
 
 const routes = [
   { path: '/mail', component: MessageInbox},
@@ -63,7 +63,7 @@ const routes = [
   { path: '/admin/mentors', component: MentorRequestPage },
 
     // ✅ 신고 페이지
-  // { path: '/report', name: 'ReportPage', component: ReportFormPage }
+  { path: '/report', name: 'ReportForm', component: ReportForm },
 
   // 팀 모집 게시판
   { path: '/board/team-recruit', name: 'TeamRecruitBoard', component: TeamRecruitBoardPage },
