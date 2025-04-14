@@ -170,11 +170,6 @@ onMounted(async () => {
   font-size: 14px;
   color: #888;
 }
-<<<<<<< HEAD
-
-=======
->>>>>>> 82b20e66f231be9167a76d55b2d430a0d587b2b5
-
 /* 오른쪽 정렬 그룹 */
 .meta-right {
   display: flex;
@@ -234,10 +229,6 @@ onMounted(async () => {
 .post-title {
   font-size: 30px;
 }
-<<<<<<< HEAD
-
-=======
->>>>>>> 82b20e66f231be9167a76d55b2d430a0d587b2b5
 .meta-left {
   display: flex;
   gap: 10px;
@@ -296,7 +287,3 @@ onMounted(async () => {
   font-weight: bold;
 }
 </style>
-<<<<<<< HEAD
-=======
-
->>>>>>> 82b20e66f231be9167a76d55b2d430a0d587b2b5
