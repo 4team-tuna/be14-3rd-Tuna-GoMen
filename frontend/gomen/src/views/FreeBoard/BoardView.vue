@@ -40,41 +40,46 @@
   const selectedCategory = ref('')
   
   const posts = ref([])
-  
+
   onMounted(async () => {
-    const raw = localStorage.getItem('allposts')
-    posts.value = raw ? JSON.parse(raw) : []
-  
-    try {
-      const res = await axios.get('http://localhost:3001/allposts')
-      posts.value = res.data
-      localStorage.setItem('allposts', JSON.stringify(res.data))
-    } catch (e) {
-      console.error('서버에서 데이터 가져오기 실패:', e)
-    }
-  })
-  
-  const filteredPosts = computed(() => {
-    let result = posts.value
-  
-    if (selectedCategory.value) {
-      result = result.filter(p => p.category === selectedCategory.value)
-    }
-  
-    if (search.value) {
-      result = result.filter(p =>
-        p.title.toLowerCase().includes(search.value.toLowerCase())
-      )
-    }
-  
-    if (sort.value === 'title') {
-      result = result.sort((a, b) => a.title.localeCompare(b.title))
-    } else {
-      result = result.sort((a, b) => b.id - a.id)
-    }
-  
-    return result
-  })
+  try {
+    // 서버에서 데이터를 가져오기
+    const res = await axios.get('http://localhost:3001/allposts');
+    const sorted = res.data.sort((a, b) => {
+    const dateA = new Date(a.createdAt || a.date); // ← 기존 글은 createdAt 없을 수 있으니 fallback
+    const dateB = new Date(b.createdAt || b.date);
+  return dateB - dateA;
+});
+
+
+    // 서버에서 데이터를 받아온 후 상태 갱신
+    posts.value = sorted;
+
+  } catch (e) {
+    console.error('서버에서 데이터 가져오기 실패:', e);
+    posts.value = [] // 서버 실패시 데이터 초기화
+  }
+});
+
+
+
+const filteredPosts = computed(() => {
+  let result = [...posts.value] // ✅ 복사본 생성
+
+  if (selectedCategory.value) {
+    result = result.filter(p => p.category === selectedCategory.value)
+  }
+
+  if (search.value) {
+    result = result.filter(p =>
+      p.title.toLowerCase().includes(search.value.toLowerCase())
+    )
+  }
+
+
+  return result
+})
+
   </script>
   
 <style scoped>

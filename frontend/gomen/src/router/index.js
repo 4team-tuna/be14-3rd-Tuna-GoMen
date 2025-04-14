@@ -29,6 +29,7 @@ import MentorRequestPage from '@/views/Admin/MentorRequestPage.vue'
 // import ReportFormPage from '@/views/Report/ReportPage.vue'
 
 const routes = [
+  { path: '/mail', component: MessageInbox},
   // 기본 진입 시 관리자 홈으로 리다이렉트
   // { path: '/', redirect: '/admin' },
   { path: '/', component: StartPage},
@@ -36,7 +37,6 @@ const routes = [
 
 
   // 자유게시판
-  { path: '/board/free', component: FreeBoardPage },
   { path: '/boards/free/:id', name: 'FreeBoardPage', component: FreeBoardPage },
   { path: '/boards/free', name: 'FreeBoardList', component: BoardView },
   {
