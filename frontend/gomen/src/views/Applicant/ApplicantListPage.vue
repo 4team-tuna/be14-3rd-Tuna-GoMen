@@ -47,6 +47,12 @@ const fetchApplicants = async () => {
   } catch (error) {
     console.error("데이터 로딩 실패:", error)
   }
+
+  if (data.isActivated === 'N') {
+  alert('모집이 종료되어 지원자 정보를 볼 수 없습니다.')
+  router.push('/board/team-recruit')
+  return
+}
 }
 
 const goToPostPage = () => {

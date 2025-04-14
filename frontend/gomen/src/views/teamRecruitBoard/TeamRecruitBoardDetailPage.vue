@@ -1,22 +1,13 @@
 <template>
   <div class="team-recruit-detail-page">
-    <transition name="fade">
-      <div class="alert" v-if="showAlert">모집 상태가 변경되었습니다</div>
-    </transition>
-
     <main class="detail-container" v-if="post">
       <h2 class="board-title">팀 모집 게시판</h2>
       <div style="display: flex; justify-content: flex-end; margin-bottom: 1rem;">
-     <ApplicantListButton v-if="post && post.nickname === userNickname" :postId="post.id" />
+        <ApplicantListButton v-if="post && post.nickname === userNickname" :postId="post.id" />
       </div>
       <div class="post-card">
         <div class="top-row">
-          <span class="status" :class="{ recruiting: post.isActivated === 'Y' }">
-            {{ post.isActivated === 'Y' ? '모집중' : '모집완료' }}
-          </span>
-          <button class="activation-button" @click="toggleActivation">
-            {{ post.isActivated === 'Y' ? '모집 완료로 변경' : '모집중으로 변경' }}
-          </button>
+          <!-- 모집 상태 관련 기능 제거됨 -->
         </div>
 
         <h3 class="post-title">{{ post.title }}</h3>
@@ -33,7 +24,7 @@
 
       <div class="button-group">
         <div class="left-buttons">
-        <DeleteButton v-if="post && post.nickname === userNickname" :postId="post.id" />
+          <DeleteButton v-if="post && post.nickname === userNickname" :postId="post.id" />
         </div>
         <div class="right-buttons">
           <button class="action-button secondary" @click="goToList">목록</button>
@@ -66,12 +57,10 @@ const route = useRoute()
 const router = useRouter()
 
 const post = ref(null)
-const showAlert = ref(false)
 const isModalOpen = ref(false)
 
 const openModal = () => isModalOpen.value = true
 const closeModal = () => isModalOpen.value = false
-
 
 const user = localStorage.getItem('user')
 const userRaw = user
@@ -81,20 +70,35 @@ const userNickname = parsedUser?.nickname || ''
 const handleSubmit = async (payload) => {
   const { nickname, introduction, blog } = payload
 
+  // 자신이 작성한 게시글에는 신청할 수 없도록 처리
+  if (post.value.nickname === userNickname) {
+    alert('본인이 작성한 게시글에는 신청할 수 없습니다.')
+    closeModal()
+    return
+  }
+
   if (!introduction.trim()) {
     alert('자기소개를 작성해주세요!')
+    return
+  }
+
+  const postId = route.params.id
+  const currentPost = await getPostData(postId)
+
+  // 중복 지원 체크
+  const isAlreadyApplied = currentPost.applicants.some(applicant => applicant.nickname === userNickname)
+  if (isAlreadyApplied) {
+    alert('이미 지원한 팀입니다.')
+    closeModal()
     return
   }
 
   const applicant = {
     nickname,
     introduction,
-    blog: blog,
+    blog,
     appliedAt: new Date().toISOString(),
   }
-
-  const postId = route.params.id
-  const currentPost = await getPostData(postId)
 
   const updatedApplicants = [...(currentPost.applicants || []), applicant]
 
@@ -129,27 +133,18 @@ const fetchPost = async (id) => {
   }
 }
 
-const toggleActivation = async () => {
-  const newStatus = post.value.isActivated === 'Y' ? 'N' : 'Y'
-  const res = await fetch(`http://localhost:3001/teamRecruitPosts/${post.value.id}`, {
-    method: 'PATCH',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ isActivated: newStatus })
-  })
+const formatDate = (dateStr) => {
+  const date = new Date(dateStr)
+  const year = date.getFullYear()
+  const month = String(date.getMonth() + 1).padStart(2, '0')
+  const day = String(date.getDate()).padStart(2, '0')
+  const hours = String(date.getHours()).padStart(2, '0')
+  const minutes = String(date.getMinutes()).padStart(2, '0')
+  const seconds = String(date.getSeconds()).padStart(2, '0')
 
-  if (res.ok) {
-    post.value.isActivated = newStatus
-    showAlert.value = true
-    setTimeout(() => {
-      showAlert.value = false
-      goToList()
-    }, 1500)
-  } else {
-    alert('상태 변경에 실패했습니다.')
-  }
+  return `${year}/${month}/${day} ${hours}:${minutes}:${seconds}`
 }
 
-const formatDate = (dateStr) => new Date(dateStr).toLocaleDateString()
 const goToList = () => router.push('/board/team-recruit')
 
 onMounted(() => {
@@ -201,16 +196,6 @@ watch(() => route.params.id, (newId) => {
   display: flex;
   justify-content: space-between;
   align-items: center;
-}
-
-.activation-button {
-  padding: 6px 10px;
-  border: none;
-  border-radius: 6px;
-  background: #4f46e5;
-  color: white;
-  font-weight: bold;
-  cursor: pointer;
 }
 
 .post-title {
@@ -265,7 +250,6 @@ watch(() => route.params.id, (newId) => {
   gap: 0.5rem;
 }
 
-/* 신청하기 버튼만 별도 */
 .apply-row {
   margin-top: 3rem;
   display: flex;
@@ -305,39 +289,5 @@ watch(() => route.params.id, (newId) => {
 .action-button:hover,
 .action-button.secondary:hover {
   background-color: #4f46e5;
-}
-
-.alert {
-  position: fixed;
-  top: 20px;
-  left: 50%;
-  transform: translateX(-50%);
-  background: rgba(74, 222, 128, 0.9);
-  color: #fff;
-  padding: 0.9rem 1.7rem;
-  border-radius: 12px;
-  font-weight: 600;
-  font-size: 1rem;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
-  z-index: 1000;
-  backdrop-filter: blur(4px);
-}
-
-.alert::after {
-  content: '✔️';
-  font-size: 1.2rem;
-  margin-left: 0.5rem;
-}
-
-.fade-enter-active, .fade-leave-active {
-  transition: all 0.5s ease;
-}
-.fade-enter-from {
-  opacity: 0;
-  transform: translateY(-10px);
-}
-.fade-leave-to {
-  opacity: 0;
-  transform: translateY(-10px);
 }
 </style>

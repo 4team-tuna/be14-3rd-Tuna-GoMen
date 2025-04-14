@@ -54,19 +54,19 @@
     }
   
     const newPost = {
-      id: Date.now(),
       userId: userId,
       title: title.value,
       teamName: teamName.value,
       teamIntroduce: content.value,
       nickname: userNickname || '익명',
       createdAt: new Date().toISOString(),
-      isActivated: 'Y',  
-      isDeleted: 'N',    
-      applicants: [],    
+      isActivated: 'Y',
+      isDeleted: 'N',
+      applicants: [],
     }
   
     try {
+      // id를 빼고, json-server가 자동으로 id를 부여하도록 처리
       await axios.post('http://localhost:3001/teamRecruitPosts', newPost)
       alert('게시글이 등록되었습니다!')
       router.push('/board/team-recruit')
@@ -136,4 +136,5 @@
   .submit-btn:hover {
     background-color: #3e4bb5;
   }
-</style>  
+  </style>
+  

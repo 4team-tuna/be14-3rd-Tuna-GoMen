@@ -52,7 +52,9 @@ const filteredPosts = computed(() => {
   const filterType = searchParams.value.filter
   const isRecruitingOnly = searchParams.value.category === 'recruiting'
 
-  return posts.value.filter((post) => {
+  const sortedPosts = posts.value.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))  // 내림차순 정렬
+
+  return sortedPosts.filter((post) => {
     const matchesRecruiting = !isRecruitingOnly || post.isActivated === 'Y'
 
     const matchesKeyword = (() => {
