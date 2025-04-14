@@ -104,8 +104,12 @@ const handleProcess = async (reportId) => {
     }
 
     const currentScore = targetUser.violationScore || 0
+    const updatedScore = currentScore + score
+
+    // 벌점 누적 및 탈퇴 처리
     await axios.patch(`http://localhost:3001/users/${targetUser.id}`, {
-      violationScore: currentScore + score
+      violationScore: updatedScore,
+      ...(updatedScore >= 100 && { isQuitted: 'Y' }) // 👈 누적 벌점 100 이상이면 탈퇴 처리
     })
 
     const target = reports.value.find(r => r.id === reportId)
@@ -114,12 +118,18 @@ const handleProcess = async (reportId) => {
       target.category = selectedCategory
     }
 
-    alert(`처리 완료! ${score}점 벌점이 부과되었습니다.`)
+    let msg = `처리 완료! ${score}점 벌점이 부과되었습니다.`
+    if (updatedScore >= 100) {
+      msg += '\n⚠️ 누적 벌점 100점 초과로 해당 회원은 탈퇴 처리되었습니다.'
+    }
+    alert(msg)
+
   } catch (error) {
     console.error('처리 실패:', error)
     alert('처리 중 오류가 발생했습니다.')
   }
 }
+
 
 const handleBlind = async (reportId) => {
   try {
