@@ -1,5 +1,4 @@
 <template>
-<template>
   <div class="hero-wrapper">
     <div class="hero-image-container">
       <img src="@/assets/Ellipse 1.png" alt="장식 원" class="hero-deco" />
@@ -12,7 +11,7 @@
       </div>
 
       <!-- 🔴 멘토리스트 바로가기 버튼 -->
-      <router-link to="/mentor-list" class="mentor-btn">
+      <router-link to="/mentorlist" class="mentor-btn">
         멘토리스트 바로가기
       </router-link>
 
@@ -31,54 +30,51 @@
         </p>
       </section>
     </div>
-  </div>
-</template>
 
+    <!-- 배너 슬라이더 -->
+    <div class="slider-wrapper">
+      <button class="arrow left" @click="prevBanner">‹</button>
 
-  <!-- 배너 슬라이더 -->
-  <div class="slider-wrapper">
-    <button class="arrow left" @click="prevBanner">‹</button>
-
-    <div class="banner-container">
-      <div class="slider-track" :style="trackStyle">
-        <img
-          v-for="(banner, index) in banners"
-          :key="index"
-          :src="banner"
-          alt="배너 이미지"
-          class="banner-image"
-        />
+      <div class="banner-container">
+        <div class="slider-track" :style="trackStyle">
+          <img
+            v-for="(banner, index) in banners"
+            :key="index"
+            :src="banner"
+            alt="배너 이미지"
+            class="banner-image"
+          />
+        </div>
       </div>
+
+      <button class="arrow right" @click="nextBanner">›</button>
     </div>
 
-    <button class="arrow right" @click="nextBanner">›</button>
-  </div>
-
-
-  <!-- 게시판 섹션 -->
-  <section class="board-section">
-    <h2>🏠 집에서 만나는 따스한 멘토링</h2>
-    <div class="board-columns">
-      <div class="board">
-        <h3>자유 게시판</h3>
-        <ul>
-          <li>코딩이 너무 재미없을 때 추천해주세요ㅠ</li>
-          <li>요즘 무엇을 공부하나요?</li>
-          <li>React와 Vue 비교해서 장단점 알려주세...</li>
-        </ul>
+    <!-- 게시판 섹션 -->
+    <section class="board-section">
+      <h2>🏠 집에서 만나는 따스한 멘토링</h2>
+      <div class="board-columns">
+        <div class="board">
+          <h3>자유 게시판</h3>
+          <ul>
+            <li>코딩이 너무 재미없을 때 추천해주세요ㅠ</li>
+            <li>요즘 무엇을 공부하나요?</li>
+            <li>React와 Vue 비교해서 장단점 알려주세...</li>
+          </ul>
+        </div>
+        <div class="board">
+          <h3>팀모집 게시판</h3>
+          <ul>
+            <li>Spring 웹팀 팀원 모집합니다</li>
+            <li>프론트엔드 개발팀 리드 찾습니다</li>
+            <li>토이프로젝트 앱 같이 만들어요!</li>
+          </ul>
+        </div>
       </div>
-      <div class="board">
-        <h3>팀모집 게시판</h3>
-        <ul>
-          <li>Spring 웹팀 팀원 모집합니다</li>
-          <li>프론트엔드 개발팀 리드 찾습니다</li>
-          <li>토이프로젝트 앱 같이 만들어요!</li>
-        </ul>
-      </div>
-    </div>
-  </section>
-
+    </section>
+  </div> <!-- Close hero-wrapper here -->
 </template>
+
 
 <script setup>
   import { useRouter } from 'vue-router'
@@ -164,8 +160,8 @@
 
 .mentor-btn {
   position: absolute;
-  bottom: 50px;       /* 원보다 아래로 안 가게 숫자 조절 */
-  left: 90px;       /* 원의 왼쪽 위치 (조정 가능) */
+  bottom: 280px;       /* 원보다 아래로 안 가게 숫자 조절 */
+  left: 150px;       /* 원의 왼쪽 위치 (조정 가능) */
   background-color: #e53935; /* 빨간색 */
   color: white;
   padding: 10px 18px;
@@ -291,14 +287,14 @@
 
 .mentor-section {
   position: absolute; /* 원에 상대적인 위치 */
-  top: -50px; /* 원 위로 올라오게 조정 */
-  left: 70px; /* 원의 왼쪽에 위치시킴 */
+  top: 270px; /* 원 위로 올라오게 조정 */
+  left: 150px; /* 원의 왼쪽에 위치시킴 */
   background-color: white;
   padding: 20px;
   border-radius: 12px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   z-index: 1; /* 버튼보다는 아래에 있도록 설정 */
-  width: 250px; /* 원하는 너비로 설정 */
+  width: auto; /* 원하는 너비로 설정 */
 }
 
 .mentor-section h2 {
@@ -306,11 +302,13 @@
   font-weight: bold;
 }
 
+
 .mentor-list {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
+  display: flex;            /* Flexbox로 가로 정렬 */
+  gap: 20px;                /* 멘토들 사이에 여백 */
+  overflow-x: auto;         /* 가로 스크롤 가능하도록 */
 }
+
 
 .mentor {
   display: flex;
