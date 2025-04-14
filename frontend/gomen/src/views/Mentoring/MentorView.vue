@@ -53,7 +53,7 @@
     <!-- 멘토링 연장 요청 -->
     <div class="extension-request-wrapper" v-if="extensionRequested">
       <ExtensionRequest
-        :requester="`멘토링 공간 ${mentoringSpaceId}`"
+        :requesterName="extensionRequesterName"
         @accept="handleAccept"
         @reject="handleReject"
       />
@@ -77,6 +77,7 @@ const teamMembers = ref([])
 const questions = ref([])
 const extensionRequested = ref(false)
 const visibleCount = ref(3)
+const extensionRequesterName = ref('')
 
 const visibleQuestions = computed(() => questions.value.slice(0, visibleCount.value))
 
@@ -90,9 +91,6 @@ onMounted(async () => {
     const spaceRes = await axios.get(`http://localhost:3001/mentoringSpaces/${mentoringSpaceId}`)
     const space = spaceRes.data
     extensionRequested.value = space.extension_requested === 'Y'
-
-    console.log('space.extension_requested:', space.extension_requested)
-    console.log('extensionRequested.value:', extensionRequested.value)
 
     const usersRes = await axios.get(`http://localhost:3001/users`)
     const allUsers = usersRes.data
@@ -112,6 +110,10 @@ onMounted(async () => {
       }
     })
 
+    // 연장 요청자 찾기
+    const requester = teamMembers.value.find(m => m.leftover_questions === 0)
+    extensionRequesterName.value = requester?.name || '알 수 없음'
+
     const questionsRes = await axios.get(`http://localhost:3001/questions?mentoring_space_id=${mentoringSpaceId}`)
     questions.value = questionsRes.data.map(q => {
       const member = memberList.find(m => String(m.user_id) === String(q.member_id))
@@ -129,17 +131,29 @@ onMounted(async () => {
 
 async function handleAccept() {
   try {
-    const res = await axios.get(`http://localhost:3001/mentoringMembers?mentoring_space_id=${mentoringSpaceId}`)
+    // 멘토링 멤버 질문횟수 +10
+    const memberRes = await axios.get(`http://localhost:3001/mentoringMembers?mentoring_space_id=${mentoringSpaceId}`)
     await Promise.all(
-      res.data.map(member =>
+      memberRes.data.map(member =>
         axios.patch(`http://localhost:3001/mentoringMembers/${member.id}`, {
           leftover_questions: member.leftover_questions + 10
         })
       )
     )
-    alert('질문 횟수가 10회 추가되었습니다.')
+
+    // 멘토링 공간 extension_requested = "N", extension_count + 1
+    const spaceRes = await axios.get(`http://localhost:3001/mentoringSpaces/${mentoringSpaceId}`)
+    const currentCount = spaceRes.data.extension_count ?? 0
+
+    await axios.patch(`http://localhost:3001/mentoringSpaces/${mentoringSpaceId}`, {
+      extension_requested: "N",
+      extension_count: currentCount + 1
+    })
+
+    alert("연장을 수락하였습니다. 질문 횟수가 추가되었습니다.")
+    location.reload()  // 또는 상태값을 수동으로 갱신
   } catch (err) {
-    console.error('연장 수락 실패:', err)
+    console.error("연장 수락 실패:", err)
   }
 }
 
@@ -149,11 +163,13 @@ async function handleReject() {
       is_activated: "N"
     })
     alert('멘토링 공간이 비활성화되었습니다.')
+    extensionRequested.value = false
   } catch (err) {
     console.error('연장 거절 실패:', err)
   }
 }
 </script>
+
 
 <style scoped>
 .mentor-view {
