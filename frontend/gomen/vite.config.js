@@ -22,6 +22,11 @@ export default defineConfig({
         rewrite: path => path.replace(/^\/api/, ''),
       }
     }
+  },
+  css: {
+    postcss: {
+      plugins: []
+    }
   }
 })
 

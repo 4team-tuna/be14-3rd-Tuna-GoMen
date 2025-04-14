@@ -3,7 +3,14 @@
     <div v-for="comment in comments" :key="comment.id" class="comment">
       <div class="comment-header">
         <strong>{{ comment.writer }}</strong>
-        <span class="report" @click="reportComment(comment.id)">🚨 신고</span>
+        <!-- 신고 버튼을 댓글 작성자 본인의 댓글에 대해선 표시하지 않음 -->
+        <div class="comment-actions">
+          <!-- 신고 버튼은 작성자가 아닌 경우에만 표시 -->
+          <span v-if="comment.writer !== nickname" class="report" @click="reportComment(comment.id)">🚨 신고</span>
+          <!-- 수정/삭제 버튼은 작성자 본인만 보임 -->
+          <span v-if="comment.writer === nickname" class="edit-delete" @click="editComment(comment)">수정</span>
+          <span v-if="comment.writer === nickname" class="edit-delete" @click="deleteComment(comment.id)">삭제</span>
+        </div>
       </div>
       <p>{{ comment.content }}</p>
       <span class="comment-date">{{ comment.date }}</span>
@@ -30,6 +37,7 @@
   </section>
 </template>
 
+
 <script setup>
 import { ref } from 'vue'
 
@@ -40,6 +48,8 @@ const props = defineProps({
   },
 })
 const emit = defineEmits(['add-reply'])
+
+const nickname = ref(JSON.parse(localStorage.getItem('user'))?.nickname)
 
 const replyTargetId = ref(null)
 const replyText = ref('')
@@ -68,14 +78,35 @@ const submitReply = (commentId) => {
 const reportComment = (id) => {
   alert(`댓글 (ID: ${id})을 신고하시겠습니까?`)
 }
+
+const editComment = (comment) => {
+  const newContent = prompt('수정할 내용을 입력하세요', comment.content)
+  if (newContent) {
+    comment.content = newContent
+    // 여기서 서버에 댓글 수정 요청을 보낼 수 있습니다.
+    // 예: axios.put('/comments/{commentId}', { content: newContent })
+  }
+}
+
+const deleteComment = (commentId) => {
+  if (confirm('정말로 삭제하시겠습니까?')) {
+    // 여기서 서버에 댓글 삭제 요청을 보낼 수 있습니다.
+    // 예: axios.delete('/comments/{commentId}')
+    const index = comments.value.findIndex(comment => comment.id === commentId)
+    if (index !== -1) {
+      comments.value.splice(index, 1)  // 로컬 상태에서 삭제
+    }
+  }
+}
 </script>
+
 
 <style scoped>
 .comments {
   display: flex;
   flex-direction: column;
   gap: 16px;
-  margin: 0 24px; /* 상단 마진 제거 */
+  margin: 0 24px;
 }
 
 .comment {
@@ -89,13 +120,14 @@ const reportComment = (id) => {
   justify-content: space-between;
   align-items: center;
   font-weight: 500;
+  position: relative;  /* 위치 조정 */
 }
 
-.comment-date {
-  font-size: 12px;
-  color: #aaa;
-  margin-top: 4px;
-  display: inline-block;
+.comment-actions {
+  display: flex;
+  gap: 12px;  /* 버튼 사이의 간격 */
+  position: absolute;
+  right: 0;  /* 맨 오른쪽에 정렬 */
 }
 
 .report {
@@ -103,6 +135,16 @@ const reportComment = (id) => {
   cursor: pointer;
   color: red;
   font-weight: bold;
+}
+
+.edit-delete {
+  font-size: 12px;
+  cursor: pointer;
+  color: #888; /* 회색 글자 */
+}
+
+.edit-delete:hover {
+  color: #333; /* 호버 시 진한 회색으로 변경 */
 }
 
 .reply-btn {
@@ -152,9 +194,13 @@ const reportComment = (id) => {
   font-size: 13px;
 }
 
+.comment-date {
+  font-size: 12px;
+  color: #aaa;
+}
+
 .comment-list {
   margin-bottom: 0;
   padding-bottom: 0;
 }
-
 </style>
