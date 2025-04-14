@@ -100,6 +100,16 @@ const routes = [
     path: '/mentee/qna/:questionId',
     name: 'QuestionDetail',
     component: () => import('@/views/Mentoring/QuestionDetailPage.vue')
+  },
+  {
+    path: '/mentoring/:id/qna/mentor',
+    name: 'MentorQnaPage',
+    component: () => import('@/views/Mentoring/MentorQnaPage.vue')
+  },
+  {
+    path: '/mentoring/:id',
+    name: 'MentoringDetail',
+    component: () => import('@/views/Mentoring/MentorView.vue') 
   }
 ]
 

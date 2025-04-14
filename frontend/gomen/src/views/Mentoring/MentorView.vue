@@ -29,7 +29,7 @@
     <div class="qna-section">
       <div class="qna-title-row">
         <h3 class="section-title">Q&A</h3>
-        <RouterLink :to="`/mentoring/${mentoringSpaceId}/qna`" class="more-btn">더보기 ></RouterLink>
+        <RouterLink :to="`/mentoring/${mentoringSpaceId}/qna/mentor`" class="more-btn">더보기 ></RouterLink>
       </div>
       <div v-if="visibleQuestions.length === 0" class="empty-msg">
         등록된 질문이 아직 없습니다.
@@ -160,12 +160,14 @@ async function handleAccept() {
 async function handleReject() {
   try {
     await axios.patch(`http://localhost:3001/mentoringSpaces/${mentoringSpaceId}`, {
+      extension_requested: "N",
       is_activated: "N"
     })
-    alert('멘토링 공간이 비활성화되었습니다.')
-    extensionRequested.value = false
+
+    alert("멘토링 공간이 종료되었습니다.")
+    location.reload()  // 또는 is_activated 관련 상태를 비활성 처리
   } catch (err) {
-    console.error('연장 거절 실패:', err)
+    console.error("연장 거절 실패:", err)
   }
 }
 </script>
