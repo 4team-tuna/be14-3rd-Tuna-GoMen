@@ -1303,27 +1303,6 @@
       "averageRating": 0,
       "college": "한양대학교",
       "blog": "tjalswhd1@naver.com"
-    },
-    {
-      "id": "1744624018563",
-      "loginId": "aaa",
-      "password": "aaa",
-      "name": "aaa",
-      "personalNumber": "aaa",
-      "phoneNumber": "aaa",
-      "nickname": "aaa",
-      "createdAt": "2025-04-14T09:46:58.563Z",
-      "updatedAt": null,
-      "willBeActivated": "2025-04-14T09:46:58.563Z",
-      "isQuitted": "Y",
-      "githubAdress": "",
-      "extensionCount": 0,
-      "careerInfo": "",
-      "isMentor": "N",
-      "violationScore": 0,
-      "averageRating": 0,
-      "college": "",
-      "blog": ""
     }
   ],
   "reports": [
