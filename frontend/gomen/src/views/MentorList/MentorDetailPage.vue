@@ -18,7 +18,14 @@
         <p class="description"><strong>기술 내용 :</strong> {{ mentor.description }}</p>
       </div>
 
-      <button class="apply-button" @click="openModal">신청하기</button>
+      <!-- ✅ 버튼 조건 분기 -->
+      <button class="apply-button" @click="applyAsTeam" v-if="isTeamLeader">
+        팀으로 신청하기
+      </button>
+      <button class="apply-button" @click="applyAsIndividual" v-else-if="user">
+        개인으로 신청하기
+      </button>
+      <p v-else class="loading">⚠ 로그인 후 신청 가능합니다.</p>
     </div>
 
     <div v-if="showModal" class="modal-overlay">
@@ -34,7 +41,7 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue'
+import { ref, onMounted, computed } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import axios from 'axios'
 
@@ -42,6 +49,61 @@ const route = useRoute()
 const router = useRouter()
 const mentor = ref({})
 const showModal = ref(false)
+
+const user = JSON.parse(localStorage.getItem('user'))
+const teamPosts = ref([])
+
+const myTeam = computed(() =>
+  teamPosts.value.find(post =>
+    post.nickname?.trim().toLowerCase() === user?.nickname?.trim().toLowerCase()
+  )
+)
+const isTeamLeader = computed(() => !!myTeam.value)
+
+const applyAsTeam = async () => {
+  try {
+    console.log('🙋 team applicants:', myTeam.value.applicants)
+    const payload = {
+      type: 'team',
+      mentorId: mentor.value.userId,
+      teamId: myTeam.value.id,
+      teamName: myTeam.value.teamName,
+      leaderNickname: myTeam.value.nickname,
+      applicants: myTeam.value.applicants.map(a => ({
+        id: a.user_id, // ✅ 핵심 수정!
+        nickname: a.nickname,
+        introduction: a.introduction
+      }))
+    }
+    
+    await axios.post('http://localhost:3001/applications', payload)
+    showModal.value = true
+  } catch (err) {
+    console.error('팀 신청 실패:', err)
+    alert('신청 중 오류가 발생했습니다.')
+  }
+}
+
+const applyAsIndividual = async () => {
+  try {
+    const payload = {
+      mentorId: mentor.value.userId,
+      menteeId: user.id,
+      name: user.nickname,
+      message: '멘토링 신청합니다!'
+    }
+
+    await axios.post('http://localhost:3001/applications', payload)
+    showModal.value = true
+  } catch (err) {
+    console.error('개인 신청 실패:', err)
+    alert('신청 중 오류가 발생했습니다.')
+  }
+}
+
+const goToList = () => {
+  router.push('/mentorlist')
+}
 
 const getImageUrl = (path) => {
   try {
@@ -51,31 +113,16 @@ const getImageUrl = (path) => {
   }
 }
 
-const openModal = async () => {
-  const user = JSON.parse(localStorage.getItem('user'))
-
-  try {
-    await axios.post('http://localhost:3001/applications', {
-      mentorId: mentor.value.userId,  
-      menteeId: user.id,
-      name: user.nickname,
-      message: '멘토링 신청합니다!'
-    })
-
-    showModal.value = true
-  } catch (err) {
-    console.error('신청 실패:', err)
-    alert('신청 중 오류가 발생했습니다.')
-  }
-}
-
-const goToList = () => {
-  router.push('/mentorlist')
-}
-
 onMounted(async () => {
-  const res = await axios.get(`http://localhost:3001/mentorlist/${route.params.id}`)
-  mentor.value = res.data
+  const mentorRes = await axios.get(`http://localhost:3001/mentorlist/${route.params.id}`)
+  mentor.value = mentorRes.data
+
+  const teamRes = await axios.get('http://localhost:3001/teamRecruitPosts')
+  teamPosts.value = teamRes.data
+
+  console.log('✅ 불러온 팀 목록:', teamPosts.value)
+  console.log('👤 현재 유저:', user.nickname)
+  console.log('🧑‍💼 isTeamLeader:', isTeamLeader.value)
 })
 </script>
 
