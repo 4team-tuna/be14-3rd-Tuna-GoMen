@@ -65,18 +65,17 @@
     <section class="bookmark-box">
       <h2>내가 북마크한 게시글</h2>
       <div class="bookmark-list">
-        <div class="bookmark-item">
-          <p>자유게시판 - 함께해요</p>
-          <small>프론트 팀 프로젝트 모집중이에요</small>
+        <div class="bookmark-item" v-for="post in bookmarkedPosts" :key="post.id" @click="goToPost(post.id)">
+          <p>자유게시판 - {{ post.category || '기타' }}</p>
+          <small>{{ post.title }}</small>
         </div>
-        <div class="bookmark-item">
-          <p>자유게시판 - Q&A</p>
-          <small>React의 Component가 안 불러와요...</small>
+        <div v-if="bookmarkedPosts.length === 0" class="empty">
+          아직 북마크한 게시글이 없어요!
         </div>
         <!-- 더보기 버튼 -->
         <div class="more">더 보기 &gt;</div>
-      </div>
-    </section>
+        </div>
+      </section>
   
       <!-- 멤버 유형 -->
       <section class="simple-box" v-if="user">
@@ -132,7 +131,7 @@
   const router = useRouter();
   const changeInfo = () => {router.push('/changeInfo')}
   
-  const myId = localStorage.getItem('userId');
+  const userId = localStorage.getItem('userId');
 
   // Modal창 띄우기용
   const showCareerModal = ref(false);
@@ -153,7 +152,7 @@
   const user = ref(null)
   onMounted(async () => {
     try {
-        const response = await axios.get(`http://localhost:3001/users/${myId}`)
+        const response = await axios.get(`http://localhost:3001/users/${userId}`)
         if (response.data) {
         user.value = response.data
         } else {
@@ -168,7 +167,7 @@
   // 회원 프로필 사진
   const addProfilePic = async (base64Image) => {
   try {
-    await axios.patch(`http://localhost:3001/users/${myId}`, {
+    await axios.patch(`http://localhost:3001/users/${userId}`, {
       image: base64Image,
     })
     alert('프로필 사진이 등록되었습니다!')
@@ -189,7 +188,7 @@
         ? currentCareer + '\n' + careerText
         : careerText
 
-      await axios.patch(`http://localhost:3001/users/${myId}`, {
+      await axios.patch(`http://localhost:3001/users/${userId}`, {
         careerInfo: updatedCareer
       })
 
@@ -211,7 +210,7 @@
     const updatedCareer = lines.join('\n')
 
     try {
-      await axios.patch(`http://localhost:3001/users/${myId}`, {
+      await axios.patch(`http://localhost:3001/users/${userId}`, {
         careerInfo: updatedCareer
       })
 
@@ -222,6 +221,32 @@
       alert('❌ 삭제 중 오류가 발생했습니다.')
     }
   }
+
+  // 북마크한 게시글
+  const bookmarkedPosts = ref([])
+  function goToPost(postId) {
+    router.push(`/boards/free/${postId}`)
+  }
+  
+  const fetchBookmarkedPosts = async () => {
+    try {
+      const bookmarkRes = await axios.get(`http://localhost:3001/bookmark?userId=${userId}`)
+      const bookmarks = bookmarkRes.data
+
+      const postPromises = bookmarks.map(b =>
+        axios.get(`http://localhost:3001/allposts/${b.postId}`)
+      )
+
+      const postResponses = await Promise.all(postPromises)
+      bookmarkedPosts.value = postResponses.map(res => res.data)
+    } catch (error) {
+      console.error('북마크 게시글 불러오기 실패:', error)
+    }
+  }
+
+  onMounted(() => {
+    fetchBookmarkedPosts()
+  })
 
    // 멘토 신청
 const applyMentor = async (message) => {
@@ -235,6 +260,7 @@ const applyMentor = async (message) => {
       message
     }
 
+
       await axios.post('http://localhost:3001/mentorRequests', payload)
 
       alert('멘토 신청이 완료되었습니다!')
@@ -244,6 +270,7 @@ const applyMentor = async (message) => {
     }
   }
 
+  // 비밀번호 변경
   const changePassword = async ({ currentPassword, newPassword }) => {
   try {
     if (user.value.password !== currentPassword) {
@@ -251,7 +278,7 @@ const applyMentor = async (message) => {
       return;
     }
 
-    await axios.patch(`http://localhost:3001/users/${myId}`, {
+    await axios.patch(`http://localhost:3001/users/${userId}`, {
       password: newPassword
     });
 
@@ -463,5 +490,14 @@ h1 {
     margin: 6px 0;
   }
 
+  .bookmark-item {
+  cursor: pointer;
+  color: #333;
+  transition: color 0.3s ease;
+  }
+  .bookmark-item:hover {
+    text-decoration: underline;
+    color: #0ea5e9; /* Tailwind의 sky-500 */
+  }
 
 </style>

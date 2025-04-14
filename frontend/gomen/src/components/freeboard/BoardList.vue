@@ -12,8 +12,16 @@
         <tr v-for="(post, index) in paginated" :key="post.id">
           <td>{{ startIndex + index + 1 }}</td>
           <td>
-  <router-link :to="`/boards/free/${post.id}`" class="router-link">{{ post.title }}</router-link>
-</td>
+              <router-link
+                v-if="post.is_blinded !== 'Y'"
+                :to="`/boards/free/${post.id}`"
+                class="router-link"
+              >
+                {{ post.title }}
+              </router-link>
+              <span v-else class="blinded-title">🚫 블라인드 처리된 게시글</span>
+          </td>
+
           <td>{{ post.author }}</td>
           <td>{{ post.date }}</td>
         </tr>
@@ -126,6 +134,10 @@
   background-color: #ced4da;
 }
 
+.blinded-title {
+  color: #cc0000;
+  font-weight: bold;
+}
 
 
 </style>
