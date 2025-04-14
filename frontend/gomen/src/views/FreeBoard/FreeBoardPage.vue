@@ -8,8 +8,7 @@
       <PostCard v-if="post && post.category && post.title" :post="post" :isAuthor="isAuthor" />
       
       <!-- 🔥 댓글 목록 -->
-      <CommentList
-  v-if="post && Array.isArray(post.comments)"
+      <CommentList v-if="post && Array.isArray(post.comments)"
   :key="post.comments.length"
   :comments="post.comments"
   @edit-comment="handleEditComment"

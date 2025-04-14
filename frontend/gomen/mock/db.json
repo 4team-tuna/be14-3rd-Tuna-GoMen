@@ -717,25 +717,6 @@
       "comments": []
     },
     {
-      "id": "8f1b",
-      "title": "ㅋㅋㅋ",
-      "author": "예지",
-      "date": "25.04.14",
-      "createdAt": "2025-04-14T02:53:30.877Z",
-      "category": "잡담",
-      "views": 0,
-      "likes": 0,
-      "content": "ㅋ",
-      "comments": [
-        {
-          "id": 1744602032722,
-          "writer": "예지",
-          "content": "ㅇ",
-          "date": "2025. 4. 14. 오후 12:40:32"
-        }
-      ]
-    },
-    {
       "id": "c2da",
       "title": "ㅎㅇ",
       "author": "예지",
@@ -745,7 +726,20 @@
       "views": 0,
       "likes": 0,
       "content": "덩할 왔다감",
-      "comments": []
+      "comments": [
+        {
+          "id": 1744609102598,
+          "writer": "예지",
+          "content": "ㅌㅌ",
+          "date": "2025-04-14T05:38:22.598Z"
+        },
+        {
+          "id": 1744609384772,
+          "writer": "예지",
+          "content": "ㅋㅇㄹㄴㄹㄴ",
+          "date": "2025-04-14T05:43:04.772Z"
+        }
+      ]
     }
   ],
   "likes": [
