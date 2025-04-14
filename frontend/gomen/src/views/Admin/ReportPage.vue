@@ -11,6 +11,7 @@
             <th>게시글ID</th>
             <th>댓글ID</th>
             <th>신고자ID</th>
+            <th>신고사유</th>
             <th>처리여부</th>
             <th>벌점사유</th>
             <th>벌점처리</th>
@@ -24,6 +25,9 @@
             <td>{{ report.postId ?? 'null' }}</td>
             <td>{{ report.commentId ?? 'null' }}</td>
             <td>{{ report.reporterId }}</td>
+            <td>
+              <button class="reason-btn" @click="openReasonModal(report.reason)">신고사유 보기</button>
+            </td>
             <td>{{ report.status }}</td>
             <td>{{ report.category ?? '-' }}</td>
             <td class="category-select-cell">
@@ -42,6 +46,15 @@
       </table>
       <p class="note">※ 블라인드 처리는 게시글 또는 댓글 ID에 대한 것입니다.</p>
     </main>
+    <!-- 신고 사유 모달 -->
+    <div v-if="showReasonModal" class="reason-modal-overlay" @click.self="closeReasonModal">
+    <div class="reason-modal">
+        <h3>📄 신고 사유</h3>
+        <p>{{ selectedReason }}</p>
+        <button class="close-btn" @click="closeReasonModal">닫기</button>
+    </div>
+</div>
+
   </div>
 </template>
 
@@ -104,8 +117,12 @@ const handleProcess = async (reportId) => {
     }
 
     const currentScore = targetUser.violationScore || 0
+    const updatedScore = currentScore + score
+
+    // 벌점 누적 및 탈퇴 처리
     await axios.patch(`http://localhost:3001/users/${targetUser.id}`, {
-      violationScore: currentScore + score
+      violationScore: updatedScore,
+      ...(updatedScore >= 100 && { isQuitted: 'Y' }) // 👈 누적 벌점 100 이상이면 탈퇴 처리
     })
 
     const target = reports.value.find(r => r.id === reportId)
@@ -114,12 +131,18 @@ const handleProcess = async (reportId) => {
       target.category = selectedCategory
     }
 
-    alert(`처리 완료! ${score}점 벌점이 부과되었습니다.`)
+    let msg = `처리 완료! ${score}점 벌점이 부과되었습니다.`
+    if (updatedScore >= 100) {
+      msg += '\n⚠️ 누적 벌점 100점 초과로 해당 회원은 탈퇴 처리되었습니다.'
+    }
+    alert(msg)
+
   } catch (error) {
     console.error('처리 실패:', error)
     alert('처리 중 오류가 발생했습니다.')
   }
 }
+
 
 const handleBlind = async (reportId) => {
   try {
@@ -140,6 +163,19 @@ const handleBlind = async (reportId) => {
     alert('블라인드 처리 중 오류가 발생했습니다.')
   }
 }
+
+const showReasonModal = ref(false)
+const selectedReason = ref('')
+
+const openReasonModal = (reason) => {
+  selectedReason.value = reason || '신고 사유가 입력되지 않았습니다.'
+  showReasonModal.value = true
+}
+
+const closeReasonModal = () => {
+  showReasonModal.value = false
+}
+
 </script>
 
 <style scoped>
@@ -243,4 +279,69 @@ tr:nth-child(even) td {
   border-color: #5d5fef;
   box-shadow: 0 0 0 2px rgba(93, 95, 239, 0.25);
 }
+
+.reason-btn {
+  padding: 6px 10px;
+  background-color: #e4e0fb;
+  color: #5d5fef;
+  border: none;
+  border-radius: 6px;
+  font-size: 13px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.2s;
+}
+.reason-btn:hover {
+  background-color: #cfc9f4;
+}
+
+.reason-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.3);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.reason-modal {
+  background-color: #fff;
+  padding: 24px;
+  border-radius: 12px;
+  width: 320px;
+  max-width: 90%;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+  text-align: center;
+}
+
+.reason-modal h3 {
+  margin-bottom: 12px;
+  font-size: 18px;
+  color: #444;
+}
+
+.reason-modal p {
+  font-size: 14px;
+  color: #555;
+  margin-bottom: 20px;
+  white-space: pre-wrap;
+  word-break: keep-all;
+}
+
+.close-btn {
+  background-color: #7c72f0;
+  color: white;
+  padding: 6px 14px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+.close-btn:hover {
+  background-color: #5d5fef;
+}
+
 </style>
