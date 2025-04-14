@@ -43,13 +43,11 @@
       </div>
     </section>
   </div>
-<<<<<<< HEAD
-=======
 
   <div v-else>
     <p>게시글을 불러오는 중입니다...</p>
   </div>
->>>>>>> develop
+
 </template>
 
 <script setup>
@@ -103,20 +101,6 @@ const deletePost = async () => {
   }
 }
 
-<<<<<<< HEAD
-const myId = localStorage.getItem('userId')
-
-const reportPost = () => {
-  alert('이 게시글을 신고하시겠습니까?')
-}
-
-  // 좋아요 관련
-
-const liked = ref(false)
-const likeCount = ref(props.post.likes)
-
-=======
->>>>>>> develop
 const toggleLike = async () => {
   liked.value = !liked.value
   likeCount.value += liked.value ? 1 : -1
