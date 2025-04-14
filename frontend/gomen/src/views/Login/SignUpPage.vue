@@ -12,7 +12,7 @@
 
       <input v-model="form.name" type="text" placeholder="이름" class="signup-input" />
       <input v-model="form.nickname" type="text" placeholder="닉네임" class="signup-input" />
-      <input v-model="form.personalNumber" type="text" placeholder="주민등록번호호" class="signup-input" />
+      <input v-model="form.personalNumber" type="text" placeholder="주민등록번호" class="signup-input" />
       <input v-model="form.phoneNumber" type="text" placeholder="휴대전화번호 (대한민국 +82)" class="signup-input" />
 
       <button class="signup-button" @click="submitForm">회원가입</button>
@@ -48,13 +48,13 @@ const submitForm = async () => {
   }
   try {
     const newUser = {
-      id: Date.now().toString(), // 임시 ID (JSON Server에서는 자동 생성도 가능)
+      id: Date.now().toString(),
       loginId: form.loginId,
-      password: form.password, // 실제 서비스에선 암호화 필요
+      password: form.password,
       name: form.name,
       personalNumber: form.personalNumber,
       phoneNumber: form.phoneNumber,
-      nickname: form.nickname, // 임시 닉네임은 이름과 동일하게
+      nickname: form.nickname,
       createdAt: new Date().toISOString(),
       updatedAt: null,
       willBeActivated: new Date().toISOString(),

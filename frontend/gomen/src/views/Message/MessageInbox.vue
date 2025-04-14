@@ -81,7 +81,7 @@ const closeModal = () => {showModal.value = false}
 const sentMessages = ref([])
 const receivedMessages = ref([])
 
-// 메일을 주고받은 모든 회원들의 닉네임을 조회회
+// 메일을 주고받은 모든 회원들의 닉네임을 조회
 async function preloadNicknames(messages) {
   const userIds = new Set();
   messages.forEach(msg => {
