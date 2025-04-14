@@ -11,7 +11,8 @@
   
       <hr />
   
-      <AnswerList :questionId="question.id" />
+      <!-- ✅ ref 추가 -->
+      <AnswerList :questionId="question.id" ref="answerListRef" />
       <AnswerForm :questionId="question.id" @submitted="reloadAnswers" />
     </div>
   </template>
@@ -28,6 +29,7 @@
   
   const question = ref({})
   const nickname = ref('')
+  const answerListRef = ref(null) // ✅ ref 선언
   
   const fetchQuestion = async () => {
     const res = await api.get(`/questions/${questionId}`)
@@ -41,13 +43,14 @@
   onMounted(fetchQuestion)
   
   const reloadAnswers = () => {
-    // AnswerList 쪽에서 watch로 questionId props 감지하면 자동 갱신됨
+    // ✅ 답변 등록 후 AnswerList의 fetchAnswers 직접 호출
+    answerListRef.value?.fetchAnswers()
   }
-
+  
   const formatDate = (dateStr) => {
     const d = new Date(dateStr)
     return `${d.getFullYear()}.${String(d.getMonth() + 1).padStart(2, '0')}.${String(d.getDate()).padStart(2, '0')} ${d.getHours()}시 ${d.getMinutes()}분`
-    }
+  }
   </script>
   
   <style scoped>

@@ -20,6 +20,7 @@
   
   <script setup>
     import { ref, watch, onMounted } from 'vue'
+    import { defineExpose } from 'vue'
     import api from '@/api'
 
     const props = defineProps({
@@ -61,6 +62,7 @@
 
     onMounted(fetchAnswers)
     watch(() => props.questionId, fetchAnswers)
+    defineExpose({ fetchAnswers })
     </script>
   
   <style scoped>

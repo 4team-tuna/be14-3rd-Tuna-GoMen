@@ -32,7 +32,7 @@
   
     await api.post('/answers', {
       question_id: props.questionId,
-      mentor_id: mentor.id,
+      user_id: mentor.id,
       answer_content: content.value,
       answer_created_time: new Date().toISOString(),
       is_deleted: 'N'
