@@ -34,6 +34,9 @@ import ReportForm from '@/views/Report/ReportForm.vue'
 // 지원자 페이지
 import ApplicantListPage from "@/views/Applicant/ApplicantListPage.vue";
 
+// 별점 리뷰 페이지
+import ReviewWritePage from '@/views/Review/ReviewWritePage.vue'
+
 const routes = [
   { path: '/mail', component: MessageInbox},
   // 기본 진입 시 관리자 홈으로 리다이렉트
@@ -106,6 +109,13 @@ const routes = [
     path: '/mentorlist/status',
     name: 'MentorStatus',
     component: () => import('@/views/MentorList/MentorStatusPage.vue') 
+  },
+
+  // 별점 리뷰 페이지
+  {
+    path: '/review/write',
+    name:'ReviewWritePage',
+    component: () => import('@/views/Review/ReviewWritePage.vue')
   }
 ]
 
