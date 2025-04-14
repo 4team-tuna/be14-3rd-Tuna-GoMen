@@ -1,3 +1,4 @@
+멘토링페이지
 <template>
   <div class="mentoring-page">
     <div v-if="spaceId">
@@ -30,13 +31,19 @@ onMounted(async () => {
       const spaceRes = await api.get(`/mentoringSpaces/${myMembership.mentoring_space_id}`)
       const mySpace = spaceRes.data
 
+      isMentor.value = String(mySpace.mentor_id) === String(user.id) // ✅ 먼저 판별
+
       if (mySpace.is_activated !== 'Y') {
-        alert('⛔ 종료된 멘토링 공간입니다.')
-        return router.push('/main')
+        if (isMentor.value) {
+          // 멘토면 공간 유지 (그냥 패스)
+        } else {
+          // 멘티면 리뷰 페이지로 이동
+          alert('⛔ 멘토가 멘토링 연장을 거절하여 종료되었습니다. 리뷰를 남겨주세요.')
+          return router.push(`/review/write`)
+        }
       }
 
       spaceId.value = mySpace.id
-      isMentor.value = false
       console.log('🧑‍🎓 멘티로 참여한 공간:', mySpace.id)
       return
     }
@@ -55,6 +62,7 @@ onMounted(async () => {
     // 3. 둘 다 없으면
     alert('멘토링 공간에 속해 있지 않습니다.')
     router.push('/main')
+
   } catch (e) {
     console.error('멘토링 공간 조회 실패:', e)
     alert('멘토링 공간을 불러오지 못했습니다.')
@@ -62,6 +70,7 @@ onMounted(async () => {
   }
 })
 </script>
+
 
 <style scoped>
 .mentoring-page {
