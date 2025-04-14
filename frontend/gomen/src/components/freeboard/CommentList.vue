@@ -62,8 +62,11 @@
       <!-- 대댓글 리스트 -->
       <div v-if="comment.replies?.length" class="replies">
         <div class="reply" v-for="reply in comment.replies" :key="reply.id">
-          <strong>{{ reply.writer }}</strong>
-          <p>{{ reply.content }}</p>
+          <div class="reply-header">
+            <strong>{{ reply.writer }}</strong>
+            <button class="delete-reply-btn" @click="confirmDeleteReply(comment.id, reply.id)">✖</button>
+          </div>
+          <p class="reply-content">{{ reply.content }}</p>
           <span class="comment-date">{{ reply.date }}</span>
         </div>
       </div>
@@ -74,13 +77,12 @@
 
 
 <script setup>
-import { ref } from 'vue'
+import { ref, defineEmits } from 'vue'
 
 const props = defineProps({
   comments: Array,
 })
-
-const emit = defineEmits(['add-reply', 'edit-comment', 'delete-comment'])
+const emit = defineEmits(['add-reply', 'edit-comment', 'delete-comment', 'delete-reply'])
 
 const nickname = ref(JSON.parse(localStorage.getItem('user'))?.nickname)
 
@@ -107,22 +109,6 @@ const submitReply = (commentId) => {
   replyTargetId.value = null
 }
 
-const handleEditComment = async ({ id, newContent }) => {
-  const updatedComments = post.value.comments.map(comment =>
-    comment.id === id
-      ? { ...comment, content: newContent, date: new Date().toISOString() }
-      : comment
-  )
-
-  await axios.put(`http://localhost:3001/allposts/${postId}`, {
-    ...post.value,
-    comments: updatedComments
-  })
-
-  post.value = { ...post.value, comments: updatedComments }
-}
-
-
 const reportComment = (id) => {
   alert(`댓글 (ID: ${id})을 신고하시겠습니까?`)
 }
@@ -141,6 +127,13 @@ const submitEdit = (id) => {
   if (!editText.value.trim()) return
   emit('edit-comment', { id, newContent: editText.value })
   cancelEdit()
+}
+
+const confirmDeleteReply = (commentId, replyId) => {
+  const confirmed = window.confirm('정말 이 대댓글을 삭제하시겠습니까?')
+  if (confirmed) {
+    emit('delete-reply', { commentId, replyId })
+  }
 }
 </script>
 
@@ -259,14 +252,36 @@ const submitEdit = (id) => {
   border: none;
 }
 
-.replies {
-  margin-top: 10px;
-  padding-left: 16px;
-  border-left: 2px solid #eee;
+.reply {
+  background: #f3f4f6;
+  padding: 10px 14px;
+  border-radius: 8px;
+  margin-top: 6px;
 }
 
-.reply {
-  margin-top: 6px;
-  font-size: 13px;
+.reply-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
+
+.reply-content {
+  margin: 4px 0;
+  word-break: break-word;
+}
+
+.delete-reply-btn {
+  background: none;
+  border: none;
+  color: #d11a2a;
+  font-size: 16px;
+  cursor: pointer;
+  padding: 0;
+}
+
+.delete-reply-btn:hover {
+  color: #a10000;
+}
+
+
 </style>

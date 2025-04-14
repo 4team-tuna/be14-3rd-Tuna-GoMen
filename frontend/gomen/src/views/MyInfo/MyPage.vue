@@ -1,6 +1,13 @@
 <template>
   <div class="mypage-container">
     <h1>My Page</h1>
+    <!-- 관리자 메뉴 버튼 -->
+    <button 
+      v-if="isAdmin" 
+      class="admin-button" 
+      @click="goToAdminPage">
+      관리자 메뉴
+    </button>
   
     <!-- 프로필 이미지 및 추가 버튼 -->
     <section class="info-box" v-if="user">
@@ -132,6 +139,12 @@
   const changeInfo = () => {router.push('/changeInfo')}
   
   const userId = localStorage.getItem('userId');
+  
+  // 관리자용 기능
+  const isAdmin = ref(localStorage.getItem('loginId') === 'ADMIN')
+  const goToAdminPage = () => {
+    router.push('/admin')  // 관리자 페이지 라우터로 이동
+  }
 
   // Modal창 띄우기용
   const showCareerModal = ref(false);
@@ -295,12 +308,32 @@ const applyMentor = async (message) => {
   
 <style scoped>
 
+.admin-button {
+  position: absolute; /* 부모 요소(mypage-container) 기준으로 절대 위치 설정 */
+  top: 10px; /* 상단에서 10px 떨어지게 */
+  right: 10px; /* 오른쪽에서 10px 떨어지게 */
+  background-color: #fff; /* 기본 배경색 */
+  padding: 10px 20px;
+  border-radius: 5px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* 그림자 효과 */
+  font-size: 14px;
+  color: #333;
+  transition: background-color 0.3s ease; /* 색 변경 효과 */
+}
+
+.admin-button:hover {
+  background-color: #4CAF50; /* hover 시 배경색을 다른 색으로 변경 */
+  color: #fff; /* hover 시 글자색을 흰색으로 변경 */
+}
+
 .mypage-container {
   max-width: 720px;
   margin: 0 auto;
   padding: 40px 20px;
   background-color: #f6f6f6;
   font-family: 'Pretendard', sans-serif;
+  position: relative; /* 자식 요소의 절대 위치를 잡기 위해 relative 설정 */
+
 }
 
 h1 {

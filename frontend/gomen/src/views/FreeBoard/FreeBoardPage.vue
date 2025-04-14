@@ -9,12 +9,13 @@
       
       <!-- 🔥 댓글 목록 -->
       <CommentList v-if="post && Array.isArray(post.comments)"
-  :key="post.comments.length"
-  :comments="post.comments"
-  @edit-comment="handleEditComment"
-  @delete-comment="handleDeleteComment"
-  @add-reply="handleAddReply"
-/>
+        :key="post.comments.length"
+        :comments="post.comments"
+        @edit-comment="handleEditComment"
+        @delete-comment="handleDeleteComment"
+        @add-reply="handleAddReply"
+        @delete-reply="handleDeleteReply"
+      />
     <!-- 댓글 폼 -->
     <CommentForm  @add-comment="handleAddComment" />
   </main>
@@ -84,6 +85,11 @@ const handleEditComment = async ({ id, newContent }) => {
 
 
 const handleDeleteComment = async (id) => {
+  const isConfirmed = window.confirm('정말 이 댓글을 삭제하시겠습니까?')
+
+  if (!isConfirmed) {
+    return // 사용자가 취소함
+  }
   console.log('삭제 처리 시작:', id)
 
   const updatedComments = post.value.comments.filter(
@@ -124,6 +130,32 @@ const handleAddReply = async ({ commentId, reply }) => {
   post.value.comments = updatedComments
 }
 
+// 대댓글 삭제
+const handleDeleteReply = async ({ commentId, replyId }) => {
+  // 1. 대댓글 삭제된 새로운 댓글 배열 생성
+  const updatedComments = post.value.comments.map(comment => {
+    if (comment.id === commentId) {
+      return {
+        ...comment,
+        replies: comment.replies?.filter(reply => reply.id !== replyId) || []
+      }
+    }
+    return comment
+  })
+
+  // 2. 서버에 반영
+  try {
+    await axios.put(`http://localhost:3001/allposts/${postId}`, {
+      ...post.value,
+      comments: updatedComments
+    })
+
+    // 3. 로컬 반영
+    post.value.comments = updatedComments
+  } catch (error) {
+    console.error('대댓글 삭제 실패:', error)
+  }
+}
 </script>
 
 <style scoped>
