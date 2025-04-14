@@ -729,22 +729,17 @@
       "userId": "1744531166026"
     },
     {
-      "id": "45f8",
-      "postId": "7e43",
-      "userId": "1"
-    },
-    {
       "id": "fcde",
       "postId": "25",
       "userId": "1744531166026"
+    },
+    {
+      "id": "ec74",
+      "postId": "7e43",
+      "userId": "1"
     }
   ],
   "bookmark": [
-    {
-      "id": "c4c9",
-      "postId": "7e43",
-      "userId": "1"
-    },
     {
       "id": "f60a",
       "postId": "7e43",
@@ -754,6 +749,11 @@
       "id": "4e4b",
       "postId": "25",
       "userId": "1744531166026"
+    },
+    {
+      "id": "4f51",
+      "postId": "7e43",
+      "userId": "1"
     }
   ],
   "messages": [
