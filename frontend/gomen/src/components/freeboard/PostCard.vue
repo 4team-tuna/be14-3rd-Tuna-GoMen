@@ -33,7 +33,7 @@
 
       <div class="post-actions">
         <span class="likes" @click="toggleLike">
-          {{ liked ? '❤️' : '🤍' }} {{ likeCount }}
+          {{ liked ? '❤️' : '🤍' }} {{ likesCount }}
         </span>
 
         <span class="bookmark" @click="toggleBookmark">
@@ -46,6 +46,7 @@
   <div v-else>
     <p>게시글을 불러오는 중입니다...</p>
   </div>
+
 </template>
 
 <script setup>
