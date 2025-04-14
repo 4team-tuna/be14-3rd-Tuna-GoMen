@@ -46,28 +46,43 @@
   <style scoped>
   .report-form {
   max-width: 500px;
-  margin: 40px auto; /* ✅ 중앙 정렬 핵심 */
+  margin: 40px auto;
   padding: 20px;
   background-color: #f9f9fb;
   border: 1px solid #ddd;
   border-radius: 12px;
+
+  /* 추가된 중앙 정렬 스타일 */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
 }
 
-  textarea {
-    width: 100%;
-    padding: 10px;
-    margin-top: 10px;
-    border-radius: 6px;
-    resize: vertical;
-  }
-  button {
-    margin-top: 10px;
-    padding: 10px 16px;
-    background-color: #e74c3c;
-    color: white;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-  }
+.report-form p {
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+textarea {
+  width: 100%;
+  padding: 10px;
+  margin-top: 10px;
+  border-radius: 6px;
+  resize: vertical;
+  font-size: 15px;
+}
+
+button {
+  margin-top: 16px;
+  padding: 10px 20px;
+  background-color: #e74c3c;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
   </style>
   
