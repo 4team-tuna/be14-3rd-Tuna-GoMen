@@ -4,6 +4,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 import FreeBoardPage from '@/views/FreeBoard/FreeBoardPage.vue'
 import BoardView from '@/views/FreeBoard/BoardView.vue'
 import WritePost from '@/views/FreeBoard/WritePost.vue'
+import EditPost from '@/views/FreeBoard/EditPost.vue'
 
 // 팀모집 게시판
 import TeamRecruitBoardPage from '@/views/teamRecruitBoard/TeamRecruitBoardPage.vue'
@@ -48,6 +49,8 @@ const routes = [
   {
     path: '/boards/free/write',name: 'WritePost', component: WritePost
   },
+  { path: '/boards/free/edit/:id', name: 'EditPost', component: EditPost },
+  
 
   // 유저 관련
   { path: '/signUp', component: SignUpPage},
