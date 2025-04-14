@@ -18,12 +18,12 @@
         :key="index"
         class="applicant-card-wrapper"
       >
-        <ApplicantCard
-          :applicant="applicant"
-          :profileImage="profileImage"
-          :postId="postId"
-          @update-status="fetchApplicants"
-        />
+      <ApplicantCard
+        :applicant="applicant"
+        :profileImage="profileImages[applicant.nickname]"
+        :postId="postId"
+        @update-status="fetchApplicants"
+      />
       </div>
     </div>
   </div>
@@ -36,27 +36,40 @@ import axios from 'axios'
 import ApplicantCard from '@/components/Applicant/ApplicantCard.vue'
 import ChangeRecruitmentStatusButton from '@/components/Applicant/ChangeRecruitmentStatusButton.vue'
 
-import profileImage from '@/assets/icon-user.png'
-
 const route = useRoute()
 const router = useRouter()
 const postId = route.params.id
+
 const applicants = ref([])
 const postTitle = ref('')
+const profileImages = ref({})
 
 const fetchApplicants = async () => {
   try {
     const { data } = await axios.get(`http://localhost:3001/teamRecruitPosts/${postId}`)
     postTitle.value = data.title
     applicants.value = data.applicants || []
-  } catch (error) {
-    console.error("데이터 로딩 실패:", error)
-  }
 
-  if (data.isActivated === 'N') {
-    alert('모집이 종료되어 지원자 정보를 볼 수 없습니다.')
-    router.push('/board/team-recruit')
-    return
+    if (data.isActivated === 'N') {
+      alert('모집이 종료되어 지원자 정보를 볼 수 없습니다.')
+      router.push('/board/team-recruit')
+      return
+    }
+
+    // ✅ 닉네임 기준으로 사용자 이미지 매핑
+    const nicknames = applicants.value.map(app => app.nickname)
+    const userRes = await axios.get('http://localhost:3001/users')
+    const users = userRes.data
+
+    const imageMap = {}
+    nicknames.forEach(nick => {
+      const found = users.find(u => u.nickname === nick)
+      imageMap[nick] = found?.image || require('@/assets/icon-user.png') 
+    })
+
+    profileImages.value = imageMap
+  } catch (error) {
+    console.error('데이터 로딩 실패:', error)
   }
 }
 
