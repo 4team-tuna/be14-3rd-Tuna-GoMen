@@ -1,3 +1,4 @@
+멘토링페이지
 <template>
   <div class="mentoring-page">
     <!-- 로딩 중일 때는 아무 것도 렌더링하지 않음 -->
@@ -26,21 +27,27 @@ onMounted(async () => {
     const res = await api.get(`/mentoringSpaces?userId=${user.id}`)
     const mySpace = res.data[0]
     if (!mySpace) return
-    console.log('mySpace:', mySpace)
-    console.log('🔍 is_activated:', mySpace.is_activated)
+
+    isMentor.value = String(mySpace.mentor_id) === String(user.id) // ✅ 먼저 판별
+
     if (mySpace.is_activated !== 'Y') {
-      alert('⛔ 종료된 멘토링 공간입니다.')
-      return router.push('/main')
+      if (isMentor.value) {
+        // 멘토면 공간 유지 (그냥 패스)
+      } else {
+        // 멘티면 리뷰 페이지로 이동
+        alert('⛔ 멘토가 멘토링 연장을 거절하여 종료되었습니다. 리뷰를 남겨주세요.')
+        return router.push(`/review/write`)
+      }
     }
 
-    spaceId.value = mySpace.id  // ✅ 확정적으로 id 사용
-    isMentor.value = String(mySpace.mentor_id) === String(user.id) // ✅ 타입 강제 일치
+    spaceId.value = mySpace.id
   } catch (e) {
     console.error('멘토링 공간 조회 실패:', e)
     router.push('/main')
   }
 })
 </script>
+
 
 <style scoped>
 .mentoring-page {
