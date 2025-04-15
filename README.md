@@ -90,12 +90,14 @@
 <details><summary> Board view Page </summary>
       <img src="https://github.com/user-attachments/assets/dd25ea85-6153-4b5a-96a8-c8179f4805bd" width="500">
 </details>
+<details><summary> Write Post Page </summary>
+      <img src="https://github.com/user-attachments/assets/ff04781e-8e4a-4260-b032-1a44c1ae2b0b" width="500">
+</details>
 <details><summary> Free Board Page </summary>
       <img src="" width="500">
 </details>
-<details><summary> Write Post Page </summary>
-      <img src="" width="500">
-</details>
+
+
 <details><summary> Edit Post Page </summary>
       <img src="" width="500">
 </details>
