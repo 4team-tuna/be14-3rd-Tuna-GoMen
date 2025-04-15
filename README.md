@@ -185,6 +185,8 @@
 </details> 
 
 ### 4-6. Team Reacruit Boards
+![3042C8AF-70F4-4AAE-9B8A-60078CB024B9](https://github.com/user-attachments/assets/4452ab9a-0b14-49ec-8fca-807360c92e7b)
+![E6BBF020-EE3E-4265-9288-CAF923B76869](https://github.com/user-attachments/assets/7d368955-b55f-4fc5-8edc-4b2f07323fc4)
 
 
 ### 4-7. MentorList
