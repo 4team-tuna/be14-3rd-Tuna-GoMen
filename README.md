@@ -210,36 +210,21 @@
 <img src="https://github.com/user-attachments/assets/b035c7c8-fee3-4189-bf50-9ea0ba4cde31" width="500">
 </details>
 
-<details><summary> 예시 </summary>
-
-</details>
-
-<details><summary> 예시 </summary>
-
-</details>
-
-<details><summary> 예시 </summary>
-
-</details>
-
-<details><summary> 예시 </summary>
-
-</details>
-
-<details><summary> 예시 </summary>
-
-</details>
-
-
+<details><summary> 검색 필터링 </summary>
 <img src="https://github.com/user-attachments/assets/46e1a577-3446-45f7-89bc-ce9cfecb53a9" width="500">
+</details>
+
+<details><summary> 모집중인 팀 모집 게시글 조회 </summary>
 <img src="https://github.com/user-attachments/assets/9984e0ca-685f-477f-8956-c03370a94614" width="500">
-<img src="https://github.com/user-attachments/assets/f6744ae5-0e70-43ec-ab1a-b6519bacb8e9" width="500">
+</details>
+
+<details><summary> 팀 모집 신청 </summary>
 <img src="https://github.com/user-attachments/assets/fa8f9a7e-a11a-4faa-9737-f15d5b994120" width="500">
+</details>
 
-
+<details><summary> 팀 신청 요청 처리 </summary>
 <img src="https://github.com/user-attachments/assets/7b62b24a-9147-4de9-a2c8-0ba62a5c73a4" width="500">
-<img src="https://github.com/user-attachments/assets/6e019428-72be-4d39-957b-10c3ad598d66" width="500">
-<img src="https://github.com/user-attachments/assets/7438e117-0e51-4b0d-b0ea-c92290b93f82" width="500">
+</details>
 
 ### 4-7. MentorList
 <details><summary> 멘토 리스트 등록 </summary>
@@ -279,6 +264,9 @@
 <img src="https://github.com/user-attachments/assets/d8a581d9-a191-4cc7-8ed3-05dfeca150d2" width="500">
 </details> 
 
+<details><summary> 별점 리뷰 작성 </summary>
+<img src="https://github.com/user-attachments/assets/7438e117-0e51-4b0d-b0ea-c92290b93f82" width="500">
+</details>
 
 ### 4-9. Report
 <details><summary> 게시글 신고 </summary>
