@@ -68,13 +68,17 @@
 ## ✍🏻 4. 테스트 계획 및 결과보고서
 ### 4-1. Main Page & Start Page
 
-<details><summary> 특정 모집 게시글에 대한 지원자 목록 조회 </summary>
+<details><summary> Main Page  </summary>
+      <img src="https://github.com/user-attachments/assets/2407983f-5fef-443b-bceb-4279da6b438f">
+</details>
+
+<details><summary> Start Page </summary>
       <img src="https://github.com/user-attachments/assets/2407983f-5fef-443b-bceb-4279da6b438f">
 </details>
 
 ### 4-2. Login Page
 
-<details><summary> 특정 모집 게시글에 대한 지원자 목록 조회 </summary>
+<details><summary> Login Page </summary>
       <img src="https://github.com/user-attachments/assets/2407983f-5fef-443b-bceb-4279da6b438f">
 </details>
 
