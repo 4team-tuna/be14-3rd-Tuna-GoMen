@@ -57,7 +57,120 @@
 
 ### 1-3. 주요 기능
 1.함께 프로젝트를 진행할 팀원 모집 및 생성 가능
-2.인증된 멘토들에게 팀단위판 </summary>
+2.인증된 멘토들에게 팀단위, 개인단위의 멘토링 가능
+3.칭호, 커뮤니티등을 통해 학습욕구 및 정보공유 가능
+4.별점및 리뷰 시스템을 통해 사용자 퀄리티 향상 가능
+5.신고를 통한 벌점 제도를 통해효율적인 회원관리 가능
+
+## 🔎 2. Figma
+### 2-1. 와이어프레임
+![image](https://github.com/user-attachments/assets/26bc4354-95e2-44f9-a598-31d66906b72e)
+### 2-2. 스토리보드 
+🗂️ 스토리보드
+이 관리자 시스템은 운영자가 멘토 요청, 신고 관리, 칭호 부여 등 다양한 사용자 관련 업무를 효율적으로 처리할 수 있도록 구성되어 있습니다. 전체적인 흐름은 로그인 후 관리자 대시보드에서 각 기능별 화면으로 진입하여 데이터를 확인하고, 처리 및 관리를 할 수 있도록 설계되어 있습니다.
+
+우선, 회원 마이페이지 구현을 통해 회원이 자신의 회원 정보를 조회할 수 있고, 정보 수정이나 본인의 개성을 나타낼 수 있도록 프로필 사진을 변경할 수 있습니다.
+또한, 자신의 개발자로서의 역량의 지표가 될 경력을 여러 개 추가 및 삭제할 수 있습니다.
+멘토로서 멘토링 활동을 하고 싶은 회원을 위해 멘토 신청 기능을 구현하였고, 관리자는 회원의 경력 항목을 보고 직접 판단하여 회원의 멘토 여부를 결정함으로써 멘토로서의 신뢰도를 보장하게끔 구성하였습니다.
+
+그리고, 쪽지 페이지에서는 자신이 대화를 나눈 회원들의 쪽지를 회원 별로 분류하여 날짜순으로 표시하였습니다. 회원은 다른 회원의 닉네임을 입력하여 그 회원에게 쪽지를 주고 받을 수 있으며 커뮤니티에서 게시글/댓글로 소통할 때는 한계가 있지만 이런 쪽지 기능을 통해 여러 회원과 더 다양하고 활발하게 소통할 수 있습니다.
+
+관리자는 먼저 로그인 후 관리자 전용 메인 페이지에 진입합니다. 이곳에서는 전체 시스템 관리 기능의 진입점 역할을 하는 버튼들이 제공되며, ‘멘토 요청 관리’, ‘신고 관리’, ‘칭호 관리’ 등의 페이지로 이동할 수 있습니다. 각각의 버튼은 floating-back 스타일로 우측 하단에 고정되어 있어 사용자가 어느 위치에서든 쉽게 홈으로 돌아갈 수 있도록 합니다.
+
+‘멘토 요청 관리’ 페이지에서는 일반 사용자들이 신청한 멘토 승급 요청 목록이 표시됩니다. 각 요청 항목은 신청자의 닉네임과 함께 ‘수락’ 또는 ‘거절’ 버튼으로 구성되어 있으며, 관리자가 수락 버튼을 클릭할 경우 해당 유저는 멘토 권한(isMentor: 'Y')이 부여됩니다. 처리된 요청은 즉시 화면에 '처리 완료'로 변경되어, 관리자가 어떤 요청을 이미 처리했는지 명확히 알 수 있도록 합니다.
+
+이후 관리자는 신고 처리를 위해 ‘신고 관리’ 페이지로 이동할 수 있습니다. 이 화면에서는 사용자가 작성한 게시글이나 댓글에 대해 들어온 신고 목록이 테이블 형식으로 정리되어 있으며, 각 항목은 신고 대상(게시글/댓글 ID), 신고자 ID, 신고 사유, 처리 상태 등으로 구성됩니다. 신고 사유는 ‘신고사유 보기’ 버튼을 통해 모달 창으로 확인할 수 있으며, 관리자에게는 벌점 사유를 선택할 수 있는 드롭다운 메뉴와 ‘처리’ 버튼이 함께 제공됩니다. 벌점이 부과되면 해당 유저의 violationScore가 누적되며, 누적 점수가 100점을 초과할 경우 자동으로 탈퇴 처리(isQuitted: 'Y')가 진행됩니다. 또한 게시글이나 댓글이 문제될 경우 블라인드 처리 버튼을 통해 콘텐츠를 숨길 수 있습니다.
+
+관리자는 이어서 칭호를 관리하기 위해 ‘칭호 관리’ 페이지로 진입합니다. 이 페이지에서는 시스템 내에서 사용자들에게 부여되는 칭호들을 추가하거나 삭제할 수 있으며, 칭호명과 달성 조건이 리스트 형태로 제공됩니다. ‘추가하기’ 버튼을 클릭하면 입력 폼이 나타나고, 새 칭호 정보를 입력 후 저장하면 리스트에 바로 반영됩니다. 필요 시 각 칭호 옆에 있는 ➖ 버튼을 눌러 삭제도 간편하게 할 수 있어, 관리자가 칭호 정책을 유동적으로 운영할 수 있습니다.
+
+전체적으로 이 시스템은 관리자들이 데이터 확인과 처리를 빠르게 할 수 있도록 최소한의 클릭만으로 원하는 기능에 접근할 수 있도록 구성되어 있으며, 사용자 요청, 신고, 역할 변화 등의 흐름을 자연스럽게 이어주는 구조로 되어 있습니다. 모든 기능은 Vue 3 Composition API와 Axios 기반으로 구성되어 있으며, 화면 전환 없이 실시간 상태 반영이 가능하도록 UX 설계가 되어 있습니다.
+
+시스템 확장이나 추가 기능 도입 시에도 현재 구조를 기반으로 페이지를 추가하거나 API를 연동하는 방식으로 손쉽게 대응할 수 있어 확장성 또한 우수합니다. 필요한 경우 통계 대시보드, 알림 설정, 관리자별 로그 기능 등을 통해 더욱 전문적인 시스템으로 발전시킬 수 있습니다.
+## 📜 3. 기능명세서
+### 3-1. WBS
+[WBS 링크](https://docs.google.com/spreadsheets/d/19VZI_1LJ8Jx2r8srhHZ5M0GApO66an1NkPZsmz7pS5Y/edit?gid=1013678623#gid=1013678623)
+![image](https://github.com/user-attachments/assets/a53d6ee0-8df2-44a4-b11f-a0cd708854c3)
+
+### 3-2. 요구사항 명세서
+[요구사항 명세서 링크](https://docs.google.com/spreadsheets/d/19VZI_1LJ8Jx2r8srhHZ5M0GApO66an1NkPZsmz7pS5Y/edit?gid=0#gid=0)
+
+![image](https://github.com/user-attachments/assets/8e653510-e6ef-4c2e-927d-ec7bceee39c6)
+
+
+## ✍🏻 4. 테스트 계획 및 결과보고서
+### 4-1. Main Page & Start Page
+
+<details><summary> Main Page  </summary>
+<img src="https://github.com/user-attachments/assets/9a83b4a1-77d1-498e-a3ee-3b69f9a326e7" width="500" />
+</details>
+
+<details><summary> Start Page </summary>
+      <img src="https://github.com/user-attachments/assets/bff787fc-3d34-4cc0-bba0-49c1c7a61737" width="500">
+</details>
+
+### 4-2. Login & SignUp Page
+<details><summary> SignUp Page </summary>
+   <img src="https://github.com/user-attachments/assets/0045a0fb-b11d-4133-8687-da9cd81c3846" width="500">
+</details>
+
+<details><summary> Login Page </summary>
+   <img src="https://github.com/user-attachments/assets/ca84cb83-a2c1-40b8-ba7a-2d567754e720" width="500">
+</details> 
+
+<details><summary> 벌점100점 탈퇴처리 </summary>
+   <img src="https://github.com/user-attachments/assets/22a67351-2cbc-40bb-8fcf-b3e1c1899ae7" width="500">
+</details> 
+
+### 4-3. MyPage
+<details><summary> MyPage </summary>
+   <img src="https://github.com/user-attachments/assets/18a850ff-995f-47be-bcfd-b43fe396f7e0" width="500">
+</details>
+
+<details><summary> Edit Information </summary>
+   <img src="https://github.com/user-attachments/assets/e302dc79-4180-40ee-a3e2-9b72a4d90c5f" width="500">
+</details>
+
+<details><summary> Change Profile Picture </summary>
+   <img src="https://github.com/user-attachments/assets/68d04479-e7c7-4335-add2-9f030267e238" width="500">
+</details>
+
+<details><summary> Change Password </summary>
+   <img src="https://github.com/user-attachments/assets/c897f734-dbec-4382-bdd9-236001dc6e2b" width="500">
+</details>
+
+<details><summary> Add Career </summary>
+   <img src="https://github.com/user-attachments/assets/30923ed1-ef46-491f-a8e5-e4087a5a3a0e" width="500">
+</details>
+
+<details><summary> Delete Career </summary>
+   <img src="https://github.com/user-attachments/assets/213a39c5-ccea-42cc-bff0-ee71308ab881" width="500">
+</details>
+
+<details><summary> Apply Mentor Authentication </summary>
+   <img src="https://github.com/user-attachments/assets/809dcf1b-664b-4542-9e15-c2871f7d4c01" width="500">
+</details>
+
+### 4-4. Message
+<details><summary> MessageBox </summary>
+   <img src="https://github.com/user-attachments/assets/8ba0f469-9eb6-4a2f-9bd1-0ec84335c07c" width="500">
+</details>
+
+<details><summary> Send Message </summary>
+   <img src="https://github.com/user-attachments/assets/983d331d-6b19-4ffe-9896-31ec44c46508" width="500">
+</details>
+
+### 4-5. Free Boards
+
+<details><summary> Board view Page </summary>
+      <img src="https://github.com/user-attachments/assets/dd25ea85-6153-4b5a-96a8-c8179f4805bd" width="500">
+</details>
+<details><summary> Write Post Page </summary>
+      <img src="https://github.com/user-attachments/assets/ff04781e-8e4a-4260-b032-1a44c1ae2b0b" width="500">
+</details>
+<details><summary> Edit Post Page </summary>
+      <img src="https://github.com/user-attachments/assets/b8466a4e-2f75-490b-a4cc-5f340b2db25f" width="500">
+</details>
+<details><summary> Free Board Page </summary>
       <img src="https://github.com/user-attachments/assets/b8d82c13-3172-41e6-8588-a8694659112c" width="500">
 </details>
 <details><summary> 게시글 블라인드 처리 </summary>
