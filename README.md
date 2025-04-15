@@ -79,14 +79,19 @@
 </details>
 
 
-
-### 4-2. Login Page
+### 4-2. Login & Regist Page
 
 <details><summary> Login Page </summary>
       <img src="">
-</details>
+</details> 
 
-### 4-3. Free Boards
+### 4-3. MyPage
+
+
+### 4-4. Message
+
+
+### 4-5. Free Boards
 
 <details><summary> Board view Page </summary>
       <img src="https://github.com/user-attachments/assets/dd25ea85-6153-4b5a-96a8-c8179f4805bd" width="500">
@@ -100,6 +105,25 @@
 <details><summary> Free Board Page </summary>
       <img src="https://github.com/user-attachments/assets/b8d82c13-3172-41e6-8588-a8694659112c" width="500">
 </details>
+
+
+### 4-6. Team Reacruit Boards
+
+
+### 4-7. MentorList
+
+
+
+### 4-8. Mentoring
+
+
+
+### 4-9. Report
+
+
+
+### 4-10. ADMIN
+
 
 ## 🛠️ 5. 기술 스택
 ## Frontend
