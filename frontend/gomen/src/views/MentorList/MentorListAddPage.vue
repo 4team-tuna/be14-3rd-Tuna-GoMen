@@ -43,6 +43,7 @@
     const user = JSON.parse(localStorage.getItem('user'))
     form.userId = user.id
     form.name = user.nickname
+    form.rating = 0.0
   
     try {
       await api.post('/mentorlist', form)
