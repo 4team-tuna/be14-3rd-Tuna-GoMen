@@ -112,7 +112,9 @@
 <details><summary> Free Board Page </summary>
       <img src="https://github.com/user-attachments/assets/b8d82c13-3172-41e6-8588-a8694659112c" width="500">
 </details>
-
+<details><summary> 게시글 블라인드 처리 </summary>
+<img src="https://github.com/user-attachments/assets/ee9ecd91-f290-4a88-84b7-ccb9f768f40b" width="500">
+</details> 
 
 ### 4-6. Team Reacruit Boards
 
@@ -126,7 +128,9 @@
 
 
 ### 4-9. Report
-
+<details><summary> 게시글 신고 </summary>
+<img src="https://github.com/user-attachments/assets/de383072-9dec-4dfc-b7f6-dcbf84636951" width="500">
+</details> 
 
 
 ### 4-10. ADMIN
