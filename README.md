@@ -120,20 +120,20 @@
 ## ✍🏻 4. 테스트 계획 및 결과보고서
 ### 4-1. Main Page & Start Page
 
-<details><summary> Main Page  </summary>
+<details><summary> 메인 페이지  </summary>
 <img src="https://github.com/user-attachments/assets/9a83b4a1-77d1-498e-a3ee-3b69f9a326e7" width="500" />
 </details>
 
-<details><summary> Start Page </summary>
+<details><summary> 시작 페이지 </summary>
       <img src="https://github.com/user-attachments/assets/bff787fc-3d34-4cc0-bba0-49c1c7a61737" width="500">
 </details>
 
 ### 4-2. Login & SignUp Page
-<details><summary> SignUp Page </summary>
+<details><summary> 회원 가입 </summary>
    <img src="https://github.com/user-attachments/assets/0045a0fb-b11d-4133-8687-da9cd81c3846" width="500">
 </details>
 
-<details><summary> Login Page </summary>
+<details><summary> 로그인 </summary>
    <img src="https://github.com/user-attachments/assets/ca84cb83-a2c1-40b8-ba7a-2d567754e720" width="500">
 </details> 
 
@@ -142,55 +142,55 @@
 </details> 
 
 ### 4-3. MyPage
-<details><summary> MyPage </summary>
+<details><summary> 내 정보 페이지 </summary>
    <img src="https://github.com/user-attachments/assets/18a850ff-995f-47be-bcfd-b43fe396f7e0" width="500">
 </details>
 
-<details><summary> Edit Information </summary>
+<details><summary> 내 정보 수정 </summary>
    <img src="https://github.com/user-attachments/assets/e302dc79-4180-40ee-a3e2-9b72a4d90c5f" width="500">
 </details>
 
-<details><summary> Change Profile Picture </summary>
+<details><summary> 프로필 사진 변경 </summary>
    <img src="https://github.com/user-attachments/assets/68d04479-e7c7-4335-add2-9f030267e238" width="500">
 </details>
 
-<details><summary> Change Password </summary>
+<details><summary> 비밀번호 변경 </summary>
    <img src="https://github.com/user-attachments/assets/c897f734-dbec-4382-bdd9-236001dc6e2b" width="500">
 </details>
 
-<details><summary> Add Career </summary>
+<details><summary> 경력 추가 </summary>
    <img src="https://github.com/user-attachments/assets/30923ed1-ef46-491f-a8e5-e4087a5a3a0e" width="500">
 </details>
 
-<details><summary> Delete Career </summary>
+<details><summary> 경력 삭제 </summary>
    <img src="https://github.com/user-attachments/assets/213a39c5-ccea-42cc-bff0-ee71308ab881" width="500">
 </details>
 
-<details><summary> Apply Mentor Authentication </summary>
+<details><summary> 멘토 신청 </summary>
    <img src="https://github.com/user-attachments/assets/809dcf1b-664b-4542-9e15-c2871f7d4c01" width="500">
 </details>
 
 ### 4-4. Message
-<details><summary> MessageBox </summary>
+<details><summary> 쪽지함 </summary>
    <img src="https://github.com/user-attachments/assets/8ba0f469-9eb6-4a2f-9bd1-0ec84335c07c" width="500">
 </details>
 
-<details><summary> Send Message </summary>
+<details><summary> 쪽지 전송 </summary>
    <img src="https://github.com/user-attachments/assets/983d331d-6b19-4ffe-9896-31ec44c46508" width="500">
 </details>
 
 ### 4-5. Free Boards
 
-<details><summary> Board view Page </summary>
+<details><summary> 게시글 조회 </summary>
       <img src="https://github.com/user-attachments/assets/dd25ea85-6153-4b5a-96a8-c8179f4805bd" width="500">
 </details>
-<details><summary> Write Post Page </summary>
+<details><summary> 게시글 작성 </summary>
       <img src="https://github.com/user-attachments/assets/ff04781e-8e4a-4260-b032-1a44c1ae2b0b" width="500">
 </details>
-<details><summary> Edit Post Page </summary>
+<details><summary> 게시글 수정 </summary>
       <img src="https://github.com/user-attachments/assets/b8466a4e-2f75-490b-a4cc-5f340b2db25f" width="500">
 </details>
-<details><summary> Free Board Page </summary>
+<details><summary> 자유 게시판 </summary>
       <img src="https://github.com/user-attachments/assets/b8d82c13-3172-41e6-8588-a8694659112c" width="500">
 </details>
 <details><summary> 게시글 블라인드 처리 </summary>
