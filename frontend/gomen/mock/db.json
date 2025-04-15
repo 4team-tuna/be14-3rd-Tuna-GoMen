@@ -978,7 +978,7 @@
       "careerInfo": "백엔드 개발자 10년차",
       "isMentor": "Y",
       "violationScore": 0,
-      "averageRating": 4.5,
+      "averageRating": 0,
       "college": "고려대학교",
       "blog": "https://minji.dev"
     },
@@ -1588,7 +1588,7 @@
   ],
   "mentorlist": [
     {
-      "id": "1",
+      "id": "100",
       "name": "진유림",
       "title": "10년차 백엔드 개발자",
       "skills": "Java, Spring, Python, Vue, React, Linux, DB, AI",
@@ -1660,12 +1660,12 @@
       "rating": 4.9
     },
     {
-      "id": "10",
-      "name": "이유진",
-      "title": "6년차 UX/UI 디자이너",
-      "skills": "Figma, Sketch, UX 리서치",
-      "description": "Figma를 활용해 UI/UX 시안 제작 및 개발자 전달을 위한 디자인 시스템을 구성했습니다. 또한 Sketch를 이용한 와이어프레임 제작 및 사용자 플로우 설계 경험이 있습니다. 그리고 UX 리서치를 통해 사용자 니즈를 분석하고 인터페이스 개선 방안을 도출한 경험이 있습니다.",
-      "rating": 4.7
+      "id": "1",
+      "name": "김용승",
+      "title": "10년차 백엔드 개발자",
+      "skills": "Spring Boot, Maria DB, JavaScript",
+      "description": "유명한 유니콘 기업 백엔드 개발자로 5년 이상 근무 하였으며 이후 강사 생활을 5년 넘게 이어가며 백엔드 강의를 진행하였습니다.",
+      "rating": 0
     }
   ],
   "mentoringSpaces": [

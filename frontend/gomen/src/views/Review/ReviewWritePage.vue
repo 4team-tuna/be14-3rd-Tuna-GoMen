@@ -32,7 +32,6 @@ export default {
     }
   },
   mounted() {
-    // 라우터 쿼리에서 값 추출
     this.spaceId = this.$route.query.spaceId
     this.mentorId = this.$route.query.mentorId
     this.mentorNickname = this.$route.query.mentorNickname
@@ -49,16 +48,16 @@ export default {
 
       if (!isReviewValid && !isRatingValid) {
         alert('리뷰를 20자 이상 입력하고 별점을 입력해주세요.');
-        return
+        return;
       } else if (!isReviewValid) {
         alert('리뷰는 최소 20자 이상 작성해야 합니다.');
-        return
+        return;
       } else if (!isRatingValid) {
         alert('별점을 입력해주세요.');
-        return
+        return;
       }
 
-      const user = JSON.parse(localStorage.getItem('user'))
+      const user = JSON.parse(localStorage.getItem('user'));
 
       const newReview = {
         mentoring_space_id: this.spaceId,
@@ -69,20 +68,32 @@ export default {
         rating: this.rating,
         content: this.reviewText.trim(),
         created_at: new Date().toISOString()
-      }
+      };
 
       try {
-        await axios.post('http://localhost:3001/reviews', newReview)
-        alert('리뷰가 성공적으로 제출되었습니다!')
-        this.$router.push('/main')
+        await axios.post('http://localhost:3001/reviews', newReview);
+
+        const res = await axios.get(`http://localhost:3001/reviews?mentor_id=${this.mentorId}`);
+        const allReviews = res.data;
+
+        const total = allReviews.reduce((sum, r) => sum + Number(r.rating), 0);
+        const average = (total / allReviews.length).toFixed(1);
+
+        await axios.patch(`http://localhost:3001/mentorlist/${this.mentorId}`, {
+          rating: Number(average)
+        });
+
+        alert('리뷰가 성공적으로 제출되었습니다!');
+        this.$router.push('/main');
       } catch (error) {
-        console.error('리뷰 제출 실패:', error)
-        alert('리뷰 제출 중 오류가 발생했습니다.')
+        console.error('리뷰 제출 실패:', error);
+        alert('리뷰 제출 중 오류가 발생했습니다.');
       }
     }
   }
 }
 </script>
+
 
 
 <style scoped>
