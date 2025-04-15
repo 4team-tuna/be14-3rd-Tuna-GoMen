@@ -82,7 +82,7 @@
 ### 4-2. Login Page
 
 <details><summary> Login Page </summary>
-      <img src="https://github.com/user-attachments/assets/2407983f-5fef-443b-bceb-4279da6b438f">
+      <img src="">
 </details>
 
 ### 4-3. Free Boards
@@ -97,9 +97,8 @@
       <img src="https://github.com/user-attachments/assets/b8466a4e-2f75-490b-a4cc-5f340b2db25f" width="500">
 </details>
 <details><summary> Free Board Page </summary>
-      <img src="" width="500">
+      <img src="https://github.com/user-attachments/assets/b8d82c13-3172-41e6-8588-a8694659112c" width="500">
 </details>
-
 
 ## 🛠️ 5. 기술 스택
 ## Frontend
