@@ -40,7 +40,7 @@ const router = useRouter();
 const goFindIdPage = () => {router.push('/findId')}
 const goFindPasswordPage = () => {router.push('/findPassword')}
 const goSignUpPage = () => {router.push('/signUp')}
-const goBack = () => {router.push('/')}
+const goBack = () => {router.push('/backend/start')}
 
 // Pinia store 인스턴스 생성
 const userStore = useUserStore()
@@ -51,40 +51,34 @@ const login = async () => {
     return
   }
   try {
-    const response = await axios.get('http://localhost:3001/users', {
-      params: {
+    const response = await axios.post('http://localhost:8000/login', {
         loginId: loginId.value,
         password: password.value,
-      }
-    })
+    }, {
+        headers: {
+        'Content-Type': 'application/json',  // 여기 추가
+        }
+    });
 
-    if (response.data.length > 0) {
-      // 회원 정보 불러오기 성공
-      const user = response.data[0]
-      console.log('✅ 회원 정보 불러오기 성공!', user)
+    console.log('응답 전체:', response);
+    console.log('응답 데이터:', response.data);
+    console.log('응답 헤더:', response.headers);
 
-      const userStatus = user.isQuitted
-      if(userStatus === 'Y'){
-        alert('❌ 탈퇴 처리된 회원입니다!')
-        return
-      }
-      
-      // 예: 로그인 상태 저장 (로컬스토리지 사용)
-      localStorage.setItem('user', JSON.stringify(user))
-      localStorage.setItem('loginId', loginId.value);
-      localStorage.setItem('userId', user.id);
+    const token = response.data.token
+    console.log('✅ 토큰:', token)
 
-      // 🔥 Pinia 상태 반영
+    if (token) {
+      localStorage.setItem('token', token)
+      localStorage.setItem('loginId', loginId.value)
+
       userStore.setLogin(true)
-
-      // 홈으로 리다이렉트
-      router.push('/main')
+      router.push('/backend/main')
     } else {
-      alert('❌ 아이디 또는 비밀번호가 올바르지 않습니다.')
+      alert('❌ 로그인에 실패했습니다.')
     }
   } catch (error) {
     console.error('로그인 중 에러 발생:', error)
-    alert('서버와의 통신 중 오류가 발생했습니다.')
+    alert('아이디 또는 비밀번호가 잘못되었거나, 서버 오류입니다.')
   }
 }
 

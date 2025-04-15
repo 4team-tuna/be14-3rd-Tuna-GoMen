@@ -91,5 +91,10 @@ public class AuthenticationFilter extends UsernamePasswordAuthenticationFilter {
 
         response.addHeader("token", token);
         log.info("생성된 token : {}", token);
+
+        // ResponseEntity로 응답 본문에 token 포함
+        response.setContentType("application/json");
+        response.getWriter().write("{\"token\":\"" + token + "\"}");
+        response.getWriter().flush();
     }
 }

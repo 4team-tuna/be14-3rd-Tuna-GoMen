@@ -39,9 +39,17 @@ onMounted(async () => {
         } else {
           // 멘티면 리뷰 페이지로 이동
           alert('⛔ 멘토가 멘토링 연장을 거절하여 종료되었습니다. 리뷰를 남겨주세요.')
-          return router.push(`/review/write`)
+          return router.push({
+            path:`/review/write`,
+            query: {
+              spaceId: mySpace.id,
+              mentorId: mySpace.mentor_id,
+              mentorNickname: mySpace.mentor_nickname
+            }
+          })
         }
       }
+
 
       spaceId.value = mySpace.id
       console.log('🧑‍🎓 멘티로 참여한 공간:', mySpace.id)

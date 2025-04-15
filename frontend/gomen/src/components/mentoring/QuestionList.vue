@@ -2,7 +2,7 @@
   <div class="question-list">
     <div
       class="question-card"
-      v-for="question in questions"
+      v-for="question in computedQuestions"
       :key="question.id"
     >
       <div class="q-header">
@@ -17,7 +17,7 @@
 </template>
 
 <script setup>
-import { ref, watch } from 'vue'
+import { ref, computed } from 'vue'
 import api from '@/api'
 
 const props = defineProps({
@@ -34,6 +34,7 @@ const getUserNickname = (userId) => {
   return nicknames.value[String(userId)] || `사용자 ${userId}`
 }
 const fetchNicknames = async () => {
+  nicknames.value = {} // 👉 이 줄 추가해서 강제로 리셋
   const uniqueUserIds = [...new Set(props.questions.map(q => q.member_id))]
 
   if (uniqueUserIds.length === 0) return
@@ -47,11 +48,8 @@ const fetchNicknames = async () => {
 
     results.forEach(res => {
       const user = res.data
-      console.log('🎯 사용자 응답:', user)
       nicknames.value[String(user.id)] = user.nickname 
     })
-
-    console.log('✅ 최종 nickname 캐시:', nicknames.value)
   } catch (err) {
     console.error('❌ 닉네임 조회 실패:', err)
   }
@@ -62,8 +60,15 @@ const formatDate = (dateStr) => {
   return `${d.getFullYear()}. ${d.getMonth() + 1}. ${d.getDate()} ${d.getHours()}시 ${d.getMinutes()}분`
 }
 
-// ✅ 질문 목록이 바뀌면 닉네임 자동 갱신
-watch(() => props.questions, fetchNicknames, { immediate: true })
+// ✅ 질문 목록이 바뀌면 닉네임 자동 갱신(최신순으로)
+const computedQuestions = computed(() => {
+  fetchNicknames()
+
+  return [...props.questions].sort(
+    (a, b) => new Date(b.question_created_time) - new Date(a.question_created_time)
+  )
+})
+
 </script>
 
 <style scoped>

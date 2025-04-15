@@ -34,8 +34,16 @@ import ReportForm from '@/views/Report/ReportForm.vue'
 // 지원자 페이지
 import ApplicantListPage from "@/views/Applicant/ApplicantListPage.vue";
 
+
+// 백엔드 연동 페이지
+import BackendLoginPage from '@/views/Backend/BackendLoginPage.vue'
+import BackendMainPage from '@/views/Backend/BackendMainPage.vue'
+import BackendSignUpPage from '@/views/Backend/BackendSignUpPage.vue'
+import BackendStartPage from '@/views/Backend/BackendStartPage.vue'
+
 // 별점 리뷰 페이지
 import ReviewWritePage from '@/views/Review/ReviewWritePage.vue'
+
 
 const routes = [
   { path: '/mail', component: MessageInbox},
@@ -140,7 +148,13 @@ const routes = [
     path: '/mentoring/:id',
     name: 'MentoringDetail',
     component: () => import('@/views/Mentoring/MentorView.vue') 
-  }
+  },
+
+  // 백엔드 관련 페이지
+  {path: '/backend/start', component: BackendStartPage},
+  {path: '/backend/login', component: BackendLoginPage},
+  {path: '/backend/signUp', component: BackendSignUpPage},
+  {path: '/backend/main', component: BackendMainPage}
 ]
 
 

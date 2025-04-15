@@ -10,15 +10,16 @@
 
     <div class="status-bar">
       <button
+        v-if="allUsedUp && !extensionRequested"
         class="extension-btn"
-        :disabled="leftoverQuestions > 0 || extensionRequested"
         @click="requestExtension"
-      >
-        {{ extensionRequested ? '요청됨' : '연장하기' }}
-      </button>
-      <span class="leftover-text">
-        남은 질문 개수: <b>{{ leftoverQuestions }}</b>
-      </span>
+        >연장하기</button>
+        <span v-else class="extension-info">
+          {{ extensionRequested ? '연장 요청됨' : '모든 질문을 소진해야 연장 가능해요.' }}
+        </span>
+        <span class="leftover-text">
+          남은 질문 개수: <b>{{ leftoverQuestions }}</b>
+        </span>
     </div>
 
     <QuestionForm
@@ -72,13 +73,19 @@ const extensionRequested = ref(false)
 
 const questions = ref([])
 
-const fetchQuestions = async () => {
-  const res = await api.get(
-    `/questions?mentoring_space_id=${mentoringSpaceId}&_sort=question_created_time&_order=desc&_limit=3`
-  )
-  questions.value = res.data
+
+// 질문 조회
+const fetchQuestions = async (spaceId) => {
+  const res = await api.get(`/questions?mentoring_space_id=${spaceId}`)
+
+  const sorted = res.data
+    .sort((a, b) => new Date(b.question_created_time) - new Date(a.question_created_time))
+    .slice(0, 3)
+
+  questions.value = sorted
 }
 
+// 멘토링 멤버
 const fetchMemberInfo = async () => {
   const membershipsRes = await api.get(`/mentoringMembers?mentoring_space_id=${mentoringSpaceId}&user_id=${user.id}`)
   console.log('🧪 멘티 멤버 확인:', membershipsRes.data)
@@ -88,17 +95,29 @@ const fetchMemberInfo = async () => {
   mentoringMemberId.value = member.id
   leftoverQuestions.value = member.leftover_questions
 
-  const spaceRes = await api.get(`/mentoringSpaces/${mentoringSpaceId}`)
+
+  const spaceRes = await api.get(`/mentoringSpaces/${member.mentoring_space_id}`)
+
   extensionRequested.value = spaceRes.data.extension_requested === 'Y'
 
   return member
 }
 
+// 연장 요청 조건(전체 잔여 질문 갯수 0)
+const allUsedUp = ref(false)
+
 const fetchAll = async () => {
   const member = await fetchMemberInfo()
   if (!member) return
 
-  const spaceRes = await api.get(`/mentoringSpaces/${mentoringSpaceId}`)
+
+  await fetchQuestions(member.mentoring_space_id)
+  // extensionRequested : 연장 요청 여부
+  const spaceRes = await api.get(`/mentoringSpaces/${member.mentoring_space_id}`)
+  extensionRequested.value = spaceRes.data.extension_requested === 'Y'
+
+  // mentor : 멘토 정보
+
   const mentorRes = await api.get(`/users/${spaceRes.data.mentor_id}`)
   mentor.value = mentorRes.data
 
@@ -115,7 +134,10 @@ const fetchAll = async () => {
   teamMembers.value = resolved
   isTeam.value = resolved.length > 1
 
-  await fetchQuestions()
+
+  // 💡 모든 멤버의 leftover_questions 총합
+  const totalLeft = allMembers.data.reduce((sum, m) => sum + m.leftover_questions, 0)
+  allUsedUp.value = totalLeft === 0
 }
 
 onMounted(async() => {
@@ -124,6 +146,8 @@ onMounted(async() => {
   console.log('✅ mentor:', mentor.value)
   console.log('✅ teamMembers:', teamMembers.value)
 })
+
+// ✅ 연장 요청 처리
 
 const requestExtension = async () => {
   if (leftoverQuestions.value > 0 || extensionRequested.value) return
