@@ -15,16 +15,8 @@
    - [3-1. WBS](#3-1)
    - [3-2. 요구사항 정의서](#3-2)
 4. [✍🏻 테스트 계획 및 결과보고서](#4)
-   - [4-1. Applicant](#4-1)
-   - [4-2. MENTORING](#4-2)
-   - [4-3. BOOKMARK&LIKE](#4-3)
-   - [4-4. BOARD](#4-4)
-   - [4-5. Mail](#4-5)
-   - [4-6. Report](#4-6)
-   - [4-7. Signup&Login](#4-7)
-   - [4-8.TeamRecruit](#4-8)
-   - [4-9.Title](#4-9)
-   - [4-10.User](#4-10)
+   - [4-1. Main Page & Start Page](#4-1)
+   - [4-2. Login Page](#4-2)
 5. [🛠️ 기술 스택](#5)
 6. [📗 동료평가](#6)
 ---
@@ -64,6 +56,10 @@
 ### 2-1. Figma 및 Prototype Page
 ![image](https://github.com/user-attachments/assets/26bc4354-95e2-44f9-a598-31d66906b72e)
 ### 2-2. 스토리보드 
+이 플랫폼은 개발자를 준비하는 학생 및 준비생들을 위한 멘토링 기반 커뮤니티 웹사이트입니다.
+사용자는 실제 경력을 가진 멘토 혹은 GitHub 등 포트폴리오로 검증된 멘토와 1:1 또는 팀 단위 멘토링을 받을 수 있으며, 다른 사용자들과 함께 프로젝트 팀을 구성하거나 개발 관련 정보를 공유함으로써 실무 감각과 협업 능력을 함께 키울 수 있습니다.
+
+로그인 및 회원가입 페이지에서는 
 
 ## 📜 3. 기능명세서
 ### 3-1. WBS
@@ -72,13 +68,17 @@
 ## ✍🏻 4. 테스트 계획 및 결과보고서
 ### 4-1. Main Page & Start Page
 
-<details><summary> 특정 모집 게시글에 대한 지원자 목록 조회 </summary>
+<details><summary> Main Page  </summary>
+      <img src="https://github.com/user-attachments/assets/2407983f-5fef-443b-bceb-4279da6b438f">
+</details>
+
+<details><summary> Start Page </summary>
       <img src="https://github.com/user-attachments/assets/2407983f-5fef-443b-bceb-4279da6b438f">
 </details>
 
 ### 4-2. Login Page
 
-<details><summary> 특정 모집 게시글에 대한 지원자 목록 조회 </summary>
+<details><summary> Login Page </summary>
       <img src="https://github.com/user-attachments/assets/2407983f-5fef-443b-bceb-4279da6b438f">
 </details>
 
