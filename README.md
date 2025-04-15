@@ -2,7 +2,7 @@
 
 # be14-3rd-Tuna-GoMen
 ❤️이혜영 🩷김성민 🧡이준규 💛서민종 🖤한석현
-![고멘로고](https://github.com/user-attachments/assets/9fe1378f-eec1-4d9f-8ece-cf6b387bc336)
+<img src="https://github.com/user-attachments/assets/9fe1378f-eec1-4d9f-8ece-cf6b387bc336" width="500" />
 ## GoMen -  코딩 멘토-멘티 매칭 서비스
 
 ### 목차
