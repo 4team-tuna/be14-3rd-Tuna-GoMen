@@ -1,5 +1,5 @@
 
-https://github.com/user-attachments/assets/1084c37d-6118-453e-b14a-33dba718be09
+
 # be14-3rd-Tuna-GoMen
 ❤️이혜영 🩷김성민 🧡이준규 💛서민종 🖤한석현
 ![고멘로고](https://github.com/user-attachments/assets/9fe1378f-eec1-4d9f-8ece-cf6b387bc336)
