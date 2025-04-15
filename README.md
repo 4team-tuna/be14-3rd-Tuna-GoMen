@@ -86,6 +86,13 @@
 </details> 
 
 ### 4-3. MyPage
+<details><summary> 사용자-멘토-신청 </summary>
+<img src="https://github.com/user-attachments/assets/12377762-a8de-4602-af5e-0797e1491f57" width="500">
+</details> 
+
+<details><summary> 예시양식 </summary>
+<img src="예시양식" width="500">
+</details> 
 
 
 ### 4-4. Message
@@ -123,7 +130,17 @@
 
 
 ### 4-10. ADMIN
+<details><summary> 신고처리 </summary>
+<img src="https://github.com/user-attachments/assets/97ecd2e8-7fdc-4e8d-a061-1e15d1eae476" width="500">
+</details> 
 
+<details><summary> 멘토요청 처리 </summary>
+<img src="https://github.com/user-attachments/assets/e3223367-6e67-4a39-8441-66ae8c4ce93c" width="500">
+</details> 
+
+<details><summary> 칭호 추가 </summary>
+<img src="https://github.com/user-attachments/assets/f2ce49bf-3c56-4193-96d4-8dc13f11a3e7" width="500">
+</details> 
 
 ## 🛠️ 5. 기술 스택
 ## Frontend
