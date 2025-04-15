@@ -72,7 +72,6 @@
 ## ✍🏻 4. 테스트 계획 및 결과보고서
 ### 4-1. Main Page & Start Page
 
-
 <details><summary> Main Page  </summary>
 <img src="https://github.com/user-attachments/assets/9a83b4a1-77d1-498e-a3ee-3b69f9a326e7" width="500" />
 </details>
@@ -81,25 +80,52 @@
       <img src="https://github.com/user-attachments/assets/bff787fc-3d34-4cc0-bba0-49c1c7a61737" width="500">
 </details>
 
-
-### 4-2. Login & Regist Page
+### 4-2. Login & SignUp Page
+<details><summary> SignUp Page </summary>
+   <img src="https://github.com/user-attachments/assets/0045a0fb-b11d-4133-8687-da9cd81c3846" width="500">
+</details>
 
 <details><summary> Login Page </summary>
-      <img src="">
+   <img src="https://github.com/user-attachments/assets/ca84cb83-a2c1-40b8-ba7a-2d567754e720" width="500">
 </details> 
 
 ### 4-3. MyPage
-<details><summary> 사용자-멘토-신청 </summary>
-<img src="https://github.com/user-attachments/assets/12377762-a8de-4602-af5e-0797e1491f57" width="500">
-</details> 
+<details><summary> MyPage </summary>
+   <img src="https://github.com/user-attachments/assets/18a850ff-995f-47be-bcfd-b43fe396f7e0" width="500">
+</details>
 
-<details><summary> 예시양식 </summary>
-<img src="예시양식" width="500">
-</details> 
+<details><summary> Edit Information </summary>
+   <img src="https://github.com/user-attachments/assets/e302dc79-4180-40ee-a3e2-9b72a4d90c5f" width="500">
+</details>
 
+<details><summary> Change Profile Picture </summary>
+   <img src="https://github.com/user-attachments/assets/68d04479-e7c7-4335-add2-9f030267e238" width="500">
+</details>
+
+<details><summary> Change Password </summary>
+   <img src="https://github.com/user-attachments/assets/c897f734-dbec-4382-bdd9-236001dc6e2b" width="500">
+</details>
+
+<details><summary> Add Career </summary>
+   <img src="https://github.com/user-attachments/assets/30923ed1-ef46-491f-a8e5-e4087a5a3a0e" width="500">
+</details>
+
+<details><summary> Delete Career </summary>
+   <img src="https://github.com/user-attachments/assets/213a39c5-ccea-42cc-bff0-ee71308ab881" width="500">
+</details>
+
+<details><summary> Apply Mentor Authentication </summary>
+   <img src="https://github.com/user-attachments/assets/809dcf1b-664b-4542-9e15-c2871f7d4c01" width="500">
+</details>
 
 ### 4-4. Message
+<details><summary> MessageBox </summary>
+   <img src="https://github.com/user-attachments/assets/8ba0f469-9eb6-4a2f-9bd1-0ec84335c07c" width="500">
+</details>
 
+<details><summary> Send Message </summary>
+   <img src="https://github.com/user-attachments/assets/983d331d-6b19-4ffe-9896-31ec44c46508" width="500">
+</details>
 
 ### 4-5. Free Boards
 
