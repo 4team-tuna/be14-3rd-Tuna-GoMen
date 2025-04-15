@@ -1,3 +1,5 @@
+
+https://github.com/user-attachments/assets/1084c37d-6118-453e-b14a-33dba718be09
 # be14-3rd-Tuna-GoMen
 ❤️이혜영 🩷김성민 🧡이준규 💛서민종 🖤한석현
 ![고멘로고](https://github.com/user-attachments/assets/9fe1378f-eec1-4d9f-8ece-cf6b387bc336)
@@ -98,6 +100,10 @@
 
 <details><summary> Login Page </summary>
    <img src="https://github.com/user-attachments/assets/ca84cb83-a2c1-40b8-ba7a-2d567754e720" width="500">
+</details> 
+
+<details><summary> 벌점100점 탈퇴처리 </summary>
+   <img src="https://github.com/user-attachments/assets/22a67351-2cbc-40bb-8fcf-b3e1c1899ae7" width="500">
 </details> 
 
 ### 4-3. MyPage
