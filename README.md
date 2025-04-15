@@ -93,14 +93,13 @@
 <details><summary> Write Post Page </summary>
       <img src="https://github.com/user-attachments/assets/ff04781e-8e4a-4260-b032-1a44c1ae2b0b" width="500">
 </details>
+<details><summary> Edit Post Page </summary>
+      <img src="https://github.com/user-attachments/assets/b8466a4e-2f75-490b-a4cc-5f340b2db25f" width="500">
+</details>
 <details><summary> Free Board Page </summary>
       <img src="" width="500">
 </details>
 
-
-<details><summary> Edit Post Page </summary>
-      <img src="" width="500">
-</details>
 
 ## 🛠️ 5. 기술 스택
 ## Frontend
