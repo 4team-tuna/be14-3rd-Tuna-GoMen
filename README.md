@@ -206,7 +206,7 @@
 <img src="https://github.com/user-attachments/assets/b867222d-291b-4a7c-9505-f76057313ee0" width="500">
 </details>
 
-<details><summary> 로그인 해야 팀 선칭 및 글 작성 가능 </summary>
+<details><summary> 로그인 해야 팀 신청 및 글 작성 가능 </summary>
 <img src="https://github.com/user-attachments/assets/b035c7c8-fee3-4189-bf50-9ea0ba4cde31" width="500">
 </details>
 
