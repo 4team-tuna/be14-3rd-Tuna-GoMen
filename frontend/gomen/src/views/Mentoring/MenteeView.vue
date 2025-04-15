@@ -22,7 +22,6 @@
         </span>
     </div>
 
-    <!-- ✅ 질문 작성 폼 -->
     <QuestionForm
       v-if="mentoringSpaceId && mentoringMemberId !== null"
       :mentoringSpaceId="mentoringSpaceId"
@@ -32,7 +31,6 @@
       @submitted="fetchAll"
     />
 
-    <!-- Q&A -->
     <div class="qna-header">
       <h3>Q&A</h3>
       <button class="more-btn" @click="goToQnaPage">더보기 &gt;</button>
@@ -50,8 +48,18 @@ import { useRouter } from 'vue-router'
 import MyMentorCard from '@/components/mentoring/MyMentorCard.vue'
 import MyTeamCard from '@/components/mentoring/MyTeamCard.vue'
 import QuestionList from '@/components/mentoring/QuestionList.vue'
-import QuestionForm from '@/components/mentoring/QuestionForm.vue' // ✅ import 누락 시 추가
+import QuestionForm from '@/components/mentoring/QuestionForm.vue'
 import api from '@/api'
+
+// ✅ MentoringPage.vue에서 전달된 spaceId props 받기
+const props = defineProps({
+  spaceId: {
+    type: [String, Number],
+    required: true
+  }
+})
+
+const mentoringSpaceId = props.spaceId  // 이제 이걸로 사용
 
 const router = useRouter()
 const user = JSON.parse(localStorage.getItem('user'))
@@ -60,11 +68,11 @@ const mentor = ref({})
 const teamMembers = ref([])
 const isTeam = ref(false)
 const leftoverQuestions = ref(0)
+const mentoringMemberId = ref(null)
+const extensionRequested = ref(false)
 
 const questions = ref([])
-const mentoringSpaceId = ref(null)
-const mentoringMemberId = ref(null)
-const extensionRequested = ref(false) // ✅ 요청 여부 상태
+
 
 // 질문 조회
 const fetchQuestions = async (spaceId) => {
@@ -79,15 +87,17 @@ const fetchQuestions = async (spaceId) => {
 
 // 멘토링 멤버
 const fetchMemberInfo = async () => {
-  const myMemberships = await api.get(`/mentoringMembers?user_id=${user.id}`)
-  const member = myMemberships.data[0]
+  const membershipsRes = await api.get(`/mentoringMembers?mentoring_space_id=${mentoringSpaceId}&user_id=${user.id}`)
+  console.log('🧪 멘티 멤버 확인:', membershipsRes.data)
+  const member = membershipsRes.data[0]
   if (!member) return null
 
-  mentoringSpaceId.value = member.mentoring_space_id
   mentoringMemberId.value = member.id
   leftoverQuestions.value = member.leftover_questions
 
+
   const spaceRes = await api.get(`/mentoringSpaces/${member.mentoring_space_id}`)
+
   extensionRequested.value = spaceRes.data.extension_requested === 'Y'
 
   return member
@@ -100,16 +110,18 @@ const fetchAll = async () => {
   const member = await fetchMemberInfo()
   if (!member) return
 
+
   await fetchQuestions(member.mentoring_space_id)
   // extensionRequested : 연장 요청 여부
   const spaceRes = await api.get(`/mentoringSpaces/${member.mentoring_space_id}`)
   extensionRequested.value = spaceRes.data.extension_requested === 'Y'
 
   // mentor : 멘토 정보
+
   const mentorRes = await api.get(`/users/${spaceRes.data.mentor_id}`)
   mentor.value = mentorRes.data
 
-  const allMembers = await api.get(`/mentoringMembers?mentoring_space_id=${member.mentoring_space_id}`)
+  const allMembers = await api.get(`/mentoringMembers?mentoring_space_id=${mentoringSpaceId}`)
   const resolved = await Promise.all(
     allMembers.data.map(async (m) => {
       const u = await api.get(`/users/${m.user_id}`)
@@ -122,22 +134,26 @@ const fetchAll = async () => {
   teamMembers.value = resolved
   isTeam.value = resolved.length > 1
 
+
   // 💡 모든 멤버의 leftover_questions 총합
   const totalLeft = allMembers.data.reduce((sum, m) => sum + m.leftover_questions, 0)
   allUsedUp.value = totalLeft === 0
-
-  
 }
 
-onMounted(fetchAll)
-
+onMounted(async() => {
+  console.log('🧪 MenteeView mentoringSpaceId:', mentoringSpaceId)
+  await fetchAll()
+  console.log('✅ mentor:', mentor.value)
+  console.log('✅ teamMembers:', teamMembers.value)
+})
 
 // ✅ 연장 요청 처리
+
 const requestExtension = async () => {
   if (leftoverQuestions.value > 0 || extensionRequested.value) return
 
   try {
-    await api.patch(`/mentoringSpaces/${mentoringSpaceId.value}`, {
+    await api.patch(`/mentoringSpaces/${mentoringSpaceId}`, {
       extension_requested: 'Y'
     })
     extensionRequested.value = true
@@ -152,6 +168,7 @@ const goToQnaPage = () => {
   router.push('/mentee/qna')
 }
 </script>
+
 
 <style scoped>
 .mentee-view {

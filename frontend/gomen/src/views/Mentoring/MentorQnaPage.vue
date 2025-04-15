@@ -2,7 +2,7 @@
     <div class="mentor-qna-page">
       <div class="header-row">
         <h2 class="page-title">멘토링 Q&A 전체 보기</h2>
-        <RouterLink :to="`/mentoring/${mentoringSpaceId}`" class="back-button">멘토링 공간으로 돌아가기</RouterLink>
+        <RouterLink :to="`/mentoring`" class="back-button">멘토링 공간으로 돌아가기</RouterLink>
       </div>
   
       <div v-if="questions.length === 0" class="empty">등록된 질문이 없습니다.</div>

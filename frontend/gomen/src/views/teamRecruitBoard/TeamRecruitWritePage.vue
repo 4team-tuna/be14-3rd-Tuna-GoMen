@@ -40,6 +40,7 @@
   const title = ref('')
   const teamName = ref('')
   const content = ref('')
+  const applicants = ref([])
   
   // 로그인한 사용자 정보 가져오기
   const user = JSON.parse(localStorage.getItem('user')) || {}
@@ -52,7 +53,7 @@
       alert('모든 항목을 입력해주세요!')
       return
     }
-  
+
     const newPost = {
       userId: userId,
       title: title.value,
@@ -62,11 +63,14 @@
       createdAt: new Date().toISOString(),
       isActivated: 'Y',
       isDeleted: 'N',
-      applicants: [],
+      applicants: applicants.value.map(a => ({
+        user_id: a.user_id,
+        nickname: a.nickname,
+        introduction: a.introduction
+      }))
     }
-  
+
     try {
-      // id를 빼고, json-server가 자동으로 id를 부여하도록 처리
       await axios.post('http://localhost:3001/teamRecruitPosts', newPost)
       alert('게시글이 등록되었습니다!')
       router.push('/board/team-recruit')
