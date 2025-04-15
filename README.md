@@ -198,13 +198,45 @@
 </details> 
 
 ### 4-6. Team Reacruit Boards
+<details><summary> 팀 모집 게시글 생성 </summary>
+<img src="https://github.com/user-attachments/assets/e7acf2b4-b303-45cd-8412-bb9c7a4247a0" width="500">
+</details>
+
+<details><summary> 팀 모집 게시글 삭제 </summary>
 <img src="https://github.com/user-attachments/assets/b867222d-291b-4a7c-9505-f76057313ee0" width="500">
+</details>
+
+<details><summary> 로그인 해야 팀 선칭 및 글 작성 가능 </summary>
+<img src="https://github.com/user-attachments/assets/b035c7c8-fee3-4189-bf50-9ea0ba4cde31" width="500">
+</details>
+
+<details><summary> 예시 </summary>
+
+</details>
+
+<details><summary> 예시 </summary>
+
+</details>
+
+<details><summary> 예시 </summary>
+
+</details>
+
+<details><summary> 예시 </summary>
+
+</details>
+
+<details><summary> 예시 </summary>
+
+</details>
+
+
 <img src="https://github.com/user-attachments/assets/46e1a577-3446-45f7-89bc-ce9cfecb53a9" width="500">
 <img src="https://github.com/user-attachments/assets/9984e0ca-685f-477f-8956-c03370a94614" width="500">
 <img src="https://github.com/user-attachments/assets/f6744ae5-0e70-43ec-ab1a-b6519bacb8e9" width="500">
 <img src="https://github.com/user-attachments/assets/fa8f9a7e-a11a-4faa-9737-f15d5b994120" width="500">
-<img src="https://github.com/user-attachments/assets/b035c7c8-fee3-4189-bf50-9ea0ba4cde31" width="500">
-<img src="https://github.com/user-attachments/assets/e7acf2b4-b303-45cd-8412-bb9c7a4247a0" width="500">
+
+
 <img src="https://github.com/user-attachments/assets/7b62b24a-9147-4de9-a2c8-0ba62a5c73a4" width="500">
 <img src="https://github.com/user-attachments/assets/6e019428-72be-4d39-957b-10c3ad598d66" width="500">
 <img src="https://github.com/user-attachments/assets/7438e117-0e51-4b0d-b0ea-c92290b93f82" width="500">
