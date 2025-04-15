@@ -64,6 +64,7 @@
 
 ## 📜 3. 기능명세서
 ### 3-1. WBS
+[WBS 링크](https://docs.google.com/spreadsheets/d/19VZI_1LJ8Jx2r8srhHZ5M0GApO66an1NkPZsmz7pS5Y/edit?gid=1013678623#gid=1013678623)
 ### 3-2. 요구사항 명세서
 
 ## ✍🏻 4. 테스트 계획 및 결과보고서
