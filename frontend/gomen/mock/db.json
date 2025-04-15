@@ -1571,7 +1571,7 @@
       "personal_info_requested": "N",
       "extension_count": 0,
       "extension_requested": "N",
-      "is_activated": "Y"
+      "is_activated": "N"
     }
   ],
   "mentoringMembers": [
@@ -1579,7 +1579,7 @@
       "id": "m100",
       "mentoring_space_id": "1000",
       "user_id": 11,
-      "leftover_questions": 1
+      "leftover_questions": 0
     },
     {
       "id": "m101",
@@ -1728,6 +1728,15 @@
       "question_content": "Java에서 record 타입은 언제 쓰는게 좋을까요?",
       "question_detail": "최근 Java에서 등장한 record 타입이 데이터 객체를 간단히 표현할 수 있다고 들었습니다. 사용하는 기준과 실무 적용 사례가 궁금합니다.",
       "question_created_time": "2025-04-14T08:00:00",
+      "is_deleted": "N"
+    },
+    {
+      "id": "5c6f",
+      "mentoring_space_id": "1000",
+      "member_id": "11",
+      "question_content": "ㅁ",
+      "question_detail": "ㅁㅁㅇㅁ",
+      "question_created_time": "2025-04-14T22:36:31.464Z",
       "is_deleted": "N"
     }
   ],
@@ -2093,5 +2102,6 @@
       "answer_created_time": "2025-04-14T13:44:00"
     }
   ],
+  "reviews": [],
   "applications": []
 }
