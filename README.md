@@ -68,6 +68,10 @@
 ![image](https://github.com/user-attachments/assets/a53d6ee0-8df2-44a4-b11f-a0cd708854c3)
 
 ### 3-2. 요구사항 명세서
+[요구사항 명세서 링크](https://docs.google.com/spreadsheets/d/19VZI_1LJ8Jx2r8srhHZ5M0GApO66an1NkPZsmz7pS5Y/edit?gid=0#gid=0)
+
+![image](https://github.com/user-attachments/assets/8e653510-e6ef-4c2e-927d-ec7bceee39c6)
+
 
 ## ✍🏻 4. 테스트 계획 및 결과보고서
 ### 4-1. Main Page & Start Page
